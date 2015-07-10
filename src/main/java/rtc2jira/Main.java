@@ -4,19 +4,15 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URI;
 import java.util.List;
 import java.util.Scanner;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import com.ibm.team.links.common.IReference;
+import com.ibm.team.process.client.IProcessClientService;
+import com.ibm.team.process.common.IProjectArea;
 import com.ibm.team.repository.client.ILoginHandler2;
 import com.ibm.team.repository.client.ILoginInfo2;
 import com.ibm.team.repository.client.ITeamRepository;
@@ -40,35 +36,11 @@ import com.ibm.team.workitem.common.model.WorkItemEndPoints;
 public class Main {
 
   public static void main(String[] args) {
-    Options options = new Options();
-    Option rtcUrlOpt = new Option("r", true, "RTC URL like 'https://rtc.local/ccm/'");
-    rtcUrlOpt.setRequired(true);
-    options.addOption(rtcUrlOpt);
-    Option userOpt = new Option("u", true, "User");
-    rtcUrlOpt.setRequired(true);
-    options.addOption(userOpt);
-    Option pwOpt = new Option("p", true, "Password");
-    pwOpt.setRequired(true);
-    options.addOption(pwOpt);
-    Option bbUrlOpt = new Option("b", true, "BitBucket URL");
-    options.addOption(bbUrlOpt);
-
-    CommandLine cmd;
-    try {
-      CommandLineParser parser = new DefaultParser();
-      cmd = parser.parse(options, args);
-    } catch (ParseException e) {
-      HelpFormatter formatter = new HelpFormatter();
-      formatter.printHelp("rtc2jira ", options);
-      System.exit(1);
-      return;
-    }
-
     IProgressMonitor myProgressMonitor = new MyProgressMonitor();
     try (Scanner sc = new Scanner(System.in)) {
-      final String userId = cmd.getOptionValue(userOpt.getOpt());
-      final String password = cmd.getOptionValue(pwOpt.getOpt());
-      String repoUri = cmd.getOptionValue(rtcUrlOpt.getOpt());
+      final String userId = Settings.getRtcUser();
+      final String password = Settings.getRtcPassword();
+      String repoUri = Settings.getRtcUrl();
       TeamPlatform.startup();
       try {
         final ITeamRepository repo = TeamPlatform.getTeamRepositoryService().getTeamRepository(repoUri);
@@ -90,12 +62,22 @@ public class Main {
   }
 
   private static void getWorkItems(ITeamRepository repo) throws TeamRepositoryException, IOException {
+    IProcessClientService processClientService =
+        (IProcessClientService) repo.getClientLibrary(IProcessClientService.class);
+    URI projectareaUri = URI.create(Settings.getRtcProjectarea().replaceAll(" ", "%20"));
+    IProjectArea projectArea = (IProjectArea) processClientService.findProcessArea(projectareaUri, null, null);
+
+
     IWorkItemClient workItemClient = (IWorkItemClient) repo.getClientLibrary(IWorkItemClient.class);
     IWorkItem workItem = workItemClient.findWorkItemById(33481, IWorkItem.FULL_PROFILE, null);
-    List<IAttribute> allAttributes = workItemClient.findAttributes(workItem.getProjectArea(), null);
+    List<IAttribute> allAttributes = workItemClient.findAttributes(projectArea, null);
     for (IAttribute attribute : allAttributes) {
       if (workItem.hasAttribute(attribute)) {
-        System.out.println(workItem.getValue(attribute));
+        Object value = workItem.getValue(attribute);
+        String formattedOutput =
+            String.format("Identifier: %s \t Display Name: %s \t Type: %s \t Value: %s", attribute.getIdentifier(),
+                attribute.getDisplayName(), attribute.getAttributeType(), value);
+        System.out.println(formattedOutput);
       }
     }
     saveAttachements(repo, workItem);

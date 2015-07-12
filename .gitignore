@@ -12,6 +12,5 @@
 hs_err_pid*
 
 /target/
-/libs/
 .settings
 /settings.properties

@@ -1,4 +1,4 @@
 rtc.url=https://rtc.local/ccm/
 rtc.user=zlatan
 rtc.password=password
-rtc.projectarea=companyprojects
+rtc.workitemid.range=33481..33482

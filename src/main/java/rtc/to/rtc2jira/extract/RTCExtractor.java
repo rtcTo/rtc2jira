@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URI;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,8 +11,6 @@ import rtc.to.rtc2jira.Settings;
 import rtc.to.rtc2jira.storage.StorageEngine;
 
 import com.ibm.team.links.common.IReference;
-import com.ibm.team.process.client.IProcessClientService;
-import com.ibm.team.process.common.IProjectArea;
 import com.ibm.team.repository.client.ILoginHandler2;
 import com.ibm.team.repository.client.ILoginInfo2;
 import com.ibm.team.repository.client.ITeamRepository;
@@ -57,7 +54,7 @@ public class RTCExtractor {
           }
         });
         repo.login(null);
-        getWorkItems(repo);
+        processWorkItems(repo, settings.getRtcWorkItemRange());
         repo.logout();
       } catch (TeamRepositoryException | IOException e) {
         e.printStackTrace();
@@ -67,15 +64,26 @@ public class RTCExtractor {
     }
   }
 
-  private void getWorkItems(ITeamRepository repo) throws TeamRepositoryException, IOException {
-    IProcessClientService processClientService =
-        (IProcessClientService) repo.getClientLibrary(IProcessClientService.class);
-    URI projectareaUri = URI.create(settings.getRtcProjectarea().replaceAll(" ", "%20"));
-    IProjectArea projectArea = (IProjectArea) processClientService.findProcessArea(projectareaUri, null, null);
-
+  private void processWorkItems(ITeamRepository repo, Iterable<Integer> workItemRange) throws TeamRepositoryException,
+      IOException {
     IWorkItemClient workItemClient = (IWorkItemClient) repo.getClientLibrary(IWorkItemClient.class);
-    IWorkItem workItem = workItemClient.findWorkItemById(33481, IWorkItem.FULL_PROFILE, null);
-    List<IAttribute> allAttributes = workItemClient.findAttributes(projectArea, null);
+
+    for (Integer currentWorkItemId : workItemRange) {
+      processWorkItem(repo, workItemClient, currentWorkItemId);
+    }
+  }
+
+  private void processWorkItem(ITeamRepository repo, IWorkItemClient workItemClient, int workItemId)
+      throws TeamRepositoryException, IOException {
+    System.out.println("WorkItem " + workItemId + ":");
+    System.out.println("****************************");
+    IWorkItem workItem = workItemClient.findWorkItemById(workItemId, IWorkItem.FULL_PROFILE, null);
+    if (workItem == null) {
+      System.out.println("Not present. Will skip this one.");
+      System.out.println();
+      return;
+    }
+    List<IAttribute> allAttributes = workItemClient.findAttributes(workItem.getProjectArea(), null);
     for (IAttribute attribute : allAttributes) {
       if (workItem.hasAttribute(attribute)) {
         Object value = workItem.getValue(attribute);
@@ -99,6 +107,8 @@ public class RTCExtractor {
       doc.save();
     });
     saveAttachements(repo, workItem);
+    System.out.println();
+    System.out.println();
   }
 
   private void updateWorkItem(ODocument doc, ITeamRepository repo, IWorkItem workItem) {
@@ -119,9 +129,14 @@ public class RTCExtractor {
 
   private void saveAttachment(ITeamRepository teamRepository, IAttachment attachment) throws TeamRepositoryException,
       IOException {
-    File save = new File(attachment.getName());
-    try (OutputStream out = new FileOutputStream(save)) {
-      teamRepository.contentManager().retrieveContent(attachment.getContent(), out, null);
+    String attachmentName = attachment.getName();
+    if (attachmentName.startsWith("\\\\")) {
+      System.out.println("***** I think I found a link: " + attachmentName);
+    } else {
+      File save = new File("testDownload_" + attachmentName);
+      try (OutputStream out = new FileOutputStream(save)) {
+        teamRepository.contentManager().retrieveContent(attachment.getContent(), out, null);
+      }
     }
   }
 }

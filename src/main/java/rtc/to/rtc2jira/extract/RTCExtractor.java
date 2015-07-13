@@ -29,6 +29,8 @@ import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IWorkItem;
 import com.ibm.team.workitem.common.model.IWorkItemReferences;
 import com.ibm.team.workitem.common.model.WorkItemEndPoints;
+import com.orientechnologies.orient.core.record.impl.ODocument;
+import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 
 public class RTCExtractor {
 
@@ -81,10 +83,26 @@ public class RTCExtractor {
             String.format("Identifier: %s \t Display Name: %s \t Type: %s \t Value: %s", attribute.getIdentifier(),
                 attribute.getDisplayName(), attribute.getAttributeType(), value);
         System.out.println(formattedOutput);
-
       }
     }
+    storageEngine.withDB(db -> {
+      OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<ODocument>("select * from WorkItem where ID = :ID");
+      List<ODocument> result = db.query(query, workItem.getId());
+      final ODocument doc;
+      if (result.size() > 0) {
+        doc = result.get(0);
+      } else {
+        doc = new ODocument("WorkItem");
+        doc.field("ID", workItem.getId());
+      }
+      updateWorkItem(doc, repo, workItem);
+      doc.save();
+    });
     saveAttachements(repo, workItem);
+  }
+
+  private void updateWorkItem(ODocument doc, ITeamRepository repo, IWorkItem workItem) {
+    doc.field("createDate", workItem.getCreationDate());
   }
 
   private void saveAttachements(ITeamRepository repo, IWorkItem workItem) throws TeamRepositoryException, IOException {

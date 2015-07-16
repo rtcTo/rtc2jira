@@ -16,6 +16,7 @@ import com.ibm.team.repository.client.ILoginInfo2;
 import com.ibm.team.repository.client.ITeamRepository;
 import com.ibm.team.repository.client.TeamPlatform;
 import com.ibm.team.repository.client.login.UsernameAndPasswordLoginInfo;
+import com.ibm.team.repository.common.PermissionDeniedException;
 import com.ibm.team.repository.common.TeamRepositoryException;
 import com.ibm.team.workitem.client.IAuditableClient;
 import com.ibm.team.workitem.client.IWorkItemClient;
@@ -75,60 +76,75 @@ public class RTCExtractor {
 
   private void processWorkItem(ITeamRepository repo, IWorkItemClient workItemClient, int workItemId)
       throws TeamRepositoryException, IOException {
-    System.out.println("WorkItem " + workItemId + ":");
-    System.out.println("****************************");
-    IWorkItem workItem = workItemClient.findWorkItemById(workItemId, IWorkItem.FULL_PROFILE, null);
-    if (workItem == null) {
-      System.out.println("Not present. Will skip this one.");
+    try {
+      System.out.println("WorkItem " + workItemId + ":");
+      System.out.println("****************************");
+      IWorkItem workItem = workItemClient.findWorkItemById(workItemId, IWorkItem.FULL_PROFILE, null);
+      if (workItem == null) {
+        System.out.println("Not present. Will skip this one.");
+        System.out.println();
+        return;
+      }
+
+      storageEngine.withDB(db -> {
+        OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<ODocument>("select * from WorkItem where ID = :ID");
+        List<ODocument> result = db.query(query, workItem.getId());
+        final ODocument doc;
+        if (result.size() > 0) {
+          doc = result.get(0);
+        } else {
+          doc = new ODocument("WorkItem");
+          doc.field("ID", workItem.getId());
+        }
+        saveAttributes(workItemClient, workItem, doc);
+        saveAttachements(repo, workItem, doc);
+        updateWorkItem(doc, repo, workItem);
+        doc.save();
+      });
       System.out.println();
-      return;
+      System.out.println();
+    } catch (PermissionDeniedException e) {
+      System.out.println("***** Too bad: I must not access WorkItem " + workItemId
+          + ". They say it is forbidden... :-(");
+    } catch (RuntimeException e) {
+      System.out.println("***** Problem: " + e.getMessage());
+      e.printStackTrace();
     }
-    List<IAttribute> allAttributes = workItemClient.findAttributes(workItem.getProjectArea(), null);
-    for (IAttribute attribute : allAttributes) {
-      if (workItem.hasAttribute(attribute)) {
-        Object value = workItem.getValue(attribute);
-        String formattedOutput =
-            String.format("Identifier: %s \t Display Name: %s \t Type: %s \t Value: %s", attribute.getIdentifier(),
-                attribute.getDisplayName(), attribute.getAttributeType(), value);
-        System.out.println(formattedOutput);
-      }
+  }
+
+  private void saveAttributes(IWorkItemClient workItemClient, IWorkItem workItem, ODocument doc) {
+    List<IAttribute> allAttributes;
+    try {
+      allAttributes = workItemClient.findAttributes(workItem.getProjectArea(), null);
+      new AttributeMapper().map(allAttributes, doc, workItem);
+    } catch (TeamRepositoryException e) {
+      throw new RuntimeException("Cannot get attributes from project area.", e);
     }
-    storageEngine.withDB(db -> {
-      OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<ODocument>("select * from WorkItem where ID = :ID");
-      List<ODocument> result = db.query(query, workItem.getId());
-      final ODocument doc;
-      if (result.size() > 0) {
-        doc = result.get(0);
-      } else {
-        doc = new ODocument("WorkItem");
-        doc.field("ID", workItem.getId());
-      }
-      updateWorkItem(doc, repo, workItem);
-      doc.save();
-    });
-    saveAttachements(repo, workItem);
-    System.out.println();
-    System.out.println();
   }
 
   private void updateWorkItem(ODocument doc, ITeamRepository repo, IWorkItem workItem) {
     doc.field("createDate", workItem.getCreationDate());
   }
 
-  private void saveAttachements(ITeamRepository repo, IWorkItem workItem) throws TeamRepositoryException, IOException {
+  private void saveAttachements(ITeamRepository repo, IWorkItem workItem, ODocument doc) {
     IWorkItemCommon common = (IWorkItemCommon) repo.getClientLibrary(IWorkItemCommon.class);
-    IWorkItemReferences workitemReferences = common.resolveWorkItemReferences(workItem, null);
-    List<IReference> references = workitemReferences.getReferences(WorkItemEndPoints.ATTACHMENT);
-    for (IReference iReference : references) {
-      IAttachmentHandle attachHandle = (IAttachmentHandle) iReference.resolve();
-      IAuditableClient auditableClient = (IAuditableClient) repo.getClientLibrary(IAuditableClient.class);
-      IAttachment attachment = auditableClient.resolveAuditable(attachHandle, IAttachment.DEFAULT_PROFILE, null);
-      saveAttachment(repo, attachment);
+    IWorkItemReferences workitemReferences;
+    try {
+      workitemReferences = common.resolveWorkItemReferences(workItem, null);
+      List<IReference> references = workitemReferences.getReferences(WorkItemEndPoints.ATTACHMENT);
+      for (IReference iReference : references) {
+        IAttachmentHandle attachHandle = (IAttachmentHandle) iReference.resolve();
+        IAuditableClient auditableClient = (IAuditableClient) repo.getClientLibrary(IAuditableClient.class);
+        IAttachment attachment = auditableClient.resolveAuditable(attachHandle, IAttachment.DEFAULT_PROFILE, null);
+        saveAttachment(repo, attachment, doc);
+      }
+    } catch (TeamRepositoryException | IOException e) {
+      System.out.println("Cannot download attachement for WorkItem " + workItem.getId() + "(" + e.getMessage() + ")");
     }
   }
 
-  private void saveAttachment(ITeamRepository teamRepository, IAttachment attachment) throws TeamRepositoryException,
-      IOException {
+  private void saveAttachment(ITeamRepository teamRepository, IAttachment attachment, ODocument doc)
+      throws TeamRepositoryException, IOException {
     String attachmentName = attachment.getName();
     if (attachmentName.startsWith("\\\\")) {
       System.out.println("***** I think I found a link: " + attachmentName);

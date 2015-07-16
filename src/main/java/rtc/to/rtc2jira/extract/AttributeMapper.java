@@ -3,7 +3,9 @@
  */
 package rtc.to.rtc2jira.extract;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IWorkItem;
@@ -15,7 +17,13 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
  */
 public class AttributeMapper {
 
+  private static final Set<String> DIRECT_STANDARD_ATTRIBUTES;
 
+  static {
+    DIRECT_STANDARD_ATTRIBUTES = new HashSet<>();
+    DIRECT_STANDARD_ATTRIBUTES.add("summary");
+    DIRECT_STANDARD_ATTRIBUTES.add("description");
+  }
 
   public void map(List<IAttribute> allAttributes, ODocument doc, IWorkItem workItem) {
     for (IAttribute attribute : allAttributes) {
@@ -24,8 +32,8 @@ public class AttributeMapper {
         String identifier = attribute.getIdentifier();
         String displayName = attribute.getDisplayName();
         String attributeType = attribute.getAttributeType();
-        if (identifier.equals("summary") && attributeType.equals("mediumHtml")) {
-          doc.field("summery", value);
+        if (DIRECT_STANDARD_ATTRIBUTES.contains(identifier)) {
+          doc.field(identifier, value);
         } else {
           String formattedOutput =
               String.format("Unknown Attribute: Identifier: %s \t Display Name: %s \t Type: %s \t Value: %s",

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2015 BISON Schweiz AG, All Rights Reserved.
  */
-package rtc.to.rtc2jira;
+package to.rtc.rtc2jira;
 
 import java.io.FileReader;
 import java.io.IOException;

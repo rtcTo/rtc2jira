@@ -1,7 +1,7 @@
-package rtc.to.rtc2jira;
+package to.rtc.rtc2jira;
 
-import rtc.to.rtc2jira.extract.RTCExtractor;
-import rtc.to.rtc2jira.storage.StorageEngine;
+import to.rtc.rtc2jira.extract.RTCExtractor;
+import to.rtc.rtc2jira.storage.StorageEngine;
 
 /**
  * @author roman.schaller

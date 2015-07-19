@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2015 BISON Schweiz AG, All Rights Reserved.
  */
-package rtc.to.rtc2jira.extract;
+package to.rtc.rtc2jira.extract;
 
 import java.util.HashSet;
 import java.util.List;

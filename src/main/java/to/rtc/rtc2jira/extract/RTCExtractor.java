@@ -1,4 +1,4 @@
-package rtc.to.rtc2jira.extract;
+package to.rtc.rtc2jira.extract;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -7,8 +7,8 @@ import java.io.OutputStream;
 import java.util.List;
 import java.util.Scanner;
 
-import rtc.to.rtc2jira.Settings;
-import rtc.to.rtc2jira.storage.StorageEngine;
+import to.rtc.rtc2jira.Settings;
+import to.rtc.rtc2jira.storage.StorageEngine;
 
 import com.ibm.team.links.common.IReference;
 import com.ibm.team.repository.client.ILoginHandler2;

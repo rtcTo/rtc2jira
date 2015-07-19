@@ -1,4 +1,4 @@
-package rtc.to.rtc2jira;
+package to.rtc.rtc2jira;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import rtc.to.rtc2jira.storage.StorageEngine;
+import to.rtc.rtc2jira.storage.StorageEngine;
 
 public class TestExtract {
 

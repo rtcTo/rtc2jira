@@ -2,3 +2,11 @@ rtc.url=https://rtc.local/ccm/
 rtc.user=zlatan
 rtc.password=password
 rtc.workitemid.range=33481..33482
+
+
+# User/Password or token can be used for authentication
+github.user=zlatan
+github.password=password
+github.token=mySecretToken
+github.reponame=myRepo
+github.repoowner=zlatan

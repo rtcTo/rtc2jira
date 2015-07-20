@@ -1,4 +1,4 @@
-package rtc.to.rtc2jira.storage;
+package to.rtc.rtc2jira.storage;
 
 import java.io.Closeable;
 import java.io.IOException;

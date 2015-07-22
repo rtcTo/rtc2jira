@@ -15,11 +15,11 @@ import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.LabelService;
 import org.eclipse.egit.github.core.service.RepositoryService;
 
-import com.orientechnologies.orient.core.record.impl.ODocument;
-import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
-
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.storage.StorageEngine;
+
+import com.orientechnologies.orient.core.record.impl.ODocument;
+import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 
 public class GitHubExporter implements Exporter {
 
@@ -44,17 +44,17 @@ public class GitHubExporter implements Exporter {
   @Override
   public boolean isConfigured() {
     boolean isConfigured = false;
-    client.setCredentials(settings.getGithubUser(), settings.getGithubPassword());
-    client.setOAuth2Token(settings.getGithubToken());
-    try {
-      repository =
-          service.getRepository(settings.getGithubRepoOwner(), settings.getGithubRepoName());
-      isConfigured = true;
-    } catch (IOException e) {
-      System.out.println("Couldnt access github repository");
-      e.printStackTrace();
+    if (settings.hasGithubProperties()) {
+      client.setCredentials(settings.getGithubUser(), settings.getGithubPassword());
+      client.setOAuth2Token(settings.getGithubToken());
+      try {
+        repository = service.getRepository(settings.getGithubRepoOwner(), settings.getGithubRepoName());
+        isConfigured = true;
+      } catch (IOException e) {
+        System.out.println("Couldnt access github repository");
+        e.printStackTrace();
+      }
     }
-
     return isConfigured;
   }
 

@@ -37,8 +37,7 @@ public class Settings {
     try {
       props.load(new FileReader("settings.properties"));
     } catch (IOException e) {
-      System.err
-          .println("Please create your settings.properties out of the settings.properties.example");
+      System.err.println("Please create your settings.properties out of the settings.properties.example");
       throw new RuntimeException(e);
     }
   }
@@ -69,6 +68,14 @@ public class Settings {
     int from = Integer.parseInt(splitted[0]);
     int to = Integer.parseInt(splitted[1]);
     return IntStream.rangeClosed(from, to).boxed().collect(Collectors.toList());
+  }
+
+  public boolean hasGithubProperties() {
+    return props.containsKey(GITHUB_USER)//
+        && props.containsKey(GITHUB_PASSWORD)//
+        && props.containsKey(GITHUB_OAUTH_TOKEN)//
+        && props.containsKey(GITHUB_REPONAME)//
+        && props.containsKey(GITHUB_REPOOWNER);
   }
 
   public String getGithubUser() {

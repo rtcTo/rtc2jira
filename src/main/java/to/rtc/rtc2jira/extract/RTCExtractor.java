@@ -7,9 +7,6 @@ import java.io.OutputStream;
 import java.util.List;
 import java.util.Scanner;
 
-import to.rtc.rtc2jira.Settings;
-import to.rtc.rtc2jira.storage.StorageEngine;
-
 import com.ibm.team.links.common.IReference;
 import com.ibm.team.repository.client.ILoginHandler2;
 import com.ibm.team.repository.client.ILoginInfo2;
@@ -30,6 +27,9 @@ import com.ibm.team.workitem.common.model.WorkItemEndPoints;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 
+import to.rtc.rtc2jira.Settings;
+import to.rtc.rtc2jira.storage.StorageEngine;
+
 public class RTCExtractor {
 
   private Settings settings;
@@ -47,7 +47,8 @@ public class RTCExtractor {
       String repoUri = settings.getRtcUrl();
       TeamPlatform.startup();
       try {
-        final ITeamRepository repo = TeamPlatform.getTeamRepositoryService().getTeamRepository(repoUri);
+        final ITeamRepository repo =
+            TeamPlatform.getTeamRepositoryService().getTeamRepository(repoUri);
         repo.registerLoginHandler(new ILoginHandler2() {
           @Override
           public ILoginInfo2 challenge(ITeamRepository repo) {
@@ -65,8 +66,8 @@ public class RTCExtractor {
     }
   }
 
-  private void processWorkItems(ITeamRepository repo, Iterable<Integer> workItemRange) throws TeamRepositoryException,
-      IOException {
+  private void processWorkItems(ITeamRepository repo, Iterable<Integer> workItemRange)
+      throws TeamRepositoryException, IOException {
     IWorkItemClient workItemClient = (IWorkItemClient) repo.getClientLibrary(IWorkItemClient.class);
 
     for (Integer currentWorkItemId : workItemRange) {
@@ -79,7 +80,8 @@ public class RTCExtractor {
     try {
       System.out.println("WorkItem " + workItemId + ":");
       System.out.println("****************************");
-      IWorkItem workItem = workItemClient.findWorkItemById(workItemId, IWorkItem.FULL_PROFILE, null);
+      IWorkItem workItem =
+          workItemClient.findWorkItemById(workItemId, IWorkItem.FULL_PROFILE, null);
       if (workItem == null) {
         System.out.println("Not present. Will skip this one.");
         System.out.println();
@@ -87,7 +89,8 @@ public class RTCExtractor {
       }
 
       storageEngine.withDB(db -> {
-        OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<ODocument>("select * from WorkItem where ID = :ID");
+        OSQLSynchQuery<ODocument> query =
+            new OSQLSynchQuery<ODocument>("select * from WorkItem where ID = :ID");
         List<ODocument> result = db.query(query, workItem.getId());
         final ODocument doc;
         if (result.size() > 0) {
@@ -134,12 +137,15 @@ public class RTCExtractor {
       List<IReference> references = workitemReferences.getReferences(WorkItemEndPoints.ATTACHMENT);
       for (IReference iReference : references) {
         IAttachmentHandle attachHandle = (IAttachmentHandle) iReference.resolve();
-        IAuditableClient auditableClient = (IAuditableClient) repo.getClientLibrary(IAuditableClient.class);
-        IAttachment attachment = auditableClient.resolveAuditable(attachHandle, IAttachment.DEFAULT_PROFILE, null);
+        IAuditableClient auditableClient =
+            (IAuditableClient) repo.getClientLibrary(IAuditableClient.class);
+        IAttachment attachment =
+            auditableClient.resolveAuditable(attachHandle, IAttachment.DEFAULT_PROFILE, null);
         saveAttachment(repo, attachment, doc);
       }
     } catch (TeamRepositoryException | IOException e) {
-      System.out.println("Cannot download attachement for WorkItem " + workItem.getId() + "(" + e.getMessage() + ")");
+      System.out.println("Cannot download attachement for WorkItem " + workItem.getId() + "("
+          + e.getMessage() + ")");
     }
   }
 

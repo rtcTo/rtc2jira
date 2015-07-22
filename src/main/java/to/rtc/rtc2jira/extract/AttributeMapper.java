@@ -18,15 +18,15 @@ import to.rtc.rtc2jira.spi.Mapping;
  */
 public class AttributeMapper {
 
-	public void map(List<IAttribute> allAttributes, ODocument doc, IWorkItem workItem) {
-		DefaultMappingRegistry.getInstance().beforeWorkItem(workItem);
-		for (IAttribute attribute : allAttributes) {
-			if (workItem.hasAttribute(attribute)) {
-				String identifier = attribute.getIdentifier();
-				Mapping mapping = DefaultMappingRegistry.getInstance().getMapping(identifier);
-				mapping.acceptAttribute(attribute);
-			}
-		}
-		DefaultMappingRegistry.getInstance().afterWorkItem(doc);
-	}
+  public void map(List<IAttribute> allAttributes, ODocument doc, IWorkItem workItem) {
+    DefaultMappingRegistry.getInstance().beforeWorkItem(workItem);
+    for (IAttribute attribute : allAttributes) {
+      if (workItem.hasAttribute(attribute)) {
+        String identifier = attribute.getIdentifier();
+        Mapping mapping = DefaultMappingRegistry.getInstance().getMapping(identifier);
+        mapping.acceptAttribute(attribute);
+      }
+    }
+    DefaultMappingRegistry.getInstance().afterWorkItem(doc);
+  }
 }

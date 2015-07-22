@@ -14,32 +14,29 @@ import com.ibm.team.workitem.common.model.IWorkItem;
  */
 public class MappingAdapter implements Mapping {
 
-	private IWorkItem workItem;
+  private IWorkItem workItem;
 
-	@Override
-	public final void beforeWorkItem(IWorkItem workItem) {
-		this.workItem = workItem;
-		beforeWorkItem();
-	}
+  @Override
+  public final void beforeWorkItem(IWorkItem workItem) {
+    this.workItem = workItem;
+    beforeWorkItem();
+  }
 
-	/**
-	 * Override this method for example to cleanup your member variables before
-	 * the next work item. {@link #getWorkItem()} already returns the next
-	 * {@link IWorkItem}.
-	 */
-	protected void beforeWorkItem() {
-	}
+  /**
+   * Override this method for example to cleanup your member variables before the next work item.
+   * {@link #getWorkItem()} already returns the next {@link IWorkItem}.
+   */
+  protected void beforeWorkItem() {}
 
-	@Override
-	public void acceptAttribute(IAttribute attribute) {
-	}
+  @Override
+  public void acceptAttribute(IAttribute attribute) {}
 
-	protected IWorkItem getWorkItem() {
-		return workItem;
-	}
+  protected IWorkItem getWorkItem() {
+    return workItem;
+  }
 
-	@SuppressWarnings("unchecked")
-	protected <T> T getValue(IAttribute attribute) {
-		return (T) workItem.getValue(attribute);
-	}
+  @SuppressWarnings("unchecked")
+  protected <T> T getValue(IAttribute attribute) {
+    return (T) workItem.getValue(attribute);
+  }
 }

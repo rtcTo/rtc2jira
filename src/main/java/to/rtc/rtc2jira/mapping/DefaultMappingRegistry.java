@@ -11,40 +11,39 @@ import to.rtc.rtc2jira.spi.Mapping;
 import to.rtc.rtc2jira.spi.MappingRegistry;
 
 public class DefaultMappingRegistry implements MappingRegistry {
-	private final static DefaultMappingRegistry INSTANCE = new DefaultMappingRegistry();
+  private final static DefaultMappingRegistry INSTANCE = new DefaultMappingRegistry();
 
-	private Mapping missingMapping = new MissingMapping();
+  private Mapping missingMapping = new MissingMapping();
 
-	private DefaultMappingRegistry() {
-	};
+  private DefaultMappingRegistry() {};
 
-	public static DefaultMappingRegistry getInstance() {
-		return INSTANCE;
-	}
+  public static DefaultMappingRegistry getInstance() {
+    return INSTANCE;
+  }
 
-	private Map<String, Mapping> mappings = new HashMap<>();
+  private Map<String, Mapping> mappings = new HashMap<>();
 
-	@Override
-	public void register(String rtcIdentifier, Mapping mapping) {
-		mappings.put(rtcIdentifier, mapping);
-	}
+  @Override
+  public void register(String rtcIdentifier, Mapping mapping) {
+    mappings.put(rtcIdentifier, mapping);
+  }
 
-	public Mapping getMapping(String rtcIdentifier) {
-		return Optional.of(mappings.get(rtcIdentifier)).orElse(missingMapping);
-	}
+  public Mapping getMapping(String rtcIdentifier) {
+    return Optional.of(mappings.get(rtcIdentifier)).orElse(missingMapping);
+  }
 
-	public void beforeWorkItem(final IWorkItem workItem) {
-		missingMapping.beforeWorkItem(workItem);
-		mappings.values().forEach(m -> {
-			m.beforeWorkItem(workItem);
-		});
-	}
+  public void beforeWorkItem(final IWorkItem workItem) {
+    missingMapping.beforeWorkItem(workItem);
+    mappings.values().forEach(m -> {
+      m.beforeWorkItem(workItem);
+    });
+  }
 
-	public void afterWorkItem(final ODocument doc) {
-		missingMapping.afterWorkItem(doc);
-		mappings.values().forEach(m -> {
-			m.afterWorkItem(doc);
-		});
-	}
+  public void afterWorkItem(final ODocument doc) {
+    missingMapping.afterWorkItem(doc);
+    mappings.values().forEach(m -> {
+      m.afterWorkItem(doc);
+    });
+  }
 
 }

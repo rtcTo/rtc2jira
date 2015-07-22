@@ -16,7 +16,8 @@ public class StorageEngine implements Closeable {
 
   public StorageEngine() throws Exception {
     server = OServerMain.create();
-    server.startup(Thread.currentThread().getContextClassLoader().getResourceAsStream("orientconf.xml"));
+    server.startup(
+        Thread.currentThread().getContextClassLoader().getResourceAsStream("orientconf.xml"));
     server.activate();
   }
 

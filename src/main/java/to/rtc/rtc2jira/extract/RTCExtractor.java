@@ -30,6 +30,12 @@ import com.ibm.team.workitem.common.model.WorkItemEndPoints;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 
+/**
+ * Extracts WorkItems from RTC
+ * 
+ * @author roman.schaller
+ *
+ */
 public class RTCExtractor {
 
   private Settings settings;

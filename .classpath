@@ -32,6 +32,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RTCClientPlainJavaLib5.0.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RTCClientPlainJavaLibs"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

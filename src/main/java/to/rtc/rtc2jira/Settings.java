@@ -21,6 +21,12 @@ public class Settings {
   private static final String RTC_PROJECTAREA = "rtc.projectarea";
   private static final String RTC_WORKITEM_ID_RANGE = "rtc.workitemid.range";
 
+  private static final String GITHUB_USER = "github.user";
+  private static final String GITHUB_PASSWORD = "github.password";
+  private static final String GITHUB_OAUTH_TOKEN = "github.token";
+  private static final String GITHUB_REPONAME = "github.reponame";
+  private static final String GITHUB_REPOOWNER = "github.repoowner";
+
   private static final Settings instance = new Settings();
 
   private final Properties props;
@@ -31,7 +37,8 @@ public class Settings {
     try {
       props.load(new FileReader("settings.properties"));
     } catch (IOException e) {
-      System.err.println("Please create your settings.properties out of the settings.properties.example");
+      System.err
+          .println("Please create your settings.properties out of the settings.properties.example");
       throw new RuntimeException(e);
     }
   }
@@ -62,5 +69,25 @@ public class Settings {
     int from = Integer.parseInt(splitted[0]);
     int to = Integer.parseInt(splitted[1]);
     return IntStream.rangeClosed(from, to).boxed().collect(Collectors.toList());
+  }
+
+  public String getGithubUser() {
+    return props.getProperty(GITHUB_USER);
+  }
+
+  public String getGithubPassword() {
+    return props.getProperty(GITHUB_PASSWORD);
+  }
+
+  public String getGithubToken() {
+    return props.getProperty(GITHUB_OAUTH_TOKEN);
+  }
+
+  public String getGithubRepoName() {
+    return props.getProperty(GITHUB_REPONAME);
+  }
+
+  public String getGithubRepoOwner() {
+    return props.getProperty(GITHUB_REPOOWNER);
   }
 }

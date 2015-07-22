@@ -29,7 +29,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
   }
 
   public Mapping getMapping(String rtcIdentifier) {
-    return Optional.of(mappings.get(rtcIdentifier)).orElse(missingMapping);
+    return Optional.ofNullable(mappings.get(rtcIdentifier)).orElse(missingMapping);
   }
 
   public void beforeWorkItem(final IWorkItem workItem) {

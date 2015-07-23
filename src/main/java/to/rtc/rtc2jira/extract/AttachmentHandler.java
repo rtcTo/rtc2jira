@@ -3,11 +3,12 @@
  */
 package to.rtc.rtc2jira.extract;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
+
+import to.rtc.rtc2jira.storage.Attachment;
+import to.rtc.rtc2jira.storage.AttachmentStorage;
 
 import com.ibm.team.links.common.IReference;
 import com.ibm.team.repository.client.ITeamRepository;
@@ -27,9 +28,11 @@ import com.ibm.team.workitem.common.model.WorkItemEndPoints;
 public class AttachmentHandler {
 
   private ITeamRepository repo;
+  private AttachmentStorage attachmentStorage;
 
-  public AttachmentHandler(ITeamRepository repo) {
+  public AttachmentHandler(ITeamRepository repo, AttachmentStorage attachmentStorage) {
     this.repo = repo;
+    this.attachmentStorage = attachmentStorage;
   }
 
   public void saveAttachements(IWorkItem workItem) {
@@ -44,7 +47,7 @@ public class AttachmentHandler {
             (IAuditableClient) repo.getClientLibrary(IAuditableClient.class);
         IAttachment attachment =
             auditableClient.resolveAuditable(attachHandle, IAttachment.DEFAULT_PROFILE, null);
-        saveAttachment(attachment);
+        saveAttachment(workItem.getId(), attachment);
       }
     } catch (TeamRepositoryException | IOException e) {
       System.out.println("Cannot download attachement for WorkItem " + workItem.getId() + "("
@@ -52,14 +55,15 @@ public class AttachmentHandler {
     }
   }
 
-  private void saveAttachment(IAttachment attachment) throws TeamRepositoryException, IOException {
-    String attachmentName = attachment.getName();
+  private void saveAttachment(long workitemId, IAttachment rtcAttachment)
+      throws TeamRepositoryException, IOException {
+    String attachmentName = rtcAttachment.getName();
     if (attachmentName.startsWith("\\\\")) {
       System.out.println("***** I think I found a link: " + attachmentName);
     } else {
-      File save = new File("testDownload_" + attachmentName);
-      try (OutputStream out = new FileOutputStream(save)) {
-        repo.contentManager().retrieveContent(attachment.getContent(), out, null);
+      Attachment att = attachmentStorage.createAttachment(workitemId, attachmentName);
+      try (OutputStream out = att.openOutputStream()) {
+        repo.contentManager().retrieveContent(rtcAttachment.getContent(), out, null);
       }
     }
   }

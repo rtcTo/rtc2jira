@@ -65,7 +65,8 @@ public class RTCExtractor {
   private void processWorkItems(ITeamRepository repo, Iterable<Integer> workItemRange)
       throws TeamRepositoryException, IOException {
     IWorkItemClient workItemClient = (IWorkItemClient) repo.getClientLibrary(IWorkItemClient.class);
-    AttachmentHandler attachmentHandler = new AttachmentHandler(repo);
+    AttachmentHandler attachmentHandler =
+        new AttachmentHandler(repo, storageEngine.getAttachmentStorage());
     for (Integer currentWorkItemId : workItemRange) {
       processWorkItem(repo, workItemClient, currentWorkItemId, attachmentHandler);
     }

@@ -4,7 +4,6 @@
 package to.rtc.rtc2jira.storage;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,23 +11,22 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
-
 /**
  * @author roman.schaller
  *
  */
 public class AttachmentStorage {
-  private Path basePath = Paths.get("attachements");
+  private Path basePath = Paths.get("attachments");
 
   public AttachmentStorage() throws IOException {
     Files.createDirectories(basePath);
   }
 
-  public void storeAttachment(Attachment attachment, InputStream in) throws IOException {
+  public Attachment createAttachment(long workitemId, String name) {
+    Attachment attachment = new Attachment(workitemId, name);
     String storeName = attachment.getWorkitemId() + "_" + attachment.getName();
     attachment.setPath(basePath.resolve(storeName));
-    IOUtils.copy(in, attachment.getOutputStream());
+    return attachment;
   }
 
   public List<Attachment> readAttachments(long workitemId) throws IOException {

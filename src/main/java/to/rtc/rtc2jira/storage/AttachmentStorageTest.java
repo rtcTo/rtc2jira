@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -26,19 +27,23 @@ public class AttachmentStorageTest {
     Attachment otiJpg =
         readAttachments.stream().filter(a -> a.getName().equals("oti.jpg")).findAny().get();
 
-    assertTrue(IOUtils.contentEquals(exitPng.getInputStream(), getExitPngInputStream()));
-    assertTrue(IOUtils.contentEquals(otiJpg.getInputStream(), getOtiJpgInputStream()));
+    assertTrue(IOUtils.contentEquals(exitPng.openInputStream(), getExitPngInputStream()));
+    assertTrue(IOUtils.contentEquals(otiJpg.openInputStream(), getOtiJpgInputStream()));
   }
 
   private void storeExitAndOti(AttachmentStorage storage, long workitemId) throws IOException {
-    Attachment exit = new Attachment(workitemId, "exit.png");
-    try (InputStream input = getExitPngInputStream()) {
-      storage.storeAttachment(exit, input);
+    try (InputStream in = getExitPngInputStream()) {
+      Attachment exit = storage.createAttachment(workitemId, "exit.png");
+      try (OutputStream out = exit.openOutputStream()) {
+        IOUtils.copy(in, out);
+      }
     }
 
-    Attachment oti = new Attachment(54285L, "oti.jpg");
-    try (InputStream input = getOtiJpgInputStream()) {
-      storage.storeAttachment(oti, input);
+    try (InputStream in = getOtiJpgInputStream()) {
+      Attachment oti = storage.createAttachment(54285L, "oti.jpg");
+      try (OutputStream out = oti.openOutputStream()) {
+        IOUtils.copy(in, out);
+      }
     }
   }
 

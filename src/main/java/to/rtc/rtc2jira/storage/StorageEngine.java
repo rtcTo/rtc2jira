@@ -13,12 +13,14 @@ import com.orientechnologies.orient.server.OServerMain;
 public class StorageEngine implements Closeable {
 
   private OServer server;
+  private AttachmentStorage attachmentStorage;
 
   public StorageEngine() throws Exception {
     server = OServerMain.create();
-    server.startup(
-        Thread.currentThread().getContextClassLoader().getResourceAsStream("orientconf.xml"));
+    server.startup(Thread.currentThread().getContextClassLoader()
+        .getResourceAsStream("orientconf.xml"));
     server.activate();
+    attachmentStorage = new AttachmentStorage();
   }
 
   public void withDB(Consumer<ODatabaseDocumentTx> doWithDB) {
@@ -34,6 +36,10 @@ public class StorageEngine implements Closeable {
       }
       doWithDB.accept(db);
     }
+  }
+
+  public AttachmentStorage getAttachmentStorage() {
+    return attachmentStorage;
   }
 
   @Override

@@ -38,7 +38,7 @@ public class Attachment {
     this.path = path;
   }
 
-  public OutputStream getOutputStream() throws IOException {
+  public OutputStream openOutputStream() throws IOException {
     File file = path.toFile();
     if (!file.exists()) {
       file.createNewFile();
@@ -46,7 +46,7 @@ public class Attachment {
     return new FileOutputStream(file);
   }
 
-  public InputStream getInputStream() throws IOException {
+  public InputStream openInputStream() throws IOException {
     return new FileInputStream(path.toFile());
   }
 }

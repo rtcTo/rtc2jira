@@ -1,5 +1,10 @@
 package to.rtc.rtc2jira.exporter.github;
 
+import static to.rtc.rtc2jira.storage.WorkItemConstants.DESCRIPTION;
+import static to.rtc.rtc2jira.storage.WorkItemConstants.ID;
+import static to.rtc.rtc2jira.storage.WorkItemConstants.SUMMARY;
+import static to.rtc.rtc2jira.storage.WorkItemConstants.WORK_ITEM_TYPE;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,12 +20,12 @@ import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.LabelService;
 import org.eclipse.egit.github.core.service.RepositoryService;
 
-import com.orientechnologies.orient.core.record.impl.ODocument;
-import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
-
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.storage.StorageEngine;
+
+import com.orientechnologies.orient.core.record.impl.ODocument;
+import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 
 public class GitHubExporter implements Exporter {
 
@@ -69,19 +74,19 @@ public class GitHubExporter implements Exporter {
       for (Entry<String, Object> entry : workItem) {
         String field = entry.getKey();
         switch (field) {
-          case "ID":
+          case ID:
             String id = (String) entry.getValue();
             issue.setNumber(Integer.valueOf(id));
             break;
-          case "summary":
+          case SUMMARY:
             String summary = (String) entry.getValue();
             issue.setTitle(summary);
             break;
-          case "description":
+          case DESCRIPTION:
             String htmlText = (String) entry.getValue();
             issue.setBody(htmlText);
             break;
-          case "workItemType":
+          case WORK_ITEM_TYPE:
             String workitemType = (String) entry.getValue();
             switch (workitemType) {
               case TYPE_TASK:

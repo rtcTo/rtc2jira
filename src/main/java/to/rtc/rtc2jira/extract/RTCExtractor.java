@@ -1,5 +1,7 @@
 package to.rtc.rtc2jira.extract;
 
+import static to.rtc.rtc2jira.storage.WorkItemConstants.ID;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -92,7 +94,7 @@ public class RTCExtractor {
           doc = result.get(0);
         } else {
           doc = new ODocument("WorkItem");
-          doc.field("ID", workItem.getId());
+          doc.field(ID, workItem.getId());
         }
         saveAttributes(workItemClient, workItem, doc);
         attachmentHandler.saveAttachements(workItem);

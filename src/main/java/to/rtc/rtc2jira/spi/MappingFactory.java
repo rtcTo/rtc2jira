@@ -9,7 +9,7 @@ import java.util.ServiceLoader;
  * @author roman
  *
  */
-public interface MappingFactoery {
+public interface MappingFactory {
 
   /**
    * Called once at startup. Register your mappers here.

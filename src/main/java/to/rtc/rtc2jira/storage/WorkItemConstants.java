@@ -11,6 +11,7 @@ package to.rtc.rtc2jira.storage;
  *
  */
 public interface WorkItemConstants {
+  public static final String ID = "ID";
   public static final String SUMMARY = "summary";
   public static final String DESCRIPTION = "description";
   public static final String WORK_ITEM_TYPE = "workItemType";

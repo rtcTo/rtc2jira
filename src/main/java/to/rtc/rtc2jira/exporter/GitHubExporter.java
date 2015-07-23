@@ -15,11 +15,11 @@ import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.LabelService;
 import org.eclipse.egit.github.core.service.RepositoryService;
 
-import to.rtc.rtc2jira.Settings;
-import to.rtc.rtc2jira.storage.StorageEngine;
-
 import com.orientechnologies.orient.core.record.impl.ODocument;
 import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
+
+import to.rtc.rtc2jira.Settings;
+import to.rtc.rtc2jira.storage.StorageEngine;
 
 public class GitHubExporter implements Exporter {
 
@@ -34,13 +34,6 @@ public class GitHubExporter implements Exporter {
   private Repository repository;
   private Settings settings;
 
-  public GitHubExporter(Settings settings, StorageEngine storageEngine) {
-    this.settings = settings;
-    this.storageEngine = storageEngine;
-    this.client = new GitHubClient();
-    this.service = new RepositoryService(client);
-  }
-
   @Override
   public boolean isConfigured() {
     boolean isConfigured = false;
@@ -48,7 +41,8 @@ public class GitHubExporter implements Exporter {
       client.setCredentials(settings.getGithubUser(), settings.getGithubPassword());
       client.setOAuth2Token(settings.getGithubToken());
       try {
-        repository = service.getRepository(settings.getGithubRepoOwner(), settings.getGithubRepoName());
+        repository =
+            service.getRepository(settings.getGithubRepoOwner(), settings.getGithubRepoName());
         isConfigured = true;
       } catch (IOException e) {
         System.out.println("Couldnt access github repository");
@@ -56,6 +50,14 @@ public class GitHubExporter implements Exporter {
       }
     }
     return isConfigured;
+  }
+
+  @Override
+  public void initialize(Settings settings, StorageEngine engine) {
+    this.settings = settings;
+    this.storageEngine = engine;
+    this.client = new GitHubClient();
+    this.service = new RepositoryService(client);
   }
 
   public void export() throws Exception {

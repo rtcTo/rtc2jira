@@ -5,6 +5,7 @@ import java.util.List;
 
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.exporter.GitHubExporter;
+import to.rtc.rtc2jira.exporter.JiraExporter;
 import to.rtc.rtc2jira.extract.RTCExtractor;
 import to.rtc.rtc2jira.mapping.DefaultMappingRegistry;
 import to.rtc.rtc2jira.mapping.DirectMapping;
@@ -18,10 +19,12 @@ public class Main {
 
   public static void main(String[] args) throws Exception {
     registerDefaultMappings();
+    Settings settings = Settings.getInstance();
     try (StorageEngine storageEngine = new StorageEngine()) {
-      RTCExtractor extractor = new RTCExtractor(Settings.getInstance(), storageEngine);
+      RTCExtractor extractor = new RTCExtractor(settings, storageEngine);
       extractor.extract();
-      for (Exporter exporter : getExporters(storageEngine)) {
+      for (Exporter exporter : getExporters()) {
+        exporter.initialize(settings, storageEngine);
         if (exporter.isConfigured()) {
           exporter.export();
         }
@@ -36,9 +39,10 @@ public class Main {
     registry.register("workItemType", new DirectMapping("workItemType"));
   }
 
-  private static List<Exporter> getExporters(StorageEngine storageEngine) {
+  private static List<Exporter> getExporters() {
     List<Exporter> exporters = new ArrayList<>();
-    exporters.add(new GitHubExporter(Settings.getInstance(), storageEngine));
+    exporters.add(new GitHubExporter());
+    exporters.add(new JiraExporter());
     return exporters;
   }
 }

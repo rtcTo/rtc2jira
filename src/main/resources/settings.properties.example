@@ -10,3 +10,8 @@ github.password=password
 github.token=mySecretToken
 github.reponame=myRepo
 github.repoowner=zlatan
+
+
+jira.user=zlatan
+jira.password=passsword
+jira.url=https://zlatan.atlassian.net

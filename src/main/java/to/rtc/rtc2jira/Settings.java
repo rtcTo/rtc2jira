@@ -27,6 +27,10 @@ public class Settings {
   private static final String GITHUB_REPONAME = "github.reponame";
   private static final String GITHUB_REPOOWNER = "github.repoowner";
 
+  private static final String JIRA_USER = "jira.user";
+  private static final String JIRA_PASSWORD = "jira.password";
+  private static final String JIRA_URL = "jira.url";
+
   private static final Settings instance = new Settings();
 
   private final Properties props;
@@ -37,7 +41,8 @@ public class Settings {
     try {
       props.load(new FileReader("settings.properties"));
     } catch (IOException e) {
-      System.err.println("Please create your settings.properties out of the settings.properties.example");
+      System.err
+          .println("Please create your settings.properties out of the settings.properties.example");
       throw new RuntimeException(e);
     }
   }
@@ -96,5 +101,24 @@ public class Settings {
 
   public String getGithubRepoOwner() {
     return props.getProperty(GITHUB_REPOOWNER);
+  }
+
+
+  public boolean hasJiraProperties() {
+    return props.containsKey(JIRA_USER)//
+        && props.containsKey(JIRA_PASSWORD)//
+        && props.containsKey(JIRA_URL);
+  }
+
+  public String getJiraUser() {
+    return props.getProperty(JIRA_USER);
+  }
+
+  public String getJiraPassword() {
+    return props.getProperty(JIRA_PASSWORD);
+  }
+
+  public String getJiraUrl() {
+    return props.getProperty(JIRA_URL);
   }
 }

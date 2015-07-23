@@ -14,6 +14,7 @@ public class StorageEngine implements Closeable {
 
   private OServer server;
   private AttachmentStorage attachmentStorage;
+  private String url;
 
   public StorageEngine() throws Exception {
     server = OServerMain.create();
@@ -21,10 +22,15 @@ public class StorageEngine implements Closeable {
         .getResourceAsStream("orientconf.xml"));
     server.activate();
     attachmentStorage = new AttachmentStorage();
+    url = "plocal:./databases/rtc2jira";
+  }
+
+  public void setConnectionUrl(String url) {
+    this.url = url;
   }
 
   public void withDB(Consumer<ODatabaseDocumentTx> doWithDB) {
-    try (ODatabaseDocumentTx db = new ODatabaseDocumentTx("plocal:./databases/rtc2jira")) {
+    try (ODatabaseDocumentTx db = new ODatabaseDocumentTx(url)) {
       if (!db.exists()) {
         db.create();
         OClass workItemClass = db.getMetadata().getSchema().createClass("WORKITEM");

@@ -14,4 +14,5 @@ public interface WorkItemConstants {
   public static final String SUMMARY = "summary";
   public static final String DESCRIPTION = "description";
   public static final String WORK_ITEM_TYPE = "workItemType";
+  public static final String ACCEPTANCE_CRITERIAS = "com.ibm.team.apt.attribute.acceptance";
 }

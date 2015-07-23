@@ -1,5 +1,6 @@
 package to.rtc.rtc2jira.mapping;
 
+import static to.rtc.rtc2jira.storage.WorkItemConstants.ACCEPTANCE_CRITERIAS;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.DESCRIPTION;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.SUMMARY;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.WORK_ITEM_TYPE;
@@ -23,6 +24,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(SUMMARY, new DirectMapping(SUMMARY));
     register(DESCRIPTION, new DirectMapping(DESCRIPTION));
     register(WORK_ITEM_TYPE, new DirectMapping(WORK_ITEM_TYPE));
+    register(ACCEPTANCE_CRITERIAS, new DirectMapping(ACCEPTANCE_CRITERIAS));
   };
 
   public static DefaultMappingRegistry getInstance() {

@@ -1,4 +1,4 @@
-package to.rtc.rtc2jira.exporter;
+package to.rtc.rtc2jira.exporter.jira;
 
 import java.util.Base64;
 
@@ -10,6 +10,7 @@ import com.sun.jersey.api.client.ClientResponse.Status;
 import com.sun.jersey.api.client.WebResource;
 
 import to.rtc.rtc2jira.Settings;
+import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.storage.StorageEngine;
 
 public class JiraExporter implements Exporter {

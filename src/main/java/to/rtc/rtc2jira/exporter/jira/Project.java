@@ -1,4 +1,4 @@
-package to.rtc.rtc2jira.exporter;
+package to.rtc.rtc2jira.exporter.jira;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

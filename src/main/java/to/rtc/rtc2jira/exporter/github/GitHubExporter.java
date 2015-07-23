@@ -1,4 +1,4 @@
-package to.rtc.rtc2jira.exporter;
+package to.rtc.rtc2jira.exporter.github;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +19,7 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
 import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 
 import to.rtc.rtc2jira.Settings;
+import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.storage.StorageEngine;
 
 public class GitHubExporter implements Exporter {

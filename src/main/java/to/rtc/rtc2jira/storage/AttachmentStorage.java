@@ -34,8 +34,9 @@ public class AttachmentStorage {
     List<Attachment> attachments = new ArrayList<>();
     try (DirectoryStream<Path> fileListStream = Files.newDirectoryStream(basePath)) {
       fileListStream.forEach(p -> {
-        if (p.getFileName().toString().startsWith(prefix)) {
-          String realName = p.getFileName().toString().substring(prefix.length());
+        String filename = p.getFileName().toString();
+        if (filename.startsWith(prefix)) {
+          String realName = filename.substring(prefix.length());
           Attachment att = new Attachment(workitemId, realName);
           att.setPath(p);
           attachments.add(att);

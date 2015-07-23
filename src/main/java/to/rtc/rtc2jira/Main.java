@@ -7,8 +7,6 @@ import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.exporter.GitHubExporter;
 import to.rtc.rtc2jira.exporter.JiraExporter;
 import to.rtc.rtc2jira.extract.RTCExtractor;
-import to.rtc.rtc2jira.mapping.DefaultMappingRegistry;
-import to.rtc.rtc2jira.mapping.DirectMapping;
 import to.rtc.rtc2jira.storage.StorageEngine;
 
 /**
@@ -30,6 +28,7 @@ public class Main {
       }
     }
   }
+
   private static List<Exporter> getExporters() {
     List<Exporter> exporters = new ArrayList<>();
     exporters.add(new GitHubExporter());

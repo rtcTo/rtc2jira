@@ -40,7 +40,7 @@ public class AttachmentStorageTest {
     }
 
     try (InputStream in = getOtiJpgInputStream()) {
-      Attachment oti = storage.createAttachment(54285L, "oti.jpg");
+      Attachment oti = storage.createAttachment(workitemId, "oti.jpg");
       try (OutputStream out = oti.openOutputStream()) {
         IOUtils.copy(in, out);
       }

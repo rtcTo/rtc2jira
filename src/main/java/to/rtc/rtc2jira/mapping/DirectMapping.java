@@ -1,9 +1,9 @@
 package to.rtc.rtc2jira.mapping;
 
+import to.rtc.rtc2jira.spi.MappingAdapter;
+
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.orientechnologies.orient.core.record.impl.ODocument;
-
-import to.rtc.rtc2jira.spi.MappingAdapter;
 
 public class DirectMapping extends MappingAdapter {
 
@@ -21,7 +21,7 @@ public class DirectMapping extends MappingAdapter {
 
   @Override
   public void acceptAttribute(IAttribute attribute) {
-    getValue(attribute);
+    value = getValue(attribute);
   }
 
   @Override

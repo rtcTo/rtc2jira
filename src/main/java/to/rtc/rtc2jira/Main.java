@@ -18,7 +18,6 @@ import to.rtc.rtc2jira.storage.StorageEngine;
 public class Main {
 
   public static void main(String[] args) throws Exception {
-    registerDefaultMappings();
     Settings settings = Settings.getInstance();
     try (StorageEngine storageEngine = new StorageEngine()) {
       RTCExtractor extractor = new RTCExtractor(settings, storageEngine);
@@ -31,14 +30,6 @@ public class Main {
       }
     }
   }
-
-  private static void registerDefaultMappings() {
-    DefaultMappingRegistry registry = DefaultMappingRegistry.getInstance();
-    registry.register("summary", new DirectMapping("summary"));
-    registry.register("description", new DirectMapping("description"));
-    registry.register("workItemType", new DirectMapping("workItemType"));
-  }
-
   private static List<Exporter> getExporters() {
     List<Exporter> exporters = new ArrayList<>();
     exporters.add(new GitHubExporter());

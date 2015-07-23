@@ -2,7 +2,6 @@ package to.rtc.rtc2jira.extract;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Scanner;
 
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.storage.StorageEngine;
@@ -37,28 +36,26 @@ public class RTCExtractor {
   }
 
   public void extract() {
-    try (Scanner sc = new Scanner(System.in)) {
-      final String userId = settings.getRtcUser();
-      final String password = settings.getRtcPassword();
-      String repoUri = settings.getRtcUrl();
-      TeamPlatform.startup();
-      try {
-        final ITeamRepository repo =
-            TeamPlatform.getTeamRepositoryService().getTeamRepository(repoUri);
-        repo.registerLoginHandler(new ILoginHandler2() {
-          @Override
-          public ILoginInfo2 challenge(ITeamRepository repo) {
-            return new UsernameAndPasswordLoginInfo(userId, password);
-          }
-        });
-        repo.login(null);
-        processWorkItems(repo, settings.getRtcWorkItemRange());
-        repo.logout();
-      } catch (TeamRepositoryException | IOException e) {
-        e.printStackTrace();
-      } finally {
-        TeamPlatform.shutdown();
-      }
+    final String userId = settings.getRtcUser();
+    final String password = settings.getRtcPassword();
+    String repoUri = settings.getRtcUrl();
+    TeamPlatform.startup();
+    try {
+      final ITeamRepository repo =
+          TeamPlatform.getTeamRepositoryService().getTeamRepository(repoUri);
+      repo.registerLoginHandler(new ILoginHandler2() {
+        @Override
+        public ILoginInfo2 challenge(ITeamRepository repo) {
+          return new UsernameAndPasswordLoginInfo(userId, password);
+        }
+      });
+      repo.login(null);
+      processWorkItems(repo, settings.getRtcWorkItemRange());
+      repo.logout();
+    } catch (TeamRepositoryException | IOException e) {
+      e.printStackTrace();
+    } finally {
+      TeamPlatform.shutdown();
     }
   }
 

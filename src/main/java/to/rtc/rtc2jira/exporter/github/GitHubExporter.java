@@ -8,9 +8,14 @@ import static to.rtc.rtc2jira.storage.WorkItemConstants.WORK_ITEM_TYPE;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.Label;
@@ -20,12 +25,12 @@ import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.LabelService;
 import org.eclipse.egit.github.core.service.RepositoryService;
 
+import com.orientechnologies.orient.core.record.impl.ODocument;
+import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
+
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.storage.StorageEngine;
-
-import com.orientechnologies.orient.core.record.impl.ODocument;
-import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 
 public class GitHubExporter implements Exporter {
 
@@ -39,6 +44,7 @@ public class GitHubExporter implements Exporter {
   private RepositoryService service;
   private Repository repository;
   private Settings settings;
+  private IssueService issueService;
 
   @Override
   public boolean isConfigured() {
@@ -64,55 +70,86 @@ public class GitHubExporter implements Exporter {
     this.storageEngine = engine;
     this.client = new GitHubClient();
     this.service = new RepositoryService(client);
+    this.issueService = new IssueService(client);
   }
 
   public void export() throws Exception {
-    IssueService issueService = new IssueService(client);
     for (ODocument workItem : getWorkItems()) {
-      Issue issue = new Issue();
-
-      for (Entry<String, Object> entry : workItem) {
-        String field = entry.getKey();
-        switch (field) {
-          case ID:
-            String id = (String) entry.getValue();
-            issue.setNumber(Integer.valueOf(id));
-            break;
-          case SUMMARY:
-            String summary = (String) entry.getValue();
-            issue.setTitle(summary);
-            break;
-          case DESCRIPTION:
-            String htmlText = (String) entry.getValue();
-            issue.setBody(htmlText);
-            break;
-          case WORK_ITEM_TYPE:
-            String workitemType = (String) entry.getValue();
-            switch (workitemType) {
-              case TYPE_TASK:
-                issue.setLabels(Collections.singletonList(getLabel("Task")));
-                break;
-              case TYPE_STORY:
-                issue.setLabels(Collections.singletonList(getLabel("Story")));
-                break;
-              case TYPE_EPIC:
-                issue.setLabels(Collections.singletonList(getLabel("Epic")));
-                break;
-              case TYPE_BUSINESSNEED:
-                issue.setLabels(Collections.singletonList(getLabel("Busines Need")));
-                break;
-              default:
-                System.out.println("Cannot create label for unknown workitemType: " + workitemType);
-                break;
-            }
-            break;
-          default:
-            break;
-        }
-      }
-      issue.setTitle(issue.getNumber() + ": " + issue.getTitle());
-      issueService.createIssue(repository, issue);
+      Issue issue = createIssueFromWorkItem(workItem);
+      Optional.ofNullable(createGitHubIssue(issue)).ifPresent(optionalIssue -> {
+        Long newIssueNumber = optionalIssue.getId();
+      });
     }
+  }
+
+  private Issue createIssueFromWorkItem(ODocument workItem) throws IOException {
+    Issue issue = new Issue();
+
+    for (Entry<String, Object> entry : workItem) {
+      String field = entry.getKey();
+      switch (field) {
+        case ID:
+          String id = (String) entry.getValue();
+          issue.setNumber(Integer.valueOf(id));
+          break;
+        case SUMMARY:
+          String summary = (String) entry.getValue();
+          issue.setTitle(summary);
+          break;
+        case DESCRIPTION:
+          // String htmlText = (String) entry.getValue();
+          // issue.setBody(htmlText);
+          break;
+        case WORK_ITEM_TYPE:
+          String workitemType = (String) entry.getValue();
+          switch (workitemType) {
+            case TYPE_TASK:
+              issue.setLabels(Collections.singletonList(getLabel("Task")));
+              break;
+            case TYPE_STORY:
+              issue.setLabels(Collections.singletonList(getLabel("Story")));
+              break;
+            case TYPE_EPIC:
+              issue.setLabels(Collections.singletonList(getLabel("Epic")));
+              break;
+            case TYPE_BUSINESSNEED:
+              issue.setLabels(Collections.singletonList(getLabel("Busines Need")));
+              break;
+            default:
+              System.out.println("Cannot create label for unknown workitemType: " + workitemType);
+              break;
+          }
+          break;
+        default:
+          break;
+      }
+    }
+    issue.setTitle(issue.getNumber() + ": " + issue.getTitle());
+    return issue;
+  }
+
+  private Issue createGitHubIssue(Issue issue) throws IOException {
+    Issue createdIssue = null;
+    Stream<Issue> filter = issueService.getIssues(repository, getFilterData(issue)).stream() //
+        .filter(existingIssues -> {
+          String issueNumberAsString = String.valueOf(issue.getNumber());
+          return existingIssues.getTitle().startsWith(issueNumberAsString);
+        });
+
+
+    boolean isAlreadyCreated = filter.iterator().hasNext();
+    if (!isAlreadyCreated) {
+      createdIssue = issueService.createIssue(repository, issue);
+    }
+    return createdIssue;
+  }
+
+  private Map<String, String> getFilterData(Issue createdIssue) {
+    HashMap<String, String> filterData = new HashMap<>();
+    String labelNamesCommaSeparated = createdIssue.getLabels().stream()
+        .map(labels -> labels.getName()).collect(Collectors.joining(","));
+    filterData.put("labels", labelNamesCommaSeparated);
+    return filterData;
   }
 
   private List<ODocument> getWorkItems() {

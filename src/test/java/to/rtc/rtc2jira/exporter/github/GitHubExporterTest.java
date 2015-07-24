@@ -3,8 +3,11 @@ package to.rtc.rtc2jira.exporter.github;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
 import java.io.IOException;
+
+import mockit.Expectations;
+import mockit.Mocked;
+import mockit.Verifications;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Issue;
@@ -14,15 +17,12 @@ import org.eclipse.egit.github.core.service.RepositoryService;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+
+import to.rtc.rtc2jira.Settings;
+import to.rtc.rtc2jira.TestDatabaseRule;
+import to.rtc.rtc2jira.storage.StorageEngine;
 
 import com.orientechnologies.orient.core.record.impl.ODocument;
-
-import mockit.Expectations;
-import mockit.Mocked;
-import mockit.Verifications;
-import to.rtc.rtc2jira.Settings;
-import to.rtc.rtc2jira.storage.StorageEngine;
 
 public class GitHubExporterTest {
 
@@ -37,14 +37,12 @@ public class GitHubExporterTest {
   private StorageEngine engine;
 
   @Rule
-  public TemporaryFolder _tempFolder = new TemporaryFolder();
+  public TestDatabaseRule testDbRule = new TestDatabaseRule();
 
 
   @Before
   public void setUp() throws Exception {
-    engine = new StorageEngine();
-    File newFolder = _tempFolder.newFolder("test_databases", "rtc2Jira");
-    engine.setConnectionUrl("plocal:" + newFolder.getCanonicalPath());
+    engine = testDbRule.getEngine();
     exporter = new GitHubExporter();
     exporter.initialize(settingsMock, engine);
   }

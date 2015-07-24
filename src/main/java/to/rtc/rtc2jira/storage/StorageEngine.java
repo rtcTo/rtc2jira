@@ -10,7 +10,7 @@ import com.orientechnologies.orient.core.metadata.schema.OType;
 import com.orientechnologies.orient.server.OServer;
 import com.orientechnologies.orient.server.OServerMain;
 
-public class StorageEngine implements Closeable {
+public class StorageEngine implements Closeable, AutoCloseable {
 
   private OServer server;
   private AttachmentStorage attachmentStorage;

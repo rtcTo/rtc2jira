@@ -6,10 +6,6 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
-import mockit.Expectations;
-import mockit.Mocked;
-import mockit.Verifications;
-
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.Repository;
@@ -20,10 +16,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import com.orientechnologies.orient.core.record.impl.ODocument;
+
+import mockit.Expectations;
+import mockit.Mocked;
+import mockit.Verifications;
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.storage.StorageEngine;
-
-import com.orientechnologies.orient.core.record.impl.ODocument;
 
 public class GitHubExporterTest {
 
@@ -106,6 +105,7 @@ public class GitHubExporterTest {
       }
     };
   }
+
 
   private void createWorkItem(int id) {
     ODocument doc = new ODocument("WorkItem");

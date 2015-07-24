@@ -15,7 +15,7 @@ import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.RepositoryService;
 import org.junit.Before;
-import org.junit.Rule;
+import org.junit.ClassRule;
 import org.junit.Test;
 
 import to.rtc.rtc2jira.Settings;
@@ -36,8 +36,8 @@ public class GitHubExporterTest {
 
   private StorageEngine engine;
 
-  @Rule
-  public TestDatabaseRule testDbRule = new TestDatabaseRule();
+  @ClassRule
+  public static TestDatabaseRule testDbRule = new TestDatabaseRule();
 
 
   @Before

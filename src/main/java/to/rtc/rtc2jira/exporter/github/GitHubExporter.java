@@ -96,8 +96,8 @@ public class GitHubExporter implements Exporter {
           issue.setTitle(summary);
           break;
         case DESCRIPTION:
-          // String htmlText = (String) entry.getValue();
-          // issue.setBody(htmlText);
+          String htmlText = (String) entry.getValue();
+          issue.setBody(htmlText);
           break;
         case WORK_ITEM_TYPE:
           String workitemType = (String) entry.getValue();
@@ -124,9 +124,9 @@ public class GitHubExporter implements Exporter {
       }
     }
     issue.setTitle(issue.getNumber() + ": " + issue.getTitle());
-    int number = workItem.field(GITHUB_WORKITEM_LINK);
-    issue.setId(number);
-    issue.setNumber(number);
+    int existingGitHubIssueNumber =
+        (int) Optional.ofNullable(workItem.field(GITHUB_WORKITEM_LINK)).orElse(0);
+    issue.setNumber(existingGitHubIssueNumber);
     return issue;
   }
 

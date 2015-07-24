@@ -38,6 +38,7 @@ public class GitHubExporter implements Exporter {
   private static final String TYPE_STORY = "com.ibm.team.apt.workItemType.story";
   private static final String TYPE_EPIC = "com.ibm.team.apt.workItemType.epic";
   private static final String TYPE_BUSINESSNEED = "com.ibm.team.workitem.workItemType.businessneed";
+  private static final String GITHUB_WORKITEM_LINK = "githubissuenumber";
 
   private StorageEngine storageEngine;
   private GitHubClient client;
@@ -76,15 +77,22 @@ public class GitHubExporter implements Exporter {
   public void export() throws Exception {
     for (ODocument workItem : getWorkItems()) {
       Issue issue = createIssueFromWorkItem(workItem);
-      Optional.ofNullable(createGitHubIssue(issue)).ifPresent(optionalIssue -> {
-        Long newIssueNumber = optionalIssue.getId();
-      });
+      storeLink(Optional.ofNullable(createGitHubIssue(issue)), workItem);
     }
+  }
+
+  private void storeLink(Optional<Issue> optionalIssue, ODocument workItem) {
+    optionalIssue.ifPresent(issue -> {
+      storageEngine.withDB(db -> {
+        int newIssueGithubId = issue.getNumber();
+        workItem.field(GITHUB_WORKITEM_LINK, newIssueGithubId);
+        workItem.save();
+      });
+    });
   }
 
   private Issue createIssueFromWorkItem(ODocument workItem) throws IOException {
     Issue issue = new Issue();
-
     for (Entry<String, Object> entry : workItem) {
       String field = entry.getKey();
       switch (field) {
@@ -125,19 +133,27 @@ public class GitHubExporter implements Exporter {
       }
     }
     issue.setTitle(issue.getNumber() + ": " + issue.getTitle());
+    int number = workItem.field(GITHUB_WORKITEM_LINK);
+    issue.setId(number);
+    issue.setNumber(number);
     return issue;
   }
 
   private Issue createGitHubIssue(Issue issue) throws IOException {
     Issue createdIssue = null;
-    Stream<Issue> filter = issueService.getIssues(repository, getFilterData(issue)).stream() //
-        .filter(existingIssues -> {
-          String issueNumberAsString = String.valueOf(issue.getNumber());
-          return existingIssues.getTitle().startsWith(issueNumberAsString);
-        });
+    Stream<Issue> filteredIssues;
+    if (issue.getId() != 0L) {
+      filteredIssues = Stream.of(issueService.getIssue(repository, issue.getNumber()));
+    } else {
+      filteredIssues = issueService.getIssues(repository, getFilterData(issue)).stream() //
+          .filter(existingIssues -> {
+            String issueNumberAsString = String.valueOf(issue.getNumber());
+            return existingIssues.getTitle().startsWith(issueNumberAsString);
+          });
 
+    }
 
-    boolean isAlreadyCreated = filter.iterator().hasNext();
+    boolean isAlreadyCreated = filteredIssues.iterator().hasNext();
     if (!isAlreadyCreated) {
       createdIssue = issueService.createIssue(repository, issue);
     }
@@ -146,9 +162,13 @@ public class GitHubExporter implements Exporter {
 
   private Map<String, String> getFilterData(Issue createdIssue) {
     HashMap<String, String> filterData = new HashMap<>();
-    String labelNamesCommaSeparated = createdIssue.getLabels().stream()
-        .map(labels -> labels.getName()).collect(Collectors.joining(","));
-    filterData.put("labels", labelNamesCommaSeparated);
+    List<Label> currentLabels = createdIssue.getLabels();
+    if (currentLabels != null) {
+      String labelNamesCommaSeparated = currentLabels.stream() //
+          .map(labels -> labels.getName()) //
+          .collect(Collectors.joining(","));
+      filterData.put("labels", labelNamesCommaSeparated);
+    }
     return filterData;
   }
 

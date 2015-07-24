@@ -8,14 +8,10 @@ import static to.rtc.rtc2jira.storage.WorkItemConstants.WORK_ITEM_TYPE;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.Label;
@@ -131,36 +127,12 @@ public class GitHubExporter implements Exporter {
   }
 
   private Issue createGitHubIssue(Issue issue) throws IOException {
+    boolean isAlreadyCreated = issue.getNumber() != 0;
     Issue createdIssue = null;
-    Stream<Issue> filteredIssues;
-    if (issue.getId() != 0L) {
-      filteredIssues = Stream.of(issueService.getIssue(repository, issue.getNumber()));
-    } else {
-      filteredIssues = issueService.getIssues(repository, getFilterData(issue)).stream() //
-          .filter(existingIssues -> {
-            String issueNumberAsString = String.valueOf(issue.getNumber());
-            return existingIssues.getTitle().startsWith(issueNumberAsString);
-          });
-
-    }
-
-    boolean isAlreadyCreated = filteredIssues.iterator().hasNext();
     if (!isAlreadyCreated) {
       createdIssue = issueService.createIssue(repository, issue);
     }
     return createdIssue;
-  }
-
-  private Map<String, String> getFilterData(Issue createdIssue) {
-    HashMap<String, String> filterData = new HashMap<>();
-    List<Label> currentLabels = createdIssue.getLabels();
-    if (currentLabels != null) {
-      String labelNamesCommaSeparated = currentLabels.stream() //
-          .map(labels -> labels.getName()) //
-          .collect(Collectors.joining(","));
-      filterData.put("labels", labelNamesCommaSeparated);
-    }
-    return filterData;
   }
 
 

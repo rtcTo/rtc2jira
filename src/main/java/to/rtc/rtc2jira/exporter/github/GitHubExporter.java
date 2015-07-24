@@ -1,12 +1,12 @@
 package to.rtc.rtc2jira.exporter.github;
 
+import static to.rtc.rtc2jira.exporter.github.GitHubStorage.GITHUB_WORKITEM_LINK;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.DESCRIPTION;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.ID;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.SUMMARY;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.WORK_ITEM_TYPE;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -25,12 +25,11 @@ import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.LabelService;
 import org.eclipse.egit.github.core.service.RepositoryService;
 
-import com.orientechnologies.orient.core.record.impl.ODocument;
-import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
-
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.storage.StorageEngine;
+
+import com.orientechnologies.orient.core.record.impl.ODocument;
 
 public class GitHubExporter implements Exporter {
 
@@ -38,14 +37,13 @@ public class GitHubExporter implements Exporter {
   private static final String TYPE_STORY = "com.ibm.team.apt.workItemType.story";
   private static final String TYPE_EPIC = "com.ibm.team.apt.workItemType.epic";
   private static final String TYPE_BUSINESSNEED = "com.ibm.team.workitem.workItemType.businessneed";
-  private static final String GITHUB_WORKITEM_LINK = "githubissuenumber";
 
-  private StorageEngine storageEngine;
   private GitHubClient client;
   private RepositoryService service;
   private Repository repository;
   private Settings settings;
   private IssueService issueService;
+  private GitHubStorage store;
 
   @Override
   public boolean isConfigured() {
@@ -68,28 +66,21 @@ public class GitHubExporter implements Exporter {
   @Override
   public void initialize(Settings settings, StorageEngine engine) {
     this.settings = settings;
-    this.storageEngine = engine;
+    this.store = new GitHubStorage(engine);
     this.client = new GitHubClient();
     this.service = new RepositoryService(client);
     this.issueService = new IssueService(client);
   }
 
   public void export() throws Exception {
-    for (ODocument workItem : getWorkItems()) {
+    for (ODocument workItem : store.getRTCWorkItems()) {
       Issue issue = createIssueFromWorkItem(workItem);
-      storeLink(Optional.ofNullable(createGitHubIssue(issue)), workItem);
+      Issue gitHubIssue = createGitHubIssue(issue);
+      store.storeLinkToIssueInWorkItem(Optional.ofNullable(gitHubIssue), workItem);
     }
   }
 
-  private void storeLink(Optional<Issue> optionalIssue, ODocument workItem) {
-    optionalIssue.ifPresent(issue -> {
-      storageEngine.withDB(db -> {
-        int newIssueGithubId = issue.getNumber();
-        workItem.field(GITHUB_WORKITEM_LINK, newIssueGithubId);
-        workItem.save();
-      });
-    });
-  }
+
 
   private Issue createIssueFromWorkItem(ODocument workItem) throws IOException {
     Issue issue = new Issue();
@@ -172,15 +163,6 @@ public class GitHubExporter implements Exporter {
     return filterData;
   }
 
-  private List<ODocument> getWorkItems() {
-    final List<ODocument> result = new ArrayList<>();
-    storageEngine.withDB(db -> {
-      OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<ODocument>("select * from WorkItem");
-      List<ODocument> queryResults = db.query(query);
-      result.addAll(queryResults);
-    });
-    return result;
-  }
 
   private Label getLabel(String name) throws IOException {
     LabelService labelService = new LabelService(client);

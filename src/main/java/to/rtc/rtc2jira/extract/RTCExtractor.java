@@ -45,7 +45,7 @@ public class RTCExtractor {
         login(settings).logout();
         isLoginPossible = true;
       } catch (TeamRepositoryException e) {
-        System.out.println("Login to RTC Repository not possible");
+        System.out.println("Unable to login into RTC Repository");
         e.printStackTrace();
       } finally {
         TeamPlatform.shutdown();

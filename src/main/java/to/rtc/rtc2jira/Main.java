@@ -18,10 +18,10 @@ public class Main {
   public static void main(String[] args) throws Exception {
     Settings settings = Settings.getInstance();
     try (StorageEngine storageEngine = new StorageEngine()) {
-      RTCExtractor extractor = new RTCExtractor(settings, storageEngine);
-      if (extractor.isLoginPossible()) {
-        extractor.extract();
+      if (RTCExtractor.isLoginPossible(settings)) {
+        new RTCExtractor(settings, storageEngine).extract();;
       }
+
       for (Exporter exporter : getExporters()) {
         exporter.initialize(settings, storageEngine);
         if (exporter.isConfigured()) {

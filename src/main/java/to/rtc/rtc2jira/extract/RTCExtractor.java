@@ -37,11 +37,11 @@ public class RTCExtractor {
     this.storageEngine = storageEngine;
   }
 
-  public boolean isLoginPossible() {
+  public static boolean isLoginPossible(Settings settings) {
     boolean isLoginPossible = false;
     TeamPlatform.startup();
     try {
-      login().logout();
+      login(settings).logout();
       isLoginPossible = true;
     } catch (TeamRepositoryException e) {
       System.out.println("Login to RTC Repository not possible");
@@ -55,7 +55,7 @@ public class RTCExtractor {
   public void extract() {
     TeamPlatform.startup();
     try {
-      ITeamRepository repo = login();
+      ITeamRepository repo = login(settings);
       processWorkItems(repo, settings.getRtcWorkItemRange());
       repo.logout();
     } catch (TeamRepositoryException | IOException e) {
@@ -65,7 +65,7 @@ public class RTCExtractor {
     }
   }
 
-  private ITeamRepository login() throws TeamRepositoryException {
+  private static ITeamRepository login(Settings settings) throws TeamRepositoryException {
     final String userId = settings.getRtcUser();
     final String password = settings.getRtcPassword();
     String repoUri = settings.getRtcUrl();

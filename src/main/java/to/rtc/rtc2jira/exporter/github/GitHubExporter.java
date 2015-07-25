@@ -77,7 +77,6 @@ public class GitHubExporter implements Exporter {
   }
 
 
-
   private Issue createIssueFromWorkItem(ODocument workItem) throws IOException {
     Issue issue = new Issue();
     for (Entry<String, Object> entry : workItem) {
@@ -131,6 +130,8 @@ public class GitHubExporter implements Exporter {
     Issue createdIssue = null;
     if (!isAlreadyCreated) {
       createdIssue = issueService.createIssue(repository, issue);
+    } else {
+      issueService.editIssue(repository, issue);
     }
     return createdIssue;
   }

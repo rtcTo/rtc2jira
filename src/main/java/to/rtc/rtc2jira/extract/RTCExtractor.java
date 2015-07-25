@@ -39,15 +39,17 @@ public class RTCExtractor {
 
   public static boolean isLoginPossible(Settings settings) {
     boolean isLoginPossible = false;
-    TeamPlatform.startup();
-    try {
-      login(settings).logout();
-      isLoginPossible = true;
-    } catch (TeamRepositoryException e) {
-      System.out.println("Login to RTC Repository not possible");
-      e.printStackTrace();
-    } finally {
-      TeamPlatform.shutdown();
+    if (settings.hasRtcProperties()) {
+      TeamPlatform.startup();
+      try {
+        login(settings).logout();
+        isLoginPossible = true;
+      } catch (TeamRepositoryException e) {
+        System.out.println("Login to RTC Repository not possible");
+        e.printStackTrace();
+      } finally {
+        TeamPlatform.shutdown();
+      }
     }
     return isLoginPossible;
   }

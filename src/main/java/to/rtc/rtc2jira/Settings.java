@@ -51,6 +51,11 @@ public class Settings {
     return instance;
   }
 
+  public boolean hasRtcProperties() {
+    return props.containsKey(RTC_USER) && props.containsKey(RTC_PASSWORD)
+        && props.containsKey(RTC_URL) && props.containsKey(RTC_WORKITEM_ID_RANGE);
+  }
+
   public String getRtcUrl() {
     return props.getProperty(RTC_URL);
   }

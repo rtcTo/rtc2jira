@@ -19,7 +19,9 @@ public class Main {
     Settings settings = Settings.getInstance();
     try (StorageEngine storageEngine = new StorageEngine()) {
       RTCExtractor extractor = new RTCExtractor(settings, storageEngine);
-      extractor.extract();
+      if (extractor.isLoginPossible()) {
+        extractor.extract();
+      }
       for (Exporter exporter : getExporters()) {
         exporter.initialize(settings, storageEngine);
         if (exporter.isConfigured()) {

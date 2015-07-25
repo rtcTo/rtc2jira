@@ -37,21 +37,25 @@ public class RTCExtractor {
     this.storageEngine = storageEngine;
   }
 
-  public void extract() {
-    final String userId = settings.getRtcUser();
-    final String password = settings.getRtcPassword();
-    String repoUri = settings.getRtcUrl();
+  public boolean isLoginPossible() {
+    boolean isLoginPossible = false;
     TeamPlatform.startup();
     try {
-      final ITeamRepository repo =
-          TeamPlatform.getTeamRepositoryService().getTeamRepository(repoUri);
-      repo.registerLoginHandler(new ILoginHandler2() {
-        @Override
-        public ILoginInfo2 challenge(ITeamRepository repo) {
-          return new UsernameAndPasswordLoginInfo(userId, password);
-        }
-      });
-      repo.login(null);
+      login().logout();
+      isLoginPossible = true;
+    } catch (TeamRepositoryException e) {
+      System.out.println("Login to RTC Repository not possible");
+      e.printStackTrace();
+    } finally {
+      TeamPlatform.shutdown();
+    }
+    return isLoginPossible;
+  }
+
+  public void extract() {
+    TeamPlatform.startup();
+    try {
+      ITeamRepository repo = login();
       processWorkItems(repo, settings.getRtcWorkItemRange());
       repo.logout();
     } catch (TeamRepositoryException | IOException e) {
@@ -59,6 +63,21 @@ public class RTCExtractor {
     } finally {
       TeamPlatform.shutdown();
     }
+  }
+
+  private ITeamRepository login() throws TeamRepositoryException {
+    final String userId = settings.getRtcUser();
+    final String password = settings.getRtcPassword();
+    String repoUri = settings.getRtcUrl();
+    final ITeamRepository repo = TeamPlatform.getTeamRepositoryService().getTeamRepository(repoUri);
+    repo.registerLoginHandler(new ILoginHandler2() {
+      @Override
+      public ILoginInfo2 challenge(ITeamRepository repo) {
+        return new UsernameAndPasswordLoginInfo(userId, password);
+      }
+    });
+    repo.login(null);
+    return repo;
   }
 
   private void processWorkItems(ITeamRepository repo, Iterable<Integer> workItemRange)

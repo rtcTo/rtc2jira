@@ -15,6 +15,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 public class Project {
   private String id;
   private String name;
+  private String description;
 
 
   public String getId() {
@@ -31,6 +32,14 @@ public class Project {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
   }
 
 

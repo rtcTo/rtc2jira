@@ -2,6 +2,9 @@ package to.rtc.rtc2jira.exporter.jira;
 
 import java.util.List;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
@@ -42,6 +45,21 @@ public class JiraExporter implements Exporter {
     List<ProjectOverview> projects =
         restAccess.get("/project", new GenericType<List<ProjectOverview>>() {});
     Project project = restAccess.get("/project/10001", Project.class);
+
+    JSONObject data = createIssueData(project);
+    String response = restAccess.post("/issue/", data.toString(), String.class);
   }
 
+  private JSONObject createIssueData(Project project) throws JSONException {
+    JSONObject data = new JSONObject();
+    JSONObject fields = new JSONObject();
+    fields.put("summary", "Test REST");
+    fields.put("description",
+        "Creating of an issue using project keys and issue type names using the REST API");
+    fields.put("project", new JSONObject().put("id", project.getId()));
+    fields.put("issuetype", new JSONObject().put("name", "Task"));
+
+    data.put("fields", fields);
+    return data;
+  }
 }

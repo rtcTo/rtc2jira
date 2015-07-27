@@ -5,15 +5,15 @@ import java.util.List;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.ClientResponse.Status;
+import com.sun.jersey.api.client.GenericType;
+
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
 import to.rtc.rtc2jira.exporter.jira.entities.ProjectOverview;
 import to.rtc.rtc2jira.storage.StorageEngine;
-
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.api.client.GenericType;
 
 public class JiraExporter implements Exporter {
 
@@ -31,11 +31,14 @@ public class JiraExporter implements Exporter {
   public boolean isConfigured() {
     boolean isConfigured = false;
     if (settings.hasJiraProperties()) {
-      restAccess =
-          new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(),
-              settings.getJiraPassword());
+      restAccess = new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(),
+          settings.getJiraPassword());
       ClientResponse response = restAccess.getResponse("/project");
-      isConfigured = response.getStatus() == Status.OK.getStatusCode();
+      if (response.getStatus() == Status.OK.getStatusCode()) {
+        isConfigured = true;
+      } else {
+        System.err.println("Unable to connect to jira repository: " + response.toString());
+      }
     }
     return isConfigured;
   }
@@ -44,6 +47,7 @@ public class JiraExporter implements Exporter {
   public void export() throws Exception {
     List<ProjectOverview> projects =
         restAccess.get("/project", new GenericType<List<ProjectOverview>>() {});
+
     Project project = restAccess.get("/project/10001", Project.class);
 
     JSONObject data = createIssueData(project);

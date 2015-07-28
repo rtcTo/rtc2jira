@@ -1,16 +1,19 @@
 package to.rtc.rtc2jira.mapping;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import to.rtc.rtc2jira.spi.MappingAdapter;
 
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 
-public class DirectMapping extends MappingAdapter {
+public class DirectDateMapping extends MappingAdapter {
 
-  private String value;
+  private Date value;
   private String identifier;
 
-  public DirectMapping(String identifier) {
+  public DirectDateMapping(String identifier) {
     this.identifier = identifier;
   }
 
@@ -21,7 +24,8 @@ public class DirectMapping extends MappingAdapter {
 
   @Override
   public void acceptAttribute(IAttribute attribute) {
-    value = getValue(attribute);
+    Timestamp timestamp = getValue(attribute);
+    value = new Date(timestamp.getTime());
   }
 
   @Override

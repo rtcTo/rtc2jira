@@ -31,6 +31,8 @@ public class Settings {
   private static final String JIRA_PASSWORD = "jira.password";
   private static final String JIRA_URL = "jira.url";
 
+  private static final String SYSOUT_EXPORTER = "sysout.exporter";
+
   private static final Settings instance = new Settings();
 
   private final Properties props;
@@ -125,5 +127,9 @@ public class Settings {
 
   public String getJiraUrl() {
     return props.getProperty(JIRA_URL);
+  }
+
+  public boolean isSystemOutExporterConfigured() {
+    return Boolean.parseBoolean(props.getProperty(SYSOUT_EXPORTER));
   }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.exporter.github.GitHubExporter;
 import to.rtc.rtc2jira.exporter.jira.JiraExporter;
+import to.rtc.rtc2jira.exporter.systemout.SystemOutExporter;
 import to.rtc.rtc2jira.extract.RTCExtractor;
 import to.rtc.rtc2jira.storage.StorageEngine;
 
@@ -35,6 +36,7 @@ public class Main {
     List<Exporter> exporters = new ArrayList<>();
     exporters.add(new GitHubExporter());
     exporters.add(new JiraExporter());
+    exporters.add(new SystemOutExporter());
     return exporters;
   }
 }

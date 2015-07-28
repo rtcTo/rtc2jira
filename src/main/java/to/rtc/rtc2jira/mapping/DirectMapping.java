@@ -24,8 +24,8 @@ public class DirectMapping extends MappingAdapter {
   @Override
   public void acceptAttribute(IAttribute attribute) {
     String rawVal = getValue(attribute);
-    if ("html".equalsIgnoreCase(attribute.getAttributeType())) {
-      value = StringEscapeUtils.unescapeHtml4(rawVal);
+    if ("mediumHtml".equalsIgnoreCase(attribute.getAttributeType())) {
+      value = StringEscapeUtils.unescapeXml(rawVal);
     } else {
       value = rawVal;
     }

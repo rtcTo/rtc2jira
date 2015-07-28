@@ -5,12 +5,12 @@ package to.rtc.rtc2jira.extract;
 
 import java.util.List;
 
+import to.rtc.rtc2jira.mapping.DefaultMappingRegistry;
+import to.rtc.rtc2jira.spi.Mapping;
+
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IWorkItem;
 import com.orientechnologies.orient.core.record.impl.ODocument;
-
-import to.rtc.rtc2jira.mapping.DefaultMappingRegistry;
-import to.rtc.rtc2jira.spi.Mapping;
 
 /**
  * @author roman.schaller

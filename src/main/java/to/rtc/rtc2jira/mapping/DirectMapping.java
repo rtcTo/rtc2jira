@@ -1,5 +1,7 @@
 package to.rtc.rtc2jira.mapping;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import to.rtc.rtc2jira.spi.MappingAdapter;
 
 import com.ibm.team.workitem.common.model.IAttribute;
@@ -21,7 +23,12 @@ public class DirectMapping extends MappingAdapter {
 
   @Override
   public void acceptAttribute(IAttribute attribute) {
-    value = getValue(attribute);
+    String rawVal = getValue(attribute);
+    if ("html".equalsIgnoreCase(attribute.getAttributeType())) {
+      value = StringEscapeUtils.unescapeHtml4(rawVal);
+    } else {
+      value = rawVal;
+    }
   }
 
   @Override

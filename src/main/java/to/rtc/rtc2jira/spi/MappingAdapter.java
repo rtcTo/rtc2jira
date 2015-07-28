@@ -1,5 +1,7 @@
 package to.rtc.rtc2jira.spi;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IWorkItem;
 

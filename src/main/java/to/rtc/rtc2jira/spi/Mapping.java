@@ -19,6 +19,8 @@ public interface Mapping {
 
   /**
    * This is called before each workitem.
+   * 
+   * @param workItem
    */
   public default void beforeWorkItem(IWorkItem workItem) {}
 

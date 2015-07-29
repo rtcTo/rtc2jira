@@ -1,10 +1,6 @@
 package to.rtc.rtc2jira.mapping;
 
-import static to.rtc.rtc2jira.storage.WorkItemConstants.ACCEPTANCE_CRITERIAS;
-import static to.rtc.rtc2jira.storage.WorkItemConstants.DESCRIPTION;
-import static to.rtc.rtc2jira.storage.WorkItemConstants.MODIFIED;
-import static to.rtc.rtc2jira.storage.WorkItemConstants.SUMMARY;
-import static to.rtc.rtc2jira.storage.WorkItemConstants.WORK_ITEM_TYPE;
+import static to.rtc.rtc2jira.storage.WorkItemConstants.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +23,8 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(WORK_ITEM_TYPE, new DirectStringMapping(WORK_ITEM_TYPE));
     register(ACCEPTANCE_CRITERIAS, new DirectStringMapping(ACCEPTANCE_CRITERIAS));
     register(MODIFIED, new DirectDateMapping(MODIFIED));
-
+    register(CREATIONDATE, new DirectDateMapping(CREATIONDATE));
+    register(COMMENTS, new CommentMapping(COMMENTS));
   };
 
   public static DefaultMappingRegistry getInstance() {

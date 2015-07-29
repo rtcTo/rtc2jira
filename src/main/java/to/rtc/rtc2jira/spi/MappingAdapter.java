@@ -1,5 +1,6 @@
 package to.rtc.rtc2jira.spi;
 
+import com.ibm.team.repository.client.ITeamRepository;
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IWorkItem;
 
@@ -33,6 +34,10 @@ public class MappingAdapter implements Mapping {
 
   protected IWorkItem getWorkItem() {
     return workItem;
+  }
+
+  protected ITeamRepository getTeamRepository() {
+    return ITeamRepository.class.cast(getWorkItem().getOrigin());
   }
 
   @SuppressWarnings("unchecked")

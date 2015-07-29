@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
-import to.rtc.rtc2jira.exporter.jira.rest.AutoClosableRestClient;
 import to.rtc.rtc2jira.exporter.jira.rest.RestClientFactory;
 import to.rtc.rtc2jira.storage.StorageEngine;
 
@@ -20,7 +19,6 @@ public class JiraExporter implements Exporter {
 
   private StorageEngine engine;
   private Settings settings;
-  private AutoClosableRestClient restAccess;
 
   @Override
   public void initialize(Settings settings, StorageEngine engine) {

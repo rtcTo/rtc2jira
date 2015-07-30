@@ -10,17 +10,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<compiler.plugin.version>3.1</compiler.plugin.version>
 	</properties>
+
 	<dependencies>
-		<dependency>
-			<groupId>com.atlassian.jira</groupId>
-			<artifactId>jira-rest-java-client-api</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.atlassian.jira</groupId>
-			<artifactId>jira-rest-java-client-core</artifactId>
-			<version>3.0.0</version>
-		</dependency>
 		<dependency>
 			<groupId>io.takari.junit</groupId>
 			<artifactId>takari-cpsuite</artifactId>
@@ -69,22 +60,6 @@
 			<version>3.4</version>
 		</dependency>
 	</dependencies>
-
-	<repositories>
-		<repository>
-			<id>atlassian-public</id>
-			<url>https://maven.atlassian.com/repository/public/</url>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-		</repository>
-	</repositories>
 
 	<build>
 		<plugins>

@@ -48,7 +48,7 @@ public class JiraRestAccess {
     return response.getEntity(type);
   }
 
-  <T> T post(String resource, Object toPostingObject, Class<T> type)
+  <T> T post(String resource, T toPostingObject, Class<T> type)
       throws AuthenticationException, ClientHandlerException {
     ClientResponse post =
         createJsonResponseBuilder(resource).post(ClientResponse.class, toPostingObject);

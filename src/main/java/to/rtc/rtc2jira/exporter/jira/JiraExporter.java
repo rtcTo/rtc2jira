@@ -1,26 +1,25 @@
 package to.rtc.rtc2jira.exporter.jira;
 
-import java.io.IOException;
+import java.util.List;
+
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
-import to.rtc.rtc2jira.exporter.jira.rest.AutoClosableRestClient;
-import to.rtc.rtc2jira.exporter.jira.rest.RestClientFactory;
+import to.rtc.rtc2jira.exporter.jira.entities.Project;
+import to.rtc.rtc2jira.exporter.jira.entities.ProjectOverview;
 import to.rtc.rtc2jira.storage.StorageEngine;
 
-import com.atlassian.jira.rest.client.api.IssueRestClient;
-import com.atlassian.jira.rest.client.api.JiraRestClient;
-import com.atlassian.jira.rest.client.api.RestClientException;
-import com.atlassian.jira.rest.client.api.domain.Attachment;
-import com.atlassian.jira.rest.client.api.domain.BasicProject;
-import com.atlassian.jira.rest.client.api.domain.Issue;
-import com.atlassian.util.concurrent.Promise;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.ClientResponse.Status;
+import com.sun.jersey.api.client.GenericType;
 
 public class JiraExporter implements Exporter {
 
   private StorageEngine engine;
   private Settings settings;
-  private AutoClosableRestClient restAccess;
+  private JiraRestAccess restAccess;
 
   @Override
   public void initialize(Settings settings, StorageEngine engine) {
@@ -32,25 +31,35 @@ public class JiraExporter implements Exporter {
   public boolean isConfigured() {
     boolean isConfigured = false;
     if (settings.hasJiraProperties()) {
-      try (JiraRestClient client = RestClientFactory.create(settings)) {
-        client.getSessionClient().getCurrentSession();
-      } catch (RestClientException | IOException e) {
-        System.err.println("Problem while connecting to session: " + e);
-        isConfigured = false;
-      }
+      restAccess =
+          new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(),
+              settings.getJiraPassword());
+      ClientResponse response = restAccess.getResponse("/project");
+      isConfigured = response.getStatus() == Status.OK.getStatusCode();
     }
     return isConfigured;
   }
 
   @Override
   public void export() throws Exception {
-    try (JiraRestClient client = RestClientFactory.create(settings)) {
-      IssueRestClient issueClient = client.getIssueClient();
-      Promise<Issue> issuePromise = issueClient.getIssue("WOR-2");
-      Issue issue = issuePromise.get();
-      Iterable<Attachment> attachments = issue.getAttachments();
-      Iterable<BasicProject> projectsIterable = client.getProjectClient().getAllProjects().get();
-    }
+    List<ProjectOverview> projects =
+        restAccess.get("/project", new GenericType<List<ProjectOverview>>() {});
+    Project project = restAccess.get("/project/10001", Project.class);
+
+    JSONObject data = createIssueData(project);
+    String response = restAccess.post("/issue/", data.toString(), String.class);
   }
 
+  private JSONObject createIssueData(Project project) throws JSONException {
+    JSONObject data = new JSONObject();
+    JSONObject fields = new JSONObject();
+    fields.put("summary", "Test REST");
+    fields.put("description",
+        "Creating of an issue using project keys and issue type names using the REST API");
+    fields.put("project", new JSONObject().put("id", project.getId()));
+    fields.put("issuetype", new JSONObject().put("name", "Task"));
+
+    data.put("fields", fields);
+    return data;
+  }
 }

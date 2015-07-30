@@ -48,9 +48,10 @@ public class JiraRestAccess {
     return response.getEntity(type);
   }
 
-  <T> T post(String resource, String data, Class<T> type) throws AuthenticationException,
-      ClientHandlerException {
-    ClientResponse post = createJsonResponseBuilder(resource).post(ClientResponse.class, data);
+  <T> T post(String resource, Object toPostingObject, Class<T> type)
+      throws AuthenticationException, ClientHandlerException {
+    ClientResponse post =
+        createJsonResponseBuilder(resource).post(ClientResponse.class, toPostingObject);
     return post.getEntity(type);
   }
 
@@ -60,9 +61,8 @@ public class JiraRestAccess {
 
   private Builder createJsonResponseBuilder(String resource) {
     WebResource webResource = client.resource(restHome + resource);
-    Builder responseBuilder =
-        webResource.header("Authorization", "Basic " + authentification)
-            .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
+    Builder responseBuilder = webResource.header("Authorization", "Basic " + authentification)
+        .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
     return responseBuilder;
   }
 }

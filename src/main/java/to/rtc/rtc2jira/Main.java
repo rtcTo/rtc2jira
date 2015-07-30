@@ -20,7 +20,7 @@ public class Main {
     Settings settings = Settings.getInstance();
     try (StorageEngine storageEngine = new StorageEngine()) {
       if (RTCExtractor.isLoginPossible(settings)) {
-        new RTCExtractor(settings, storageEngine).extract();;
+        new RTCExtractor(settings, storageEngine).extract();
       }
 
       for (Exporter exporter : getExporters()) {

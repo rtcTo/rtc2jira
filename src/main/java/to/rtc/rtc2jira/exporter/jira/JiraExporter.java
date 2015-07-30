@@ -11,6 +11,7 @@ import com.sun.jersey.api.client.GenericType;
 
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
+import to.rtc.rtc2jira.exporter.jira.entities.Issue;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
 import to.rtc.rtc2jira.exporter.jira.entities.ProjectOverview;
 import to.rtc.rtc2jira.storage.StorageEngine;
@@ -49,6 +50,8 @@ public class JiraExporter implements Exporter {
         restAccess.get("/project", new GenericType<List<ProjectOverview>>() {});
 
     Project project = restAccess.get("/project/10001", Project.class);
+
+    Issue issue = restAccess.get("/issue/WOR-2", Issue.class);
 
     JSONObject data = createIssueData(project);
     String response = restAccess.post("/issue/", data.toString(), String.class);

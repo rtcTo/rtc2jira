@@ -1,9 +1,6 @@
 package to.rtc.rtc2jira.mapping;
 
-import static to.rtc.rtc2jira.storage.WorkItemConstants.ACCEPTANCE_CRITERIAS;
-import static to.rtc.rtc2jira.storage.WorkItemConstants.DESCRIPTION;
-import static to.rtc.rtc2jira.storage.WorkItemConstants.SUMMARY;
-import static to.rtc.rtc2jira.storage.WorkItemConstants.WORK_ITEM_TYPE;
+import static to.rtc.rtc2jira.storage.WorkItemConstants.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,10 +18,13 @@ public class DefaultMappingRegistry implements MappingRegistry {
   private Mapping missingMapping = new MissingMapping();
 
   private DefaultMappingRegistry() {
-    register(SUMMARY, new DirectMapping(SUMMARY));
-    register(DESCRIPTION, new DirectMapping(DESCRIPTION));
-    register(WORK_ITEM_TYPE, new DirectMapping(WORK_ITEM_TYPE));
-    register(ACCEPTANCE_CRITERIAS, new DirectMapping(ACCEPTANCE_CRITERIAS));
+    register(SUMMARY, new DirectStringMapping(SUMMARY));
+    register(DESCRIPTION, new DirectStringMapping(DESCRIPTION));
+    register(WORK_ITEM_TYPE, new DirectStringMapping(WORK_ITEM_TYPE));
+    register(ACCEPTANCE_CRITERIAS, new DirectStringMapping(ACCEPTANCE_CRITERIAS));
+    register(MODIFIED, new DirectDateMapping(MODIFIED));
+    register(CREATIONDATE, new DirectDateMapping(CREATIONDATE));
+    register(COMMENTS, new CommentMapping(COMMENTS));
   };
 
   public static DefaultMappingRegistry getInstance() {

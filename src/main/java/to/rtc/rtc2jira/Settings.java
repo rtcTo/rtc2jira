@@ -31,6 +31,8 @@ public class Settings {
   private static final String JIRA_PASSWORD = "jira.password";
   private static final String JIRA_URL = "jira.url";
 
+  private static final String SYSOUT_EXPORTER = "sysout.exporter";
+
   private static final Settings instance = new Settings();
 
   private final Properties props;
@@ -49,6 +51,11 @@ public class Settings {
 
   public static Settings getInstance() {
     return instance;
+  }
+
+  public boolean hasRtcProperties() {
+    return props.containsKey(RTC_USER) && props.containsKey(RTC_PASSWORD)
+        && props.containsKey(RTC_URL) && props.containsKey(RTC_WORKITEM_ID_RANGE);
   }
 
   public String getRtcUrl() {
@@ -120,5 +127,9 @@ public class Settings {
 
   public String getJiraUrl() {
     return props.getProperty(JIRA_URL);
+  }
+
+  public boolean isSystemOutExporterConfigured() {
+    return Boolean.parseBoolean(props.getProperty(SYSOUT_EXPORTER));
   }
 }

@@ -37,21 +37,27 @@ public class RTCExtractor {
     this.storageEngine = storageEngine;
   }
 
+  public static boolean isLoginPossible(Settings settings) {
+    boolean isLoginPossible = false;
+    if (settings.hasRtcProperties()) {
+      TeamPlatform.startup();
+      try {
+        login(settings).logout();
+        isLoginPossible = true;
+      } catch (TeamRepositoryException e) {
+        System.out.println("Unable to login into RTC Repository");
+        e.printStackTrace();
+      } finally {
+        TeamPlatform.shutdown();
+      }
+    }
+    return isLoginPossible;
+  }
+
   public void extract() {
-    final String userId = settings.getRtcUser();
-    final String password = settings.getRtcPassword();
-    String repoUri = settings.getRtcUrl();
     TeamPlatform.startup();
     try {
-      final ITeamRepository repo =
-          TeamPlatform.getTeamRepositoryService().getTeamRepository(repoUri);
-      repo.registerLoginHandler(new ILoginHandler2() {
-        @Override
-        public ILoginInfo2 challenge(ITeamRepository repo) {
-          return new UsernameAndPasswordLoginInfo(userId, password);
-        }
-      });
-      repo.login(null);
+      ITeamRepository repo = login(settings);
       processWorkItems(repo, settings.getRtcWorkItemRange());
       repo.logout();
     } catch (TeamRepositoryException | IOException e) {
@@ -59,6 +65,21 @@ public class RTCExtractor {
     } finally {
       TeamPlatform.shutdown();
     }
+  }
+
+  private static ITeamRepository login(Settings settings) throws TeamRepositoryException {
+    final String userId = settings.getRtcUser();
+    final String password = settings.getRtcPassword();
+    String repoUri = settings.getRtcUrl();
+    final ITeamRepository repo = TeamPlatform.getTeamRepositoryService().getTeamRepository(repoUri);
+    repo.registerLoginHandler(new ILoginHandler2() {
+      @Override
+      public ILoginInfo2 challenge(ITeamRepository repo) {
+        return new UsernameAndPasswordLoginInfo(userId, password);
+      }
+    });
+    repo.login(null);
+    return repo;
   }
 
   private void processWorkItems(ITeamRepository repo, Iterable<Integer> workItemRange)

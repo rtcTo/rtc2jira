@@ -31,7 +31,7 @@ public class JiraExporter implements Exporter {
   private StorageEngine store;
   private Settings settings;
   private JiraRestAccess restAccess;
-  private List<IssueType> _existingIssueTypes;
+  private List<IssueType> existingIssueTypes;
 
   @Override
   public void initialize(Settings settings, StorageEngine store) {
@@ -141,10 +141,10 @@ public class JiraExporter implements Exporter {
   }
 
   private IssueType getIssueType(String issuetypeName) throws Exception {
-    if (_existingIssueTypes == null) {
-      _existingIssueTypes = restAccess.get("/issuetype", new GenericType<List<IssueType>>() {});
+    if (existingIssueTypes == null) {
+      existingIssueTypes = restAccess.get("/issuetype", new GenericType<List<IssueType>>() {});
     }
-    for (IssueType issuetype : _existingIssueTypes) {
+    for (IssueType issuetype : existingIssueTypes) {
       if (issuetype.getName().equals(issuetypeName)) {
         return issuetype;
       }
@@ -153,7 +153,7 @@ public class JiraExporter implements Exporter {
     IssueType newIssueType = new IssueType();
     newIssueType.setName(issuetypeName);
     IssueType createdIssueType = restAccess.post("/issuetype", newIssueType, IssueType.class);
-    _existingIssueTypes.add(createdIssueType);
+    existingIssueTypes.add(createdIssueType);
     return newIssueType;
 
   }

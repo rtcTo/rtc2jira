@@ -119,8 +119,7 @@ public class GitHubExporter implements Exporter {
       }
     }
     issue.setTitle(issue.getNumber() + ": " + issue.getTitle());
-    int existingGitHubIssueNumber =
-        (int) Optional.ofNullable(workItem.field(GITHUB_WORKITEM_LINK)).orElse(0);
+    int existingGitHubIssueNumber = StorageQuery.getField(workItem, GITHUB_WORKITEM_LINK, 0);
     issue.setNumber(existingGitHubIssueNumber);
     return issue;
   }

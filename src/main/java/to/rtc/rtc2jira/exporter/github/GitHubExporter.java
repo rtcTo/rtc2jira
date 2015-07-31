@@ -25,11 +25,12 @@ import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.LabelService;
 import org.eclipse.egit.github.core.service.RepositoryService;
 
-import com.orientechnologies.orient.core.record.impl.ODocument;
-
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.storage.StorageEngine;
+import to.rtc.rtc2jira.storage.StorageQuery;
+
+import com.orientechnologies.orient.core.record.impl.ODocument;
 
 public class GitHubExporter implements Exporter {
 
@@ -69,13 +70,12 @@ public class GitHubExporter implements Exporter {
   }
 
   public void export() throws Exception {
-    for (ODocument workItem : store.getStorage().getRTCWorkItems()) {
+    for (ODocument workItem : StorageQuery.getRTCWorkItems(store.getStorage())) {
       Issue issue = createIssueFromWorkItem(workItem);
       Issue gitHubIssue = createGitHubIssue(issue);
       store.storeLinkToIssueInWorkItem(Optional.ofNullable(gitHubIssue), workItem);
     }
   }
-
 
   private Issue createIssueFromWorkItem(ODocument workItem) throws IOException {
     Issue issue = new Issue();

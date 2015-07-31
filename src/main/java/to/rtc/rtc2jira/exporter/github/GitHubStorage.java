@@ -25,11 +25,8 @@ public final class GitHubStorage {
 
   final void storeLinkToIssueInWorkItem(Optional<Issue> optionalIssue, ODocument workItem) {
     optionalIssue.ifPresent(issue -> {
-      store.withDB(db -> {
-        int newIssueGithubNumber = issue.getNumber();
-        workItem.field(GITHUB_WORKITEM_LINK, newIssueGithubNumber);
-        workItem.save();
-      });
+      int newIssueGithubNumber = issue.getNumber();
+      store.setField(workItem, GITHUB_WORKITEM_LINK, newIssueGithubNumber);
     });
   }
 

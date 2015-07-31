@@ -1,6 +1,6 @@
 package to.rtc.rtc2jira.storage;
 
-import static to.rtc.rtc2jira.storage.WorkItemFieldNames.ID;
+import static to.rtc.rtc2jira.storage.WorkItemConstants.ID;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -9,6 +9,7 @@ import java.util.function.Consumer;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx;
 import com.orientechnologies.orient.core.metadata.schema.OClass;
 import com.orientechnologies.orient.core.metadata.schema.OType;
+import com.orientechnologies.orient.core.record.impl.ODocument;
 import com.orientechnologies.orient.server.OServer;
 import com.orientechnologies.orient.server.OServerMain;
 
@@ -44,6 +45,13 @@ public class StorageEngine implements Closeable, AutoCloseable {
       }
       doWithDB.accept(db);
     }
+  }
+
+  public final void setField(ODocument document, String fieldname, Object value) {
+    withDB(db -> {
+      document.field(fieldname, value);
+      document.save();
+    });
   }
 
   public AttachmentStorage getAttachmentStorage() {

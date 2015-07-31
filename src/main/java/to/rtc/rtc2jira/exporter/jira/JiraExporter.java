@@ -50,7 +50,7 @@ public class JiraExporter implements Exporter {
       restAccess =
           new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(),
               settings.getJiraPassword());
-      ClientResponse response = restAccess.get("/project");
+      ClientResponse response = restAccess.get("/myself");
       if (response.getStatus() == Status.OK.getStatusCode()) {
         isConfigured = true;
       } else {

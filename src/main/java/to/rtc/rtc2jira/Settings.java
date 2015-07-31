@@ -30,6 +30,7 @@ public class Settings {
   private static final String JIRA_USER = "jira.user";
   private static final String JIRA_PASSWORD = "jira.password";
   private static final String JIRA_URL = "jira.url";
+  private static final String JIRA_PROJECTKEY = "jira.projectkey";
 
   private static final String SYSOUT_EXPORTER = "sysout.exporter";
 
@@ -114,7 +115,8 @@ public class Settings {
   public boolean hasJiraProperties() {
     return props.containsKey(JIRA_USER)//
         && props.containsKey(JIRA_PASSWORD)//
-        && props.containsKey(JIRA_URL);
+        && props.containsKey(JIRA_URL) //
+        && props.containsKey(JIRA_PROJECTKEY);
   }
 
   public String getJiraUser() {
@@ -127,6 +129,10 @@ public class Settings {
 
   public String getJiraUrl() {
     return props.getProperty(JIRA_URL);
+  }
+
+  public String getJiraProjectKey() {
+    return props.getProperty(JIRA_PROJECTKEY);
   }
 
   public boolean isSystemOutExporterConfigured() {

@@ -16,7 +16,7 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
  * 
  * @author Manuel
  */
-public final class GitHubStorage {
+final class GitHubStorage {
 
   private StorageEngine store;
 

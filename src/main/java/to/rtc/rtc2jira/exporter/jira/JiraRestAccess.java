@@ -19,7 +19,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
  * 
  * @author Manuel
  */
-public class JiraRestAccess {
+class JiraRestAccess {
 
   private Client client;
   private String authentification;

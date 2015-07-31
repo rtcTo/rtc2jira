@@ -1,10 +1,10 @@
 package to.rtc.rtc2jira.exporter.github;
 
-import static to.rtc.rtc2jira.exporter.github.GitHubStorage.GITHUB_WORKITEM_LINK;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.DESCRIPTION;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.ID;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.SUMMARY;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.WORK_ITEM_TYPE;
+import static to.rtc.rtc2jira.storage.WorkItemFieldNames.GITHUB_WORKITEM_LINK;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.BUSINESSNEED;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
@@ -33,7 +33,6 @@ import to.rtc.rtc2jira.storage.StorageQuery;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 
 public class GitHubExporter implements Exporter {
-
 
   private GitHubClient client;
   private RepositoryService service;

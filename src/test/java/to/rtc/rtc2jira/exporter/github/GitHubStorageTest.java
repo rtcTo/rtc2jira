@@ -2,8 +2,8 @@ package to.rtc.rtc2jira.exporter.github;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static to.rtc.rtc2jira.exporter.github.GitHubStorage.GITHUB_WORKITEM_LINK;
 import static to.rtc.rtc2jira.storage.TestWorkItemCreator.createWorkItem;
+import static to.rtc.rtc2jira.storage.WorkItemFieldNames.GITHUB_WORKITEM_LINK;
 
 import java.util.Optional;
 

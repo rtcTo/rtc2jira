@@ -1,5 +1,7 @@
 package to.rtc.rtc2jira.storage;
 
+import static to.rtc.rtc2jira.storage.WorkItemFieldNames.ID;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.function.Consumer;
@@ -18,8 +20,8 @@ public class StorageEngine implements Closeable, AutoCloseable {
 
   public StorageEngine() throws Exception {
     server = OServerMain.create();
-    server.startup(
-        Thread.currentThread().getContextClassLoader().getResourceAsStream("orientconf.xml"));
+    server.startup(Thread.currentThread().getContextClassLoader()
+        .getResourceAsStream("orientconf.xml"));
     server.activate();
     attachmentStorage = new AttachmentStorage();
     url = "plocal:./databases/rtc2jira";
@@ -35,8 +37,8 @@ public class StorageEngine implements Closeable, AutoCloseable {
         db.create();
         OClass workItemClass = db.getMetadata().getSchema().createClass("WORKITEM");
         workItemClass.setStrictMode(false);
-        workItemClass.createProperty("ID", OType.STRING).setMandatory(true).setNotNull(true);
-        workItemClass.createIndex("workitem_ID_IDX", OClass.INDEX_TYPE.UNIQUE, "ID");
+        workItemClass.createProperty(ID, OType.STRING).setMandatory(true).setNotNull(true);
+        workItemClass.createIndex("workitem_ID_IDX", OClass.INDEX_TYPE.UNIQUE, ID);
       } else {
         db.open("admin", "admin");
       }

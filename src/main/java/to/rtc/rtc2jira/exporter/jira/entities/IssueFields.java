@@ -10,6 +10,8 @@ public class IssueFields {
 
   private IssueType issuetype;
   private ProjectOverview project;
+  private String summary;
+  private String description;
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -25,6 +27,22 @@ public class IssueFields {
 
   public void setProject(ProjectOverview project) {
     this.project = project;
+  }
+
+  public String getSummary() {
+    return summary;
+  }
+
+  public void setSummary(String summary) {
+    this.summary = summary;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
   }
 
 }

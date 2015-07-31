@@ -3,9 +3,11 @@
  */
 package to.rtc.rtc2jira.storage;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import static java.nio.file.Files.createFile;
+import static java.nio.file.Files.exists;
+import static java.nio.file.Files.newInputStream;
+import static java.nio.file.Files.newOutputStream;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -39,14 +41,13 @@ public class Attachment {
   }
 
   public OutputStream openOutputStream() throws IOException {
-    File file = path.toFile();
-    if (!file.exists()) {
-      file.createNewFile();
+    if (!exists(path)) {
+      createFile(path);
     }
-    return new FileOutputStream(file);
+    return newOutputStream(path);
   }
 
   public InputStream openInputStream() throws IOException {
-    return new FileInputStream(path.toFile());
+    return newInputStream(path);
   }
 }

@@ -47,9 +47,15 @@ public class StorageEngine implements Closeable, AutoCloseable {
     }
   }
 
-  public final void setField(ODocument document, String fieldname, Object value) {
+  public final void setField(ODocument document, Field field) {
+    setFields(document, field);
+  }
+
+  public final void setFields(ODocument document, Field... fields) {
     withDB(db -> {
-      document.field(fieldname, value);
+      for (Field field : fields) {
+        document.field(field.getName(), field.getValue());
+      }
       document.save();
     });
   }

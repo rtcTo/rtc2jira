@@ -1,9 +1,12 @@
 package to.rtc.rtc2jira.exporter.jira;
 
+import static to.rtc.rtc2jira.storage.Field.of;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.DESCRIPTION;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.ID;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.SUMMARY;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.WORK_ITEM_TYPE;
+import static to.rtc.rtc2jira.storage.WorkItemFieldNames.JIRA_ID_LINK;
+import static to.rtc.rtc2jira.storage.WorkItemFieldNames.JIRA_KEY_LINK;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.BUSINESSNEED;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
@@ -44,8 +47,9 @@ public class JiraExporter implements Exporter {
   public boolean isConfigured() {
     boolean isConfigured = false;
     if (settings.hasJiraProperties()) {
-      restAccess = new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(),
-          settings.getJiraPassword());
+      restAccess =
+          new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(),
+              settings.getJiraPassword());
       ClientResponse response = restAccess.get("/project");
       if (response.getStatus() == Status.OK.getStatusCode()) {
         isConfigured = true;
@@ -63,13 +67,17 @@ public class JiraExporter implements Exporter {
       for (ODocument workItem : StorageQuery.getRTCWorkItems(store)) {
         Issue issue = createIssueFromWorkItem(workItem, projectOptional.get());
         Issue jiraIssue = createIssueInJira(issue);
-        storeReference(jiraIssue);
+        storeReference(Optional.ofNullable(jiraIssue), workItem);
       }
     }
   }
 
-  private void storeReference(Issue jiraIssue) {
-    // TODO Store key/id in o2 database
+  private void storeReference(Optional<Issue> optionalJiraIssue, ODocument workItem) {
+    optionalJiraIssue.ifPresent(jiraIssue -> {
+      store.setFields(workItem, //
+          of(JIRA_KEY_LINK, jiraIssue.getKey()), //
+          of(JIRA_ID_LINK, jiraIssue.getId()));
+    });
   }
 
   private Optional<Project> getProject() {
@@ -127,8 +135,8 @@ public class JiraExporter implements Exporter {
               issueFields.setIssuetype(getIssueType("Business Need"));
               break;
             default:
-              System.out
-                  .println("Cannot determine issuetype for unknown workitemType: " + workitemType);
+              System.out.println("Cannot determine issuetype for unknown workitemType: "
+                  + workitemType);
               break;
           }
           break;

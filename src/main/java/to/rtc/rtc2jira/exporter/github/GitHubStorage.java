@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.eclipse.egit.github.core.Issue;
 
+import to.rtc.rtc2jira.storage.Field;
 import to.rtc.rtc2jira.storage.StorageEngine;
 
 import com.orientechnologies.orient.core.record.impl.ODocument;
@@ -26,7 +27,7 @@ public final class GitHubStorage {
   final void storeLinkToIssueInWorkItem(Optional<Issue> optionalIssue, ODocument workItem) {
     optionalIssue.ifPresent(issue -> {
       int newIssueGithubNumber = issue.getNumber();
-      store.setField(workItem, GITHUB_WORKITEM_LINK, newIssueGithubNumber);
+      store.setField(workItem, Field.of(GITHUB_WORKITEM_LINK, newIssueGithubNumber));
     });
   }
 

@@ -2,15 +2,11 @@ package to.rtc.rtc2jira.storage;
 
 import java.io.Closeable;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Consumer;
 
 import com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx;
 import com.orientechnologies.orient.core.metadata.schema.OClass;
 import com.orientechnologies.orient.core.metadata.schema.OType;
-import com.orientechnologies.orient.core.record.impl.ODocument;
-import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 import com.orientechnologies.orient.server.OServer;
 import com.orientechnologies.orient.server.OServerMain;
 
@@ -46,16 +42,6 @@ public class StorageEngine implements Closeable, AutoCloseable {
       }
       doWithDB.accept(db);
     }
-  }
-
-  public final List<ODocument> getRTCWorkItems() {
-    final List<ODocument> result = new ArrayList<>();
-    withDB(db -> {
-      OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<ODocument>("select * from WorkItem");
-      List<ODocument> queryResults = db.query(query);
-      result.addAll(queryResults);
-    });
-    return result;
   }
 
   public AttachmentStorage getAttachmentStorage() {

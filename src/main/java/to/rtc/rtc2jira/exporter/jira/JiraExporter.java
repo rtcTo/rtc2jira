@@ -13,11 +13,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Optional;
 
-import com.orientechnologies.orient.core.record.impl.ODocument;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.api.client.GenericType;
-
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
@@ -25,6 +20,12 @@ import to.rtc.rtc2jira.exporter.jira.entities.IssueFields;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueType;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
 import to.rtc.rtc2jira.storage.StorageEngine;
+import to.rtc.rtc2jira.storage.StorageQuery;
+
+import com.orientechnologies.orient.core.record.impl.ODocument;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.ClientResponse.Status;
+import com.sun.jersey.api.client.GenericType;
 
 public class JiraExporter implements Exporter {
 
@@ -59,7 +60,7 @@ public class JiraExporter implements Exporter {
   public void export() throws Exception {
     Optional<Project> projectOptional = getProject();
     if (projectOptional.isPresent()) {
-      for (ODocument workItem : store.getRTCWorkItems()) {
+      for (ODocument workItem : StorageQuery.getRTCWorkItems(store)) {
         Issue issue = createIssueFromWorkItem(workItem, projectOptional.get());
         Issue jiraIssue = createIssueInJira(issue);
         storeReference(jiraIssue);
@@ -72,8 +73,7 @@ public class JiraExporter implements Exporter {
   }
 
   private Optional<Project> getProject() {
-    List<Project> projects =
-        restAccess.get("/project", new GenericType<List<Project>>() {});
+    List<Project> projects = restAccess.get("/project", new GenericType<List<Project>>() {});
     for (Project project : projects) {
       if (project.getKey().equals(settings.getJiraProjectKey())) {
         return Optional.of(project);
@@ -92,8 +92,7 @@ public class JiraExporter implements Exporter {
     }
   }
 
-  private Issue createIssueFromWorkItem(ODocument workItem, Project project)
-      throws Exception {
+  private Issue createIssueFromWorkItem(ODocument workItem, Project project) throws Exception {
     Issue issue = new Issue();
     IssueFields issueFields = issue.getFields();
     issueFields.setProject(project);

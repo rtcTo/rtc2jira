@@ -23,7 +23,7 @@ import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueFields;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueType;
-import to.rtc.rtc2jira.exporter.jira.entities.ProjectOverview;
+import to.rtc.rtc2jira.exporter.jira.entities.Project;
 import to.rtc.rtc2jira.storage.StorageEngine;
 
 public class JiraExporter implements Exporter {
@@ -57,7 +57,7 @@ public class JiraExporter implements Exporter {
 
   @Override
   public void export() throws Exception {
-    Optional<ProjectOverview> projectOptional = getProject();
+    Optional<Project> projectOptional = getProject();
     if (projectOptional.isPresent()) {
       for (ODocument workItem : store.getRTCWorkItems()) {
         Issue issue = createIssueFromWorkItem(workItem, projectOptional.get());
@@ -71,10 +71,10 @@ public class JiraExporter implements Exporter {
     // TODO Store key/id in o2 database
   }
 
-  private Optional<ProjectOverview> getProject() {
-    List<ProjectOverview> projects =
-        restAccess.get("/project", new GenericType<List<ProjectOverview>>() {});
-    for (ProjectOverview project : projects) {
+  private Optional<Project> getProject() {
+    List<Project> projects =
+        restAccess.get("/project", new GenericType<List<Project>>() {});
+    for (Project project : projects) {
       if (project.getKey().equals(settings.getJiraProjectKey())) {
         return Optional.of(project);
       }
@@ -92,7 +92,7 @@ public class JiraExporter implements Exporter {
     }
   }
 
-  private Issue createIssueFromWorkItem(ODocument workItem, ProjectOverview project)
+  private Issue createIssueFromWorkItem(ODocument workItem, Project project)
       throws Exception {
     Issue issue = new Issue();
     IssueFields issueFields = issue.getFields();

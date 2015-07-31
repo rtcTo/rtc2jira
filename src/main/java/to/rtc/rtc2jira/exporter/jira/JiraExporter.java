@@ -145,8 +145,8 @@ public class JiraExporter implements Exporter {
       }
     }
     issueFields.setSummary(issue.getId() + ": " + issueFields.getSummary());
-    String existingJiraId = StorageQuery.getField(workItem, JIRA_ID_LINK, "");
-    issue.setId(existingJiraId);
+    issue.setId(StorageQuery.getField(workItem, JIRA_ID_LINK, ""));
+    issue.setKey(StorageQuery.getField(workItem, JIRA_KEY_LINK, ""));
     return issue;
   }
 

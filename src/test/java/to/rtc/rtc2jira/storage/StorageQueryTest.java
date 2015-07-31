@@ -45,5 +45,24 @@ public class StorageQueryTest {
     assertEquals(createdWorkItemsSorted, storedWorkItemsSorted);
   }
 
+  @Test
+  public void testGetField_FieldIsNotAvailable_ShouldReturnFallBackValue() {
+    ODocument doc = createWorkItem(1, storage);
+    String fallbackValue = "aFallBackValue";
+    String fieldValue = StorageQuery.getField(doc, "anyFieldName", fallbackValue);
+    assertEquals(fallbackValue, fieldValue);
+  }
+
+  @Test
+  public void testGetField_FieldIsAvailable_ShouldReturnFieldValue() {
+    ODocument doc = createWorkItem(1, storage);
+    String fieldname = "anyFieldName";
+    String expectedValue = "anyValue";
+    doc.field(fieldname, expectedValue);
+
+    String fieldValue = StorageQuery.getField(doc, fieldname, "aFallBackValue");
+    assertEquals(expectedValue, fieldValue);
+  }
+
 
 }

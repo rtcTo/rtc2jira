@@ -4,21 +4,18 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static to.rtc.rtc2jira.exporter.github.GitHubStorage.GITHUB_WORKITEM_LINK;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.eclipse.egit.github.core.Issue;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import com.orientechnologies.orient.core.record.impl.ODocument;
+
 import to.rtc.rtc2jira.TestDatabaseRule;
 import to.rtc.rtc2jira.storage.StorageEngine;
-
-import com.orientechnologies.orient.core.record.impl.ODocument;
 
 /**
  * Test of {@link GitHubStorage}
@@ -61,24 +58,6 @@ public class GitHubStorageTest {
     assertEquals(1337, link);
   }
 
-  @Test
-  public void testGetWorkItems_NoWorkItems_ShouldReturnEmptyCollection() {
-    assertEquals(0, storage.getRTCWorkItems().size());
-  }
-
-  @Test
-  public void testGetWorkItems_TwoWorkItems_ShouldReturnThem() {
-    List<ODocument> createdWorkItemsSorted = Stream.of(createWorkItem(1), createWorkItem(2)) //
-        .sorted().collect(Collectors.toList());
-
-    List<ODocument> storedWorkItems = storage.getRTCWorkItems();
-
-    assertEquals(2, storedWorkItems.size());
-    List<ODocument> storedWorkItemsSorted = storedWorkItems.stream() //
-        .sorted().collect(Collectors.toList());
-    assertEquals(createdWorkItemsSorted, storedWorkItemsSorted);
-  }
-
   private ODocument createWorkItem(int id) {
     final AtomicReference<ODocument> reference = new AtomicReference<>();
     storageEngine.withDB(db -> {
@@ -89,4 +68,5 @@ public class GitHubStorageTest {
     });
     return reference.get();
   }
+
 }

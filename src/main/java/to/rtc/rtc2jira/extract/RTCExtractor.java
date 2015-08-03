@@ -72,6 +72,7 @@ public class RTCExtractor {
     final String password = settings.getRtcPassword();
     String repoUri = settings.getRtcUrl();
     final ITeamRepository repo = TeamPlatform.getTeamRepositoryService().getTeamRepository(repoUri);
+    repo.setProxy(settings.getProxyHost(), Integer.parseInt(settings.getProxyPort()), null, null);
     repo.registerLoginHandler(new ILoginHandler2() {
       @Override
       public ILoginInfo2 challenge(ITeamRepository repo) {

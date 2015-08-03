@@ -18,17 +18,34 @@ public class Main {
 
   public static void main(String[] args) throws Exception {
     Settings settings = Settings.getInstance();
+    setUpProxy(settings);
     try (StorageEngine storageEngine = new StorageEngine()) {
-      if (RTCExtractor.isLoginPossible(settings)) {
-        new RTCExtractor(settings, storageEngine).extract();
-      }
+      extract(settings, storageEngine);
+      export(settings, storageEngine);
+    }
+  }
 
-      for (Exporter exporter : getExporters()) {
-        exporter.initialize(settings, storageEngine);
-        if (exporter.isConfigured()) {
-          exporter.export();
-        }
+  private static void export(Settings settings, StorageEngine storageEngine) throws Exception {
+    for (Exporter exporter : getExporters()) {
+      exporter.initialize(settings, storageEngine);
+      if (exporter.isConfigured()) {
+        exporter.export();
       }
+    }
+  }
+
+  private static void extract(Settings settings, StorageEngine storageEngine) {
+    if (RTCExtractor.isLoginPossible(settings)) {
+      new RTCExtractor(settings, storageEngine).extract();
+    }
+  }
+
+  private static void setUpProxy(Settings settings) {
+    if (settings.hasProxySettings()) {
+      System.setProperty("http.proxyHost", settings.getProxyHost());
+      System.setProperty("http.proxyPort", settings.getProxyPort());
+      System.setProperty("https.proxyHost", settings.getProxyHost());
+      System.setProperty("https.proxyPort", settings.getProxyPort());
     }
   }
 

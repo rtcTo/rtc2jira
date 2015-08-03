@@ -4,11 +4,9 @@ import java.util.Base64;
 
 import javax.ws.rs.core.MediaType;
 
-import org.apache.http.auth.AuthenticationException;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
@@ -21,7 +19,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
  * 
  * @author Manuel
  */
-public class JiraRestAccess {
+class JiraRestAccess {
 
   private Client client;
   private String authentification;
@@ -39,30 +37,33 @@ public class JiraRestAccess {
   }
 
   <T> T get(String resource, GenericType<T> type) {
-    ClientResponse response = getResponse(resource);
+    ClientResponse response = get(resource);
     return response.getEntity(type);
   }
 
   <T> T get(String resource, Class<T> type) {
-    ClientResponse response = getResponse(resource);
+    ClientResponse response = get(resource);
     return response.getEntity(type);
   }
 
-  <T> T post(String resource, T toPostingObject, Class<T> type)
-      throws AuthenticationException, ClientHandlerException {
-    ClientResponse post =
-        createJsonResponseBuilder(resource).post(ClientResponse.class, toPostingObject);
-    return post.getEntity(type);
+  <T> T post(String resource, T toPostingObject, Class<T> responseType) {
+    ClientResponse postResponse = post(resource, toPostingObject);
+    return postResponse.getEntity(responseType);
   }
 
-  ClientResponse getResponse(String resource) {
+  ClientResponse get(String resource) {
     return createJsonResponseBuilder(resource).get(ClientResponse.class);
+  }
+
+  ClientResponse post(String ressource, Object toPostingObject) {
+    return createJsonResponseBuilder(ressource).post(ClientResponse.class, toPostingObject);
   }
 
   private Builder createJsonResponseBuilder(String resource) {
     WebResource webResource = client.resource(restHome + resource);
-    Builder responseBuilder = webResource.header("Authorization", "Basic " + authentification)
-        .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
+    Builder responseBuilder =
+        webResource.header("Authorization", "Basic " + authentification)
+            .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
     return responseBuilder;
   }
 }

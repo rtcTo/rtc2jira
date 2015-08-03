@@ -8,28 +8,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Issue {
 
   private String expand;
-  private String summary;
-  private String description;
   private String id;
   private String key;
   private URL self;
   private IssueFields fields;
 
-  public String getSummary() {
-    return summary;
-  }
-
-  public void setSummary(String summary) {
-    this.summary = summary;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
 
   public String getExpand() {
     return expand;
@@ -64,6 +47,9 @@ public class Issue {
   }
 
   public IssueFields getFields() {
+    if (fields == null) {
+      fields = new IssueFields();
+    }
     return fields;
   }
 

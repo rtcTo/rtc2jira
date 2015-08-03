@@ -1,10 +1,14 @@
 package to.rtc.rtc2jira.exporter.github;
 
-import static to.rtc.rtc2jira.exporter.github.GitHubStorage.GITHUB_WORKITEM_LINK;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.DESCRIPTION;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.ID;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.SUMMARY;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.WORK_ITEM_TYPE;
+import static to.rtc.rtc2jira.storage.WorkItemFieldNames.GITHUB_WORKITEM_LINK;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.BUSINESSNEED;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.TASK;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -24,15 +28,11 @@ import org.eclipse.egit.github.core.service.RepositoryService;
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.storage.StorageEngine;
+import to.rtc.rtc2jira.storage.StorageQuery;
 
 import com.orientechnologies.orient.core.record.impl.ODocument;
 
 public class GitHubExporter implements Exporter {
-
-  private static final String TYPE_TASK = "task";
-  private static final String TYPE_STORY = "com.ibm.team.apt.workItemType.story";
-  private static final String TYPE_EPIC = "com.ibm.team.apt.workItemType.epic";
-  private static final String TYPE_BUSINESSNEED = "com.ibm.team.workitem.workItemType.businessneed";
 
   private GitHubClient client;
   private RepositoryService service;
@@ -69,13 +69,12 @@ public class GitHubExporter implements Exporter {
   }
 
   public void export() throws Exception {
-    for (ODocument workItem : store.getRTCWorkItems()) {
+    for (ODocument workItem : StorageQuery.getRTCWorkItems(store.getStorage())) {
       Issue issue = createIssueFromWorkItem(workItem);
       Issue gitHubIssue = createGitHubIssue(issue);
       store.storeLinkToIssueInWorkItem(Optional.ofNullable(gitHubIssue), workItem);
     }
   }
-
 
   private Issue createIssueFromWorkItem(ODocument workItem) throws IOException {
     Issue issue = new Issue();
@@ -97,16 +96,16 @@ public class GitHubExporter implements Exporter {
         case WORK_ITEM_TYPE:
           String workitemType = (String) entry.getValue();
           switch (workitemType) {
-            case TYPE_TASK:
+            case TASK:
               issue.setLabels(Collections.singletonList(getLabel("Task")));
               break;
-            case TYPE_STORY:
+            case STORY:
               issue.setLabels(Collections.singletonList(getLabel("Story")));
               break;
-            case TYPE_EPIC:
+            case EPIC:
               issue.setLabels(Collections.singletonList(getLabel("Epic")));
               break;
-            case TYPE_BUSINESSNEED:
+            case BUSINESSNEED:
               issue.setLabels(Collections.singletonList(getLabel("Busines Need")));
               break;
             default:
@@ -119,8 +118,7 @@ public class GitHubExporter implements Exporter {
       }
     }
     issue.setTitle(issue.getNumber() + ": " + issue.getTitle());
-    int existingGitHubIssueNumber =
-        (int) Optional.ofNullable(workItem.field(GITHUB_WORKITEM_LINK)).orElse(0);
+    int existingGitHubIssueNumber = StorageQuery.getField(workItem, GITHUB_WORKITEM_LINK, 0);
     issue.setNumber(existingGitHubIssueNumber);
     return issue;
   }

@@ -81,6 +81,11 @@ public class RTCExtractor {
         return new UsernameAndPasswordLoginInfo(userId, password);
       }
     });
+    if (settings.hasProxySettings()) {
+      repo.setProxy(settings.getProxyHost(), Integer.parseInt(settings.getProxyPort()), null, null);
+    }
+    repo.registerLoginHandler((ILoginHandler2) loginHandler -> new UsernameAndPasswordLoginInfo(
+        userId, password));
     repo.login(null);
     return repo;
   }

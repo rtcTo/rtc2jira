@@ -15,6 +15,9 @@ import java.util.stream.IntStream;
  */
 public class Settings {
 
+  private static final String PROXY_HOST = "proxy.host";
+  private static final String PROXY_PORT = "proxy.port";
+
   private static final String RTC_URL = "rtc.url";
   private static final String RTC_USER = "rtc.user";
   private static final String RTC_PASSWORD = "rtc.password";
@@ -52,6 +55,18 @@ public class Settings {
 
   public static Settings getInstance() {
     return instance;
+  }
+
+  public boolean hasProxySettings() {
+    return props.getProperty(PROXY_HOST) != null && props.getProperty(PROXY_PORT) != null;
+  }
+
+  public String getProxyHost() {
+    return props.getProperty(PROXY_HOST);
+  }
+
+  public String getProxyPort() {
+    return props.getProperty(PROXY_PORT);
   }
 
   public boolean hasRtcProperties() {

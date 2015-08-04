@@ -13,6 +13,6 @@ hs_err_pid*
 
 /target/
 .settings
-/settings.properties
+/*settings.properties
 /databases/
 /attachments/

@@ -22,7 +22,7 @@ public class Settings {
   private static final String RTC_USER = "rtc.user";
   private static final String RTC_PASSWORD = "rtc.password";
   private static final String RTC_PROJECTAREA = "rtc.projectarea";
-  private static final String RTC_WORKITEM_ID_RANGE = "rtc.workitemid.range";
+  static final String RTC_WORKITEM_ID_RANGE = "rtc.workitemid.range";
 
   private static final String GITHUB_USER = "github.user";
   private static final String GITHUB_PASSWORD = "github.password";
@@ -43,14 +43,16 @@ public class Settings {
 
   private Settings() {
     props = new Properties();
-
     try {
       props.load(new FileReader("settings.properties"));
     } catch (IOException e) {
-      System.err
-          .println("Please create your settings.properties out of the settings.properties.example");
+      System.err.println("Please create your settings.properties out of the settings.properties.example");
       throw new RuntimeException(e);
     }
+  }
+
+  Settings(Properties props) {
+    this.props = props;
   }
 
   public static Settings getInstance() {
@@ -70,8 +72,8 @@ public class Settings {
   }
 
   public boolean hasRtcProperties() {
-    return props.containsKey(RTC_USER) && props.containsKey(RTC_PASSWORD)
-        && props.containsKey(RTC_URL) && props.containsKey(RTC_WORKITEM_ID_RANGE);
+    return props.containsKey(RTC_USER) && props.containsKey(RTC_PASSWORD) && props.containsKey(RTC_URL)
+        && props.containsKey(RTC_WORKITEM_ID_RANGE);
   }
 
   public String getRtcUrl() {
@@ -91,11 +93,16 @@ public class Settings {
   }
 
   public Iterable<Integer> getRtcWorkItemRange() {
-    String range = props.getProperty(RTC_WORKITEM_ID_RANGE);
-    String[] splitted = range.split("\\.\\.");
-    int from = Integer.parseInt(splitted[0]);
-    int to = Integer.parseInt(splitted[1]);
-    return IntStream.rangeClosed(from, to).boxed().collect(Collectors.toList());
+    String rangesString = props.getProperty(RTC_WORKITEM_ID_RANGE);
+    String[] ranges = rangesString.split(",");
+    IntStream intStream = IntStream.of();
+    for (String range : ranges) {
+      String[] splitted = range.split("\\.\\.");
+      int from = Integer.parseInt(splitted[0]);
+      int to = Integer.parseInt(splitted[1]);
+      intStream = IntStream.concat(intStream, IntStream.rangeClosed(from, to));
+    }
+    return intStream.boxed().collect(Collectors.toList());
   }
 
   public boolean hasGithubProperties() {

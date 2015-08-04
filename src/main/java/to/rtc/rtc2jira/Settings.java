@@ -101,8 +101,12 @@ public class Settings {
     for (String range : ranges) {
       String[] splitted = range.split("\\.\\.");
       int from = Integer.parseInt(splitted[0]);
-      int to = Integer.parseInt(splitted[1]);
-      intStream = IntStream.concat(intStream, IntStream.rangeClosed(from, to));
+      if (splitted.length == 1) {
+        intStream = IntStream.concat(intStream, IntStream.rangeClosed(from, from));
+      } else {
+        int to = Integer.parseInt(splitted[1]);
+        intStream = IntStream.concat(intStream, IntStream.rangeClosed(from, to));
+      }
     }
     return intStream.boxed().collect(Collectors.toList());
   }

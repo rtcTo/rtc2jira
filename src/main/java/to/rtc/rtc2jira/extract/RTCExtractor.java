@@ -9,7 +9,6 @@ import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.storage.StorageEngine;
 
 import com.ibm.team.repository.client.ILoginHandler2;
-import com.ibm.team.repository.client.ILoginInfo2;
 import com.ibm.team.repository.client.ITeamRepository;
 import com.ibm.team.repository.client.TeamPlatform;
 import com.ibm.team.repository.client.login.UsernameAndPasswordLoginInfo;
@@ -75,12 +74,8 @@ public class RTCExtractor {
     if (settings.hasProxySettings()) {
       repo.setProxy(settings.getProxyHost(), Integer.parseInt(settings.getProxyPort()), null, null);
     }
-    repo.registerLoginHandler(new ILoginHandler2() {
-      @Override
-      public ILoginInfo2 challenge(ITeamRepository repo) {
-        return new UsernameAndPasswordLoginInfo(userId, password);
-      }
-    });
+    repo.registerLoginHandler((ILoginHandler2) loginHandler -> new UsernameAndPasswordLoginInfo(
+        userId, password));
     repo.login(null);
     return repo;
   }

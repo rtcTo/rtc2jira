@@ -3,7 +3,9 @@
  */
 package to.rtc.rtc2jira;
 
-import java.io.FileReader;
+import static java.nio.file.Files.newBufferedReader;
+import static java.nio.file.Paths.get;
+
 import java.io.IOException;
 import java.util.Properties;
 import java.util.stream.Collectors;
@@ -22,7 +24,7 @@ public class Settings {
   private static final String RTC_USER = "rtc.user";
   private static final String RTC_PASSWORD = "rtc.password";
   private static final String RTC_PROJECTAREA = "rtc.projectarea";
-  private static final String RTC_WORKITEM_ID_RANGE = "rtc.workitemid.range";
+  static final String RTC_WORKITEM_ID_RANGE = "rtc.workitemid.range";
 
   private static final String GITHUB_USER = "github.user";
   private static final String GITHUB_PASSWORD = "github.password";
@@ -39,18 +41,21 @@ public class Settings {
 
   private static final Settings instance = new Settings();
 
-  private final Properties props;
+  private Properties props;
 
   private Settings() {
     props = new Properties();
-
     try {
-      props.load(new FileReader("settings.properties"));
+      props.load(newBufferedReader(get("settings.properties")));
     } catch (IOException e) {
       System.err
           .println("Please create your settings.properties out of the settings.properties.example");
       throw new RuntimeException(e);
     }
+  }
+
+  void setProperties(Properties props) {
+    this.props = props;
   }
 
   public static Settings getInstance() {

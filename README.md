@@ -4,7 +4,10 @@ This tiny program lets you migrate work items from an ibm rtc server to another 
 
 # How can I use it?
 
-
+Up so far, its possible to:
+- Import some basic informations from the RTC WorkItems into a local database
+- Export as Github-Issues (Creation & Update, but without any comments)
+- Export as Jira-Issues (Creation, but without comments)
 
 ## Preconditions
 

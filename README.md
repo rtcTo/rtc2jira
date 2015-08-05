@@ -4,7 +4,7 @@ This tiny program lets you migrate work items from an ibm rtc server to another 
 
 # How can I use it?
 
-Currently you can't... I just started developing it.
+
 
 ## Preconditions
 

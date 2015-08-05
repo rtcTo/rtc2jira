@@ -3,10 +3,8 @@ package to.rtc.rtc2jira.extract;
 import static to.rtc.rtc2jira.storage.WorkItemConstants.ID;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
-
-import to.rtc.rtc2jira.Settings;
-import to.rtc.rtc2jira.storage.StorageEngine;
 
 import com.ibm.team.repository.client.ILoginHandler2;
 import com.ibm.team.repository.client.ILoginInfo2;
@@ -21,6 +19,9 @@ import com.ibm.team.workitem.common.model.IWorkItem;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 
+import to.rtc.rtc2jira.Settings;
+import to.rtc.rtc2jira.storage.StorageEngine;
+
 /**
  * Extracts WorkItems from RTC
  * 
@@ -31,10 +32,14 @@ public class RTCExtractor {
 
   private Settings settings;
   private StorageEngine storageEngine;
+  private List<Integer> permissionDeniedWorkitems;
+  private List<Integer> notPresentWorkitems;
 
   public RTCExtractor(Settings settings, StorageEngine storageEngine) {
     this.settings = settings;
     this.storageEngine = storageEngine;
+    this.permissionDeniedWorkitems = new LinkedList<>();
+    this.notPresentWorkitems = new LinkedList<>();
   }
 
   public static boolean isLoginPossible(Settings settings) {
@@ -84,8 +89,7 @@ public class RTCExtractor {
     if (settings.hasProxySettings()) {
       repo.setProxy(settings.getProxyHost(), Integer.parseInt(settings.getProxyPort()), null, null);
     }
-    repo.registerLoginHandler((ILoginHandler2) loginHandler -> new UsernameAndPasswordLoginInfo(
-        userId, password));
+    repo.registerLoginHandler((ILoginHandler2) loginHandler -> new UsernameAndPasswordLoginInfo(userId, password));
     repo.login(null);
     return repo;
   }
@@ -93,30 +97,40 @@ public class RTCExtractor {
   private void processWorkItems(ITeamRepository repo, Iterable<Integer> workItemRange)
       throws TeamRepositoryException, IOException {
     IWorkItemClient workItemClient = (IWorkItemClient) repo.getClientLibrary(IWorkItemClient.class);
-    AttachmentHandler attachmentHandler =
-        new AttachmentHandler(repo, storageEngine.getAttachmentStorage());
+    AttachmentHandler attachmentHandler = new AttachmentHandler(repo, storageEngine.getAttachmentStorage());
+    int counter = 0;
     for (Integer currentWorkItemId : workItemRange) {
       processWorkItem(repo, workItemClient, currentWorkItemId, attachmentHandler);
+      System.out.print(String.format("processed %s items...\r", ++counter));
+    }
+    System.out.println(
+        String.format("There were %s items which I had no permission to access.", permissionDeniedWorkitems.size()));
+    for (Integer id : permissionDeniedWorkitems) {
+      System.out.print(String.format("%d, ", id));
+    }
+    System.out.println(String.format("There were %s items which were not present.", notPresentWorkitems.size()));
+    for (Integer id : notPresentWorkitems) {
+      System.out.print(String.format("%d, ", id));
     }
   }
 
-  private void processWorkItem(ITeamRepository repo, IWorkItemClient workItemClient,
-      int workItemId, AttachmentHandler attachmentHandler) throws TeamRepositoryException,
-      IOException {
+  private void processWorkItem(ITeamRepository repo, IWorkItemClient workItemClient, int workItemId,
+      AttachmentHandler attachmentHandler) throws TeamRepositoryException, IOException {
     try {
-      System.out.println("WorkItem " + workItemId + ":");
-      System.out.println("****************************");
-      IWorkItem workItem =
-          workItemClient.findWorkItemById(workItemId, IWorkItem.FULL_PROFILE, null);
+      IWorkItem workItem;
+      try {
+        workItem = workItemClient.findWorkItemById(workItemId, IWorkItem.FULL_PROFILE, null);
+      } catch (PermissionDeniedException e) {
+        this.permissionDeniedWorkitems.add(workItemId);
+        return;
+      }
       if (workItem == null) {
-        System.out.println("Not present. Will skip this one.");
-        System.out.println();
+        this.notPresentWorkitems.add(workItemId);
         return;
       }
 
       storageEngine.withDB(db -> {
-        OSQLSynchQuery<ODocument> query =
-            new OSQLSynchQuery<ODocument>("select * from WorkItem where ID = :ID");
+        OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<ODocument>("select * from WorkItem where ID = :ID");
         List<ODocument> result = db.query(query, workItem.getId());
         final ODocument doc;
         if (result.size() > 0) {
@@ -132,9 +146,6 @@ public class RTCExtractor {
       });
       System.out.println();
       System.out.println();
-    } catch (PermissionDeniedException e) {
-      System.out.println("***** Too bad: I must not access WorkItem " + workItemId
-          + ". They say it is forbidden... :-(");
     } catch (RuntimeException e) {
       System.out.println("***** Problem: " + e.getMessage());
       e.printStackTrace();

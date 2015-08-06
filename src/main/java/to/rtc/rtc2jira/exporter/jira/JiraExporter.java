@@ -67,8 +67,8 @@ public class JiraExporter implements Exporter {
     if (projectOptional.isPresent()) {
       for (ODocument workItem : StorageQuery.getRTCWorkItems(store)) {
         Issue issue = createIssueFromWorkItem(workItem, projectOptional.get());
-        Issue jiraIssue = createIssueInJira(issue);
-        storeReference(Optional.ofNullable(jiraIssue), workItem);
+        // Issue jiraIssue = createIssueInJira(issue);
+        // storeReference(Optional.ofNullable(jiraIssue), workItem);
       }
     }
   }
@@ -154,6 +154,7 @@ public class JiraExporter implements Exporter {
     if (existingIssueTypes == null) {
       IssueMetadata issueMetadata =
           restAccess.get("/issue/createmeta/?expand=projects.issuetypes.fields.", IssueMetadata.class);
+      String test = restAccess.get("/issuetype", String.class);
       existingIssueTypes = new HashMap<>();
       existingIssueTypes.put(projectKey, issueMetadata.getProject(projectKey).get().getIssuetypes());
     }
@@ -166,11 +167,14 @@ public class JiraExporter implements Exporter {
 
     // check if issuetype is available or just not assigned to this project
 
-    // for (List<IssueType> issueTypes : existingIssueTypes.values()) {
-    // for (IssueType issueType : issueTypes) {
-    //
-    // }
-    // }
+    for (List<IssueType> issueTypes : existingIssueTypes.values()) {
+      for (IssueType type : issueTypes) {
+        if (type.getName().equals(issuetypeName)) {
+          // assign it to project
+        }
+      }
+    }
+    // else, create it and assign it to project
     IssueType newIssueType = new IssueType();
     newIssueType.setName(issuetypeName);
     IssueType createdIssueType = restAccess.post("/issuetype", newIssueType, IssueType.class);

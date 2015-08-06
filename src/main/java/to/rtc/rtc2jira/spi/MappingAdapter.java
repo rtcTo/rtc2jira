@@ -3,9 +3,8 @@ package to.rtc.rtc2jira.spi;
 import com.ibm.team.repository.client.IItemManager;
 import com.ibm.team.repository.client.ITeamRepository;
 import com.ibm.team.repository.client.internal.ItemManager;
-import com.ibm.team.repository.common.IContributorHandle;
+import com.ibm.team.repository.common.IItemHandle;
 import com.ibm.team.repository.common.TeamRepositoryException;
-import com.ibm.team.repository.common.model.Contributor;
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IWorkItem;
 
@@ -50,14 +49,15 @@ public abstract class MappingAdapter implements Mapping {
     return (T) workItem.getValue(attribute);
   }
 
-  protected Contributor loadContributor(IContributorHandle contributorHandle) {
-    Contributor rtcCreator = null;
+  @SuppressWarnings("unchecked")
+  protected <T> T fetchCompleteItem(IItemHandle itemHandle) {
+    T completeItem = null;
     try {
       IItemManager itemManager = ITeamRepository.class.cast(getWorkItem().getOrigin()).itemManager();
-      rtcCreator = (Contributor) itemManager.fetchCompleteItem(contributorHandle, ItemManager.DEFAULT, null);
+      completeItem = (T) itemManager.fetchCompleteItem(itemHandle, ItemManager.DEFAULT, null);
     } catch (TeamRepositoryException e) {
       e.printStackTrace();
     }
-    return rtcCreator;
+    return (T) completeItem;
   }
 }

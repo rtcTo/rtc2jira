@@ -24,4 +24,22 @@ public interface RTCIdentifierConstants {
   public static final String CREATOR = "creator";
   public static final String MODIFIED_BY = "modifiedBy";
   public static final String RESOLVER = "resolver";
+  public static final String ARCHIVED = "archived";
+
+  public static final String CATEGORY = "category";
+  public static final String CONTEXT_ID = "contextId";
+  public static final String CORRECTED_ESTIMATE = "correctedEstimate";
+  public static final String CUSTOM_ATTRIBUTES = "customAttributes";
+  public static final String DURATION = "duration";
+  public static final String APPROVAL_DESCRIPTORS = "internalApprovalDescriptors";
+  public static final String APPROVALS = "internalApprovals";
+  public static final String RESOLUTION = "internalResolution";
+  public static final String SEQUENCE_VALUE = "internalSequenceValue";
+  public static final String STATE = "internalState";
+  public static final String STATE_TRANSITIONS = "internalStateTransitions";
+  public static final String SUBSCRIPTIONS = "internalSubscriptions";
+  public static final String TAGS = "internalTags";
+  public static final String PROJECT_AREA = "projectArea";
+  public static final String TIME_SPENT = "timeSpent";
+
 }

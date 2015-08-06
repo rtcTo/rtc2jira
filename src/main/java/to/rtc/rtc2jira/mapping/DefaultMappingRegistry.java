@@ -32,6 +32,11 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.CREATOR, new ContributorMapping(WorkItemConstants.CREATOR));
     register(RTCIdentifierConstants.MODIFIED_BY, new ContributorMapping(WorkItemConstants.MODIFIED_BY));
     register(RTCIdentifierConstants.RESOLVER, new ContributorMapping(WorkItemConstants.RESOLVER));
+    register(RTCIdentifierConstants.DURATION, new NullMapping());
+    register(RTCIdentifierConstants.CORRECTED_ESTIMATE, new NullMapping());
+    register(RTCIdentifierConstants.TIME_SPENT, new NullMapping());
+    register(RTCIdentifierConstants.CATEGORY, new CategoryMapping());
+    register(RTCIdentifierConstants.ARCHIVED, new BooleanMapping(WorkItemConstants.ARCHIVED));
   };
 
   public static DefaultMappingRegistry getInstance() {

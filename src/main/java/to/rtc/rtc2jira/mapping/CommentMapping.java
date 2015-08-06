@@ -8,10 +8,6 @@ import to.rtc.rtc2jira.spi.MappingAdapter;
 import to.rtc.rtc2jira.storage.Comment;
 import to.rtc.rtc2jira.storage.WorkItemConstants;
 
-import com.ibm.team.repository.client.IItemManager;
-import com.ibm.team.repository.client.ITeamRepository;
-import com.ibm.team.repository.client.internal.ItemManager;
-import com.ibm.team.repository.common.TeamRepositoryException;
 import com.ibm.team.repository.common.model.Contributor;
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IComment;
@@ -36,16 +32,7 @@ public class CommentMapping extends MappingAdapter {
     if (value != null) {
       List<Comment> comments = new ArrayList<>();
       for (IComment rtcCom : value) {
-        Contributor rtcCreator = null;
-        try {
-          IItemManager itemManager =
-              ITeamRepository.class.cast(getWorkItem().getOrigin()).itemManager();
-          rtcCreator =
-              (Contributor) itemManager.fetchCompleteItem(rtcCom.getCreator(), ItemManager.DEFAULT,
-                  null);
-        } catch (TeamRepositoryException e) {
-          e.printStackTrace();
-        }
+        Contributor rtcCreator = loadContributor(rtcCom.getCreator());
         String creatorEmail = rtcCreator.getEmailAddress();
         String creatorName = rtcCreator.getName();
         Date creationDate = new Date(rtcCom.getCreationDate().getTime());
@@ -58,5 +45,4 @@ public class CommentMapping extends MappingAdapter {
       }
     }
   }
-
 }

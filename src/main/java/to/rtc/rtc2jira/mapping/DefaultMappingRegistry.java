@@ -26,6 +26,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.CREATIONDATE, new DirectDateMapping(WorkItemConstants.CREATIONDATE));
     register(RTCIdentifierConstants.COMMENTS, new CommentMapping());
     register(RTCIdentifierConstants.PRIORITY, new PriorityMapping());
+    register(RTCIdentifierConstants.SEVERITY, new SeverityMapping());
   };
 
   public static DefaultMappingRegistry getInstance() {

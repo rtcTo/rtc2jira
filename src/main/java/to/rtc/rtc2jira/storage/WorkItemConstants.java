@@ -20,4 +20,5 @@ public interface WorkItemConstants {
   public static final String CREATIONDATE = "creationDate";
   public static final String COMMENTS = "internalComments";
   public static final String PRIORITY = "priority";
+  public static final String SEVERITY = "severity";
 }

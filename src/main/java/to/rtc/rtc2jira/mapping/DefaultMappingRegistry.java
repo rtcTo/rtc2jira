@@ -8,12 +8,14 @@ import to.rtc.rtc2jira.spi.Mapping;
 import to.rtc.rtc2jira.spi.MappingRegistry;
 import to.rtc.rtc2jira.storage.WorkItemConstants;
 
+import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IWorkItem;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 
 public class DefaultMappingRegistry implements MappingRegistry {
   private final static DefaultMappingRegistry INSTANCE = new DefaultMappingRegistry();
 
+  private Map<String, Mapping> mappings = new HashMap<>();
   private Mapping missingMapping = new MissingMapping();
 
   private DefaultMappingRegistry() {
@@ -37,20 +39,21 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.TIME_SPENT, new NullMapping());
     register(RTCIdentifierConstants.CATEGORY, new CategoryMapping());
     register(RTCIdentifierConstants.ARCHIVED, new BooleanMapping(WorkItemConstants.ARCHIVED));
+    register(RTCIdentifierConstants.CONTEXT_ID, new NullMapping());
+    register(RTCIdentifierConstants.PROJECT_AREA, new ProjectAreaMapping());
+    register(RTCIdentifierConstants.SEQUENCE_VALUE, new NullMapping());
   };
 
   public static DefaultMappingRegistry getInstance() {
     return INSTANCE;
   }
 
-  private Map<String, Mapping> mappings = new HashMap<>();
-
   @Override
   public void register(String rtcIdentifier, Mapping mapping) {
     mappings.put(rtcIdentifier, mapping);
   }
 
-  public Mapping getMapping(String rtcIdentifier) {
+  private Mapping getMapping(String rtcIdentifier) {
     return Optional.ofNullable(mappings.get(rtcIdentifier)).orElse(missingMapping);
   }
 
@@ -59,6 +62,11 @@ public class DefaultMappingRegistry implements MappingRegistry {
     mappings.values().forEach(m -> {
       m.beforeWorkItem(workItem);
     });
+  }
+
+  public void acceptAttribute(IAttribute attribute) {
+    String identifier = attribute.getIdentifier();
+    getMapping(identifier).acceptAttribute(attribute);
   }
 
   public void afterWorkItem(final ODocument doc) {

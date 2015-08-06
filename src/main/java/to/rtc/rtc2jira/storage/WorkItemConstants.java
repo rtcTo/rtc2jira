@@ -5,7 +5,7 @@ package to.rtc.rtc2jira.storage;
 
 
 /**
- * Data from default mappings are stored in the db with this keys.
+ * Data from rtc workitems is stored in the db with this keys.
  * 
  * @author roman.schaller
  *
@@ -27,4 +27,5 @@ public interface WorkItemConstants {
   public static final String RESOLVER = "resolver";
   public static final String CATEGORY = "category";
   public static final String ARCHIVED = "archived";
+  public static final String PROJECT_AREA = "projectArea";
 }

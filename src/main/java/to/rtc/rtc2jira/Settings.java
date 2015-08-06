@@ -100,11 +100,11 @@ public class Settings {
     IntStream intStream = IntStream.of();
     for (String range : ranges) {
       String[] splitted = range.split("\\.\\.");
-      int from = Integer.parseInt(splitted[0]);
+      int from = Integer.parseInt(splitted[0].trim());
       if (splitted.length == 1) {
         intStream = IntStream.concat(intStream, IntStream.rangeClosed(from, from));
       } else {
-        int to = Integer.parseInt(splitted[1]);
+        int to = Integer.parseInt(splitted[1].trim());
         intStream = IntStream.concat(intStream, IntStream.rangeClosed(from, to));
       }
     }

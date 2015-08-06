@@ -54,10 +54,20 @@ public class SettingsTest {
   }
 
   @Test
+  public void testWorkItemRange_Range_And_CommaSeparated_Mixed_WithSpaces() {
+    String range = "1 , 34..36 ";
+    properties.setProperty(RTC_WORKITEM_ID_RANGE, range);
+
+    Integer[] expectedRange = {1, 34, 35, 36};
+    assertThat(settings.getRtcWorkItemRange(), contains(expectedRange));
+  }
+
+  @Test
   public void testExtractingSingleRange() {
     Properties props = new Properties();
     props.setProperty(Settings.RTC_WORKITEM_ID_RANGE, "12..14");
     Settings.getInstance().setProperties(props);
+
     Integer[] expectedRange = {12, 13, 14};
     assertThat(settings.getRtcWorkItemRange(), contains(expectedRange));
   }
@@ -67,8 +77,11 @@ public class SettingsTest {
     Properties props = new Properties();
     props.setProperty(Settings.RTC_WORKITEM_ID_RANGE, "12..14,20..22");
     Settings.getInstance().setProperties(props);
+
     Integer[] expectedRange = {12, 13, 14, 20, 21, 22};
     assertThat(settings.getRtcWorkItemRange(), contains(expectedRange));
   }
+
+
 
 }

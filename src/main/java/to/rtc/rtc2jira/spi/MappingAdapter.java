@@ -18,7 +18,7 @@ import com.ibm.team.workitem.common.model.IWorkItem;
  * @author roman
  *
  */
-public class MappingAdapter implements Mapping {
+public abstract class MappingAdapter implements Mapping {
 
   private IWorkItem workItem;
 

@@ -20,4 +20,5 @@ public interface RTCIdentifierConstants {
   public static final String COMMENTS = "internalComments";
   public static final String PRIORITY = "internalPriority";
   public static final String SEVERITY = "internalSeverity";
+  public static final String OWNER = "owner";
 }

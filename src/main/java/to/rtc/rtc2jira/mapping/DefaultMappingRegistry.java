@@ -28,6 +28,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.COMMENTS, new CommentMapping());
     register(RTCIdentifierConstants.PRIORITY, new PriorityMapping());
     register(RTCIdentifierConstants.SEVERITY, new SeverityMapping());
+    register(RTCIdentifierConstants.OWNER, new ContributorMapping(WorkItemConstants.OWNER));
   };
 
   public static DefaultMappingRegistry getInstance() {

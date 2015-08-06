@@ -32,7 +32,7 @@ public class CommentMapping extends MappingAdapter {
     if (value != null) {
       List<Comment> comments = new ArrayList<>();
       for (IComment rtcCom : value) {
-        Contributor rtcCreator = loadContributor(rtcCom.getCreator());
+        Contributor rtcCreator = fetchCompleteItem(rtcCom.getCreator());
         String creatorEmail = rtcCreator.getEmailAddress();
         String creatorName = rtcCreator.getName();
         Date creationDate = new Date(rtcCom.getCreationDate().getTime());

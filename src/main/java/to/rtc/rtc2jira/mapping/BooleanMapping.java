@@ -5,22 +5,21 @@ package to.rtc.rtc2jira.mapping;
 
 import to.rtc.rtc2jira.spi.MappingAdapter;
 
-import com.ibm.team.repository.common.model.Contributor;
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 
 /**
- * Can handle all attributes pointing to a contributor.
+ * used to map boolean values
  * 
  * @author roman.schaller
  *
  */
-public class ContributorMapping extends MappingAdapter {
+public class BooleanMapping extends MappingAdapter {
 
-  private String value;
+  private Boolean value;
   private String localStorageIdentifier;
 
-  public ContributorMapping(String localStorageIdentifier) {
+  public BooleanMapping(String localStorageIdentifier) {
     this.localStorageIdentifier = localStorageIdentifier;
   }
 
@@ -31,12 +30,12 @@ public class ContributorMapping extends MappingAdapter {
 
   @Override
   public void acceptAttribute(IAttribute attribute) {
-    Contributor contributor = fetchCompleteItem(getValue(attribute));
-    value = String.format("%s <%s>", contributor.getName(), contributor.getEmailAddress());
+    value = getValue(attribute);
   }
 
   @Override
   public void afterWorkItem(ODocument doc) {
     doc.field(localStorageIdentifier, value);
   }
+
 }

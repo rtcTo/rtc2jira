@@ -1,16 +1,15 @@
 /*
  * Copyright (c) 2015 BISON Schweiz AG, All Rights Reserved.
  */
-package to.rtc.rtc2jira.storage;
-
+package to.rtc.rtc2jira.mapping;
 
 /**
- * Data from default mappings are stored in the db with this keys.
+ * Contains all the rtc identifiers
  * 
  * @author roman.schaller
  *
  */
-public interface WorkItemConstants {
+public interface RTCIdentifierConstants {
   public static final String ID = "ID";
   public static final String SUMMARY = "summary";
   public static final String DESCRIPTION = "description";
@@ -19,5 +18,5 @@ public interface WorkItemConstants {
   public static final String MODIFIED = "modified";
   public static final String CREATIONDATE = "creationDate";
   public static final String COMMENTS = "internalComments";
-  public static final String PRIORITY = "priority";
+  public static final String PRIORITY = "internalPriority";
 }

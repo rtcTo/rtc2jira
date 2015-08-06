@@ -6,6 +6,7 @@ import java.util.List;
 
 import to.rtc.rtc2jira.spi.MappingAdapter;
 import to.rtc.rtc2jira.storage.Comment;
+import to.rtc.rtc2jira.storage.WorkItemConstants;
 
 import com.ibm.team.repository.client.IItemManager;
 import com.ibm.team.repository.client.ITeamRepository;
@@ -19,11 +20,6 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
 public class CommentMapping extends MappingAdapter {
 
   private List<IComment> value;
-  private String identifier;
-
-  public CommentMapping(String identifier) {
-    this.identifier = identifier;
-  }
 
   @Override
   public void beforeWorkItem() {
@@ -58,7 +54,7 @@ public class CommentMapping extends MappingAdapter {
         comments.add(comment);
       }
       if (!comments.isEmpty()) {
-        doc.field(identifier, comments);
+        doc.field(WorkItemConstants.COMMENTS, comments);
       }
     }
   }

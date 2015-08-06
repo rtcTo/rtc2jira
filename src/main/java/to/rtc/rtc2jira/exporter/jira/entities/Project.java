@@ -1,6 +1,7 @@
 package to.rtc.rtc2jira.exporter.jira.entities;
 
 import java.net.URL;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -20,6 +21,7 @@ public class Project {
   private String id;
   private String key;
   private String name;
+  private List<IssueType> issuetypes;
 
 
   public String getExpand() {
@@ -60,6 +62,19 @@ public class Project {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  /**
+   * Only available when called rest method with expand="issuetypes"
+   * 
+   * @return {@link List} of {@link IssueType}
+   */
+  public List<IssueType> getIssuetypes() {
+    return issuetypes;
+  }
+
+  public void setIssueTypes(List<IssueType> issuetypes) {
+    this.issuetypes = issuetypes;
   }
 
 }

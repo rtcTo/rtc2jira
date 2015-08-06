@@ -10,7 +10,7 @@ package to.rtc.rtc2jira.mapping;
  *
  */
 public interface RTCIdentifierConstants {
-  public static final String ID = "ID";
+  public static final String ID = "id";
   public static final String SUMMARY = "summary";
   public static final String DESCRIPTION = "description";
   public static final String WORK_ITEM_TYPE = "workItemType";

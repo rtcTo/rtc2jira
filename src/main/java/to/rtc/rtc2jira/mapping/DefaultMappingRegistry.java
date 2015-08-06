@@ -17,6 +17,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
   private Mapping missingMapping = new MissingMapping();
 
   private DefaultMappingRegistry() {
+    register(RTCIdentifierConstants.ID, new NullMapping());
     register(RTCIdentifierConstants.SUMMARY, new DirectStringMapping(WorkItemConstants.SUMMARY));
     register(RTCIdentifierConstants.DESCRIPTION, new DirectStringMapping(WorkItemConstants.DESCRIPTION));
     register(RTCIdentifierConstants.WORK_ITEM_TYPE, new DirectStringMapping(WorkItemConstants.WORK_ITEM_TYPE));

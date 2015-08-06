@@ -42,6 +42,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.CONTEXT_ID, new NullMapping());
     register(RTCIdentifierConstants.PROJECT_AREA, new ProjectAreaMapping());
     register(RTCIdentifierConstants.SEQUENCE_VALUE, new NullMapping());
+    register(RTCIdentifierConstants.TAGS, new TagsMapping());
   };
 
   public static DefaultMappingRegistry getInstance() {

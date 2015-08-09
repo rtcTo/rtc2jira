@@ -155,18 +155,6 @@ public class JiraExporter implements Exporter {
       existingIssueTypes.put(projectKey, issueMetadata.getProject(projectKey).get().getIssuetypes());
     }
 
-    // boolean isNotAssigned = false;
-    // for (List<IssueType> issueTypes : existingIssueTypes.values()) {
-    // if (getIssueTypeByName(issuetypeName, issueTypes).isPresent()) {
-    // isNotAssigned = true;
-    // break;
-    // }
-    // }
-    // if (isNotAssigned) {
-    // System.out.println("Please assign issueType " + issuetypeName + " to Project " +
-    // project.getName());
-    // // throw exception?
-    // }
     List<IssueType> issuesTypesByProject = existingIssueTypes.get(projectKey);
     IssueType issueType =
         getIssueTypeByName(issuetypeName, issuesTypesByProject).orElse(createIssueType(issuetypeName));

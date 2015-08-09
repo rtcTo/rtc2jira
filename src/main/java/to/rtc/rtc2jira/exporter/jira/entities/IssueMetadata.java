@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class IssueMetadata {
 
   private String expand;
-  private List<Project> projects;
+  private List<ProjectOverview> projects;
 
 
   public String getExpand() {
@@ -20,16 +20,16 @@ public class IssueMetadata {
     this.expand = expand;
   }
 
-  public List<Project> getProjects() {
+  public List<ProjectOverview> getProjects() {
     return projects;
   }
 
-  public void setProjects(List<Project> projects) {
+  public void setProjects(List<ProjectOverview> projects) {
     this.projects = projects;
   }
 
-  public Optional<Project> getProject(String projectKey) {
-    for (Project project : projects) {
+  public Optional<ProjectOverview> getProject(String projectKey) {
+    for (ProjectOverview project : projects) {
       if (project.getKey().equals(projectKey)) {
         return Optional.of(project);
       }

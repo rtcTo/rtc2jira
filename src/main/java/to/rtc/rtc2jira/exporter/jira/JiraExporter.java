@@ -12,16 +12,13 @@ import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.TASK;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
-
-import com.orientechnologies.orient.core.record.impl.ODocument;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.api.client.GenericType;
+import java.util.stream.Collectors;
 
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
@@ -32,6 +29,10 @@ import to.rtc.rtc2jira.exporter.jira.entities.IssueType;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
 import to.rtc.rtc2jira.storage.StorageEngine;
 import to.rtc.rtc2jira.storage.StorageQuery;
+
+import com.orientechnologies.orient.core.record.impl.ODocument;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.ClientResponse.Status;
 
 public class JiraExporter implements Exporter {
 
@@ -67,8 +68,8 @@ public class JiraExporter implements Exporter {
     if (projectOptional.isPresent()) {
       for (ODocument workItem : StorageQuery.getRTCWorkItems(store)) {
         Issue issue = createIssueFromWorkItem(workItem, projectOptional.get());
-        // Issue jiraIssue = createIssueInJira(issue);
-        // storeReference(Optional.ofNullable(jiraIssue), workItem);
+        Issue jiraIssue = createIssueInJira(issue);
+        storeReference(Optional.ofNullable(jiraIssue), workItem);
       }
     }
   }
@@ -82,13 +83,7 @@ public class JiraExporter implements Exporter {
   }
 
   private Optional<Project> getProject() {
-    List<Project> projects = restAccess.get("/project", new GenericType<List<Project>>() {});
-    for (Project project : projects) {
-      if (project.getKey().equals(settings.getJiraProjectKey())) {
-        return Optional.of(project);
-      }
-    }
-    return Optional.ofNullable(null);
+    return Optional.ofNullable(restAccess.get("/project/" + settings.getJiraProjectKey(), Project.class));
   }
 
   private Issue createIssueInJira(Issue issue) throws Exception {
@@ -118,22 +113,23 @@ public class JiraExporter implements Exporter {
           break;
         case DESCRIPTION:
           String htmlText = (String) entry.getValue();
+          // TODO: replace HTML style formatting with JIRA formatting
           issueFields.setDescription(htmlText);
           break;
         case WORK_ITEM_TYPE:
           String workitemType = (String) entry.getValue();
           switch (workitemType) {
             case TASK:
-              issueFields.setIssuetype(getIssueType("Task", project.getKey()));
+              issueFields.setIssuetype(getIssueType("Task", project));
               break;
             case STORY:
-              issueFields.setIssuetype(getIssueType("User Story", project.getKey()));
+              issueFields.setIssuetype(getIssueType("User Story", project));
               break;
             case EPIC:
-              issueFields.setIssuetype(getIssueType("Epic", project.getKey()));
+              issueFields.setIssuetype(getIssueType("Epic", project));
               break;
             case BUSINESSNEED:
-              issueFields.setIssuetype(getIssueType("Business Need", project.getKey()));
+              issueFields.setIssuetype(getIssueType("Business Need", project));
               break;
             default:
               System.out.println("Cannot determine issuetype for unknown workitemType: " + workitemType);
@@ -150,36 +146,52 @@ public class JiraExporter implements Exporter {
     return issue;
   }
 
-  private IssueType getIssueType(String issuetypeName, String projectKey) throws Exception {
+  private IssueType getIssueType(String issuetypeName, Project project) throws Exception {
+    String projectKey = project.getKey();
     if (existingIssueTypes == null) {
       IssueMetadata issueMetadata =
           restAccess.get("/issue/createmeta/?expand=projects.issuetypes.fields.", IssueMetadata.class);
-      String test = restAccess.get("/issuetype", String.class);
       existingIssueTypes = new HashMap<>();
       existingIssueTypes.put(projectKey, issueMetadata.getProject(projectKey).get().getIssuetypes());
     }
+
+    // boolean isNotAssigned = false;
+    // for (List<IssueType> issueTypes : existingIssueTypes.values()) {
+    // if (getIssueTypeByName(issuetypeName, issueTypes).isPresent()) {
+    // isNotAssigned = true;
+    // break;
+    // }
+    // }
+    // if (isNotAssigned) {
+    // System.out.println("Please assign issueType " + issuetypeName + " to Project " +
+    // project.getName());
+    // // throw exception?
+    // }
     List<IssueType> issuesTypesByProject = existingIssueTypes.get(projectKey);
-    for (IssueType issuetype : issuesTypesByProject) {
-      if (issuetype.getName().equals(issuetypeName)) {
-        return issuetype;
-      }
-    }
+    IssueType issueType =
+        getIssueTypeByName(issuetypeName, issuesTypesByProject).orElse(createIssueType(issuetypeName));
 
-    // check if issuetype is available or just not assigned to this project
-
-    for (List<IssueType> issueTypes : existingIssueTypes.values()) {
-      for (IssueType type : issueTypes) {
-        if (type.getName().equals(issuetypeName)) {
-          // assign it to project
-        }
-      }
+    if (!issuesTypesByProject.contains(issueType)) {
+      issuesTypesByProject.add(issueType);
     }
-    // else, create it and assign it to project
+    return issueType;
+  }
+
+  private IssueType createIssueType(String issuetypeName) {
     IssueType newIssueType = new IssueType();
     newIssueType.setName(issuetypeName);
-    IssueType createdIssueType = restAccess.post("/issuetype", newIssueType, IssueType.class);
-    issuesTypesByProject.add(createdIssueType);
+    newIssueType = restAccess.post("/issuetype", newIssueType, IssueType.class);
     return newIssueType;
+  }
+
+  private Optional<IssueType> getIssueTypeByName(String name, Collection<IssueType> types) {
+    List<IssueType> filteredTypes =
+        types.stream().filter(issuetype -> issuetype.getName().equals(name)).collect(Collectors.toList());
+    if (filteredTypes.isEmpty()) {
+      return Optional.empty();
+    } else {
+      return Optional.of(filteredTypes.get(0));
+    }
 
   }
 }

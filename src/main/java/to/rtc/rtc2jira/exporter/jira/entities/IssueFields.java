@@ -9,7 +9,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 public class IssueFields {
 
   private IssueType issuetype;
-  private Project project;
+  private ProjectOverview project;
   private String summary;
   private String description;
 
@@ -21,11 +21,11 @@ public class IssueFields {
     this.issuetype = issuetype;
   }
 
-  public Project getProject() {
+  public ProjectOverview getProject() {
     return project;
   }
 
-  public void setProject(Project project) {
+  public void setProject(ProjectOverview project) {
     this.project = project;
   }
 

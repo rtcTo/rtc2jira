@@ -3,7 +3,7 @@ package to.rtc.rtc2jira.spi;
 import java.util.ServiceLoader;
 
 /**
- * Implement this factory and make it available via {@link ServiceLoader} to register your ouwn
+ * Implement this factory and make it available via {@link ServiceLoader} to register your own
  * mappings.
  * 
  * @author roman

@@ -12,14 +12,19 @@ import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.TASK;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueFields;
+import to.rtc.rtc2jira.exporter.jira.entities.IssueMetadata;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueType;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
 import to.rtc.rtc2jira.storage.StorageEngine;
@@ -28,14 +33,13 @@ import to.rtc.rtc2jira.storage.StorageQuery;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.api.client.GenericType;
 
 public class JiraExporter implements Exporter {
 
   private StorageEngine store;
   private Settings settings;
   private JiraRestAccess restAccess;
-  private List<IssueType> existingIssueTypes;
+  private Map<String, List<IssueType>> existingIssueTypes;
 
   @Override
   public void initialize(Settings settings, StorageEngine store) {
@@ -47,9 +51,7 @@ public class JiraExporter implements Exporter {
   public boolean isConfigured() {
     boolean isConfigured = false;
     if (settings.hasJiraProperties()) {
-      restAccess =
-          new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(),
-              settings.getJiraPassword());
+      restAccess = new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(), settings.getJiraPassword());
       ClientResponse response = restAccess.get("/myself");
       if (response.getStatus() == Status.OK.getStatusCode()) {
         isConfigured = true;
@@ -81,13 +83,7 @@ public class JiraExporter implements Exporter {
   }
 
   private Optional<Project> getProject() {
-    List<Project> projects = restAccess.get("/project", new GenericType<List<Project>>() {});
-    for (Project project : projects) {
-      if (project.getKey().equals(settings.getJiraProjectKey())) {
-        return Optional.of(project);
-      }
-    }
-    return Optional.ofNullable(null);
+    return Optional.ofNullable(restAccess.get("/project/" + settings.getJiraProjectKey(), Project.class));
   }
 
   private Issue createIssueInJira(Issue issue) throws Exception {
@@ -117,26 +113,26 @@ public class JiraExporter implements Exporter {
           break;
         case DESCRIPTION:
           String htmlText = (String) entry.getValue();
+          // TODO: replace HTML style formatting with JIRA formatting
           issueFields.setDescription(htmlText);
           break;
         case WORK_ITEM_TYPE:
           String workitemType = (String) entry.getValue();
           switch (workitemType) {
             case TASK:
-              issueFields.setIssuetype(getIssueType("Task"));
+              issueFields.setIssuetype(getIssueType("Task", project));
               break;
             case STORY:
-              issueFields.setIssuetype(getIssueType("User Story"));
+              issueFields.setIssuetype(getIssueType("User Story", project));
               break;
             case EPIC:
-              issueFields.setIssuetype(getIssueType("Epic"));
+              issueFields.setIssuetype(getIssueType("Epic", project));
               break;
             case BUSINESSNEED:
-              issueFields.setIssuetype(getIssueType("Business Need"));
+              issueFields.setIssuetype(getIssueType("Business Need", project));
               break;
             default:
-              System.out.println("Cannot determine issuetype for unknown workitemType: "
-                  + workitemType);
+              System.out.println("Cannot determine issuetype for unknown workitemType: " + workitemType);
               break;
           }
           break;
@@ -150,21 +146,40 @@ public class JiraExporter implements Exporter {
     return issue;
   }
 
-  private IssueType getIssueType(String issuetypeName) throws Exception {
+  private IssueType getIssueType(String issuetypeName, Project project) throws Exception {
+    String projectKey = project.getKey();
     if (existingIssueTypes == null) {
-      existingIssueTypes = restAccess.get("/issuetype", new GenericType<List<IssueType>>() {});
-    }
-    for (IssueType issuetype : existingIssueTypes) {
-      if (issuetype.getName().equals(issuetypeName)) {
-        return issuetype;
-      }
+      IssueMetadata issueMetadata =
+          restAccess.get("/issue/createmeta/?expand=projects.issuetypes.fields.", IssueMetadata.class);
+      existingIssueTypes = new HashMap<>();
+      existingIssueTypes.put(projectKey, issueMetadata.getProject(projectKey).get().getIssuetypes());
     }
 
+    List<IssueType> issuesTypesByProject = existingIssueTypes.get(projectKey);
+    IssueType issueType =
+        getIssueTypeByName(issuetypeName, issuesTypesByProject).orElse(createIssueType(issuetypeName));
+
+    if (!issuesTypesByProject.contains(issueType)) {
+      issuesTypesByProject.add(issueType);
+    }
+    return issueType;
+  }
+
+  private IssueType createIssueType(String issuetypeName) {
     IssueType newIssueType = new IssueType();
     newIssueType.setName(issuetypeName);
-    IssueType createdIssueType = restAccess.post("/issuetype", newIssueType, IssueType.class);
-    existingIssueTypes.add(createdIssueType);
+    newIssueType = restAccess.post("/issuetype", newIssueType, IssueType.class);
     return newIssueType;
+  }
+
+  private Optional<IssueType> getIssueTypeByName(String name, Collection<IssueType> types) {
+    List<IssueType> filteredTypes =
+        types.stream().filter(issuetype -> issuetype.getName().equals(name)).collect(Collectors.toList());
+    if (filteredTypes.isEmpty()) {
+      return Optional.empty();
+    } else {
+      return Optional.of(filteredTypes.get(0));
+    }
 
   }
 }

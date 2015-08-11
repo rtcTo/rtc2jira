@@ -3,19 +3,23 @@
  */
 package to.rtc.rtc2jira.mapping;
 
+import java.util.HashSet;
 import java.util.List;
-
-import to.rtc.rtc2jira.spi.MappingAdapter;
+import java.util.Set;
 
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IAttributeHandle;
 import com.orientechnologies.orient.core.record.impl.ODocument;
+
+import to.rtc.rtc2jira.spi.MappingAdapter;
 
 /**
  * @author roman.schaller
  *
  */
 public class CustomAttributeMapping extends MappingAdapter {
+
+  private Set<String> customAttributes = new HashSet<>();
 
   @Override
   protected void beforeWorkItem() {}
@@ -25,7 +29,10 @@ public class CustomAttributeMapping extends MappingAdapter {
     List<IAttributeHandle> attributeHandles = getValue(attribute);
     for (IAttributeHandle attributeHandle : attributeHandles) {
       IAttribute a = fetchCompleteItem(attributeHandle);
-      System.out.println("Got custom attribute " + a.getDisplayName());
+      if (!customAttributes.contains(a.getIdentifier())) {
+        customAttributes.add(a.getIdentifier());
+        System.out.println(String.format("Detected custom attribute %s / %s", a.getDisplayName(), a.getIdentifier()));
+      }
     }
   }
 

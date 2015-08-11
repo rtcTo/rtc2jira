@@ -35,7 +35,7 @@ public class Main {
   }
 
   private static void extract(Settings settings, StorageEngine storageEngine) {
-    if (RTCExtractor.isLoginPossible(settings)) {
+    if (settings.hasRtcProperties()) {
       new RTCExtractor(settings, storageEngine).extract();
     }
   }

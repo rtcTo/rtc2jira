@@ -25,6 +25,7 @@ public interface WorkItemConstants {
   public static final String CREATOR = "creator";
   public static final String MODIFIED_BY = "modifiedBy";
   public static final String RESOLVER = "resolver";
+  public static final String RESOLUTION = "resolution";
   public static final String CATEGORY = "category";
   public static final String ARCHIVED = "archived";
   public static final String PROJECT_AREA = "projectArea";

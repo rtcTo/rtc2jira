@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import to.rtc.rtc2jira.spi.Mapping;
-import to.rtc.rtc2jira.spi.MappingRegistry;
-import to.rtc.rtc2jira.storage.WorkItemConstants;
-
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IWorkItem;
 import com.orientechnologies.orient.core.record.impl.ODocument;
+
+import to.rtc.rtc2jira.spi.Mapping;
+import to.rtc.rtc2jira.spi.MappingRegistry;
+import to.rtc.rtc2jira.storage.WorkItemConstants;
 
 public class DefaultMappingRegistry implements MappingRegistry {
   private final static DefaultMappingRegistry INSTANCE = new DefaultMappingRegistry();
@@ -23,8 +23,8 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.SUMMARY, new DirectStringMapping(WorkItemConstants.SUMMARY));
     register(RTCIdentifierConstants.DESCRIPTION, new DirectStringMapping(WorkItemConstants.DESCRIPTION));
     register(RTCIdentifierConstants.WORK_ITEM_TYPE, new DirectStringMapping(WorkItemConstants.WORK_ITEM_TYPE));
-    register(RTCIdentifierConstants.ACCEPTANCE_CRITERIAS, new DirectStringMapping(
-        WorkItemConstants.ACCEPTANCE_CRITERIAS));
+    register(RTCIdentifierConstants.ACCEPTANCE_CRITERIAS,
+        new DirectStringMapping(WorkItemConstants.ACCEPTANCE_CRITERIAS));
     register(RTCIdentifierConstants.MODIFIED, new DirectDateMapping(WorkItemConstants.MODIFIED));
     register(RTCIdentifierConstants.CREATIONDATE, new DirectDateMapping(WorkItemConstants.CREATIONDATE));
     register(RTCIdentifierConstants.COMMENTS, new CommentMapping());
@@ -45,6 +45,8 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.TAGS, new TagsMapping());
     register(RTCIdentifierConstants.STORY_POINTS, new StoryPointsMapping());
     register(RTCIdentifierConstants.CUSTOM_ATTRIBUTES, new CustomAttributeMapping());
+    register(RTCIdentifierConstants.APPROVALS, new ApprovalMapping());
+    register(RTCIdentifierConstants.APPROVAL_DESCRIPTORS, new ApprovalDescriptorMapping());
   };
 
   public static DefaultMappingRegistry getInstance() {

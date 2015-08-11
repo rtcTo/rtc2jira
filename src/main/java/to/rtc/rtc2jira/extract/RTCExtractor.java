@@ -62,6 +62,8 @@ public class RTCExtractor {
   public void extract() {
     TeamPlatform.startup();
     try {
+      System.out.println();
+      System.out.println("Starting to extract work items.");
       ITeamRepository repo = login(settings);
       processWorkItems(repo, settings.getRtcWorkItemRange());
       repo.logout();

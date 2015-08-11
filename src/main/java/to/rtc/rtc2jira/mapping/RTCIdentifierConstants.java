@@ -42,5 +42,4 @@ public interface RTCIdentifierConstants {
   public static final String TIME_SPENT = "timeSpent";
   public static final String STORY_POINTS = "com.ibm.team.apt.attribute.complexity";
 
-
 }

@@ -29,4 +29,5 @@ public interface WorkItemConstants {
   public static final String ARCHIVED = "archived";
   public static final String PROJECT_AREA = "projectArea";
   public static final String STORY_POINTS = "storyPoints";
+  public static final String CUSTOM_ATTRIBUTES = "customAttributes";
 }

@@ -25,7 +25,6 @@ public interface RTCIdentifierConstants {
   public static final String MODIFIED_BY = "modifiedBy";
   public static final String RESOLVER = "resolver";
   public static final String ARCHIVED = "archived";
-
   public static final String CATEGORY = "category";
   public static final String CONTEXT_ID = "contextId";
   public static final String CORRECTED_ESTIMATE = "correctedEstimate";
@@ -42,5 +41,6 @@ public interface RTCIdentifierConstants {
   public static final String PROJECT_AREA = "projectArea";
   public static final String TIME_SPENT = "timeSpent";
   public static final String STORY_POINTS = "com.ibm.team.apt.attribute.complexity";
+
 
 }

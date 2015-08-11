@@ -44,6 +44,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.SEQUENCE_VALUE, new NullMapping());
     register(RTCIdentifierConstants.TAGS, new TagsMapping());
     register(RTCIdentifierConstants.STORY_POINTS, new StoryPointsMapping());
+    register(RTCIdentifierConstants.CUSTOM_ATTRIBUTES, new CustomAttributeMapping());
   };
 
   public static DefaultMappingRegistry getInstance() {

@@ -31,10 +31,7 @@ public abstract class MappingAdapter implements Mapping {
    * Override this method for example to cleanup your member variables before the next work item.
    * {@link #getWorkItem()} already returns the next {@link IWorkItem}.
    */
-  protected void beforeWorkItem() {}
-
-  @Override
-  public void acceptAttribute(IAttribute attribute) {}
+  protected abstract void beforeWorkItem();
 
   protected IWorkItem getWorkItem() {
     return workItem;

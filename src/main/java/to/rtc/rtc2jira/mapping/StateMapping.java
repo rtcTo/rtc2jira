@@ -6,7 +6,6 @@ package to.rtc.rtc2jira.mapping;
 import to.rtc.rtc2jira.spi.MappingAdapter;
 import to.rtc.rtc2jira.storage.WorkItemConstants;
 
-import com.ibm.team.workitem.common.internal.util.SeparatedStringList;
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 
@@ -14,24 +13,24 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
  * @author roman.schaller
  *
  */
-public class TagsMapping extends MappingAdapter {
+public class StateMapping extends MappingAdapter {
 
-  private SeparatedStringList tags;
+  private String value;
 
   @Override
   protected void beforeWorkItem() {
-    tags = null;
+    value = null;
   }
 
   @Override
   public void acceptAttribute(IAttribute attribute) {
-    tags = getValue(attribute);
+    value = getValue(attribute);
   }
 
   @Override
   public void afterWorkItem(ODocument doc) {
-    if (tags != null && tags.size() > 0) {
-      doc.field(WorkItemConstants.TAGS, tags);
+    if (value != null && !value.isEmpty()) {
+      doc.field(WorkItemConstants.STATE, value);
     }
   }
 }

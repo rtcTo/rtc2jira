@@ -22,7 +22,7 @@ public interface Mapping {
    * 
    * @param workItem
    */
-  public default void beforeWorkItem(IWorkItem workItem) {}
+  public void beforeWorkItem(IWorkItem workItem);
 
   /**
    * This is called if a workitem contains an attribute for which this mapping is registered for.
@@ -38,5 +38,5 @@ public interface Mapping {
    * @param doc This is the intermediate store of the RTC workitems. From here we will send the
    *        workitems to jira or such.
    */
-  public default void afterWorkItem(ODocument doc) {}
+  public void afterWorkItem(ODocument doc);
 }

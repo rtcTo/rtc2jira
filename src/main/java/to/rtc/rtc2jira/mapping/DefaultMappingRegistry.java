@@ -49,6 +49,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.APPROVAL_DESCRIPTORS, new ApprovalDescriptorMapping());
     register(RTCIdentifierConstants.RESOLUTION, new ResolutionMapping());
     register(RTCIdentifierConstants.STATE, new StateMapping());
+    register(RTCIdentifierConstants.TARGET, new TargetMapping());
   };
 
   public static DefaultMappingRegistry getInstance() {

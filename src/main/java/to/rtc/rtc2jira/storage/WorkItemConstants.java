@@ -33,5 +33,6 @@ public interface WorkItemConstants {
   public static final String CUSTOM_ATTRIBUTES = "customAttributes";
   public static final String STATE = "state";
   public static final String TAGS = "tags";
+  public static final String ITERATION_LABEL = "iterationLabel";
 
 }

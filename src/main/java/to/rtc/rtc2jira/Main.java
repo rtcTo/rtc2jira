@@ -7,7 +7,7 @@ import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.exporter.github.GitHubExporter;
 import to.rtc.rtc2jira.exporter.jira.JiraExporter;
 import to.rtc.rtc2jira.exporter.systemout.SystemOutExporter;
-import to.rtc.rtc2jira.extract.RTCExtractor;
+import to.rtc.rtc2jira.importer.RTCImporter;
 import to.rtc.rtc2jira.storage.StorageEngine;
 
 /**
@@ -20,7 +20,7 @@ public class Main {
     Settings settings = Settings.getInstance();
     setUpProxy(settings);
     try (StorageEngine storageEngine = new StorageEngine()) {
-      extract(settings, storageEngine);
+      doImport(settings, storageEngine);
       export(settings, storageEngine);
     }
   }
@@ -34,9 +34,9 @@ public class Main {
     }
   }
 
-  private static void extract(Settings settings, StorageEngine storageEngine) {
+  private static void doImport(Settings settings, StorageEngine storageEngine) {
     if (settings.hasRtcProperties()) {
-      new RTCExtractor(settings, storageEngine).extract();
+      new RTCImporter(settings, storageEngine).doImport();
     }
   }
 

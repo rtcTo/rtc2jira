@@ -4,7 +4,7 @@ import com.ibm.team.workitem.common.model.IAttribute;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 
 import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
-import to.rtc.rtc2jira.storage.WorkItemConstants;
+import to.rtc.rtc2jira.storage.FieldNames;
 
 public class ResolutionMapping extends MappingAdapter {
 
@@ -23,7 +23,7 @@ public class ResolutionMapping extends MappingAdapter {
   @Override
   public void afterWorkItem(ODocument doc) {
     if (value != null && !value.isEmpty()) {
-      doc.field(WorkItemConstants.RESOLUTION, value);
+      doc.field(FieldNames.RESOLUTION, value);
     }
   }
 }

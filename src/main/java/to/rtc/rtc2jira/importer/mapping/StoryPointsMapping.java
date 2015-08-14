@@ -4,7 +4,7 @@
 package to.rtc.rtc2jira.importer.mapping;
 
 import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
-import to.rtc.rtc2jira.storage.WorkItemConstants;
+import to.rtc.rtc2jira.storage.FieldNames;
 
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.ILiteral;
@@ -33,7 +33,7 @@ public class StoryPointsMapping extends MappingAdapter {
   @Override
   public void afterWorkItem(ODocument doc) {
     if (value != null) {
-      doc.field(WorkItemConstants.STORY_POINTS, value);
+      doc.field(FieldNames.STORY_POINTS, value);
     }
   }
 }

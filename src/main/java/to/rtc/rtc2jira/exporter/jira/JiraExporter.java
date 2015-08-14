@@ -1,12 +1,10 @@
 package to.rtc.rtc2jira.exporter.jira;
 
 import static to.rtc.rtc2jira.storage.Field.of;
-import static to.rtc.rtc2jira.storage.WorkItemConstants.DESCRIPTION;
-import static to.rtc.rtc2jira.storage.WorkItemConstants.ID;
-import static to.rtc.rtc2jira.storage.WorkItemConstants.SUMMARY;
-import static to.rtc.rtc2jira.storage.WorkItemConstants.WORK_ITEM_TYPE;
-import static to.rtc.rtc2jira.storage.WorkItemFieldNames.JIRA_ID_LINK;
-import static to.rtc.rtc2jira.storage.WorkItemFieldNames.JIRA_KEY_LINK;
+import static to.rtc.rtc2jira.storage.FieldNames.DESCRIPTION;
+import static to.rtc.rtc2jira.storage.FieldNames.ID;
+import static to.rtc.rtc2jira.storage.FieldNames.SUMMARY;
+import static to.rtc.rtc2jira.storage.FieldNames.WORK_ITEM_TYPE;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.BUSINESSNEED;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
@@ -20,6 +18,10 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.orientechnologies.orient.core.record.impl.ODocument;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.ClientResponse.Status;
+
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
@@ -27,12 +29,9 @@ import to.rtc.rtc2jira.exporter.jira.entities.IssueFields;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueMetadata;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueType;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
+import to.rtc.rtc2jira.storage.FieldNames;
 import to.rtc.rtc2jira.storage.StorageEngine;
 import to.rtc.rtc2jira.storage.StorageQuery;
-
-import com.orientechnologies.orient.core.record.impl.ODocument;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.ClientResponse.Status;
 
 public class JiraExporter implements Exporter {
 
@@ -77,8 +76,8 @@ public class JiraExporter implements Exporter {
   private void storeReference(Optional<Issue> optionalJiraIssue, ODocument workItem) {
     optionalJiraIssue.ifPresent(jiraIssue -> {
       store.setFields(workItem, //
-          of(JIRA_KEY_LINK, jiraIssue.getKey()), //
-          of(JIRA_ID_LINK, jiraIssue.getId()));
+          of(FieldNames.JIRA_KEY_LINK, jiraIssue.getKey()), //
+          of(FieldNames.JIRA_ID_LINK, jiraIssue.getId()));
     });
   }
 
@@ -141,8 +140,8 @@ public class JiraExporter implements Exporter {
       }
     }
     issueFields.setSummary(issue.getId() + ": " + issueFields.getSummary());
-    issue.setId(StorageQuery.getField(workItem, JIRA_ID_LINK, ""));
-    issue.setKey(StorageQuery.getField(workItem, JIRA_KEY_LINK, ""));
+    issue.setId(StorageQuery.getField(workItem, FieldNames.JIRA_ID_LINK, ""));
+    issue.setKey(StorageQuery.getField(workItem, FieldNames.JIRA_KEY_LINK, ""));
     return issue;
   }
 

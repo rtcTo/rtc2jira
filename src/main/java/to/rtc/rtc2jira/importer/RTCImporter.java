@@ -1,6 +1,6 @@
 package to.rtc.rtc2jira.importer;
 
-import static to.rtc.rtc2jira.storage.WorkItemConstants.ID;
+import static to.rtc.rtc2jira.storage.FieldNames.ID;
 
 import java.io.IOException;
 import java.util.LinkedList;

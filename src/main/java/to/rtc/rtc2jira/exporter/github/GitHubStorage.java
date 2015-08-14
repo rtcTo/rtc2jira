@@ -1,15 +1,14 @@
 package to.rtc.rtc2jira.exporter.github;
 
-import static to.rtc.rtc2jira.storage.WorkItemFieldNames.GITHUB_WORKITEM_LINK;
-
 import java.util.Optional;
 
 import org.eclipse.egit.github.core.Issue;
 
-import to.rtc.rtc2jira.storage.Field;
-import to.rtc.rtc2jira.storage.StorageEngine;
-
 import com.orientechnologies.orient.core.record.impl.ODocument;
+
+import to.rtc.rtc2jira.storage.Field;
+import to.rtc.rtc2jira.storage.FieldNames;
+import to.rtc.rtc2jira.storage.StorageEngine;
 
 /**
  * Used for storing/retrieving GitHub related stuff into/out of database
@@ -27,7 +26,7 @@ final class GitHubStorage {
   final void storeLinkToIssueInWorkItem(Optional<Issue> optionalIssue, ODocument workItem) {
     optionalIssue.ifPresent(issue -> {
       int newIssueGithubNumber = issue.getNumber();
-      store.setField(workItem, Field.of(GITHUB_WORKITEM_LINK, newIssueGithubNumber));
+      store.setField(workItem, Field.of(FieldNames.GITHUB_WORKITEM_LINK, newIssueGithubNumber));
     });
   }
 

@@ -1,10 +1,9 @@
 package to.rtc.rtc2jira.exporter.github;
 
-import static to.rtc.rtc2jira.storage.WorkItemConstants.DESCRIPTION;
-import static to.rtc.rtc2jira.storage.WorkItemConstants.ID;
-import static to.rtc.rtc2jira.storage.WorkItemConstants.SUMMARY;
-import static to.rtc.rtc2jira.storage.WorkItemConstants.WORK_ITEM_TYPE;
-import static to.rtc.rtc2jira.storage.WorkItemFieldNames.GITHUB_WORKITEM_LINK;
+import static to.rtc.rtc2jira.storage.FieldNames.DESCRIPTION;
+import static to.rtc.rtc2jira.storage.FieldNames.ID;
+import static to.rtc.rtc2jira.storage.FieldNames.SUMMARY;
+import static to.rtc.rtc2jira.storage.FieldNames.WORK_ITEM_TYPE;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.BUSINESSNEED;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
@@ -25,12 +24,13 @@ import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.LabelService;
 import org.eclipse.egit.github.core.service.RepositoryService;
 
+import com.orientechnologies.orient.core.record.impl.ODocument;
+
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
+import to.rtc.rtc2jira.storage.FieldNames;
 import to.rtc.rtc2jira.storage.StorageEngine;
 import to.rtc.rtc2jira.storage.StorageQuery;
-
-import com.orientechnologies.orient.core.record.impl.ODocument;
 
 public class GitHubExporter implements Exporter {
 
@@ -48,8 +48,7 @@ public class GitHubExporter implements Exporter {
       client.setCredentials(settings.getGithubUser(), settings.getGithubPassword());
       client.setOAuth2Token(settings.getGithubToken());
       try {
-        repository =
-            service.getRepository(settings.getGithubRepoOwner(), settings.getGithubRepoName());
+        repository = service.getRepository(settings.getGithubRepoOwner(), settings.getGithubRepoName());
         isConfigured = true;
       } catch (IOException e) {
         System.out.println("Couldnt access github repository");
@@ -118,7 +117,7 @@ public class GitHubExporter implements Exporter {
       }
     }
     issue.setTitle(issue.getNumber() + ": " + issue.getTitle());
-    int existingGitHubIssueNumber = StorageQuery.getField(workItem, GITHUB_WORKITEM_LINK, 0);
+    int existingGitHubIssueNumber = StorageQuery.getField(workItem, FieldNames.GITHUB_WORKITEM_LINK, 0);
     issue.setNumber(existingGitHubIssueNumber);
     return issue;
   }

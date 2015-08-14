@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import to.rtc.rtc2jira.importer.mapping.spi.Mapping;
 import to.rtc.rtc2jira.importer.mapping.spi.MappingRegistry;
-import to.rtc.rtc2jira.storage.WorkItemConstants;
+import to.rtc.rtc2jira.storage.FieldNames;
 
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IWorkItem;
@@ -20,25 +20,25 @@ public class DefaultMappingRegistry implements MappingRegistry {
 
   private DefaultMappingRegistry() {
     register(RTCIdentifierConstants.ID, new NullMapping());
-    register(RTCIdentifierConstants.SUMMARY, new DirectStringMapping(WorkItemConstants.SUMMARY));
-    register(RTCIdentifierConstants.DESCRIPTION, new DirectStringMapping(WorkItemConstants.DESCRIPTION));
-    register(RTCIdentifierConstants.WORK_ITEM_TYPE, new DirectStringMapping(WorkItemConstants.WORK_ITEM_TYPE));
+    register(RTCIdentifierConstants.SUMMARY, new DirectStringMapping(FieldNames.SUMMARY));
+    register(RTCIdentifierConstants.DESCRIPTION, new DirectStringMapping(FieldNames.DESCRIPTION));
+    register(RTCIdentifierConstants.WORK_ITEM_TYPE, new DirectStringMapping(FieldNames.WORK_ITEM_TYPE));
     register(RTCIdentifierConstants.ACCEPTANCE_CRITERIAS, new DirectStringMapping(
-        WorkItemConstants.ACCEPTANCE_CRITERIAS));
-    register(RTCIdentifierConstants.MODIFIED, new DirectDateMapping(WorkItemConstants.MODIFIED));
-    register(RTCIdentifierConstants.CREATIONDATE, new DirectDateMapping(WorkItemConstants.CREATIONDATE));
+        FieldNames.ACCEPTANCE_CRITERIAS));
+    register(RTCIdentifierConstants.MODIFIED, new DirectDateMapping(FieldNames.MODIFIED));
+    register(RTCIdentifierConstants.CREATIONDATE, new DirectDateMapping(FieldNames.CREATIONDATE));
     register(RTCIdentifierConstants.COMMENTS, new CommentMapping());
     register(RTCIdentifierConstants.PRIORITY, new PriorityMapping());
     register(RTCIdentifierConstants.SEVERITY, new SeverityMapping());
-    register(RTCIdentifierConstants.OWNER, new ContributorMapping(WorkItemConstants.OWNER));
-    register(RTCIdentifierConstants.CREATOR, new ContributorMapping(WorkItemConstants.CREATOR));
-    register(RTCIdentifierConstants.MODIFIED_BY, new ContributorMapping(WorkItemConstants.MODIFIED_BY));
-    register(RTCIdentifierConstants.RESOLVER, new ContributorMapping(WorkItemConstants.RESOLVER));
+    register(RTCIdentifierConstants.OWNER, new ContributorMapping(FieldNames.OWNER));
+    register(RTCIdentifierConstants.CREATOR, new ContributorMapping(FieldNames.CREATOR));
+    register(RTCIdentifierConstants.MODIFIED_BY, new ContributorMapping(FieldNames.MODIFIED_BY));
+    register(RTCIdentifierConstants.RESOLVER, new ContributorMapping(FieldNames.RESOLVER));
     register(RTCIdentifierConstants.DURATION, new NullMapping());
     register(RTCIdentifierConstants.CORRECTED_ESTIMATE, new NullMapping());
     register(RTCIdentifierConstants.TIME_SPENT, new NullMapping());
     register(RTCIdentifierConstants.CATEGORY, new CategoryMapping());
-    register(RTCIdentifierConstants.ARCHIVED, new BooleanMapping(WorkItemConstants.ARCHIVED));
+    register(RTCIdentifierConstants.ARCHIVED, new BooleanMapping(FieldNames.ARCHIVED));
     register(RTCIdentifierConstants.CONTEXT_ID, new NullMapping());
     register(RTCIdentifierConstants.PROJECT_AREA, new ProjectAreaMapping());
     register(RTCIdentifierConstants.SEQUENCE_VALUE, new NullMapping());

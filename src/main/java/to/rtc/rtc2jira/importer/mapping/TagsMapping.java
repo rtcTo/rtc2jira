@@ -4,7 +4,7 @@
 package to.rtc.rtc2jira.importer.mapping;
 
 import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
-import to.rtc.rtc2jira.storage.WorkItemConstants;
+import to.rtc.rtc2jira.storage.FieldNames;
 
 import com.ibm.team.workitem.common.internal.util.SeparatedStringList;
 import com.ibm.team.workitem.common.model.IAttribute;
@@ -31,7 +31,7 @@ public class TagsMapping extends MappingAdapter {
   @Override
   public void afterWorkItem(ODocument doc) {
     if (tags != null && tags.size() > 0) {
-      doc.field(WorkItemConstants.TAGS, tags);
+      doc.field(FieldNames.TAGS, tags);
     }
   }
 }

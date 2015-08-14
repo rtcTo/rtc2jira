@@ -4,7 +4,7 @@
 package to.rtc.rtc2jira.importer.mapping;
 
 import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
-import to.rtc.rtc2jira.storage.WorkItemConstants;
+import to.rtc.rtc2jira.storage.FieldNames;
 
 import com.ibm.team.process.internal.common.Iteration;
 import com.ibm.team.process.internal.common.IterationHandle;
@@ -36,7 +36,7 @@ public class TargetMapping extends MappingAdapter {
   @Override
   public void afterWorkItem(ODocument doc) {
     if (iterationLabel != null && !iterationLabel.isEmpty()) {
-      doc.field(WorkItemConstants.ITERATION_LABEL, iterationLabel);
+      doc.field(FieldNames.ITERATION_LABEL, iterationLabel);
     }
   }
 

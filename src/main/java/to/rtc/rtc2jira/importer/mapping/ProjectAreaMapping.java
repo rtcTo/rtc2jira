@@ -4,7 +4,7 @@
 package to.rtc.rtc2jira.importer.mapping;
 
 import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
-import to.rtc.rtc2jira.storage.WorkItemConstants;
+import to.rtc.rtc2jira.storage.FieldNames;
 
 import com.ibm.team.process.common.IProjectArea;
 import com.ibm.team.process.common.IProjectAreaHandle;
@@ -35,6 +35,6 @@ public class ProjectAreaMapping extends MappingAdapter {
 
   @Override
   public void afterWorkItem(ODocument doc) {
-    doc.field(WorkItemConstants.PROJECT_AREA, value);
+    doc.field(FieldNames.PROJECT_AREA, value);
   }
 }

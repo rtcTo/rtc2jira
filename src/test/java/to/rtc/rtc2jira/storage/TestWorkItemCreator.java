@@ -1,6 +1,6 @@
 package to.rtc.rtc2jira.storage;
 
-import static to.rtc.rtc2jira.storage.WorkItemFieldNames.ID;
+import static to.rtc.rtc2jira.storage.FieldNames.ID;
 
 import java.util.concurrent.atomic.AtomicReference;
 

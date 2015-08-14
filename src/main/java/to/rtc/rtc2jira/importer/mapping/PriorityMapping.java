@@ -1,7 +1,7 @@
 package to.rtc.rtc2jira.importer.mapping;
 
 import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
-import to.rtc.rtc2jira.storage.WorkItemConstants;
+import to.rtc.rtc2jira.storage.FieldNames;
 
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IPriority;
@@ -26,7 +26,7 @@ public class PriorityMapping extends MappingAdapter {
   @Override
   public void afterWorkItem(ODocument doc) {
     if (value != null) {
-      doc.field(WorkItemConstants.PRIORITY, value);
+      doc.field(FieldNames.PRIORITY, value);
     }
   }
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
 import to.rtc.rtc2jira.storage.Comment;
-import to.rtc.rtc2jira.storage.WorkItemConstants;
+import to.rtc.rtc2jira.storage.FieldNames;
 
 import com.ibm.team.repository.common.model.Contributor;
 import com.ibm.team.workitem.common.model.IAttribute;
@@ -41,7 +41,7 @@ public class CommentMapping extends MappingAdapter {
         comments.add(comment);
       }
       if (!comments.isEmpty()) {
-        doc.field(WorkItemConstants.COMMENTS, comments);
+        doc.field(FieldNames.COMMENTS, comments);
       }
     }
   }

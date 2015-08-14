@@ -4,7 +4,7 @@
 package to.rtc.rtc2jira.importer.mapping;
 
 import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
-import to.rtc.rtc2jira.storage.WorkItemConstants;
+import to.rtc.rtc2jira.storage.FieldNames;
 
 import com.ibm.team.workitem.common.internal.model.Category;
 import com.ibm.team.workitem.common.model.IAttribute;
@@ -33,6 +33,6 @@ public class CategoryMapping extends MappingAdapter {
 
   @Override
   public void afterWorkItem(ODocument doc) {
-    doc.field(WorkItemConstants.CATEGORY, value);
+    doc.field(FieldNames.CATEGORY, value);
   }
 }

@@ -3,7 +3,6 @@ package to.rtc.rtc2jira.exporter.github;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static to.rtc.rtc2jira.storage.TestWorkItemCreator.createWorkItem;
-import static to.rtc.rtc2jira.storage.WorkItemFieldNames.GITHUB_WORKITEM_LINK;
 
 import java.util.Optional;
 
@@ -12,10 +11,11 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import to.rtc.rtc2jira.TestDatabaseRule;
-import to.rtc.rtc2jira.storage.StorageEngine;
-
 import com.orientechnologies.orient.core.record.impl.ODocument;
+
+import to.rtc.rtc2jira.TestDatabaseRule;
+import to.rtc.rtc2jira.storage.FieldNames;
+import to.rtc.rtc2jira.storage.StorageEngine;
 
 /**
  * Test of {@link GitHubStorage}
@@ -42,7 +42,7 @@ public class GitHubStorageTest {
 
     storage.storeLinkToIssueInWorkItem(Optional.ofNullable(issue), workItem);
 
-    boolean isStored = workItem.field(GITHUB_WORKITEM_LINK) != null;
+    boolean isStored = workItem.field(FieldNames.GITHUB_WORKITEM_LINK) != null;
     assertFalse(isStored);
   }
 
@@ -54,7 +54,7 @@ public class GitHubStorageTest {
 
     storage.storeLinkToIssueInWorkItem(Optional.ofNullable(issue), workitem);
 
-    Object link = workitem.field(GITHUB_WORKITEM_LINK);
+    Object link = workitem.field(FieldNames.GITHUB_WORKITEM_LINK);
     assertEquals(1337, link);
   }
 }

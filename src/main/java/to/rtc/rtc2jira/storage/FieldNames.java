@@ -37,5 +37,6 @@ public interface FieldNames {
   String GITHUB_WORKITEM_LINK = "githubissuenumber";
   String JIRA_ID_LINK = "jiraid";
   String JIRA_KEY_LINK = "jiraKey";
+  String RESOLUTION_DATE = "resolutionDate";
 
 }

@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import to.rtc.rtc2jira.importer.mapping.spi.Mapping;
-import to.rtc.rtc2jira.importer.mapping.spi.MappingRegistry;
-import to.rtc.rtc2jira.storage.FieldNames;
-
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IWorkItem;
 import com.orientechnologies.orient.core.record.impl.ODocument;
+
+import to.rtc.rtc2jira.importer.mapping.spi.Mapping;
+import to.rtc.rtc2jira.importer.mapping.spi.MappingRegistry;
+import to.rtc.rtc2jira.storage.FieldNames;
 
 public class DefaultMappingRegistry implements MappingRegistry {
   private final static DefaultMappingRegistry INSTANCE = new DefaultMappingRegistry();
@@ -23,8 +23,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.SUMMARY, new DirectStringMapping(FieldNames.SUMMARY));
     register(RTCIdentifierConstants.DESCRIPTION, new DirectStringMapping(FieldNames.DESCRIPTION));
     register(RTCIdentifierConstants.WORK_ITEM_TYPE, new DirectStringMapping(FieldNames.WORK_ITEM_TYPE));
-    register(RTCIdentifierConstants.ACCEPTANCE_CRITERIAS, new DirectStringMapping(
-        FieldNames.ACCEPTANCE_CRITERIAS));
+    register(RTCIdentifierConstants.ACCEPTANCE_CRITERIAS, new DirectStringMapping(FieldNames.ACCEPTANCE_CRITERIAS));
     register(RTCIdentifierConstants.MODIFIED, new DirectDateMapping(FieldNames.MODIFIED));
     register(RTCIdentifierConstants.CREATIONDATE, new DirectDateMapping(FieldNames.CREATIONDATE));
     register(RTCIdentifierConstants.COMMENTS, new CommentMapping());
@@ -48,6 +47,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.APPROVALS, new ApprovalMapping());
     register(RTCIdentifierConstants.APPROVAL_DESCRIPTORS, new ApprovalDescriptorMapping());
     register(RTCIdentifierConstants.RESOLUTION, new ResolutionMapping());
+    register(RTCIdentifierConstants.RESOLUTION_DATE, new ResolutionDateMapping());
     register(RTCIdentifierConstants.STATE, new StateMapping());
     register(RTCIdentifierConstants.TARGET, new TargetMapping());
   };

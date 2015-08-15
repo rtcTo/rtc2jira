@@ -20,12 +20,12 @@ public class DefaultMappingRegistry implements MappingRegistry {
 
   private DefaultMappingRegistry() {
     register(RTCIdentifierConstants.ID, new NullMapping());
-    register(RTCIdentifierConstants.SUMMARY, new DirectStringMapping(FieldNames.SUMMARY));
-    register(RTCIdentifierConstants.DESCRIPTION, new DirectStringMapping(FieldNames.DESCRIPTION));
-    register(RTCIdentifierConstants.WORK_ITEM_TYPE, new DirectStringMapping(FieldNames.WORK_ITEM_TYPE));
-    register(RTCIdentifierConstants.ACCEPTANCE_CRITERIAS, new DirectStringMapping(FieldNames.ACCEPTANCE_CRITERIAS));
-    register(RTCIdentifierConstants.MODIFIED, new DirectDateMapping(FieldNames.MODIFIED));
-    register(RTCIdentifierConstants.CREATIONDATE, new DirectDateMapping(FieldNames.CREATIONDATE));
+    register(RTCIdentifierConstants.SUMMARY, new StringMapping(FieldNames.SUMMARY));
+    register(RTCIdentifierConstants.DESCRIPTION, new StringMapping(FieldNames.DESCRIPTION));
+    register(RTCIdentifierConstants.WORK_ITEM_TYPE, new StringMapping(FieldNames.WORK_ITEM_TYPE));
+    register(RTCIdentifierConstants.ACCEPTANCE_CRITERIAS, new StringMapping(FieldNames.ACCEPTANCE_CRITERIAS));
+    register(RTCIdentifierConstants.MODIFIED, new TimestampMapping(FieldNames.MODIFIED));
+    register(RTCIdentifierConstants.CREATIONDATE, new TimestampMapping(FieldNames.CREATIONDATE));
     register(RTCIdentifierConstants.COMMENTS, new CommentMapping());
     register(RTCIdentifierConstants.PRIORITY, new PriorityMapping());
     register(RTCIdentifierConstants.SEVERITY, new SeverityMapping());
@@ -47,9 +47,10 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.APPROVALS, new ApprovalMapping());
     register(RTCIdentifierConstants.APPROVAL_DESCRIPTORS, new ApprovalDescriptorMapping());
     register(RTCIdentifierConstants.RESOLUTION, new ResolutionMapping());
-    register(RTCIdentifierConstants.RESOLUTION_DATE, new ResolutionDateMapping());
+    register(RTCIdentifierConstants.RESOLUTION_DATE, new DateMapping(FieldNames.RESOLUTION_DATE));
     register(RTCIdentifierConstants.STATE, new StateMapping());
     register(RTCIdentifierConstants.TARGET, new TargetMapping());
+    register(RTCIdentifierConstants.DUE_DATE, new DateMapping(FieldNames.DUE_DATE));
   };
 
   public static DefaultMappingRegistry getInstance() {

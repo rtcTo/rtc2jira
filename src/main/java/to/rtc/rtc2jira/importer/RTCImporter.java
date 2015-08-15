@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import to.rtc.rtc2jira.Settings;
-import to.rtc.rtc2jira.storage.StorageEngine;
-
 import com.ibm.team.repository.client.ILoginHandler2;
 import com.ibm.team.repository.client.ILoginInfo2;
 import com.ibm.team.repository.client.ITeamRepository;
@@ -21,6 +18,9 @@ import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IWorkItem;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
+
+import to.rtc.rtc2jira.Settings;
+import to.rtc.rtc2jira.storage.StorageEngine;
 
 /**
  * Imports WorkItems from RTC
@@ -96,8 +96,8 @@ public class RTCImporter {
     return repo;
   }
 
-  private void processWorkItems(ITeamRepository repo, Iterable<Integer> workItemRange) throws TeamRepositoryException,
-      IOException {
+  private void processWorkItems(ITeamRepository repo, Iterable<Integer> workItemRange)
+      throws TeamRepositoryException, IOException {
     IWorkItemClient workItemClient = (IWorkItemClient) repo.getClientLibrary(IWorkItemClient.class);
     AttachmentHandler attachmentHandler = new AttachmentHandler(repo, storageEngine.getAttachmentStorage());
     int counter = 0;
@@ -105,8 +105,8 @@ public class RTCImporter {
       processWorkItem(repo, workItemClient, currentWorkItemId, attachmentHandler);
       System.out.print(String.format("processed %s items...\r", ++counter));
     }
-    System.out.println(String.format("There were %s items which I had no permission to access.",
-        permissionDeniedWorkitems.size()));
+    System.out.println(
+        String.format("There were %s items which I had no permission to access.", permissionDeniedWorkitems.size()));
     for (Integer id : permissionDeniedWorkitems) {
       System.out.print(String.format("%d, ", id));
     }
@@ -143,7 +143,6 @@ public class RTCImporter {
         }
         saveAttributes(workItemClient, workItem, doc);
         attachmentHandler.saveAttachements(workItem);
-        updateWorkItem(doc, repo, workItem);
         doc.save();
       });
       System.out.println();
@@ -162,9 +161,5 @@ public class RTCImporter {
     } catch (TeamRepositoryException e) {
       throw new RuntimeException("Cannot get attributes from project area.", e);
     }
-  }
-
-  private void updateWorkItem(ODocument doc, ITeamRepository repo, IWorkItem workItem) {
-    doc.field("createDate", workItem.getCreationDate());
   }
 }

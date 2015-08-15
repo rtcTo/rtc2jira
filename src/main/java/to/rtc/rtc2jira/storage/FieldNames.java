@@ -38,5 +38,6 @@ public interface FieldNames {
   String JIRA_ID_LINK = "jiraid";
   String JIRA_KEY_LINK = "jiraKey";
   String RESOLUTION_DATE = "resolutionDate";
+  String DUE_DATE = "dueDate";
 
 }

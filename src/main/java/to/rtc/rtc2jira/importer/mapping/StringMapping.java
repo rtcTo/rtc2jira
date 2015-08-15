@@ -1,19 +1,18 @@
 package to.rtc.rtc2jira.importer.mapping;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
 
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 
-public class DirectDateMapping extends MappingAdapter {
+public class StringMapping extends MappingAdapter {
 
-  private Date value;
+  private String value;
   private String identifier;
 
-  public DirectDateMapping(String identifier) {
+  public StringMapping(String identifier) {
     this.identifier = identifier;
   }
 
@@ -24,8 +23,12 @@ public class DirectDateMapping extends MappingAdapter {
 
   @Override
   public void acceptAttribute(IAttribute attribute) {
-    Timestamp timestamp = getValue(attribute);
-    value = new Date(timestamp.getTime());
+    String rawVal = getValue(attribute);
+    if ("mediumHtml".equalsIgnoreCase(attribute.getAttributeType())) {
+      value = StringEscapeUtils.unescapeXml(rawVal);
+    } else {
+      value = rawVal;
+    }
   }
 
   @Override

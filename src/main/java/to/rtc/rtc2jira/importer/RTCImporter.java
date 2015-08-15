@@ -63,6 +63,7 @@ public class RTCImporter {
     TeamPlatform.startup();
     try {
       System.out.println();
+      System.out.println();
       System.out.println("Starting to import work items.");
       ITeamRepository repo = login(settings);
       processWorkItems(repo, settings.getRtcWorkItemRange());
@@ -145,8 +146,6 @@ public class RTCImporter {
         attachmentHandler.saveAttachements(workItem);
         doc.save();
       });
-      System.out.println();
-      System.out.println();
     } catch (RuntimeException e) {
       System.out.println("***** Problem: " + e.getMessage());
       e.printStackTrace();

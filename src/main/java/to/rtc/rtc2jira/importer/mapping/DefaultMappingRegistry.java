@@ -51,6 +51,8 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.STATE, new StateMapping());
     register(RTCIdentifierConstants.TARGET, new TargetMapping());
     register(RTCIdentifierConstants.DUE_DATE, new DateMapping(FieldNames.DUE_DATE));
+    register(RTCIdentifierConstants.SUBSCRIPTIONS, new SubscriptionsMapping());
+    register(RTCIdentifierConstants.STATE_TRANSITIONS, new NullMapping());
   };
 
   public static DefaultMappingRegistry getInstance() {

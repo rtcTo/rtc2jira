@@ -21,3 +21,7 @@ jira.projectkey=SAM
 
 # Uncomment following line to enable an exporter which simply prints the work items. 
 # sysout.exporter=true
+
+# Set proxy
+# proxy.host=http://myProxy.com 
+# proxy.port=8080 

@@ -1,13 +1,7 @@
 package to.rtc.rtc2jira.exporter.github;
 
-import static to.rtc.rtc2jira.storage.FieldNames.DESCRIPTION;
-import static to.rtc.rtc2jira.storage.FieldNames.ID;
-import static to.rtc.rtc2jira.storage.FieldNames.SUMMARY;
-import static to.rtc.rtc2jira.storage.FieldNames.WORK_ITEM_TYPE;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.BUSINESSNEED;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.TASK;
+import static to.rtc.rtc2jira.storage.FieldNames.*;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.*;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -15,6 +9,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.Label;
@@ -24,16 +20,17 @@ import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.LabelService;
 import org.eclipse.egit.github.core.service.RepositoryService;
 
-import com.orientechnologies.orient.core.record.impl.ODocument;
-
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.storage.FieldNames;
 import to.rtc.rtc2jira.storage.StorageEngine;
 import to.rtc.rtc2jira.storage.StorageQuery;
 
+import com.orientechnologies.orient.core.record.impl.ODocument;
+
 public class GitHubExporter implements Exporter {
 
+  private static final Logger LOGGER = Logger.getLogger(GitHubExporter.class.getName());
   private GitHubClient client;
   private RepositoryService service;
   private Repository repository;
@@ -51,8 +48,7 @@ public class GitHubExporter implements Exporter {
         repository = service.getRepository(settings.getGithubRepoOwner(), settings.getGithubRepoName());
         isConfigured = true;
       } catch (IOException e) {
-        System.out.println("Couldnt access github repository");
-        e.printStackTrace();
+        LOGGER.log(Level.WARNING, "Couldnt access github repository", e);
       }
     }
     return isConfigured;
@@ -108,7 +104,7 @@ public class GitHubExporter implements Exporter {
               issue.setLabels(Collections.singletonList(getLabel("Busines Need")));
               break;
             default:
-              System.out.println("Cannot create label for unknown workitemType: " + workitemType);
+              LOGGER.warning("Cannot create label for unknown workitemType: " + workitemType);
               break;
           }
           break;

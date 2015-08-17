@@ -6,6 +6,7 @@ package to.rtc.rtc2jira.importer;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.logging.Logger;
 
 import to.rtc.rtc2jira.storage.Attachment;
 import to.rtc.rtc2jira.storage.AttachmentStorage;
@@ -26,6 +27,7 @@ import com.ibm.team.workitem.common.model.WorkItemEndPoints;
  *
  */
 public class AttachmentHandler {
+  private static final Logger LOGGER = Logger.getLogger(AttachmentHandler.class.getName());
 
   private ITeamRepository repo;
   private AttachmentStorage attachmentStorage;
@@ -43,23 +45,19 @@ public class AttachmentHandler {
       List<IReference> references = workitemReferences.getReferences(WorkItemEndPoints.ATTACHMENT);
       for (IReference iReference : references) {
         IAttachmentHandle attachHandle = (IAttachmentHandle) iReference.resolve();
-        IAuditableClient auditableClient =
-            (IAuditableClient) repo.getClientLibrary(IAuditableClient.class);
-        IAttachment attachment =
-            auditableClient.resolveAuditable(attachHandle, IAttachment.DEFAULT_PROFILE, null);
+        IAuditableClient auditableClient = (IAuditableClient) repo.getClientLibrary(IAuditableClient.class);
+        IAttachment attachment = auditableClient.resolveAuditable(attachHandle, IAttachment.DEFAULT_PROFILE, null);
         saveAttachment(workItem.getId(), attachment);
       }
     } catch (TeamRepositoryException | IOException e) {
-      System.out.println("Cannot download attachement for WorkItem " + workItem.getId() + "("
-          + e.getMessage() + ")");
+      LOGGER.warning("Cannot download attachement for WorkItem " + workItem.getId() + "(" + e.getMessage() + ")");
     }
   }
 
-  private void saveAttachment(long workitemId, IAttachment rtcAttachment)
-      throws TeamRepositoryException, IOException {
+  private void saveAttachment(long workitemId, IAttachment rtcAttachment) throws TeamRepositoryException, IOException {
     String attachmentName = rtcAttachment.getName();
     if (attachmentName.startsWith("\\\\")) {
-      System.out.println("***** I think I found a link: " + attachmentName);
+      LOGGER.info("***** I think I found a link: " + attachmentName);
     } else {
       Attachment att = attachmentStorage.createAttachment(workitemId, attachmentName);
       try (OutputStream out = att.openOutputStream()) {

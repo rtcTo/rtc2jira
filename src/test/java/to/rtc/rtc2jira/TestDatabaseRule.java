@@ -2,12 +2,15 @@ package to.rtc.rtc2jira;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.rules.TemporaryFolder;
 
 import to.rtc.rtc2jira.storage.StorageEngine;
 
 public final class TestDatabaseRule extends TemporaryFolder {
+  private static final Logger LOGGER = Logger.getLogger(TestDatabaseRule.class.getName());
 
   private StorageEngine engine;
 
@@ -18,7 +21,7 @@ public final class TestDatabaseRule extends TemporaryFolder {
     Path testDatabasePath = newFolder("test_databases", "rtc2Jira").toPath();
     String url = "plocal:" + testDatabasePath;
     engine.setConnectionUrl(url);
-    System.out.println("Set connection url to " + url);
+    LOGGER.info("Set connection url to " + url);
   }
 
   @Override
@@ -35,8 +38,7 @@ public final class TestDatabaseRule extends TemporaryFolder {
     try {
       engine.close();
     } catch (IOException e) {
-      System.err.println("Error while closing testdatabase");
-      e.printStackTrace();
+      LOGGER.log(Level.SEVERE, "Error while closing testdatabase", e);
     }
   }
 

@@ -1,14 +1,8 @@
 package to.rtc.rtc2jira.exporter.jira;
 
 import static to.rtc.rtc2jira.storage.Field.of;
-import static to.rtc.rtc2jira.storage.FieldNames.DESCRIPTION;
-import static to.rtc.rtc2jira.storage.FieldNames.ID;
-import static to.rtc.rtc2jira.storage.FieldNames.SUMMARY;
-import static to.rtc.rtc2jira.storage.FieldNames.WORK_ITEM_TYPE;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.BUSINESSNEED;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.TASK;
+import static to.rtc.rtc2jira.storage.FieldNames.*;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.*;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -16,11 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
-
-import com.orientechnologies.orient.core.record.impl.ODocument;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.ClientResponse.Status;
 
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
@@ -33,7 +24,12 @@ import to.rtc.rtc2jira.storage.FieldNames;
 import to.rtc.rtc2jira.storage.StorageEngine;
 import to.rtc.rtc2jira.storage.StorageQuery;
 
+import com.orientechnologies.orient.core.record.impl.ODocument;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.ClientResponse.Status;
+
 public class JiraExporter implements Exporter {
+  private static final Logger LOGGER = Logger.getLogger(JiraExporter.class.getName());
 
   private StorageEngine store;
   private Settings settings;
@@ -131,7 +127,7 @@ public class JiraExporter implements Exporter {
               issueFields.setIssuetype(getIssueType("Business Need", project));
               break;
             default:
-              System.out.println("Cannot determine issuetype for unknown workitemType: " + workitemType);
+              LOGGER.warning("Cannot determine issuetype for unknown workitemType: " + workitemType);
               break;
           }
           break;

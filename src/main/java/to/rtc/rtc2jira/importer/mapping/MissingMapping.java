@@ -1,5 +1,7 @@
 package to.rtc.rtc2jira.importer.mapping;
 
+import java.util.logging.Logger;
+
 import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
 
 import com.ibm.team.workitem.common.model.IAttribute;
@@ -13,6 +15,7 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
  *
  */
 public class MissingMapping extends MappingAdapter {
+  private static final Logger LOGGER = Logger.getLogger(MissingMapping.class.getName());
 
   @Override
   public void acceptAttribute(IAttribute attribute) {
@@ -22,7 +25,7 @@ public class MissingMapping extends MappingAdapter {
           String.format("Unknown Attribute: Identifier: "
               + "%-25s \t Display Name: %-20s \t Type: %-20s \t Value: %-40s", attribute.getIdentifier(),
               attribute.getDisplayName(), attribute.getAttributeType(), value);
-      System.out.println(formattedOutput);
+      LOGGER.warning(formattedOutput);
     }
   }
 

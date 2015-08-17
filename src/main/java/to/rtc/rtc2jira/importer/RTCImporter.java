@@ -5,6 +5,11 @@ import static to.rtc.rtc2jira.storage.FieldNames.ID;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import to.rtc.rtc2jira.Settings;
+import to.rtc.rtc2jira.storage.StorageEngine;
 
 import com.ibm.team.repository.client.ILoginHandler2;
 import com.ibm.team.repository.client.ILoginInfo2;
@@ -19,9 +24,6 @@ import com.ibm.team.workitem.common.model.IWorkItem;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 
-import to.rtc.rtc2jira.Settings;
-import to.rtc.rtc2jira.storage.StorageEngine;
-
 /**
  * Imports WorkItems from RTC
  * 
@@ -29,6 +31,7 @@ import to.rtc.rtc2jira.storage.StorageEngine;
  *
  */
 public class RTCImporter {
+  private static final Logger LOGGER = Logger.getLogger(RTCImporter.class.getName());
 
   private Settings settings;
   private StorageEngine storageEngine;
@@ -50,8 +53,7 @@ public class RTCImporter {
         login(settings).logout();
         isLoginPossible = true;
       } catch (TeamRepositoryException e) {
-        System.out.println("Unable to login into RTC Repository");
-        e.printStackTrace();
+        LOGGER.log(Level.SEVERE, "Unable to login into RTC Repository", e);
       } finally {
         TeamPlatform.shutdown();
       }
@@ -62,9 +64,8 @@ public class RTCImporter {
   public void doImport() {
     TeamPlatform.startup();
     try {
-      System.out.println();
-      System.out.println();
-      System.out.println("Starting to import work items.");
+      LOGGER.info("***********************");
+      LOGGER.info("Starting to import work items.");
       ITeamRepository repo = login(settings);
       processWorkItems(repo, settings.getRtcWorkItemRange());
       repo.logout();
@@ -97,23 +98,23 @@ public class RTCImporter {
     return repo;
   }
 
-  private void processWorkItems(ITeamRepository repo, Iterable<Integer> workItemRange)
-      throws TeamRepositoryException, IOException {
+  private void processWorkItems(ITeamRepository repo, Iterable<Integer> workItemRange) throws TeamRepositoryException,
+      IOException {
     IWorkItemClient workItemClient = (IWorkItemClient) repo.getClientLibrary(IWorkItemClient.class);
     AttachmentHandler attachmentHandler = new AttachmentHandler(repo, storageEngine.getAttachmentStorage());
     int counter = 0;
     for (Integer currentWorkItemId : workItemRange) {
       processWorkItem(repo, workItemClient, currentWorkItemId, attachmentHandler);
-      System.out.print(String.format("processed %s items...\r", ++counter));
+      LOGGER.info(String.format("processed %s items...", ++counter));
     }
-    System.out.println(
-        String.format("There were %s items which I had no permission to access.", permissionDeniedWorkitems.size()));
+    LOGGER.info(String.format("There were %s items which I had no permission to access.",
+        permissionDeniedWorkitems.size()));
     for (Integer id : permissionDeniedWorkitems) {
-      System.out.print(String.format("%d, ", id));
+      LOGGER.info(String.format("%d, ", id));
     }
-    System.out.println(String.format("There were %s items which were not present.", notPresentWorkitems.size()));
+    LOGGER.info(String.format("There were %s items which were not present.", notPresentWorkitems.size()));
     for (Integer id : notPresentWorkitems) {
-      System.out.print(String.format("%d, ", id));
+      LOGGER.info(String.format("%d, ", id));
     }
   }
 
@@ -147,8 +148,7 @@ public class RTCImporter {
         doc.save();
       });
     } catch (RuntimeException e) {
-      System.out.println("***** Problem: " + e.getMessage());
-      e.printStackTrace();
+      LOGGER.log(Level.SEVERE, "***** Problem processing workitem " + workItemId, e);
     }
   }
 

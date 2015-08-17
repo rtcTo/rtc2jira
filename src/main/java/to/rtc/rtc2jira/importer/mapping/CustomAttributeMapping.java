@@ -6,18 +6,20 @@ package to.rtc.rtc2jira.importer.mapping;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
+
+import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
 
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IAttributeHandle;
 import com.orientechnologies.orient.core.record.impl.ODocument;
-
-import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
 
 /**
  * @author roman.schaller
  *
  */
 public class CustomAttributeMapping extends MappingAdapter {
+  private static final Logger LOGGER = Logger.getLogger(CustomAttributeMapping.class.getName());
 
   private Set<String> customAttributes = new HashSet<>();
 
@@ -31,7 +33,7 @@ public class CustomAttributeMapping extends MappingAdapter {
       IAttribute a = fetchCompleteItem(attributeHandle);
       if (!customAttributes.contains(a.getIdentifier())) {
         customAttributes.add(a.getIdentifier());
-        System.out.println(String.format("Detected custom attribute %s / %s", a.getDisplayName(), a.getIdentifier()));
+        LOGGER.warning(String.format("Detected custom attribute %s / %s", a.getDisplayName(), a.getIdentifier()));
       }
     }
   }

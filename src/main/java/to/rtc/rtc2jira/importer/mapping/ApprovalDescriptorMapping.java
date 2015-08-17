@@ -1,14 +1,16 @@
 package to.rtc.rtc2jira.importer.mapping;
 
 import java.util.List;
+import java.util.logging.Logger;
+
+import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
 
 import com.ibm.team.workitem.common.model.IApprovalDescriptor;
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 
-import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
-
 public class ApprovalDescriptorMapping extends MappingAdapter {
+  private static final Logger LOGGER = Logger.getLogger(ApprovalDescriptorMapping.class.getName());
 
   @Override
   protected void beforeWorkItem() {}
@@ -17,7 +19,7 @@ public class ApprovalDescriptorMapping extends MappingAdapter {
   public void acceptAttribute(IAttribute attribute) {
     List<IApprovalDescriptor> approvals = getValue(attribute);
     if (!approvals.isEmpty()) {
-      System.out.println("Approval descriptors are currently not supported.");
+      LOGGER.warning("Approval descriptors are currently not supported.");
     }
   }
 

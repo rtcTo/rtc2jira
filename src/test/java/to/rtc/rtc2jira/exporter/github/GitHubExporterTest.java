@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
 
+import to.rtc.rtc2jira.ExportManager;
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.TestDatabaseRule;
 import to.rtc.rtc2jira.storage.StorageEngine;
@@ -44,6 +45,12 @@ public class GitHubExporterTest {
   public void setUp() throws Exception {
     engine = testDbRule.getEngine();
     exporter = new GitHubExporter();
+    new Expectations() {
+      {
+        settingsMock.hasGithubProperties();
+        result = true;
+      }
+    };
     exporter.initialize(settingsMock, engine);
   }
 
@@ -51,8 +58,6 @@ public class GitHubExporterTest {
   public void testIsConfigured_WithWrongCredentials_ExpectIsNotConfigured() throws Exception {
     new Expectations() {
       {
-        settingsMock.hasGithubProperties();
-        result = true;
         _service.getRepository(anyString, anyString);
         result = new IOException("Wrong credentials");
       }
@@ -65,8 +70,6 @@ public class GitHubExporterTest {
       throws IOException {
     new Expectations() {
       {
-        settingsMock.hasGithubProperties();
-        result = true;
         _service.getRepository(anyString, anyString);
         result = repoMock;
       }
@@ -77,7 +80,9 @@ public class GitHubExporterTest {
   @Test
   public void testExport_WithoutEmptyDB_ExpectNoExport(@Mocked IssueService issueServiceMock)
       throws Exception {
-    exporter.export();
+    ExportManager exportManager = new ExportManager();
+    exportManager.addExporters(exporter);
+    exportManager.export(settingsMock, engine);
     new Verifications() {
       {
         issueServiceMock.createIssue(withInstanceOf(IRepositoryIdProvider.class),
@@ -88,13 +93,23 @@ public class GitHubExporterTest {
   }
 
   @Test
-  public void testExport_WithDBEntries_ExpectExport(@Mocked IssueService issueServiceMock)
-      throws Exception {
+  public void testExport_WithDBEntries_ExpectExport(@Mocked Repository repoMock,
+      @Mocked IssueService issueServiceMock) throws Exception {
+    new Expectations() {
+      {
+        settingsMock.hasGithubProperties();
+        result = true;
+        _service.getRepository(anyString, anyString);
+        result = repoMock;
+      }
+    };
     engine.withDB(db -> {
       createWorkItem(123);
       createWorkItem(324);
     });
-    exporter.export();
+    ExportManager exportManager = new ExportManager();
+    exportManager.addExporters(exporter);
+    exportManager.export(settingsMock, engine);
 
     new Verifications() {
       {

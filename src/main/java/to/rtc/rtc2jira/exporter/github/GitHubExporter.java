@@ -1,7 +1,14 @@
 package to.rtc.rtc2jira.exporter.github;
 
-import static to.rtc.rtc2jira.storage.FieldNames.*;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.*;
+import static to.rtc.rtc2jira.storage.FieldNames.DESCRIPTION;
+import static to.rtc.rtc2jira.storage.FieldNames.ID;
+import static to.rtc.rtc2jira.storage.FieldNames.SUMMARY;
+import static to.rtc.rtc2jira.storage.FieldNames.WORK_ITEM_TYPE;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.BUSINESSNEED;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.DEFECT;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.TASK;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -41,21 +48,22 @@ public class GitHubExporter implements Exporter {
   @Override
   public boolean isConfigured() {
     boolean isConfigured = false;
-    if (settings.hasGithubProperties()) {
-      client.setCredentials(settings.getGithubUser(), settings.getGithubPassword());
-      client.setOAuth2Token(settings.getGithubToken());
-      try {
-        repository = service.getRepository(settings.getGithubRepoOwner(), settings.getGithubRepoName());
-        isConfigured = true;
-      } catch (IOException e) {
-        LOGGER.log(Level.WARNING, "Couldnt access github repository", e);
-      }
+    client.setCredentials(settings.getGithubUser(), settings.getGithubPassword());
+    client.setOAuth2Token(settings.getGithubToken());
+    try {
+      repository =
+          service.getRepository(settings.getGithubRepoOwner(), settings.getGithubRepoName());
+      isConfigured = true;
+    } catch (IOException e) {
+      LOGGER.log(Level.WARNING, "Couldn't access github repository", e);
     }
     return isConfigured;
   }
 
   @Override
   public void initialize(Settings settings, StorageEngine engine) {
+    if (!settings.hasGithubProperties())
+      throw new IllegalStateException("The Github properties are not set!");
     this.settings = settings;
     this.store = new GitHubStorage(engine);
     this.client = new GitHubClient();
@@ -63,13 +71,13 @@ public class GitHubExporter implements Exporter {
     this.issueService = new IssueService(client);
   }
 
-  public void export() throws Exception {
-    for (ODocument workItem : StorageQuery.getRTCWorkItems(store.getStorage())) {
-      Issue issue = createIssueFromWorkItem(workItem);
-      Issue gitHubIssue = createGitHubIssue(issue);
-      store.storeLinkToIssueInWorkItem(Optional.ofNullable(gitHubIssue), workItem);
-    }
+  @Override
+  public void createOrUpdateItem(ODocument item) throws Exception {
+    Issue issue = createIssueFromWorkItem(item);
+    Issue gitHubIssue = createGitHubIssue(issue);
+    store.storeLinkToIssueInWorkItem(Optional.ofNullable(gitHubIssue), item);
   }
+
 
   private Issue createIssueFromWorkItem(ODocument workItem) throws IOException {
     Issue issue = new Issue();
@@ -101,7 +109,10 @@ public class GitHubExporter implements Exporter {
               issue.setLabels(Collections.singletonList(getLabel("Epic")));
               break;
             case BUSINESSNEED:
-              issue.setLabels(Collections.singletonList(getLabel("Busines Need")));
+              issue.setLabels(Collections.singletonList(getLabel("Business Need")));
+              break;
+            case DEFECT:
+              issue.setLabels(Collections.singletonList(getLabel("Defect")));
               break;
             default:
               LOGGER.warning("Cannot create label for unknown workitemType: " + workitemType);
@@ -113,7 +124,8 @@ public class GitHubExporter implements Exporter {
       }
     }
     issue.setTitle(issue.getNumber() + ": " + issue.getTitle());
-    int existingGitHubIssueNumber = StorageQuery.getField(workItem, FieldNames.GITHUB_WORKITEM_LINK, 0);
+    int existingGitHubIssueNumber =
+        StorageQuery.getField(workItem, FieldNames.GITHUB_WORKITEM_LINK, 0);
     issue.setNumber(existingGitHubIssueNumber);
     return issue;
   }

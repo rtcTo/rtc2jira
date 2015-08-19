@@ -59,6 +59,10 @@ class JiraRestAccess {
     return createJsonResponseBuilder(ressource).post(ClientResponse.class, toPostingObject);
   }
 
+  ClientResponse put(String ressource, Object objectToPut) {
+    return createJsonResponseBuilder(ressource).put(ClientResponse.class, objectToPut);
+  }
+    
   private Builder createJsonResponseBuilder(String resource) {
     WebResource webResource = client.resource(restHome + resource);
     Builder responseBuilder =

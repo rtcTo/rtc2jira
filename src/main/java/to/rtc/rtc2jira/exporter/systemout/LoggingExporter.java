@@ -10,7 +10,6 @@ import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.storage.FieldNames;
 import to.rtc.rtc2jira.storage.StorageEngine;
-import to.rtc.rtc2jira.storage.StorageQuery;
 
 import com.orientechnologies.orient.core.record.impl.ODocument;
 
@@ -21,29 +20,30 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
 public class LoggingExporter implements Exporter {
   private static final Logger LOGGER = Logger.getLogger(LoggingExporter.class.getName());
 
-  private StorageEngine engine;
   private Settings settings;
 
   @Override
   public void initialize(Settings settings, StorageEngine engine) {
     this.settings = settings;
-    this.engine = engine;
-  }
-
-  @Override
-  public void export() throws Exception {
-    for (ODocument workitem : StorageQuery.getRTCWorkItems(engine)) {
-      LOGGER.info("");
-      LOGGER.info("===== WorkItem: " + workitem.field(FieldNames.ID) + " ======");
-      for (Entry<String, Object> entry : workitem) {
-        String formattedAttribute = String.format("%-25s: %s", entry.getKey(), entry.getValue());
-        LOGGER.info(formattedAttribute);
-      }
-    }
   }
 
   @Override
   public boolean isConfigured() {
     return settings.isSystemOutExporterConfigured();
   }
+
+  @Override
+  public void createOrUpdateItem(ODocument item) throws Exception {
+    createItem(item);
+  }
+
+  private void createItem(ODocument item) throws Exception {
+    LOGGER.info("");
+    LOGGER.info("===== WorkItem: " + item.field(FieldNames.ID) + " ======");
+    for (Entry<String, Object> entry : item) {
+      String formattedAttribute = String.format("%-25s: %s", entry.getKey(), entry.getValue());
+      LOGGER.info(formattedAttribute);
+    }
+  }
+
 }

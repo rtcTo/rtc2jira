@@ -36,6 +36,7 @@ public class Settings {
   private static final String JIRA_PASSWORD = "jira.password";
   private static final String JIRA_URL = "jira.url";
   private static final String JIRA_PROJECTKEY = "jira.projectkey";
+  private static final String JIRA_FORCE_CREATE = "jira.forcecreate";
 
   private static final String SYSOUT_EXPORTER = "sysout.exporter";
 
@@ -48,7 +49,8 @@ public class Settings {
     try {
       props.load(newBufferedReader(get("settings.properties")));
     } catch (IOException e) {
-      System.err.println("Please create your settings.properties out of the settings.properties.example");
+      System.err
+          .println("Please create your settings.properties out of the settings.properties.example");
       throw new RuntimeException(e);
     }
   }
@@ -74,8 +76,8 @@ public class Settings {
   }
 
   public boolean hasRtcProperties() {
-    return props.containsKey(RTC_USER) && props.containsKey(RTC_PASSWORD) && props.containsKey(RTC_URL)
-        && props.containsKey(RTC_WORKITEM_ID_RANGE);
+    return props.containsKey(RTC_USER) && props.containsKey(RTC_PASSWORD)
+        && props.containsKey(RTC_URL) && props.containsKey(RTC_WORKITEM_ID_RANGE);
   }
 
   public String getRtcUrl() {
@@ -144,7 +146,7 @@ public class Settings {
     return props.containsKey(JIRA_USER)//
         && props.containsKey(JIRA_PASSWORD)//
         && props.containsKey(JIRA_URL) //
-        && props.containsKey(JIRA_PROJECTKEY);
+        && props.containsKey(JIRA_PROJECTKEY) && props.containsKey(JIRA_FORCE_CREATE);
   }
 
   public String getJiraUser() {
@@ -161,6 +163,10 @@ public class Settings {
 
   public String getJiraProjectKey() {
     return props.getProperty(JIRA_PROJECTKEY);
+  }
+
+  public boolean isForceCreate() {
+    return Boolean.parseBoolean(props.getProperty(JIRA_FORCE_CREATE, Boolean.toString(false)));
   }
 
   public boolean isSystemOutExporterConfigured() {

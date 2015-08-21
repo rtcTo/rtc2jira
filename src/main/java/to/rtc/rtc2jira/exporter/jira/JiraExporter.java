@@ -89,13 +89,12 @@ public class JiraExporter implements Exporter {
     }
   }
 
-  private void createItem(ODocument item) throws Exception {
+  void createItem(ODocument item) throws Exception {
     projectOptional.ifPresent(project -> {
       Issue issue = createIssueFromWorkItem(item, project);
       Issue jiraIssue = createIssueInJira(issue);
-      Optional<Issue> optionalJiraIssue = Optional.ofNullable(jiraIssue);
-      if (optionalJiraIssue.isPresent()) {
-        storeReference(optionalJiraIssue, item);
+      if (jiraIssue != null) {
+        storeReference(jiraIssue, item);
         storeTimestampOfLastExport(item);
       }
     });
@@ -111,15 +110,13 @@ public class JiraExporter implements Exporter {
     });
   }
 
-  private void storeReference(Optional<Issue> optionalJiraIssue, ODocument workItem) {
-    optionalJiraIssue.ifPresent(jiraIssue -> {
-      store.setFields(workItem, //
-          of(FieldNames.JIRA_KEY_LINK, jiraIssue.getKey()), //
-          of(FieldNames.JIRA_ID_LINK, jiraIssue.getId()));
-    });
+  void storeReference(Issue jiraIssue, ODocument workItem) {
+    store.setFields(workItem, //
+        of(FieldNames.JIRA_KEY_LINK, jiraIssue.getKey()), //
+        of(FieldNames.JIRA_ID_LINK, jiraIssue.getId()));
   }
 
-  private void storeTimestampOfLastExport(ODocument workItem) {
+  void storeTimestampOfLastExport(ODocument workItem) {
     store.setFields(
         workItem, //
         of(FieldNames.JIRA_EXPORT_TIMESTAMP,
@@ -128,11 +125,12 @@ public class JiraExporter implements Exporter {
 
 
   private Optional<Project> getProject() {
+    System.out.println("testing");
     return Optional.ofNullable(restAccess.get("/project/" + settings.getJiraProjectKey(),
         Project.class));
   }
 
-  private Issue createIssueInJira(Issue issue) {
+  Issue createIssueInJira(Issue issue) {
     ClientResponse postResponse = restAccess.post("/issue", issue);
     if (postResponse.getStatus() == Status.CREATED.getStatusCode()) {
       return postResponse.getEntity(Issue.class);
@@ -154,7 +152,7 @@ public class JiraExporter implements Exporter {
   }
 
 
-  private Issue createIssueFromWorkItem(ODocument workItem, Project project) {
+  Issue createIssueFromWorkItem(ODocument workItem, Project project) {
     Issue issue = new Issue();
     IssueFields issueFields = issue.getFields();
     issueFields.setProject(project);

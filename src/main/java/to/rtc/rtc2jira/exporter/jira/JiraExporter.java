@@ -1,15 +1,8 @@
 package to.rtc.rtc2jira.exporter.jira;
 
 import static to.rtc.rtc2jira.storage.Field.of;
-import static to.rtc.rtc2jira.storage.FieldNames.DESCRIPTION;
-import static to.rtc.rtc2jira.storage.FieldNames.ID;
-import static to.rtc.rtc2jira.storage.FieldNames.SUMMARY;
-import static to.rtc.rtc2jira.storage.FieldNames.WORK_ITEM_TYPE;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.BUSINESSNEED;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.DEFECT;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.TASK;
+import static to.rtc.rtc2jira.storage.FieldNames.*;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.*;
 
 import java.time.Instant;
 import java.util.Collection;
@@ -46,30 +39,24 @@ public class JiraExporter implements Exporter {
   private Map<String, List<IssueType>> existingIssueTypes;
   Optional<Project> projectOptional;
 
+  @Override
+  public boolean isConfigured() {
+    return Settings.getInstance().hasJiraProperties();
+  }
 
   @Override
   public void initialize(Settings settings, StorageEngine store) throws Exception {
-    if (!settings.hasJiraProperties())
-      throw new IllegalStateException("The Jira properties are not set!");
     this.settings = settings;
     this.store = store;
-    restAccess =
-        new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(),
-            settings.getJiraPassword());
+    restAccess = new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(), settings.getJiraPassword());
     this.projectOptional = getProject();
-  }
-
-  @Override
-  public boolean isConfigured() {
-    boolean isConfigured = false;
     ClientResponse response = restAccess.get("/myself");
     if (response.getStatus() == Status.OK.getStatusCode()) {
-      isConfigured = true;
     } else {
       System.err.println("Unable to connect to jira repository: " + response.toString());
     }
-    return isConfigured;
   }
+
 
   private boolean forceCreate() {
     return settings.isForceCreate();
@@ -126,8 +113,7 @@ public class JiraExporter implements Exporter {
 
   private Optional<Project> getProject() {
     System.out.println("testing");
-    return Optional.ofNullable(restAccess.get("/project/" + settings.getJiraProjectKey(),
-        Project.class));
+    return Optional.ofNullable(restAccess.get("/project/" + settings.getJiraProjectKey(), Project.class));
   }
 
   Issue createIssueInJira(Issue issue) {
@@ -191,8 +177,7 @@ public class JiraExporter implements Exporter {
               issueFields.setIssuetype(getIssueType("Bug", project));
               break;
             default:
-              LOGGER
-                  .warning("Cannot determine issuetype for unknown workitemType: " + workitemType);
+              LOGGER.warning("Cannot determine issuetype for unknown workitemType: " + workitemType);
               break;
           }
           break;
@@ -210,17 +195,14 @@ public class JiraExporter implements Exporter {
     String projectKey = project.getKey();
     if (existingIssueTypes == null) {
       IssueMetadata issueMetadata =
-          restAccess.get("/issue/createmeta/?expand=projects.issuetypes.fields.",
-              IssueMetadata.class);
+          restAccess.get("/issue/createmeta/?expand=projects.issuetypes.fields.", IssueMetadata.class);
       existingIssueTypes = new HashMap<>();
-      existingIssueTypes
-          .put(projectKey, issueMetadata.getProject(projectKey).get().getIssuetypes());
+      existingIssueTypes.put(projectKey, issueMetadata.getProject(projectKey).get().getIssuetypes());
     }
 
     List<IssueType> issuesTypesByProject = existingIssueTypes.get(projectKey);
     IssueType issueType =
-        getIssueTypeByName(issuetypeName, issuesTypesByProject).orElse(
-            createIssueType(issuetypeName));
+        getIssueTypeByName(issuetypeName, issuesTypesByProject).orElse(createIssueType(issuetypeName));
 
     if (!issuesTypesByProject.contains(issueType)) {
       issuesTypesByProject.add(issueType);
@@ -237,8 +219,7 @@ public class JiraExporter implements Exporter {
 
   private Optional<IssueType> getIssueTypeByName(String name, Collection<IssueType> types) {
     List<IssueType> filteredTypes =
-        types.stream().filter(issuetype -> issuetype.getName().equals(name))
-            .collect(Collectors.toList());
+        types.stream().filter(issuetype -> issuetype.getName().equals(name)).collect(Collectors.toList());
     if (filteredTypes.isEmpty()) {
       return Optional.empty();
     } else {

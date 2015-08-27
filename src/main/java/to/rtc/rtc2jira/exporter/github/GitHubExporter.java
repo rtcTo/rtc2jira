@@ -1,14 +1,7 @@
 package to.rtc.rtc2jira.exporter.github;
 
-import static to.rtc.rtc2jira.storage.FieldNames.DESCRIPTION;
-import static to.rtc.rtc2jira.storage.FieldNames.ID;
-import static to.rtc.rtc2jira.storage.FieldNames.SUMMARY;
-import static to.rtc.rtc2jira.storage.FieldNames.WORK_ITEM_TYPE;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.BUSINESSNEED;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.DEFECT;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.TASK;
+import static to.rtc.rtc2jira.storage.FieldNames.*;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.*;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -41,30 +34,23 @@ public class GitHubExporter implements Exporter {
   private GitHubClient client;
   private RepositoryService service;
   private Repository repository;
-  private Settings settings;
   private IssueService issueService;
   private GitHubStorage store;
 
   @Override
   public boolean isConfigured() {
-    boolean isConfigured = false;
-    client.setCredentials(settings.getGithubUser(), settings.getGithubPassword());
-    client.setOAuth2Token(settings.getGithubToken());
-    try {
-      repository =
-          service.getRepository(settings.getGithubRepoOwner(), settings.getGithubRepoName());
-      isConfigured = true;
-    } catch (IOException e) {
-      LOGGER.log(Level.WARNING, "Couldn't access github repository", e);
-    }
-    return isConfigured;
+    return Settings.getInstance().hasGithubProperties();
   }
 
   @Override
   public void initialize(Settings settings, StorageEngine engine) {
-    if (!settings.hasGithubProperties())
-      throw new IllegalStateException("The Github properties are not set!");
-    this.settings = settings;
+    client.setCredentials(settings.getGithubUser(), settings.getGithubPassword());
+    client.setOAuth2Token(settings.getGithubToken());
+    try {
+      repository = service.getRepository(settings.getGithubRepoOwner(), settings.getGithubRepoName());
+    } catch (IOException e) {
+      LOGGER.log(Level.WARNING, "Couldn't access github repository", e);
+    }
     this.store = new GitHubStorage(engine);
     this.client = new GitHubClient();
     this.service = new RepositoryService(client);
@@ -77,7 +63,6 @@ public class GitHubExporter implements Exporter {
     Issue gitHubIssue = createGitHubIssue(issue);
     store.storeLinkToIssueInWorkItem(Optional.ofNullable(gitHubIssue), item);
   }
-
 
   private Issue createIssueFromWorkItem(ODocument workItem) throws IOException {
     Issue issue = new Issue();
@@ -124,8 +109,7 @@ public class GitHubExporter implements Exporter {
       }
     }
     issue.setTitle(issue.getNumber() + ": " + issue.getTitle());
-    int existingGitHubIssueNumber =
-        StorageQuery.getField(workItem, FieldNames.GITHUB_WORKITEM_LINK, 0);
+    int existingGitHubIssueNumber = StorageQuery.getField(workItem, FieldNames.GITHUB_WORKITEM_LINK, 0);
     issue.setNumber(existingGitHubIssueNumber);
     return issue;
   }

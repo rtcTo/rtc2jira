@@ -38,6 +38,7 @@ public class JiraExporter implements Exporter {
   private JiraRestAccess restAccess;
   private Map<String, List<IssueType>> existingIssueTypes;
   Optional<Project> projectOptional;
+  private int highestExistingId = -1;
 
   @Override
   public boolean isConfigured() {
@@ -49,42 +50,42 @@ public class JiraExporter implements Exporter {
     this.settings = settings;
     this.store = store;
     restAccess = new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(), settings.getJiraPassword());
-    this.projectOptional = getProject();
     ClientResponse response = restAccess.get("/myself");
-    if (response.getStatus() == Status.OK.getStatusCode()) {
-    } else {
-      System.err.println("Unable to connect to jira repository: " + response.toString());
+    if (response.getStatus() != Status.OK.getStatusCode()) {
+      throw new RuntimeException("Unable to connect to jira repository: " + response.toString());
     }
-  }
-
-
-  private boolean forceCreate() {
-    return settings.isForceCreate();
+    this.projectOptional = getProject();
   }
 
   @Override
   public void createOrUpdateItem(ODocument item) throws Exception {
-    String id = StorageQuery.getField(item, FieldNames.JIRA_ID_LINK, "");
-    if (forceCreate() || id.isEmpty()) {
-      createItem(item);
-    } else {
-      Date modified = StorageQuery.getField(item, FieldNames.MODIFIED, Date.from(Instant.now()));
-      Date lastExport = StorageQuery.getField(item, FieldNames.JIRA_EXPORT_TIMESTAMP, new Date(0));
-      if (modified.compareTo(lastExport) > 0) {
-        updateItem(item);
-      }
+    String workItemId = item.field(FieldNames.ID);
+    ensureWorkItemWithId(Integer.parseInt(workItemId));
+    Date modified = StorageQuery.getField(item, FieldNames.MODIFIED, Date.from(Instant.now()));
+    Date lastExport = StorageQuery.getField(item, FieldNames.JIRA_EXPORT_TIMESTAMP, new Date(0));
+    if (modified.compareTo(lastExport) > 0) {
+      updateItem(item);
     }
   }
 
-  void createItem(ODocument item) throws Exception {
-    projectOptional.ifPresent(project -> {
-      Issue issue = createIssueFromWorkItem(item, project);
-      Issue jiraIssue = createIssueInJira(issue);
-      if (jiraIssue != null) {
-        storeReference(jiraIssue, item);
-        storeTimestampOfLastExport(item);
-      }
-    });
+  private void ensureWorkItemWithId(int workItemId) {
+    while (highestExistingId < workItemId) {
+      createDummyIssues();
+    }
+  }
+
+  private void createDummyIssues() {
+    if (projectOptional.isPresent()) {
+      Project project = projectOptional.get();
+      Issue issue = new Issue();
+      issue.getFields().setProject(project);
+      issue.getFields().setIssuetype(getIssueType("Task", project));
+      issue.getFields().setSummary("Dummy");
+      issue.getFields().setDescription("This is just a dummy issue. Delete it after successfully migrating to Jira.");
+      Issue createdIssue = createIssueInJira(issue);
+      String highestAsString = createdIssue.getKey().replace(settings.getJiraProjectKey() + '-', "");
+      highestExistingId = Integer.parseInt(highestAsString);
+    }
   }
 
   private void updateItem(ODocument item) {
@@ -92,6 +93,7 @@ public class JiraExporter implements Exporter {
       Issue issue = createIssueFromWorkItem(item, project);
       boolean success = updateIssueInJira(issue);
       if (success) {
+        storeReference(issue, item);
         storeTimestampOfLastExport(item);
       }
     });
@@ -187,7 +189,7 @@ public class JiraExporter implements Exporter {
     }
     issueFields.setSummary(issue.getId() + ": " + issueFields.getSummary());
     issue.setId(StorageQuery.getField(workItem, FieldNames.JIRA_ID_LINK, ""));
-    issue.setKey(StorageQuery.getField(workItem, FieldNames.JIRA_KEY_LINK, ""));
+    issue.setKey(settings.getJiraProjectKey() + '-' + workItem.field(FieldNames.ID));
     return issue;
   }
 

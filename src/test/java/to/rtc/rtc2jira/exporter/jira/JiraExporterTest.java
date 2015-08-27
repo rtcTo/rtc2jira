@@ -2,9 +2,7 @@ package to.rtc.rtc2jira.exporter.jira;
 
 import static mockit.Deencapsulation.invoke;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.time.Instant;
 import java.util.Date;
@@ -24,8 +22,6 @@ import org.junit.Test;
 
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.TestDatabaseRule;
-import to.rtc.rtc2jira.exporter.jira.entities.Issue;
-import to.rtc.rtc2jira.exporter.jira.entities.IssueFields;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueType;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
 import to.rtc.rtc2jira.storage.FieldNames;
@@ -49,8 +45,7 @@ public class JiraExporterTest {
   public TestDatabaseRule testDbRule = new TestDatabaseRule();
 
   @Test
-  public void testInitialize(@Mocked ClientResponse clientResponse, @Mocked StorageEngine store)
-      throws Exception {
+  public void testInitialize(@Mocked ClientResponse clientResponse, @Mocked StorageEngine store) throws Exception {
     new Expectations() {
       {
         settings.hasJiraProperties();
@@ -76,8 +71,8 @@ public class JiraExporterTest {
   }
 
   @Test
-  public void testIsConfigured_serverOK(@Mocked ClientResponse clientResponse,
-      @Mocked StorageEngine store) throws Exception {
+  public void testIsConfigured_serverOK(@Mocked ClientResponse clientResponse, @Mocked StorageEngine store)
+      throws Exception {
     new Expectations() {
       {
         settings.hasJiraProperties();
@@ -102,9 +97,9 @@ public class JiraExporterTest {
     };
   }
 
-  @Test
-  public void testIsConfigured_serverNotOK(@Mocked ClientResponse clientResponse,
-      @Mocked StorageEngine store) throws Exception {
+  @Test(expected = RuntimeException.class)
+  public void testIsConfigured_serverNotOK(@Mocked ClientResponse clientResponse, @Mocked StorageEngine store)
+      throws Exception {
     new Expectations() {
       {
         settings.hasJiraProperties();
@@ -116,15 +111,14 @@ public class JiraExporterTest {
     };
 
     JiraExporter jiraExporter = new JiraExporter();
+    assertTrue(jiraExporter.isConfigured());
     jiraExporter.initialize(settings, store);
-    boolean isConfigured = jiraExporter.isConfigured();
-    assertNotEquals(true, isConfigured);
   }
 
 
-  public void testCreateOrUpdateItem(@Mocked ClientResponse clientResponse,
-      @Mocked StorageEngine store, @Mocked Repository repoMock, @Mocked RepositoryService service,
-      @Mocked IssueService issueServiceMock, @Mocked ODocument workItem) throws Exception {
+  public void testCreateOrUpdateItem_Update(@Mocked ClientResponse clientResponse, @Mocked StorageEngine store,
+      @Mocked Repository repoMock, @Mocked RepositoryService service, @Mocked IssueService issueServiceMock,
+      @Mocked ODocument workItem) throws Exception {
 
     new Expectations() {
       {
@@ -149,40 +143,10 @@ public class JiraExporterTest {
     };
   }
 
-  @Test
-  public void testCreateOrUpdateItem_forceCreate(@Mocked ODocument workItem,
-      @Mocked StorageEngine store, @Mocked StorageQuery storageQuery,
-      @Mocked Optional<Project> projectOptional) throws Exception {
-
-    JiraExporter jiraExporter = new JiraExporter();
-
-    new Expectations(jiraExporter) {
-      {
-        settings.hasJiraProperties();
-        result = true;
-
-        StorageQuery.getField(workItem, FieldNames.JIRA_ID_LINK, "");
-        result = "123";
-
-        invoke(jiraExporter, "forceCreate");
-        result = true;
-      }
-    };
-
-    jiraExporter.initialize(settings, store);
-    jiraExporter.createOrUpdateItem(workItem);
-
-    new Verifications() {
-      {
-        invoke(jiraExporter, "createItem", workItem);
-      }
-    };
-  }
 
   @Test
-  public void testCreateOrUpdateItem_itemIdEmpty(@Mocked ODocument workItem,
-      @Mocked StorageEngine store, @Mocked StorageQuery storageQuery,
-      @Mocked Optional<Project> projectOptional) throws Exception {
+  public void testCreateOrUpdateItem_CreateWithCorrectId(@Mocked ODocument workItem, @Mocked StorageEngine store,
+      @Mocked StorageQuery storageQuery, @Mocked Optional<Project> projectOptional) throws Exception {
 
     JiraExporter jiraExporter = new JiraExporter();
 
@@ -193,9 +157,6 @@ public class JiraExporterTest {
 
         StorageQuery.getField(workItem, FieldNames.JIRA_ID_LINK, "");
         result = "";
-
-        invoke(jiraExporter, "forceCreate");
-        result = false;
       }
     };
 
@@ -210,68 +171,10 @@ public class JiraExporterTest {
     };
   }
 
-  @Test
-  public void testCreateItem() throws Exception {
-
-    final Project project = new Project();
-    final Optional<Project> projectOpt = Optional.ofNullable(project);
-    final StorageEngine engine = testDbRule.getEngine();
-
-    ODocument workItem = new ODocument();
-    workItem.field(FieldNames.DESCRIPTION, "The description");
-
-    IssueFields fields = new IssueFields();
-    fields.setDescription("The description");
-
-    Issue issue = new Issue();
-    issue.setId("123");
-    issue.setKey("theKey");
-    issue.setFields(fields);
-
-    JiraExporter jiraExporter = new JiraExporter();
-    new Expectations(jiraExporter) {
-      {
-
-        settings.hasJiraProperties();
-        result = true;
-
-        invoke(jiraExporter, "getProject");
-        result = projectOpt;
-        minTimes = 1;
-
-        jiraExporter.createIssueFromWorkItem(workItem, withInstanceOf(Project.class));
-        result = issue;
-        jiraExporter.createIssueInJira(issue);
-        result = issue;
-      }
-    };
-    jiraExporter.initialize(settings, engine);
-
-    assertEquals("", StorageQuery.getField(workItem, FieldNames.JIRA_ID_LINK, ""));
-    assertNull(workItem.field(FieldNames.JIRA_KEY_LINK));
-    assertNull(workItem.field(FieldNames.JIRA_EXPORT_TIMESTAMP));
-    assertNull(workItem.field(FieldNames.JIRA_EXPORT_TIMESTAMP));
-
-    jiraExporter.createItem(workItem);
-
-    assertEquals("123", StorageQuery.getField(workItem, FieldNames.JIRA_ID_LINK, ""));
-    assertEquals("theKey", workItem.field(FieldNames.JIRA_KEY_LINK));
-    assertNotNull(workItem.field(FieldNames.JIRA_EXPORT_TIMESTAMP));
-    assertEquals("The description", workItem.field(FieldNames.DESCRIPTION));
-
-    new Verifications() {
-      {
-        jiraExporter.createIssueFromWorkItem(workItem, withInstanceOf(Project.class));
-        jiraExporter.createIssueInJira(withInstanceOf(Issue.class));
-        jiraExporter.storeReference(withInstanceOf(Issue.class), workItem);
-        jiraExporter.storeTimestampOfLastExport(workItem);
-      }
-    };
-  }
 
   @Test
-  public void testCreateOrUpdateItem_notForceCreate(@Mocked ODocument workItem,
-      @Mocked StorageEngine store, @Mocked StorageQuery storageQuery) throws Exception {
+  public void testCreateOrUpdateItem(@Mocked ODocument workItem, @Mocked StorageEngine store,
+      @Mocked StorageQuery storageQuery) throws Exception {
 
     JiraExporter jiraExporter = new JiraExporter();
 
@@ -283,17 +186,14 @@ public class JiraExporterTest {
         StorageQuery.getField(workItem, FieldNames.JIRA_ID_LINK, "");
         result = "123";
 
-        settings.isForceCreate();
-        result = false;
-
         StorageQuery.getField(workItem, FieldNames.MODIFIED, withInstanceOf(Date.class));
         result = Date.from(Instant.now());
-        StorageQuery.getField(workItem, FieldNames.JIRA_EXPORT_TIMESTAMP,
-            withInstanceOf(Date.class));
+        StorageQuery.getField(workItem, FieldNames.JIRA_EXPORT_TIMESTAMP, withInstanceOf(Date.class));
         result = new Date(0);
 
-        invoke(jiraExporter, "updateItem", workItem);
+        invoke(jiraExporter, "createIssueInJira");
 
+        invoke(jiraExporter, "updateItem", workItem);
       }
     };
 
@@ -306,5 +206,4 @@ public class JiraExporterTest {
       }
     };
   }
-
 }

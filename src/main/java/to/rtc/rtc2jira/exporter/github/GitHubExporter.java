@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Random;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.eclipse.egit.github.core.Issue;
@@ -43,18 +42,14 @@ public class GitHubExporter implements Exporter {
   }
 
   @Override
-  public void initialize(Settings settings, StorageEngine engine) {
-    client.setCredentials(settings.getGithubUser(), settings.getGithubPassword());
-    client.setOAuth2Token(settings.getGithubToken());
-    try {
-      repository = service.getRepository(settings.getGithubRepoOwner(), settings.getGithubRepoName());
-    } catch (IOException e) {
-      LOGGER.log(Level.WARNING, "Couldn't access github repository", e);
-    }
+  public void initialize(Settings settings, StorageEngine engine) throws IOException {
     this.store = new GitHubStorage(engine);
     this.client = new GitHubClient();
     this.service = new RepositoryService(client);
     this.issueService = new IssueService(client);
+    client.setCredentials(settings.getGithubUser(), settings.getGithubPassword());
+    client.setOAuth2Token(settings.getGithubToken());
+    repository = service.getRepository(settings.getGithubRepoOwner(), settings.getGithubRepoName());
   }
 
   @Override

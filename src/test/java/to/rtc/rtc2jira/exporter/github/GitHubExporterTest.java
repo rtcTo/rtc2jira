@@ -1,12 +1,10 @@
 package to.rtc.rtc2jira.exporter.github;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 
 import mockit.Expectations;
 import mockit.Mocked;
+import mockit.NonStrictExpectations;
 import mockit.Verifications;
 
 import org.eclipse.egit.github.core.IRepositoryIdProvider;
@@ -45,56 +43,52 @@ public class GitHubExporterTest {
   public void setUp() throws Exception {
     engine = testDbRule.getEngine();
     exporter = new GitHubExporter();
-    new Expectations() {
+    new NonStrictExpectations() {
       {
         settingsMock.hasGithubProperties();
         result = true;
       }
     };
-    exporter.initialize(settingsMock, engine);
   }
 
-  @Test
-  public void testIsConfigured_WithWrongCredentials_ExpectIsNotConfigured() throws Exception {
+  @Test(expected = IOException.class)
+  public void testInitialize_WithWrongCredentials_ExpectException() throws Exception {
     new Expectations() {
       {
         _service.getRepository(anyString, anyString);
         result = new IOException("Wrong credentials");
       }
     };
-    assertFalse(exporter.isConfigured());
+    exporter.initialize(settingsMock, engine);
   }
 
   @Test
-  public void testIsConfigured_WithValidCredentials_ExpectIsConfigured(@Mocked Repository repoMock)
-      throws IOException {
+  public void testInitialize_WithValidCredentials_ExpectIsConfigured(@Mocked Repository repoMock) throws IOException {
     new Expectations() {
       {
         _service.getRepository(anyString, anyString);
         result = repoMock;
       }
     };
-    assertTrue(exporter.isConfigured());
+    exporter.initialize(settingsMock, engine);
   }
 
   @Test
-  public void testExport_WithoutEmptyDB_ExpectNoExport(@Mocked IssueService issueServiceMock)
-      throws Exception {
+  public void testExport_WithoutEmptyDB_ExpectNoExport(@Mocked IssueService issueServiceMock) throws Exception {
     ExportManager exportManager = new ExportManager();
     exportManager.addExporters(exporter);
     exportManager.export(settingsMock, engine);
     new Verifications() {
       {
-        issueServiceMock.createIssue(withInstanceOf(IRepositoryIdProvider.class),
-            withInstanceOf(Issue.class));
+        issueServiceMock.createIssue(withInstanceOf(IRepositoryIdProvider.class), withInstanceOf(Issue.class));
         times = 0;
       }
     };
   }
 
   @Test
-  public void testExport_WithDBEntries_ExpectExport(@Mocked Repository repoMock,
-      @Mocked IssueService issueServiceMock) throws Exception {
+  public void testExport_WithDBEntries_ExpectExport(@Mocked Repository repoMock, @Mocked IssueService issueServiceMock)
+      throws Exception {
     new Expectations() {
       {
         settingsMock.hasGithubProperties();

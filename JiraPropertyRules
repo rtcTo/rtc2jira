@@ -1,0 +1,5 @@
+# Jira rest property exclusions 
+
+issue.duedate: create
+issue.priority: create
+issue.comment: create

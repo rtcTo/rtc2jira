@@ -42,6 +42,8 @@ public class CommentMapping extends MappingAdapter {
       }
       if (!comments.isEmpty()) {
         doc.field(FieldNames.COMMENTS, comments);
+      } else {
+        doc.removeField(FieldNames.COMMENTS);
       }
     }
   }

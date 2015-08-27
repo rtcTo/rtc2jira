@@ -19,6 +19,7 @@ import mockit.Verifications;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.RepositoryService;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -41,6 +42,8 @@ public class JiraExporterTest {
   @Mocked
   Settings settings;
   @Mocked
+  JiraPersistence persistence;
+  @Mocked
   JiraRestAccess restAccess;
   @Mocked
   Map<String, List<IssueType>> existingIssueTypes;
@@ -53,9 +56,6 @@ public class JiraExporterTest {
       throws Exception {
     new Expectations() {
       {
-        settings.hasJiraProperties();
-        result = true;
-
         clientResponse.getStatus();
         result = Status.OK.getStatusCode();
       }
@@ -80,9 +80,6 @@ public class JiraExporterTest {
       @Mocked StorageEngine store) throws Exception {
     new Expectations() {
       {
-        settings.hasJiraProperties();
-        result = true;
-
         clientResponse.getStatus();
         result = Status.OK.getStatusCode();
       }
@@ -107,9 +104,6 @@ public class JiraExporterTest {
       @Mocked StorageEngine store) throws Exception {
     new Expectations() {
       {
-        settings.hasJiraProperties();
-        result = true;
-
         clientResponse.getStatus();
         result = Status.NOT_FOUND.getStatusCode();
       }
@@ -158,11 +152,11 @@ public class JiraExporterTest {
 
     new Expectations(jiraExporter) {
       {
-        settings.hasJiraProperties();
-        result = true;
-
         StorageQuery.getField(workItem, FieldNames.JIRA_ID_LINK, "");
         result = "123";
+
+        StorageQuery.getField(workItem, FieldNames.JIRA_KEY_LINK, "");
+        result = "WOR_123";
 
         invoke(jiraExporter, "forceCreate");
         result = true;
@@ -188,10 +182,10 @@ public class JiraExporterTest {
 
     new Expectations(jiraExporter) {
       {
-        settings.hasJiraProperties();
-        result = true;
-
         StorageQuery.getField(workItem, FieldNames.JIRA_ID_LINK, "");
+        result = "";
+
+        StorageQuery.getField(workItem, FieldNames.JIRA_KEY_LINK, "");
         result = "";
 
         invoke(jiraExporter, "forceCreate");
@@ -210,11 +204,9 @@ public class JiraExporterTest {
     };
   }
 
-  @Test
+  @Ignore
   public void testCreateItem() throws Exception {
 
-    final Project project = new Project();
-    final Optional<Project> projectOpt = Optional.ofNullable(project);
     final StorageEngine engine = testDbRule.getEngine();
 
     ODocument workItem = new ODocument();
@@ -229,19 +221,9 @@ public class JiraExporterTest {
     issue.setFields(fields);
 
     JiraExporter jiraExporter = new JiraExporter();
-    new Expectations(jiraExporter) {
+    new Expectations(jiraExporter, issue) {
       {
-
-        settings.hasJiraProperties();
-        result = true;
-
-        invoke(jiraExporter, "getProject");
-        result = projectOpt;
-        minTimes = 1;
-
-        jiraExporter.createIssueFromWorkItem(workItem, withInstanceOf(Project.class));
-        result = issue;
-        jiraExporter.createIssueInJira(issue);
+        Issue.createFromWorkItem(workItem);
         result = issue;
       }
     };
@@ -261,8 +243,7 @@ public class JiraExporterTest {
 
     new Verifications() {
       {
-        jiraExporter.createIssueFromWorkItem(workItem, withInstanceOf(Project.class));
-        jiraExporter.createIssueInJira(withInstanceOf(Issue.class));
+        Issue.createFromWorkItem(workItem);
         jiraExporter.storeReference(withInstanceOf(Issue.class), workItem);
         jiraExporter.storeTimestampOfLastExport(workItem);
       }
@@ -277,9 +258,6 @@ public class JiraExporterTest {
 
     new Expectations(jiraExporter) {
       {
-        settings.hasJiraProperties();
-        result = true;
-
         StorageQuery.getField(workItem, FieldNames.JIRA_ID_LINK, "");
         result = "123";
 

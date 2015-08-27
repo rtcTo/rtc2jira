@@ -2,10 +2,10 @@ package to.rtc.rtc2jira.importer.mapping;
 
 import java.util.Date;
 
+import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
+
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.orientechnologies.orient.core.record.impl.ODocument;
-
-import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
 
 public class DateMapping extends MappingAdapter {
 
@@ -30,6 +30,8 @@ public class DateMapping extends MappingAdapter {
   public void afterWorkItem(ODocument doc) {
     if (date != null) {
       doc.field(fieldName, date);
+    } else {
+      doc.removeField(fieldName);
     }
   }
 

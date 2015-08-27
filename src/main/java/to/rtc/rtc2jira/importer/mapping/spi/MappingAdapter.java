@@ -50,11 +50,12 @@ public abstract class MappingAdapter implements Mapping {
   protected <T> T fetchCompleteItem(IItemHandle itemHandle) {
     T completeItem = null;
     try {
-      IItemManager itemManager = ITeamRepository.class.cast(getWorkItem().getOrigin()).itemManager();
+      IItemManager itemManager =
+          ITeamRepository.class.cast(getWorkItem().getOrigin()).itemManager();
       completeItem = (T) itemManager.fetchCompleteItem(itemHandle, ItemManager.DEFAULT, null);
     } catch (TeamRepositoryException e) {
       e.printStackTrace();
     }
-    return (T) completeItem;
+    return completeItem;
   }
 }

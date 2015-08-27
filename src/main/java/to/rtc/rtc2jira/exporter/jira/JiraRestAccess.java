@@ -19,7 +19,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
  * 
  * @author Manuel
  */
-class JiraRestAccess {
+public class JiraRestAccess {
 
   private Client client;
   private String authentification;
@@ -36,33 +36,33 @@ class JiraRestAccess {
     this.client = Client.create(cfg);
   }
 
-  <T> T get(String resource, GenericType<T> type) {
+  public <T> T get(String resource, GenericType<T> type) {
     ClientResponse response = get(resource);
     return response.getEntity(type);
   }
 
-  <T> T get(String resource, Class<T> type) {
+  public <T> T get(String resource, Class<T> type) {
     ClientResponse response = get(resource);
     return response.getEntity(type);
   }
 
-  <T> T post(String resource, T toPostingObject, Class<T> responseType) {
+  public <T> T post(String resource, T toPostingObject, Class<T> responseType) {
     ClientResponse postResponse = post(resource, toPostingObject);
     return postResponse.getEntity(responseType);
   }
 
-  ClientResponse get(String resource) {
+  public ClientResponse get(String resource) {
     return createJsonResponseBuilder(resource).get(ClientResponse.class);
   }
 
-  ClientResponse post(String ressource, Object toPostingObject) {
+  public ClientResponse post(String ressource, Object toPostingObject) {
     return createJsonResponseBuilder(ressource).post(ClientResponse.class, toPostingObject);
   }
 
-  ClientResponse put(String ressource, Object objectToPut) {
+  public ClientResponse put(String ressource, Object objectToPut) {
     return createJsonResponseBuilder(ressource).put(ClientResponse.class, objectToPut);
   }
-    
+
   private Builder createJsonResponseBuilder(String resource) {
     WebResource webResource = client.resource(restHome + resource);
     Builder responseBuilder =

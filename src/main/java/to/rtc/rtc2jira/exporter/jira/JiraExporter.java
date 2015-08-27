@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
+import to.rtc.rtc2jira.exporter.jira.entities.DummyIssue;
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
 import to.rtc.rtc2jira.storage.FieldNames;
@@ -60,12 +61,13 @@ public class JiraExporter implements Exporter {
   private void createDummyIssues() {
     if (projectOptional.isPresent()) {
       Project project = projectOptional.get();
-      Issue issue = new Issue();
-      issue.getFields().setProject(project);
-      issue.getFields().setIssuetype(Issue.getIssueType("Task"));
-      issue.getFields().setSummary("Dummy");
-      issue.getFields().setDescription("This is just a dummy issue. Delete it after successfully migrating to Jira.");
-      Issue createdIssue = createIssueInJira(issue);
+      DummyIssue dummyIssue = new DummyIssue();
+      dummyIssue.getFields().setProject(project);
+      dummyIssue.getFields().setIssuetype(Issue.getIssueType("Task"));
+      dummyIssue.getFields().setSummary("Dummy");
+      dummyIssue.getFields().setDescription(
+          "This is just a dummy issue. Delete it after successfully migrating to Jira.");
+      Issue createdIssue = createIssueInJira(dummyIssue);
       String highestAsString = createdIssue.getKey().replace(settings.getJiraProjectKey() + '-', "");
       highestExistingId = Integer.parseInt(highestAsString);
     }
@@ -95,37 +97,11 @@ public class JiraExporter implements Exporter {
                 StorageQuery.getField(workItem, FieldNames.MODIFIED, Date.from(Instant.now()))));
   }
 
-
-  // Issue createIssueInJira(Issue issue) {
-  // ClientResponse postResponse =
-  // JiraPersistence.getInstance().getRestAccess().post("/issue", new IssueDto(issue));
-  // if (postResponse.getStatus() == Status.CREATED.getStatusCode()) {
-  // return postResponse.getEntity(Issue.class);
-  // } else {
-  // System.err.println("Problems while creating issue: " + postResponse.getEntity(String.class));
-  // return null;
-  // }
-  // }
-  //
-  // private boolean updateIssueInJira(Issue issue) {
-  // ClientResponse postResponse =
-  // JiraPersistence.getInstance().getRestAccess()
-  // .put("/issue/" + issue.getKey(), new IssueDto(issue));
-  // if (postResponse.getStatus() >= Status.OK.getStatusCode()
-  // && postResponse.getStatus() <= Status.PARTIAL_CONTENT.getStatusCode()) {
-  // return true;
-  // } else {
-  // System.err.println("Problems while updating issue: " + postResponse.getEntity(String.class));
-  // return false;
-  // }
-  // }
-
   private Optional<Project> getProject() {
-    System.out.println("testing");
     return Optional.ofNullable(restAccess.get("/project/" + settings.getJiraProjectKey(), Project.class));
   }
 
-  Issue createIssueInJira(Issue issue) {
+  Issue createIssueInJira(DummyIssue issue) {
     ClientResponse postResponse = restAccess.post("/issue", issue);
     if (postResponse.getStatus() == Status.CREATED.getStatusCode()) {
       return postResponse.getEntity(Issue.class);

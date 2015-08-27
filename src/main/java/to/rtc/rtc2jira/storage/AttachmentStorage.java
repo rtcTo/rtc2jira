@@ -24,7 +24,7 @@ public class AttachmentStorage {
 
   public Attachment createAttachment(long workitemId, String name) {
     Attachment attachment = new Attachment(workitemId, name);
-    String storeName = attachment.getWorkitemId() + "_" + attachment.getName();
+    String storeName = attachment.getWorkitemId() + "_" + attachment.getName().replaceAll("[^a-zA-Z0-9.-]", "_");
     attachment.setPath(basePath.resolve(storeName));
     return attachment;
   }

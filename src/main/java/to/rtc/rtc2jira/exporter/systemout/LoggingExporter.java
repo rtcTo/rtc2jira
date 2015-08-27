@@ -20,17 +20,13 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
 public class LoggingExporter implements Exporter {
   private static final Logger LOGGER = Logger.getLogger(LoggingExporter.class.getName());
 
-  private Settings settings;
-
-  @Override
-  public void initialize(Settings settings, StorageEngine engine) {
-    this.settings = settings;
-  }
-
   @Override
   public boolean isConfigured() {
-    return settings.isSystemOutExporterConfigured();
+    return Settings.getInstance().isSystemOutExporterConfigured();
   }
+
+  @Override
+  public void initialize(Settings settings, StorageEngine engine) {}
 
   @Override
   public void createOrUpdateItem(ODocument item) throws Exception {

@@ -1,14 +1,7 @@
 package to.rtc.rtc2jira.exporter.jira.entities;
 
-import static to.rtc.rtc2jira.storage.FieldNames.DESCRIPTION;
-import static to.rtc.rtc2jira.storage.FieldNames.ID;
-import static to.rtc.rtc2jira.storage.FieldNames.SUMMARY;
-import static to.rtc.rtc2jira.storage.FieldNames.WORK_ITEM_TYPE;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.BUSINESSNEED;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.DEFECT;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.TASK;
+import static to.rtc.rtc2jira.storage.FieldNames.*;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.*;
 
 import java.util.Collection;
 import java.util.Date;
@@ -22,6 +15,7 @@ import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.jira.JiraPersistence;
 import to.rtc.rtc2jira.exporter.jira.JiraRestAccess;
 import to.rtc.rtc2jira.storage.Comment;
@@ -104,8 +98,7 @@ public class Issue extends BaseEntity {
               issueFields.setIssuetype(getIssueType("Bug"));
               break;
             default:
-              LOGGER
-                  .warning("Cannot determine issuetype for unknown workitemType: " + workitemType);
+              LOGGER.warning("Cannot determine issuetype for unknown workitemType: " + workitemType);
               break;
           }
           break;
@@ -115,7 +108,7 @@ public class Issue extends BaseEntity {
     }
     issueFields.setSummary(issue.getId() + ": " + issueFields.getSummary());
     issue.setId(StorageQuery.getField(workItem, FieldNames.JIRA_ID_LINK, ""));
-    issue.setKey(StorageQuery.getField(workItem, FieldNames.JIRA_KEY_LINK, ""));
+    issue.setKey(Settings.getInstance().getJiraProjectKey() + '-' + workItem.field(FieldNames.ID));
     return issue;
   }
 
@@ -158,22 +151,19 @@ public class Issue extends BaseEntity {
     return (Optional<Issue>) super.save();
   }
 
-  private static IssueType getIssueType(String issuetypeName) {
+  public static IssueType getIssueType(String issuetypeName) {
     String projectKey = JiraPersistence.getInstance().getProject().getKey();
     JiraRestAccess restAccess = JiraPersistence.getInstance().getRestAccess();
     if (existingIssueTypes == null) {
       IssueMetadata issueMetadata =
-          restAccess.get("/issue/createmeta/?expand=projects.issuetypes.fields.",
-              IssueMetadata.class);
+          restAccess.get("/issue/createmeta/?expand=projects.issuetypes.fields.", IssueMetadata.class);
       existingIssueTypes = new HashMap<String, List<IssueType>>();
-      existingIssueTypes
-          .put(projectKey, issueMetadata.getProject(projectKey).get().getIssuetypes());
+      existingIssueTypes.put(projectKey, issueMetadata.getProject(projectKey).get().getIssuetypes());
     }
 
     List<IssueType> issuesTypesByProject = existingIssueTypes.get(projectKey);
     IssueType issueType =
-        getIssueTypeByName(issuetypeName, issuesTypesByProject).orElse(
-            createIssueType(issuetypeName));
+        getIssueTypeByName(issuetypeName, issuesTypesByProject).orElse(createIssueType(issuetypeName));
 
     if (!issuesTypesByProject.contains(issueType)) {
       issuesTypesByProject.add(issueType);
@@ -191,8 +181,7 @@ public class Issue extends BaseEntity {
 
   private static Optional<IssueType> getIssueTypeByName(String name, Collection<IssueType> types) {
     List<IssueType> filteredTypes =
-        types.stream().filter(issuetype -> issuetype.getName().equals(name))
-            .collect(Collectors.toList());
+        types.stream().filter(issuetype -> issuetype.getName().equals(name)).collect(Collectors.toList());
     if (filteredTypes.isEmpty()) {
       return Optional.empty();
     } else {

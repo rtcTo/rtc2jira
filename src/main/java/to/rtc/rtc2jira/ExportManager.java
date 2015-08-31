@@ -3,17 +3,20 @@ package to.rtc.rtc2jira;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.exporter.github.GitHubExporter;
 import to.rtc.rtc2jira.exporter.jira.JiraExporter;
 import to.rtc.rtc2jira.exporter.systemout.LoggingExporter;
+import to.rtc.rtc2jira.storage.FieldNames;
 import to.rtc.rtc2jira.storage.StorageEngine;
 import to.rtc.rtc2jira.storage.StorageQuery;
 
 import com.orientechnologies.orient.core.record.impl.ODocument;
 
 public class ExportManager {
+  private static Logger LOGGER = Logger.getLogger(ExportManager.class.getName());
 
   private List<Exporter> exporters;
 
@@ -27,6 +30,7 @@ public class ExportManager {
         exporter.initialize(settings, storageEngine);
         for (ODocument workItem : StorageQuery.getRTCWorkItems(storageEngine)) {
           exporter.createOrUpdateItem(workItem);
+          LOGGER.info("Exported workitem " + workItem.field(FieldNames.ID));
         }
       }
     }

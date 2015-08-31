@@ -1,6 +1,7 @@
 package to.rtc.rtc2jira;
 
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static to.rtc.rtc2jira.Settings.RTC_WORKITEM_ID_RANGE;
 
@@ -82,6 +83,12 @@ public class SettingsTest {
     assertThat(settings.getRtcWorkItemRange(), contains(expectedRange));
   }
 
-
+  @Test
+  public void testTrimming() throws Exception {
+    Properties props = new Properties();
+    props.setProperty("proxy.host", "   my.proxy.host   ");
+    Settings.getInstance().setProperties(props);
+    assertThat(settings.getProxyHost(), is("my.proxy.host"));
+  }
 
 }

@@ -7,6 +7,7 @@ import static java.nio.file.Files.newBufferedReader;
 import static java.nio.file.Paths.get;
 
 import java.io.IOException;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -46,9 +47,10 @@ public class Settings {
   private Properties props;
 
   private Settings() {
-    props = new Properties();
     try {
-      props.load(newBufferedReader(get("settings.properties")));
+      Properties newProps = new Properties();
+      newProps.load(newBufferedReader(get("settings.properties")));
+      setProperties(newProps);
     } catch (IOException e) {
       System.err.println("Please create your settings.properties out of the settings.properties.example");
       throw new RuntimeException(e);
@@ -56,6 +58,11 @@ public class Settings {
   }
 
   void setProperties(Properties props) {
+    for (Entry<Object, Object> entry : props.entrySet()) {
+      if (entry.getValue() != null) {
+        entry.setValue(entry.getValue().toString().trim());
+      }
+    }
     this.props = props;
   }
 

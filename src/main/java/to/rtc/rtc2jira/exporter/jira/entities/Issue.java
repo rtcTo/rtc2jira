@@ -1,10 +1,16 @@
 package to.rtc.rtc2jira.exporter.jira.entities;
 
-import static to.rtc.rtc2jira.storage.FieldNames.*;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.*;
+import static to.rtc.rtc2jira.storage.FieldNames.DESCRIPTION;
+import static to.rtc.rtc2jira.storage.FieldNames.ID;
+import static to.rtc.rtc2jira.storage.FieldNames.SUMMARY;
+import static to.rtc.rtc2jira.storage.FieldNames.WORK_ITEM_TYPE;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.BUSINESSNEED;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.DEFECT;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.TASK;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +24,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.jira.JiraPersistence;
 import to.rtc.rtc2jira.exporter.jira.JiraRestAccess;
-import to.rtc.rtc2jira.storage.Comment;
 import to.rtc.rtc2jira.storage.FieldNames;
 import to.rtc.rtc2jira.storage.StorageQuery;
 
@@ -56,28 +61,12 @@ public class Issue extends BaseEntity {
           // TODO: replace HTML style formatting with JIRA formatting
           issueFields.setDescription(htmlText);
           break;
-        case FieldNames.COMMENTS:
-          @SuppressWarnings("unchecked")
-          List<Comment> comments = (List<Comment>) entry.getValue();
-          if (comments.size() > 0) {
-            IssueCommentContainer issueCommentContainer = new IssueCommentContainer();
-            List<IssueComment> commentList = issueCommentContainer.getComments();
-            for (Comment comment : comments) {
-              commentList.add(IssueComment.createWithBody(issue, comment.getComment()));
-            }
-            issueFields.setComment(issueCommentContainer);
-          }
-          break;
         case FieldNames.SEVERITY:
           String severity = (String) entry.getValue();
           SeverityEnum severityEnum = SeverityEnum.fromRtcLiteral(severity);
           IssuePriority issuePrio = IssuePriority.createWithId(severityEnum.getJiraId());
           issuePrio.setId(severityEnum.getJiraId());
           issueFields.setPriority(issuePrio);
-          break;
-        case FieldNames.DUE_DATE:
-          Date dueDate = (Date) entry.getValue();
-          issueFields.setDueDate(dueDate);
           break;
         case WORK_ITEM_TYPE:
           String workitemType = (String) entry.getValue();

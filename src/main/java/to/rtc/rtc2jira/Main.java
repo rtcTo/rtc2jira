@@ -33,8 +33,10 @@ public class Main {
     if (settings.hasProxySettings()) {
       System.setProperty("http.proxyHost", settings.getProxyHost());
       System.setProperty("http.proxyPort", settings.getProxyPort());
+      System.setProperty("http.nonProxyHosts", settings.getNonProxyHosts());
       System.setProperty("https.proxyHost", settings.getProxyHost());
       System.setProperty("https.proxyPort", settings.getProxyPort());
+      System.setProperty("https.nonProxyHosts", settings.getNonProxyHosts());
     }
   }
 

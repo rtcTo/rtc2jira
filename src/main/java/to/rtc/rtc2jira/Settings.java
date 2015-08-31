@@ -19,6 +19,7 @@ public class Settings {
 
   private static final String PROXY_HOST = "proxy.host";
   private static final String PROXY_PORT = "proxy.port";
+  private static final String NON_PROXY_HOST = "non.proxy.hosts";
 
   private static final String RTC_URL = "rtc.url";
   private static final String RTC_USER = "rtc.user";
@@ -49,8 +50,7 @@ public class Settings {
     try {
       props.load(newBufferedReader(get("settings.properties")));
     } catch (IOException e) {
-      System.err
-          .println("Please create your settings.properties out of the settings.properties.example");
+      System.err.println("Please create your settings.properties out of the settings.properties.example");
       throw new RuntimeException(e);
     }
   }
@@ -75,9 +75,13 @@ public class Settings {
     return props.getProperty(PROXY_PORT);
   }
 
+  public String getNonProxyHosts() {
+    return props.getProperty(NON_PROXY_HOST);
+  }
+
   public boolean hasRtcProperties() {
-    return props.containsKey(RTC_USER) && props.containsKey(RTC_PASSWORD)
-        && props.containsKey(RTC_URL) && props.containsKey(RTC_WORKITEM_ID_RANGE);
+    return props.containsKey(RTC_USER) && props.containsKey(RTC_PASSWORD) && props.containsKey(RTC_URL)
+        && props.containsKey(RTC_WORKITEM_ID_RANGE);
   }
 
   public String getRtcUrl() {

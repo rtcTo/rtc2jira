@@ -23,5 +23,6 @@ jira.forcecreate=false
 # sysout.exporter=true
 
 # Set proxy
-# proxy.host=http://myProxy.com 
-# proxy.port=8080 
+# proxy.host=myProxy.com
+# proxy.port=8080
+# non.proxy.hosts=*.local

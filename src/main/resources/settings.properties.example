@@ -16,7 +16,7 @@ jira.user=zlatan
 jira.password=passsword
 jira.url=https://zlatan.atlassian.net
 jira.projectkey=SAM
-jira.forcecreate=false
+jira.forceupdate=false
 
 
 # Uncomment following line to enable an exporter which simply prints the work items. 

@@ -21,10 +21,6 @@ import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import com.orientechnologies.orient.core.record.impl.ODocument;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.ClientResponse.Status;
-
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
@@ -36,6 +32,10 @@ import to.rtc.rtc2jira.exporter.jira.mapping.MappingRegistry;
 import to.rtc.rtc2jira.storage.FieldNames;
 import to.rtc.rtc2jira.storage.StorageEngine;
 import to.rtc.rtc2jira.storage.StorageQuery;
+
+import com.orientechnologies.orient.core.record.impl.ODocument;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.ClientResponse.Status;
 
 public class JiraExporter implements Exporter {
   private static final Logger LOGGER = Logger.getLogger(JiraExporter.class.getName());
@@ -71,7 +71,7 @@ public class JiraExporter implements Exporter {
     ensureWorkItemWithId(Integer.parseInt(workItemId));
     Date modified = StorageQuery.getField(item, FieldNames.MODIFIED, Date.from(Instant.now()));
     Date lastExport = StorageQuery.getField(item, FieldNames.JIRA_EXPORT_TIMESTAMP, new Date(0));
-    if (modified.compareTo(lastExport) > 0) {
+    if (Settings.getInstance().isForceUpdate() || modified.compareTo(lastExport) > 0) {
       updateItem(item);
     }
   }
@@ -128,7 +128,8 @@ public class JiraExporter implements Exporter {
   }
 
   void storeTimestampOfLastExport(ODocument workItem) {
-    store.setFields(workItem, //
+    store.setFields(
+        workItem, //
         of(FieldNames.JIRA_EXPORT_TIMESTAMP,
             StorageQuery.getField(workItem, FieldNames.MODIFIED, Date.from(Instant.now()))));
   }

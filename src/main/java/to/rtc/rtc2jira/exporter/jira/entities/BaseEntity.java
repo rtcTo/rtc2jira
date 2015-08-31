@@ -1,13 +1,11 @@
 package to.rtc.rtc2jira.exporter.jira.entities;
 
 import java.net.URL;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.jira.JiraPersistence;
 
 import com.sun.jersey.api.client.ClientResponse;
@@ -44,30 +42,8 @@ public abstract class BaseEntity {
     this.self = self;
   }
 
-  private boolean forceCreate() {
-    return Settings.getInstance().isForceCreate();
-  }
-
-  public Optional<? extends BaseEntity> save() {
-    BaseEntity entity = null;
-    if (forceCreate() || getId().isEmpty()) {
-      entity = createEntityInJira();
-      if (entity != null) {
-        this.setId(entity.getId());
-        this.setKey(entity.getKey());
-      }
-    } else {
-      boolean success = updateEntityInJira();
-      if (success) {
-        entity = this;
-      }
-    }
-    return Optional.ofNullable(entity);
-  }
-
   BaseEntity createEntityInJira() {
-    ClientResponse postResponse =
-        JiraPersistence.getInstance().getRestAccess().post(getPath(), this);
+    ClientResponse postResponse = JiraPersistence.getInstance().getRestAccess().post(getPath(), this);
     if (postResponse.getStatus() == Status.CREATED.getStatusCode()) {
       return postResponse.getEntity(this.getClass());
     } else {

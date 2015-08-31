@@ -37,7 +37,7 @@ public class Settings {
   private static final String JIRA_PASSWORD = "jira.password";
   private static final String JIRA_URL = "jira.url";
   private static final String JIRA_PROJECTKEY = "jira.projectkey";
-  private static final String JIRA_FORCE_CREATE = "jira.forcecreate";
+  private static final String JIRA_FORCE_UPDATE = "jira.forceupdate";
 
   private static final String SYSOUT_EXPORTER = "sysout.exporter";
 
@@ -150,7 +150,7 @@ public class Settings {
     return props.containsKey(JIRA_USER)//
         && props.containsKey(JIRA_PASSWORD)//
         && props.containsKey(JIRA_URL) //
-        && props.containsKey(JIRA_PROJECTKEY) && props.containsKey(JIRA_FORCE_CREATE);
+        && props.containsKey(JIRA_PROJECTKEY) && props.containsKey(JIRA_FORCE_UPDATE);
   }
 
   public String getJiraUser() {
@@ -169,8 +169,8 @@ public class Settings {
     return props.getProperty(JIRA_PROJECTKEY);
   }
 
-  public boolean isForceCreate() {
-    return Boolean.parseBoolean(props.getProperty(JIRA_FORCE_CREATE, Boolean.toString(false)));
+  public boolean isForceUpdate() {
+    return Boolean.parseBoolean(props.getProperty(JIRA_FORCE_UPDATE, Boolean.toString(false)));
   }
 
   public boolean isSystemOutExporterConfigured() {

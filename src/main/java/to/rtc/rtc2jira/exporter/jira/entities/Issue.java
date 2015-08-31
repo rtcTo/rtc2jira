@@ -134,12 +134,6 @@ public class Issue extends BaseEntity {
     return "/issue";
   }
 
-  @SuppressWarnings("unchecked")
-  @Override
-  public Optional<Issue> save() {
-    return (Optional<Issue>) super.save();
-  }
-
   public static IssueType getIssueType(String issuetypeName) {
     String projectKey = JiraPersistence.getInstance().getProject().getKey();
     JiraRestAccess restAccess = JiraPersistence.getInstance().getRestAccess();

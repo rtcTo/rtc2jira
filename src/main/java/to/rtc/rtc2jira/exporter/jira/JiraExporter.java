@@ -160,6 +160,9 @@ public class JiraExporter implements Exporter {
     }
   }
 
+  boolean forceUpdate() {
+    return Settings.getInstance().isForceUpdate();
+  }
 
   Issue createIssueFromWorkItem(ODocument workItem, Project project) {
     Issue issue = new Issue();

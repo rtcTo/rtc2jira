@@ -2,6 +2,9 @@ package to.rtc.rtc2jira.exporter.jira.entities;
 
 public class IssueView {
 
+  public static class Create {
+  }
+
   public static class Update {
   }
 

@@ -21,6 +21,7 @@ public class MappingRegistry {
 
   public MappingRegistry() {
     registry.put(FieldNames.SUMMARY, new SummaryMapping());
+    registry.put(FieldNames.DUE_DATE, new DueDateMapping());
   }
 
   public void map(Entry<String, Object> attribute, Issue issue, StorageEngine storage) {

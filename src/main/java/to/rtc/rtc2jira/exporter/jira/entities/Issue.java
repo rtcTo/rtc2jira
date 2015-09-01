@@ -1,16 +1,9 @@
 package to.rtc.rtc2jira.exporter.jira.entities;
 
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Issue extends BaseEntity {
-  private static final Logger LOGGER = Logger.getLogger(Issue.class.getName());
-
-  private static Map<String, List<IssueType>> existingIssueTypes = null;
 
   private String expand;
   private String key;

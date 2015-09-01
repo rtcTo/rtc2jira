@@ -4,7 +4,12 @@ import java.util.Base64;
 
 import javax.ws.rs.core.MediaType;
 
+import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+
+import to.rtc.rtc2jira.exporter.jira.entities.IssueView;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -22,6 +27,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 public class JiraRestAccess {
 
   private Client client;
+  private ObjectMapper objectMapper;
   private String authentification;
   private String restHome;
 
@@ -30,9 +36,14 @@ public class JiraRestAccess {
   JiraRestAccess(String url, String user, String password) {
     this.restHome = url + JIRA_REST_API_SUFFIX;
     String userAndPassword = user + ':' + password;
-    this.authentification = new String(Base64.getEncoder().encode(userAndPassword.getBytes()));;
+    this.authentification = new String(Base64.getEncoder().encode(userAndPassword.getBytes()));
+
+    JacksonJsonProvider jacksonJsonProvider =
+        new JacksonJaxbJsonProvider().configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    objectMapper = jacksonJsonProvider.locateMapper(Object.class, MediaType.APPLICATION_JSON_TYPE);
+
     ClientConfig cfg = new DefaultClientConfig();
-    cfg.getClasses().add(JacksonJsonProvider.class);
+    cfg.getSingletons().add(jacksonJsonProvider);
     this.client = Client.create(cfg);
   }
 
@@ -52,22 +63,25 @@ public class JiraRestAccess {
   }
 
   public ClientResponse get(String resource) {
+    objectMapper.setSerializationConfig(objectMapper.getSerializationConfig().withView(IssueView.Read.class));
     return createJsonResponseBuilder(resource).get(ClientResponse.class);
   }
 
   public ClientResponse post(String ressource, Object toPostingObject) {
+    objectMapper.setSerializationConfig(objectMapper.getSerializationConfig().withView(IssueView.Create.class));
     return createJsonResponseBuilder(ressource).post(ClientResponse.class, toPostingObject);
   }
 
   public ClientResponse put(String ressource, Object objectToPut) {
+    objectMapper.setSerializationConfig(objectMapper.getSerializationConfig().withView(IssueView.Update.class));
     return createJsonResponseBuilder(ressource).put(ClientResponse.class, objectToPut);
   }
 
   private Builder createJsonResponseBuilder(String resource) {
     WebResource webResource = client.resource(restHome + resource);
     Builder responseBuilder =
-        webResource.header("Authorization", "Basic " + authentification)
-            .type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
+        webResource.header("Authorization", "Basic " + authentification).type(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON);
     return responseBuilder;
   }
 }

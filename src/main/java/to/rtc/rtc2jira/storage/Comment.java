@@ -12,6 +12,7 @@ public class Comment implements Serializable {
   private String creatorEmail;
   private final Date date;
   private final String comment;
+  private String jiraId;
 
   public Comment(String createrName, String creatorEmail, Date date, String comment) {
     this.createrName = createrName;
@@ -34,5 +35,13 @@ public class Comment implements Serializable {
 
   public String getComment() {
     return comment;
+  }
+
+  public String getJiraId() {
+    return jiraId;
+  }
+
+  public void setJiraId(String jiraId) {
+    this.jiraId = jiraId;
   }
 }

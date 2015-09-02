@@ -1,8 +1,6 @@
 package to.rtc.rtc2jira.exporter.jira;
 
 import static to.rtc.rtc2jira.storage.Field.of;
-import static to.rtc.rtc2jira.storage.FieldNames.DESCRIPTION;
-import static to.rtc.rtc2jira.storage.FieldNames.ID;
 import static to.rtc.rtc2jira.storage.FieldNames.WORK_ITEM_TYPE;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.BUSINESSNEED;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.DEFECT;
@@ -24,11 +22,13 @@ import java.util.stream.Collectors;
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
+import to.rtc.rtc2jira.exporter.jira.entities.IssueComment;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueFields;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueMetadata;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueType;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
 import to.rtc.rtc2jira.exporter.jira.mapping.MappingRegistry;
+import to.rtc.rtc2jira.storage.Comment;
 import to.rtc.rtc2jira.storage.FieldNames;
 import to.rtc.rtc2jira.storage.StorageEngine;
 import to.rtc.rtc2jira.storage.StorageQuery;
@@ -113,12 +113,27 @@ public class JiraExporter implements Exporter {
     }
   }
 
-  private void persistAttachments(ODocument item, Issue issue) {
-    // TODO Auto-generated method stub
-  }
+  private void persistAttachments(ODocument item, Issue issue) {}
+
 
   private void persistNewComments(ODocument item, Issue issue) {
-    // TODO Auto-generated method stub
+    List<IssueComment> issueComments = issue.getFields().getComment().getComments();
+    List<Comment> comments = item.field(FieldNames.COMMENTS);
+    if (comments != null) {
+      for (Comment comment : comments) {
+        IssueComment issueComment = IssueComment.createWithIdAndBody(issue, comment.getJiraId(), comment.getComment());
+        if (comment.getJiraId() == null) {
+          ClientResponse cr = restAccess.post(issueComment.getPath(), issueComment);
+          IssueComment issueCommentResponse = cr.getEntity(IssueComment.class);
+          issueComment.setId(issueCommentResponse.getId());
+          comment.setJiraId(issueComment.getId());
+        }
+        issueComments.add(issueComment);
+      }
+      // save comments in item because IDs may have been added
+      store.setFields(item, //
+          of(FieldNames.COMMENTS, comments));
+    }
   }
 
   void storeReference(Issue jiraIssue, ODocument workItem) {
@@ -174,15 +189,6 @@ public class JiraExporter implements Exporter {
 
       String field = entry.getKey();
       switch (field) {
-        case ID:
-          String id = (String) entry.getValue();
-          issue.setId(id);
-          break;
-        case DESCRIPTION:
-          String htmlText = (String) entry.getValue();
-          // TODO: replace HTML style formatting with JIRA formatting
-          issueFields.setDescription(htmlText);
-          break;
         case WORK_ITEM_TYPE:
           String workitemType = (String) entry.getValue();
           switch (workitemType) {
@@ -210,8 +216,6 @@ public class JiraExporter implements Exporter {
           break;
       }
     }
-    issueFields.setSummary(issue.getId() + ": " + issueFields.getSummary());
-    issue.setId(StorageQuery.getField(workItem, FieldNames.JIRA_ID_LINK, ""));
     issue.setKey(settings.getJiraProjectKey() + '-' + workItem.field(FieldNames.ID));
     return issue;
   }

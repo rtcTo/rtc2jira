@@ -16,7 +16,7 @@ public class DescriptionMapping implements Mapping {
 
   @Override
   public void map(Entry<String, Object> attribute, Issue issue, StorageEngine storage) {
-    String summary = (String) attribute.getValue();
-    issue.getFields().setSummary(summary);
+    String description = (String) attribute.getValue();
+    issue.getFields().setDescription(description);
   }
 }

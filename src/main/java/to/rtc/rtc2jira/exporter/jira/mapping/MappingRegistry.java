@@ -20,6 +20,7 @@ public class MappingRegistry {
   private final Map<String, Mapping> registry = new HashMap<>();
 
   public MappingRegistry() {
+    registry.put(FieldNames.ID, new IdMapping());
     registry.put(FieldNames.SUMMARY, new SummaryMapping());
     registry.put(FieldNames.DUE_DATE, new DueDateMapping());
   }

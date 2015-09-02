@@ -22,6 +22,7 @@ public class IssueFields {
   private String description;
   private IssuePriority priority;
   private Date duedate;
+  private IssueCommentContainer comment = new IssueCommentContainer();
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -71,5 +72,14 @@ public class IssueFields {
 
   public void setDuedate(Date duedate) {
     this.duedate = duedate;
+  }
+
+  @JsonView(IssueView.Read.class)
+  public IssueCommentContainer getComment() {
+    return comment;
+  }
+
+  public void setComment(IssueCommentContainer comment) {
+    this.comment = comment;
   }
 }

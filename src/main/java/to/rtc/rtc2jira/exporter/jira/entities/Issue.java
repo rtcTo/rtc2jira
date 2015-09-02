@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Issue extends BaseEntity {
 
   private String expand;
-  private String key;
   private IssueFields fields;
 
 
@@ -16,14 +15,6 @@ public class Issue extends BaseEntity {
 
   public void setExpand(String expand) {
     this.expand = expand;
-  }
-
-  public String getKey() {
-    return key;
-  }
-
-  public void setKey(String key) {
-    this.key = key;
   }
 
   public IssueFields getFields() {

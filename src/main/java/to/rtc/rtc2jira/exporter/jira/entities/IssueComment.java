@@ -2,10 +2,15 @@ package to.rtc.rtc2jira.exporter.jira.entities;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.codehaus.jackson.map.annotate.JsonView;
+
 @XmlRootElement
 public class IssueComment extends BaseEntity {
 
   private String body;
+
+  @JsonView(IssueView.Filtered.class)
+  private Issue issue;
 
   public static IssueComment createWithId(Issue issue, String id) {
     return new IssueComment(issue, id, null);
@@ -15,15 +20,20 @@ public class IssueComment extends BaseEntity {
     return new IssueComment(issue, null, body);
   }
 
+  public static IssueComment createWithIdAndBody(Issue issue, String id, String body) {
+    return new IssueComment(issue, id, body);
+  }
+
   public IssueComment() {
     super();
   }
 
   private IssueComment(Issue issue, String id, String body) {
     super(id);
-    // this.issue = issue;
+    this.issue = issue;
     this.body = body;
   }
+
 
   public String getBody() {
     return body;
@@ -35,7 +45,15 @@ public class IssueComment extends BaseEntity {
 
   @Override
   public String getPath() {
-    return "/comment";
+    return "/issue/" + getIssue().getKey() + "/comment";
+  }
+
+  public Issue getIssue() {
+    return issue;
+  }
+
+  public void setIssue(Issue issue) {
+    this.issue = issue;
   }
 
 

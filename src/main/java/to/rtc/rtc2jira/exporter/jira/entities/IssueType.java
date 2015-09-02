@@ -1,28 +1,17 @@
 package to.rtc.rtc2jira.exporter.jira.entities;
 
-import java.net.URL;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.map.annotate.JsonView;
 
 @XmlRootElement
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class IssueType {
+public class IssueType extends NamedEntity {
 
-  private URL self;
   private String description;
-  private String id;
-  private String name;
   private boolean subtask;
 
-  public URL getSelf() {
-    return self;
-  }
-
-  public void setSelf(URL self) {
-    this.self = self;
-  }
 
   public String getDescription() {
     return description;
@@ -32,14 +21,7 @@ public class IssueType {
     this.description = description;
   }
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
+  @JsonView(IssueView.Update.class)
   public boolean isSubtask() {
     return subtask;
   }
@@ -48,11 +30,14 @@ public class IssueType {
     this.subtask = subtask;
   }
 
-  public String getName() {
-    return name;
+  @Override
+  public String getPath() {
+    return "/issuetype";
   }
 
-  public void setName(String name) {
-    this.name = name;
+  @Override
+  public String getSelfPath() {
+    return "/issuetype/" + getId();
   }
+
 }

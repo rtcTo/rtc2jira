@@ -45,6 +45,7 @@ public class JiraRestAccess {
     ClientConfig cfg = new DefaultClientConfig();
     cfg.getSingletons().add(jacksonJsonProvider);
     this.client = Client.create(cfg);
+    // this.client.addFilter(new LoggingFilter(System.out));
   }
 
   public <T> T get(String resource, GenericType<T> type) {

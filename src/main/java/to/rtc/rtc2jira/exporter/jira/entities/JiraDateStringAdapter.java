@@ -5,7 +5,9 @@
 package to.rtc.rtc2jira.exporter.jira.entities;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
@@ -16,7 +18,7 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
  */
 public class JiraDateStringAdapter extends XmlAdapter<String, Date> {
 
-  public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+  public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 
 
   @Override
@@ -26,7 +28,9 @@ public class JiraDateStringAdapter extends XmlAdapter<String, Date> {
 
   @Override
   public String marshal(Date date) throws Exception {
-    return DATE_FORMAT.format(date);
+    Calendar myCal = new GregorianCalendar();
+    myCal.setTime(date);
+    return javax.xml.bind.DatatypeConverter.printDateTime(myCal);
   }
 
 }

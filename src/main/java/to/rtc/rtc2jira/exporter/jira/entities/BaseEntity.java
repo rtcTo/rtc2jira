@@ -4,6 +4,8 @@ import java.net.URL;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.codehaus.jackson.map.annotate.JsonView;
+
 @XmlRootElement
 public abstract class BaseEntity {
 
@@ -18,6 +20,7 @@ public abstract class BaseEntity {
     this.id = id;
   }
 
+  @JsonView(IssueView.Read.class)
   public String getId() {
     return id;
   }
@@ -26,6 +29,7 @@ public abstract class BaseEntity {
     this.id = id;
   }
 
+  @JsonView(IssueView.Read.class)
   public URL getSelf() {
     return self;
   }
@@ -35,8 +39,13 @@ public abstract class BaseEntity {
   }
 
 
+  @JsonView(IssueView.Filtered.class)
   abstract public String getPath();
 
+  @JsonView(IssueView.Filtered.class)
+  abstract public String getSelfPath();
+
+  @JsonView(IssueView.Read.class)
   public String getKey() {
     return key;
   }

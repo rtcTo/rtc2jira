@@ -6,7 +6,7 @@ public class IssueView {
   public static class Create {
   }
 
-  public static class Update {
+  public static class Update extends Create {
   }
 
   public static class Read extends Update {

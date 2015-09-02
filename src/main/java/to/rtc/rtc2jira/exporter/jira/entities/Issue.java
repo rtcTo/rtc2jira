@@ -33,5 +33,10 @@ public class Issue extends BaseEntity {
     return "/issue";
   }
 
+  @Override
+  public String getSelfPath() {
+    return getPath() + "/" + getKey();
+  }
+
 
 }

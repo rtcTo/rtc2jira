@@ -24,4 +24,9 @@ public class IssuePriority extends NamedEntity {
   public String getPath() {
     return "/priority";
   }
+
+  @Override
+  public String getSelfPath() {
+    return getPath() + "/" + getId();
+  }
 }

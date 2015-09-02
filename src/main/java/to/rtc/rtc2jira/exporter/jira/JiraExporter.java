@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,7 @@ import to.rtc.rtc2jira.exporter.jira.entities.IssueComment;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueFields;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueMetadata;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueType;
+import to.rtc.rtc2jira.exporter.jira.entities.JiraUser;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
 import to.rtc.rtc2jira.exporter.jira.mapping.MappingRegistry;
 import to.rtc.rtc2jira.storage.Comment;
@@ -123,9 +125,14 @@ public class JiraExporter implements Exporter {
       for (Comment comment : comments) {
         IssueComment issueComment = IssueComment.createWithIdAndBody(issue, comment.getJiraId(), comment.getComment());
         if (comment.getJiraId() == null) {
+          JiraUser jiraUser = persistUser(comment);
+          issueComment.setAuthor(jiraUser);
+          issueComment.setCreated(comment.getDate());
           ClientResponse cr = restAccess.post(issueComment.getPath(), issueComment);
-          IssueComment issueCommentResponse = cr.getEntity(IssueComment.class);
-          issueComment.setId(issueCommentResponse.getId());
+          IssueComment issueCommentPosted = cr.getEntity(IssueComment.class);
+          issueComment.setId(issueCommentPosted.getId());
+          issueCommentPosted.setIssue(issue);
+          // update document comment
           comment.setJiraId(issueComment.getId());
         }
         issueComments.add(issueComment);
@@ -134,6 +141,18 @@ public class JiraExporter implements Exporter {
       store.setFields(item, //
           of(FieldNames.COMMENTS, comments));
     }
+  }
+
+  private JiraUser persistUser(Comment comment) {
+    JiraUser jiraUser = JiraUser.createFromComment(comment);
+    ClientResponse cr = restAccess.get(jiraUser.getSelfPath());
+    if (!isResponseOk(cr)) {
+      ClientResponse postResponse = restAccess.post(jiraUser.getPath(), jiraUser);
+      if (isResponseOk(postResponse)) {
+        jiraUser = postResponse.getEntity(JiraUser.class);
+      }
+    }
+    return jiraUser;
   }
 
   void storeReference(Issue jiraIssue, ODocument workItem) {
@@ -230,8 +249,12 @@ public class JiraExporter implements Exporter {
     }
 
     List<IssueType> issuesTypesByProject = existingIssueTypes.get(projectKey);
-    IssueType issueType =
-        getIssueTypeByName(issuetypeName, issuesTypesByProject).orElse(createIssueType(issuetypeName));
+
+    Supplier<IssueType> createIssueTypeForName = () -> {
+      return createIssueType(issuetypeName);
+    };
+
+    IssueType issueType = getIssueTypeByName(issuetypeName, issuesTypesByProject).orElseGet(createIssueTypeForName);
 
     if (!issuesTypesByProject.contains(issueType)) {
       issuesTypesByProject.add(issueType);
@@ -242,7 +265,7 @@ public class JiraExporter implements Exporter {
   private IssueType createIssueType(String issuetypeName) {
     IssueType newIssueType = new IssueType();
     newIssueType.setName(issuetypeName);
-    newIssueType = restAccess.post("/issuetype", newIssueType, IssueType.class);
+    newIssueType = restAccess.post(newIssueType.getPath(), newIssueType, IssueType.class);
     return newIssueType;
   }
 
@@ -254,6 +277,26 @@ public class JiraExporter implements Exporter {
     } else {
       return Optional.of(filteredTypes.get(0));
     }
+
+  }
+
+  private boolean isResponseOk(ClientResponse cr) {
+    switch (cr.getStatus()) {
+      case 200:
+      case 201:
+      case 202:
+      case 203:
+      case 204:
+      case 205:
+      case 206:
+      case 207:
+      case 208:
+      case 226:
+        return true;
+      default:
+        return false;
+    }
+
 
   }
 

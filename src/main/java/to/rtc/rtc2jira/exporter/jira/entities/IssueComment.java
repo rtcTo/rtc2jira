@@ -1,5 +1,6 @@
 package to.rtc.rtc2jira.exporter.jira.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -39,7 +40,9 @@ public class IssueComment extends BaseEntity {
 
 
   public String getBody() {
-    return body;
+    String author = getAuthor().getDisplayName();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    return "<RTC: " + author + " " + dateFormat.format(getCreated()) + ">\n\n" + body;
   }
 
   public void setBody(String body) {

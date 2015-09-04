@@ -23,6 +23,7 @@ public class MappingRegistry {
     registry.put(FieldNames.ID, new IdMapping());
     registry.put(FieldNames.SUMMARY, new SummaryMapping());
     registry.put(FieldNames.DUE_DATE, new DueDateMapping());
+    registry.put(FieldNames.DESCRIPTION, new DescriptionMapping());
   }
 
   public void map(Entry<String, Object> attribute, Issue issue, StorageEngine storage) {

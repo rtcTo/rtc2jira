@@ -1,11 +1,12 @@
 package to.rtc.rtc2jira.exporter.jira.entities;
 
-import java.net.URL;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.map.annotate.JsonView;
 
 /**
  * Represents one object of a list, retrieved by resource /project/. <br>
@@ -14,15 +15,32 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
  */
 @XmlRootElement()
 @JsonIgnoreProperties({"avatarUrls"})
-public class ProjectOverview {
+public class ProjectOverview extends NamedEntity {
   private String expand;
-  private URL self;
-  private String id;
-  private String key;
-  private String name;
   private List<IssueType> issuetypes;
 
+  // override JsonView
+  @JsonView(IssueView.Create.class)
+  public String getKey() {
+    return super.getKey();
+  }
 
+  // override JsonView
+  @JsonView(IssueView.Create.class)
+  public String getId() {
+    return super.getId();
+  }
+
+  @JsonView(IssueView.Filtered.class)
+  @Override
+  public Date getCreated() {
+    return null;
+  }
+
+  @Override
+  public void setCreated(Date created) {}
+
+  @JsonView(IssueView.Read.class)
   public String getExpand() {
     return expand;
   }
@@ -31,49 +49,28 @@ public class ProjectOverview {
     this.expand = expand;
   }
 
-  public URL getSelf() {
-    return self;
-  }
-
-  public void setSelf(URL self) {
-    this.self = self;
-  }
-
-  public String getKey() {
-    return key;
-  }
-
-  public void setKey(String key) {
-    this.key = key;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
   /**
    * Only available when called rest method with expand="issuetypes"
    * 
    * @return {@link List} of {@link IssueType}
    */
+  @JsonView(IssueView.Read.class)
   public List<IssueType> getIssuetypes() {
     return issuetypes;
   }
 
   public void setIssueTypes(List<IssueType> issuetypes) {
     this.issuetypes = issuetypes;
+  }
+
+  @Override
+  public String getPath() {
+    return "/project";
+  }
+
+  @Override
+  public String getSelfPath() {
+    return getPath() + "/" + getKey();
   }
 
 }

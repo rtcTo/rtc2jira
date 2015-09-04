@@ -216,11 +216,13 @@ public class JiraExporter implements Exporter {
 
 
   private Optional<Project> getProject() {
-    return Optional.ofNullable(restAccess.get("/project/" + settings.getJiraProjectKey(), Project.class));
+    Project projectConfig = new Project();
+    projectConfig.setKey(settings.getJiraProjectKey());
+    return Optional.ofNullable(restAccess.get(projectConfig.getSelfPath(), Project.class));
   }
 
   Issue createIssueInJira(Issue issue) {
-    ClientResponse postResponse = restAccess.post("/issue", issue);
+    ClientResponse postResponse = restAccess.post(issue.getPath(), issue);
     if (postResponse.getStatus() == Status.CREATED.getStatusCode()) {
       return postResponse.getEntity(Issue.class);
     } else {

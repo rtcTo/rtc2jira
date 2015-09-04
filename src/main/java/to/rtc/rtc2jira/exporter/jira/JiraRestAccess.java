@@ -34,7 +34,7 @@ public class JiraRestAccess {
 
   private static final String JIRA_REST_API_SUFFIX = "/rest/api/2";
 
-  JiraRestAccess(String url, String user, String password) {
+  public JiraRestAccess(String url, String user, String password) {
     this.restHome = url + JIRA_REST_API_SUFFIX;
     String userAndPassword = user + ':' + password;
     this.authentification = new String(Base64.getEncoder().encode(userAndPassword.getBytes()));

@@ -1,26 +1,14 @@
 package to.rtc.rtc2jira.exporter.jira;
 
 import static to.rtc.rtc2jira.storage.Field.of;
-import static to.rtc.rtc2jira.storage.FieldNames.WORK_ITEM_TYPE;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.BUSINESSNEED;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.DEFECT;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.TASK;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.Instant;
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
-import java.util.function.Supplier;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import javax.ws.rs.core.MediaType;
 
@@ -30,11 +18,10 @@ import to.rtc.rtc2jira.exporter.jira.entities.Issue;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueAttachment;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueComment;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueFields;
-import to.rtc.rtc2jira.exporter.jira.entities.IssueMetadata;
-import to.rtc.rtc2jira.exporter.jira.entities.IssueType;
 import to.rtc.rtc2jira.exporter.jira.entities.JiraUser;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
 import to.rtc.rtc2jira.exporter.jira.mapping.MappingRegistry;
+import to.rtc.rtc2jira.exporter.jira.mapping.WorkItemTypeMapping;
 import to.rtc.rtc2jira.storage.Attachment;
 import to.rtc.rtc2jira.storage.AttachmentStorage;
 import to.rtc.rtc2jira.storage.Comment;
@@ -50,12 +37,9 @@ import com.sun.jersey.multipart.FormDataMultiPart;
 import com.sun.jersey.multipart.file.FileDataBodyPart;
 
 public class JiraExporter implements Exporter {
-  private static final Logger LOGGER = Logger.getLogger(JiraExporter.class.getName());
-
   private StorageEngine store;
   private Settings settings;
   private JiraRestAccess restAccess;
-  private Map<String, List<IssueType>> existingIssueTypes;
   private Optional<Project> projectOptional;
   private int highestExistingId = -1;
   private MappingRegistry mappingRegistry = new MappingRegistry();
@@ -99,7 +83,7 @@ public class JiraExporter implements Exporter {
       Project project = projectOptional.get();
       Issue issue = new Issue();
       issue.getFields().setProject(project);
-      issue.getFields().setIssuetype(getIssueType("Task", project));
+      issue.getFields().setIssuetype(new WorkItemTypeMapping(restAccess).getIssueType("Task", project));
       issue.getFields().setSummary("Dummy");
       issue.getFields().setDescription("This is just a dummy issue. Delete it after successfully migrating to Jira.");
       Issue createdIssue = createIssueInJira(issue);
@@ -252,80 +236,11 @@ public class JiraExporter implements Exporter {
 
     for (Entry<String, Object> entry : workItem) {
       mappingRegistry.map(entry, issue, store);
-
-      String field = entry.getKey();
-      switch (field) {
-        case WORK_ITEM_TYPE:
-          String workitemType = (String) entry.getValue();
-          switch (workitemType) {
-            case TASK:
-              issueFields.setIssuetype(getIssueType("Task", project));
-              break;
-            case STORY:
-              issueFields.setIssuetype(getIssueType("User Story", project));
-              break;
-            case EPIC:
-              issueFields.setIssuetype(getIssueType("Epic", project));
-              break;
-            case BUSINESSNEED:
-              issueFields.setIssuetype(getIssueType("Business Need", project));
-              break;
-            case DEFECT:
-              issueFields.setIssuetype(getIssueType("Bug", project));
-              break;
-            default:
-              LOGGER.warning("Cannot determine issuetype for unknown workitemType: " + workitemType);
-              break;
-          }
-          break;
-        default:
-          break;
-      }
     }
     issue.setKey(settings.getJiraProjectKey() + '-' + workItem.field(FieldNames.ID));
     return issue;
   }
 
-  private IssueType getIssueType(String issuetypeName, Project project) {
-    String projectKey = project.getKey();
-    if (existingIssueTypes == null) {
-      IssueMetadata issueMetadata =
-          restAccess.get("/issue/createmeta/?expand=projects.issuetypes.fields.", IssueMetadata.class);
-      existingIssueTypes = new HashMap<>();
-      existingIssueTypes.put(projectKey, issueMetadata.getProject(projectKey).get().getIssuetypes());
-    }
-
-    List<IssueType> issuesTypesByProject = existingIssueTypes.get(projectKey);
-
-    Supplier<IssueType> createIssueTypeForName = () -> {
-      return createIssueType(issuetypeName);
-    };
-
-    IssueType issueType = getIssueTypeByName(issuetypeName, issuesTypesByProject).orElseGet(createIssueTypeForName);
-
-    if (!issuesTypesByProject.contains(issueType)) {
-      issuesTypesByProject.add(issueType);
-    }
-    return issueType;
-  }
-
-  private IssueType createIssueType(String issuetypeName) {
-    IssueType newIssueType = new IssueType();
-    newIssueType.setName(issuetypeName);
-    newIssueType = restAccess.post(newIssueType.getPath(), newIssueType, IssueType.class);
-    return newIssueType;
-  }
-
-  private Optional<IssueType> getIssueTypeByName(String name, Collection<IssueType> types) {
-    List<IssueType> filteredTypes =
-        types.stream().filter(issuetype -> issuetype.getName().equals(name)).collect(Collectors.toList());
-    if (filteredTypes.isEmpty()) {
-      return Optional.empty();
-    } else {
-      return Optional.of(filteredTypes.get(0));
-    }
-
-  }
 
   private boolean isResponseOk(ClientResponse cr) {
     return cr.getStatus() >= Status.OK.getStatusCode() && cr.getStatus() <= Status.PARTIAL_CONTENT.getStatusCode();

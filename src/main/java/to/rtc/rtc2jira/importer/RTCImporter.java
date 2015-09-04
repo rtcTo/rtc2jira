@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import to.rtc.rtc2jira.Settings;
+import to.rtc.rtc2jira.storage.Attachment;
 import to.rtc.rtc2jira.storage.StorageEngine;
 
 import com.ibm.team.repository.client.ILoginHandler2;
@@ -19,6 +20,7 @@ import com.ibm.team.repository.client.login.UsernameAndPasswordLoginInfo;
 import com.ibm.team.repository.common.PermissionDeniedException;
 import com.ibm.team.repository.common.TeamRepositoryException;
 import com.ibm.team.workitem.client.IWorkItemClient;
+import com.ibm.team.workitem.common.internal.util.SeparatedStringList;
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IWorkItem;
 import com.orientechnologies.orient.core.record.impl.ODocument;
@@ -139,9 +141,11 @@ public class RTCImporter {
         } else {
           doc = new ODocument("WorkItem");
           doc.field(ID, workItem.getId());
+          doc.field(Attachment.EXPORTED_ATTACHMENTS_PROPERTY, new SeparatedStringList());
         }
         saveAttributes(workItemClient, workItem, doc);
         attachmentHandler.saveAttachements(workItem);
+
         doc.save();
       });
     } catch (RuntimeException e) {

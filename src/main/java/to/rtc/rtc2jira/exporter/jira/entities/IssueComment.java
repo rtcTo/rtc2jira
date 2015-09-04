@@ -1,10 +1,8 @@
 package to.rtc.rtc2jira.exporter.jira.entities;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.codehaus.jackson.map.annotate.JsonView;
 
@@ -14,7 +12,6 @@ public class IssueComment extends BaseEntity {
   private String body;
   private JiraUser author;
   private Issue issue;
-  private Date created;
 
   public static IssueComment createWithId(Issue issue, String id) {
     return new IssueComment(issue, id, null);
@@ -42,7 +39,7 @@ public class IssueComment extends BaseEntity {
   public String getBody() {
     String author = getAuthor().getDisplayName();
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-    return "<RTC: " + author + " " + dateFormat.format(getCreated()) + ">\n\n" + body;
+    return "*<Created in RTC by " + author + " " + dateFormat.format(getCreated()) + ">*\n\n" + body;
   }
 
   public void setBody(String body) {
@@ -77,14 +74,6 @@ public class IssueComment extends BaseEntity {
     this.author = author;
   }
 
-  @XmlJavaTypeAdapter(JiraDateStringAdapter.class)
-  public Date getCreated() {
-    return created;
-  }
-
-  public void setCreated(Date created) {
-    this.created = created;
-  }
 
 
 }

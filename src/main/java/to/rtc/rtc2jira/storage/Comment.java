@@ -44,4 +44,25 @@ public class Comment implements Serializable {
   public void setJiraId(String jiraId) {
     this.jiraId = jiraId;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this) {
+      return true;
+    }
+    if (obj == null || !(obj instanceof Comment)) {
+      return false;
+    }
+    Comment comparand = (Comment) obj;
+    return comparand.getDate().equals(this.getDate()) && comparand.getCreatorEmail().equals(this.getCreatorEmail());
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + (this.date == null ? 0 : this.date.hashCode());
+    result = prime * result + (this.creatorEmail == null ? 0 : this.creatorEmail.hashCode());
+    return result;
+  }
 }

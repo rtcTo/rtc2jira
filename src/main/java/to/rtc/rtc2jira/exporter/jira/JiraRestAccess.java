@@ -18,6 +18,7 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.WebResource.Builder;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.multipart.FormDataMultiPart;
 
 /**
  * Little helper class, which is responsible for all gets/post to the JIRA REST API
@@ -56,6 +57,17 @@ public class JiraRestAccess {
   public <T> T get(String resource, Class<T> type) {
     ClientResponse response = get(resource);
     return response.getEntity(type);
+  }
+
+  public ClientResponse postMultiPart(String ressource, FormDataMultiPart multiPart) {
+    WebResource webResource = client.resource(restHome + ressource);
+
+    Builder responseBuilder =
+        webResource.header("Authorization", "Basic " + authentification).header("X-Atlassian-Token", "nocheck")
+            .type(MediaType.MULTIPART_FORM_DATA_TYPE).accept(MediaType.APPLICATION_JSON);
+
+
+    return responseBuilder.post(ClientResponse.class, multiPart);
   }
 
   public <T> T post(String resource, T toPostingObject, Class<T> responseType) {

@@ -19,6 +19,8 @@ import java.nio.file.Path;
  */
 public class Attachment {
 
+  static final public String EXPORTED_ATTACHMENTS_PROPERTY = "exportedAttachments";
+
   private final long workitemId;
   private final String name;
   private Path path;
@@ -38,6 +40,10 @@ public class Attachment {
 
   void setPath(Path path) {
     this.path = path;
+  }
+
+  public Path getPath() {
+    return path;
   }
 
   public OutputStream openOutputStream() throws IOException {

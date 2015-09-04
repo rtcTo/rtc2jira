@@ -1,6 +1,10 @@
 package to.rtc.rtc2jira.exporter.jira.entities;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.codehaus.jackson.map.annotate.JsonView;
 
 @XmlRootElement
 public class Issue extends BaseEntity {
@@ -36,6 +40,15 @@ public class Issue extends BaseEntity {
   @Override
   public String getSelfPath() {
     return getPath() + "/" + getKey();
+  }
+
+  @JsonView(IssueView.Filtered.class)
+  public Date getCreated() {
+    return getFields().getCreated();
+  }
+
+  public void setCreated(Date created) {
+    getFields().setCreated(created);
   }
 
 

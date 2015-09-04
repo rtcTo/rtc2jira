@@ -8,6 +8,8 @@ import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.TASK;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.Date;
@@ -20,9 +22,12 @@ import java.util.function.Supplier;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import javax.ws.rs.core.MediaType;
+
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
+import to.rtc.rtc2jira.exporter.jira.entities.IssueAttachment;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueComment;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueFields;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueMetadata;
@@ -30,6 +35,8 @@ import to.rtc.rtc2jira.exporter.jira.entities.IssueType;
 import to.rtc.rtc2jira.exporter.jira.entities.JiraUser;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
 import to.rtc.rtc2jira.exporter.jira.mapping.MappingRegistry;
+import to.rtc.rtc2jira.storage.Attachment;
+import to.rtc.rtc2jira.storage.AttachmentStorage;
 import to.rtc.rtc2jira.storage.Comment;
 import to.rtc.rtc2jira.storage.FieldNames;
 import to.rtc.rtc2jira.storage.StorageEngine;
@@ -38,6 +45,9 @@ import to.rtc.rtc2jira.storage.StorageQuery;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.ClientResponse.Status;
+import com.sun.jersey.api.client.GenericType;
+import com.sun.jersey.multipart.FormDataMultiPart;
+import com.sun.jersey.multipart.file.FileDataBodyPart;
 
 public class JiraExporter implements Exporter {
   private static final Logger LOGGER = Logger.getLogger(JiraExporter.class.getName());
@@ -98,13 +108,18 @@ public class JiraExporter implements Exporter {
     }
   }
 
-  private void updateItem(ODocument item) {
-    projectOptional.ifPresent(project -> {
+  private void updateItem(ODocument item) throws Exception {
+    if (projectOptional.isPresent()) {
+      Project project = projectOptional.get();
       Issue issue = createIssueFromWorkItem(item, project);
       persistIssue(item, issue);
       persistNewComments(item, issue);
-      persistAttachments(item, issue);
-    });
+      try {
+        persistAttachments(item, issue);
+      } catch (IOException e) {
+        throw new Exception("Fatal error - could not open attachment directory while exporting", e);
+      }
+    }
   }
 
   private void persistIssue(ODocument item, Issue issue) {
@@ -115,8 +130,39 @@ public class JiraExporter implements Exporter {
     }
   }
 
-  private void persistAttachments(ODocument item, Issue issue) {}
-
+  private void persistAttachments(ODocument item, Issue issue) throws IOException {
+    AttachmentStorage storage = new AttachmentStorage();
+    String id = item.field(FieldNames.ID);
+    List<Attachment> attachments = storage.readAttachments(Long.parseLong(id));
+    if (attachments.size() > 0) {
+      List<String> alreadyExportedAttachments = item.field(Attachment.EXPORTED_ATTACHMENTS_PROPERTY);
+      final FormDataMultiPart multiPart = new FormDataMultiPart();
+      int newlyAdded = 0;
+      for (Attachment attachment : attachments) {
+        // check if already exported
+        if (!alreadyExportedAttachments.contains(attachment.getPath().getFileName().toString())) {
+          final File fileToUpload = attachment.getPath().toFile();
+          if (fileToUpload != null) {
+            multiPart.bodyPart(new FileDataBodyPart("file", fileToUpload, MediaType.APPLICATION_OCTET_STREAM_TYPE));
+            newlyAdded++;
+          }
+        }
+      }
+      if (newlyAdded > 0) {
+        ClientResponse clientResponse = restAccess.postMultiPart(issue.getSelfPath() + "/attachments", multiPart);
+        if (isResponseOk(clientResponse)) {
+          // refresh list of already exported attachments
+          List<IssueAttachment> responseAttachments =
+              clientResponse.getEntity(new GenericType<List<IssueAttachment>>() {});
+          for (IssueAttachment issueAttachment : responseAttachments) {
+            alreadyExportedAttachments.add(issueAttachment.getFilename());
+          }
+          store.setFields(item, //
+              of(Attachment.EXPORTED_ATTACHMENTS_PROPERTY, alreadyExportedAttachments));
+        }
+      }
+    }
+  }
 
   private void persistNewComments(ODocument item, Issue issue) {
     List<IssueComment> issueComments = issue.getFields().getComment().getComments();
@@ -185,8 +231,7 @@ public class JiraExporter implements Exporter {
 
   private boolean updateIssueInJira(Issue issue) {
     ClientResponse postResponse = restAccess.put("/issue/" + issue.getKey(), issue);
-    if (postResponse.getStatus() >= Status.OK.getStatusCode()
-        && postResponse.getStatus() <= Status.PARTIAL_CONTENT.getStatusCode()) {
+    if (isResponseOk(postResponse)) {
       return true;
     } else {
       System.err.println("Problems while updating issue: " + postResponse.getEntity(String.class));
@@ -281,23 +326,6 @@ public class JiraExporter implements Exporter {
   }
 
   private boolean isResponseOk(ClientResponse cr) {
-    switch (cr.getStatus()) {
-      case 200:
-      case 201:
-      case 202:
-      case 203:
-      case 204:
-      case 205:
-      case 206:
-      case 207:
-      case 208:
-      case 226:
-        return true;
-      default:
-        return false;
-    }
-
-
+    return cr.getStatus() >= Status.OK.getStatusCode() && cr.getStatus() <= Status.PARTIAL_CONTENT.getStatusCode();
   }
-
 }

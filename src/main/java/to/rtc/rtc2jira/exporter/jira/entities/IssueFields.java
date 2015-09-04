@@ -3,6 +3,7 @@ package to.rtc.rtc2jira.exporter.jira.entities;
 import static org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion.NON_NULL;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -23,6 +24,10 @@ public class IssueFields {
   private IssuePriority priority;
   private Date duedate;
   private IssueCommentContainer comment = new IssueCommentContainer();
+
+  private JiraUser creator;
+  private Date created;
+  private List<IssueAttachment> attachment;
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -82,4 +87,32 @@ public class IssueFields {
   public void setComment(IssueCommentContainer comment) {
     this.comment = comment;
   }
+
+  @JsonView(IssueView.Read.class)
+  public List<IssueAttachment> getAttachment() {
+    return attachment;
+  }
+
+  public void setAttachment(List<IssueAttachment> attachment) {
+    this.attachment = attachment;
+  }
+
+  @JsonView(IssueView.Read.class)
+  public JiraUser getCreator() {
+    return creator;
+  }
+
+  public void setCreator(JiraUser creator) {
+    this.creator = creator;
+  }
+
+  @JsonView(IssueView.Read.class)
+  public Date getCreated() {
+    return created;
+  }
+
+  public void setCreated(Date created) {
+    this.created = created;
+  }
+
 }

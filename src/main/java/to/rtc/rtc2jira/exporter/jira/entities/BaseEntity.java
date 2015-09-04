@@ -1,8 +1,10 @@
 package to.rtc.rtc2jira.exporter.jira.entities;
 
 import java.net.URL;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.codehaus.jackson.map.annotate.JsonView;
 
@@ -12,7 +14,7 @@ public abstract class BaseEntity {
   private String id;
   private String key;
   private URL self;
-
+  private Date created;
 
   protected BaseEntity() {}
 
@@ -53,5 +55,16 @@ public abstract class BaseEntity {
   public void setKey(String key) {
     this.key = key;
   }
+
+  @XmlJavaTypeAdapter(JiraDateStringAdapter.class)
+  @JsonView(IssueView.Read.class)
+  public Date getCreated() {
+    return created;
+  }
+
+  public void setCreated(Date created) {
+    this.created = created;
+  }
+
 
 }

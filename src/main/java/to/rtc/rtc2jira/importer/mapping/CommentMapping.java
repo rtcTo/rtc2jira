@@ -30,7 +30,11 @@ public class CommentMapping extends MappingAdapter {
   @Override
   public void afterWorkItem(ODocument doc) {
     if (value != null) {
-      List<Comment> comments = new ArrayList<>();
+      // don't just overwrite existing comments, because they contain jira export history
+      List<Comment> comments = doc.field(FieldNames.COMMENTS);
+      if (comments == null) {
+        comments = new ArrayList<>();
+      }
       for (IComment rtcCom : value) {
         Contributor rtcCreator = fetchCompleteItem(rtcCom.getCreator());
         String creatorEmail = rtcCreator.getEmailAddress();
@@ -38,11 +42,14 @@ public class CommentMapping extends MappingAdapter {
         Date creationDate = new Date(rtcCom.getCreationDate().getTime());
         String plainTextComment = rtcCom.getHTMLContent().getPlainText();
         Comment comment = new Comment(creatorName, creatorEmail, creationDate, plainTextComment);
-        comments.add(comment);
+        if (!comments.contains(comment)) {
+          comments.add(comment);
+        }
       }
       if (!comments.isEmpty()) {
         doc.field(FieldNames.COMMENTS, comments);
       }
     }
   }
+
 }

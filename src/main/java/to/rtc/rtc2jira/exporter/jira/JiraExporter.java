@@ -9,11 +9,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ws.rs.core.MediaType;
 
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
+import to.rtc.rtc2jira.exporter.jira.entities.BulkCreateContainer;
+import to.rtc.rtc2jira.exporter.jira.entities.BulkCreateEntry;
+import to.rtc.rtc2jira.exporter.jira.entities.BulkCreateResponseEntity;
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueAttachment;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueComment;
@@ -37,12 +42,14 @@ import com.sun.jersey.multipart.FormDataMultiPart;
 import com.sun.jersey.multipart.file.FileDataBodyPart;
 
 public class JiraExporter implements Exporter {
+  private static final Logger LOGGER = Logger.getLogger(JiraExporter.class.getName());
   private StorageEngine store;
   private Settings settings;
   private JiraRestAccess restAccess;
   private Optional<Project> projectOptional;
-  private int highestExistingId = -1;
+  private int highestExistingId = 5802;
   private MappingRegistry mappingRegistry = new MappingRegistry();
+  private WorkItemTypeMapping workItemTypeMapping;
 
   @Override
   public boolean isConfigured() {
@@ -59,6 +66,7 @@ public class JiraExporter implements Exporter {
       throw new RuntimeException("Unable to connect to jira repository: " + response.toString());
     }
     this.projectOptional = getProject();
+    this.workItemTypeMapping = new WorkItemTypeMapping(restAccess);
   }
 
   @Override
@@ -74,21 +82,46 @@ public class JiraExporter implements Exporter {
 
   private void ensureWorkItemWithId(int workItemId) {
     while (highestExistingId < workItemId) {
-      createDummyIssues();
+      int gap = workItemId - highestExistingId;
+      gap = (gap <= 100) ? gap : 100;
+      createDummyIssues(gap);
     }
   }
 
-  private void createDummyIssues() {
+  private void createDummyIssues(int total) {
     if (projectOptional.isPresent()) {
+      // build request entity
       Project project = projectOptional.get();
-      Issue issue = new Issue();
-      issue.getFields().setProject(project);
-      issue.getFields().setIssuetype(new WorkItemTypeMapping(restAccess).getIssueType("Task", project));
-      issue.getFields().setSummary("Dummy");
-      issue.getFields().setDescription("This is just a dummy issue. Delete it after successfully migrating to Jira.");
-      Issue createdIssue = createIssueInJira(issue);
-      String highestAsString = createdIssue.getKey().replace(settings.getJiraProjectKey() + '-', "");
-      highestExistingId = Integer.parseInt(highestAsString);
+      BulkCreateContainer postEntity = new BulkCreateContainer();
+      List<BulkCreateEntry> issueUpdates = postEntity.getIssueUpdates();
+      for (int i = 0; i < total; i++) {
+        Issue issue = new Issue();
+        IssueFields fields = issue.getFields();
+        fields.setProject(project);
+        fields.setIssuetype(workItemTypeMapping.getIssueType("Task", project));
+        fields.setSummary("Dummy");
+        fields.setDescription("This is just a dummy issue. Delete it after successfully migrating to Jira.");
+        issueUpdates.add(new BulkCreateEntry(fields));
+      }
+      // post request
+      long startTime = System.currentTimeMillis();
+      LOGGER.log(Level.INFO, "Starting bulk creation of " + total + " items.");
+      ClientResponse postResponse = restAccess.post("/issue/bulk", postEntity);
+      if (postResponse.getStatus() == Status.CREATED.getStatusCode()) {
+        BulkCreateResponseEntity respEntity = postResponse.getEntity(BulkCreateResponseEntity.class);
+        List<Issue> issues = respEntity.getIssues();
+        if (!issues.isEmpty()) {
+          String highestAsString =
+              issues.get(issues.size() - 1).getKey().replace(settings.getJiraProjectKey() + '-', "");
+          highestExistingId = Integer.parseInt(highestAsString);
+        }
+        long endTime = System.currentTimeMillis();
+        long duration = endTime - startTime;
+        double minutes = Math.floor(duration / (1000 * 60));
+        LOGGER.log(Level.INFO, "Bulk creation of " + issues.size() + " items took " + minutes + " min. and ");
+      } else {
+        System.err.println("Problems while bulk creating issues: " + postResponse.getEntity(String.class));
+      }
     }
   }
 

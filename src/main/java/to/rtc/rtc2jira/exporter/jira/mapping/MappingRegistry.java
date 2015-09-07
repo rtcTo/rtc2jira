@@ -25,6 +25,9 @@ public class MappingRegistry {
     registry.put(FieldNames.DUE_DATE, new DueDateMapping());
     registry.put(FieldNames.DESCRIPTION, new DescriptionMapping());
     registry.put(FieldNames.WORK_ITEM_TYPE, new WorkItemTypeMapping());
+    registry.put(FieldNames.RESOLUTION_DATE, new ResolutiondateMapping());
+    registry.put(FieldNames.RESOLUTION, new ResolutionMapping());
+    registry.put(FieldNames.CREATOR, new ReporterMapping());
   }
 
   public void map(Entry<String, Object> attribute, Issue issue, StorageEngine storage) {

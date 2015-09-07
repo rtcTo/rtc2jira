@@ -24,8 +24,11 @@ public class IssueFields {
   private IssuePriority priority;
   private Date duedate;
   private IssueCommentContainer comment = new IssueCommentContainer();
-
+  private Date updated;
+  private IssueResolution resolution;
+  private Date resolutiondate;
   private JiraUser creator;
+  private JiraUser reporter;
   private Date created;
   private List<IssueAttachment> attachment;
 
@@ -114,5 +117,40 @@ public class IssueFields {
   public void setCreated(Date created) {
     this.created = created;
   }
+
+  @JsonView(IssueView.Read.class)
+  public Date getUpdated() {
+    return updated;
+  }
+
+  public void setUpdated(Date updated) {
+    this.updated = updated;
+  }
+
+  @JsonView(IssueView.Read.class)
+  public Date getResolutiondate() {
+    return resolutiondate;
+  }
+
+  public void setResolutiondate(Date resolutiondate) {
+    this.resolutiondate = resolutiondate;
+  }
+
+  public IssueResolution getResolution() {
+    return resolution;
+  }
+
+  public void setResolution(IssueResolution resolution) {
+    this.resolution = resolution;
+  }
+
+  public JiraUser getReporter() {
+    return reporter;
+  }
+
+  public void setReporter(JiraUser reporter) {
+    this.reporter = reporter;
+  }
+
 
 }

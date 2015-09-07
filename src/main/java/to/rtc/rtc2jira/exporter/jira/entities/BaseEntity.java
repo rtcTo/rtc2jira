@@ -22,7 +22,6 @@ public abstract class BaseEntity {
     this.id = id;
   }
 
-  @JsonView(IssueView.Read.class)
   public String getId() {
     return id;
   }

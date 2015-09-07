@@ -46,7 +46,7 @@ public class JiraUser extends NamedEntity {
   }
 
   public void setEmailAddress(String emailAddress) {
-    this.emailAddress = emailAddress;
+    this.emailAddress = emailAddress.toLowerCase();
   }
 
   public String getDisplayName() {

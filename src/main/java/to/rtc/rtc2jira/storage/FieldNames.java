@@ -11,21 +11,24 @@ package to.rtc.rtc2jira.storage;
  *
  */
 public interface FieldNames {
-  String ID = "ID";
-  String SUMMARY = "summary";
-  String DESCRIPTION = "description";
-  String WORK_ITEM_TYPE = "workItemType";
-  String ACCEPTANCE_CRITERIAS = "acceptanceCriterias";
-  String MODIFIED = "modified";
-  String CREATIONDATE = "creationDate";
-  String COMMENTS = "internalComments";
+  String ID = "ID"; // DONE
+  String SUMMARY = "summary"; // DONE
+  String DESCRIPTION = "description"; // DONE
+  String WORK_ITEM_TYPE = "workItemType"; // DONE
+  String ACCEPTANCE_CRITERIAS = "acceptanceCriterias"; // TODO: custom field (or description)
+  String MODIFIED = "modified"; // TODO = updated (can't be PUT)
+  String CREATIONDATE = "creationDate"; // NOT POSSIBLE
+  String COMMENTS = "internalComments"; // DONE
   String PRIORITY = "priority";
   String SEVERITY = "severity";
-  String OWNER = "owner";
-  String CREATOR = "creator";
-  String MODIFIED_BY = "modifiedBy";
-  String RESOLVER = "resolver";
-  String RESOLUTION = "resolution";
+  String OWNER = "owner"; // TODO: custom field?
+  String CREATOR = "creator"; // DONE = reporter
+  String MODIFIED_BY = "modifiedBy"; // no match. ignore
+  String RESOLVER = "resolver"; // TODO? custom field
+  String RESOLUTION = "resolution"; // DONE (rtc 1=Fixed, 2=Duplicate/Rejected, 3=WorksAsDesigned,
+                                    // 4=WorksForMe,
+                                    // 5=Invalid)
+  String RESOLUTION_DATE = "resolutionDate"; // TODO = resolutiondate (can't be PUT)
   String CATEGORY = "category";
   String ARCHIVED = "archived";
   String PROJECT_AREA = "projectArea";
@@ -38,8 +41,7 @@ public interface FieldNames {
   String JIRA_ID_LINK = "jiraid";
   String JIRA_KEY_LINK = "jiraKey";
   String JIRA_EXPORT_TIMESTAMP = "jiraExportTimestamp";
-  String RESOLUTION_DATE = "resolutionDate";
-  String DUE_DATE = "dueDate";
+  String DUE_DATE = "dueDate"; // DONE
   String SUBSCRIPTIONS = "subscriptions";
 
 }

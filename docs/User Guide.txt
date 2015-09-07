@@ -1,0 +1,5 @@
+Before running the tool:
+
+1. In the target Jira project, configure the Edit/View Issue screen so that it contains all issue fields you will be importing. See the Jira documentation.
+   Fields normally missing from the default Edit/View screen are:
+   - resolution 

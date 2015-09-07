@@ -28,6 +28,7 @@ public class MappingRegistry {
     registry.put(FieldNames.RESOLUTION_DATE, new ResolutiondateMapping());
     registry.put(FieldNames.RESOLUTION, new ResolutionMapping());
     registry.put(FieldNames.CREATOR, new ReporterMapping());
+    registry.put(FieldNames.TAGS, new LabelsMapping());
   }
 
   public void map(Entry<String, Object> attribute, Issue issue, StorageEngine storage) {

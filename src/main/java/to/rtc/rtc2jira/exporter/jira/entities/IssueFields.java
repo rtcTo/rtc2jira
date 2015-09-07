@@ -2,6 +2,7 @@ package to.rtc.rtc2jira.exporter.jira.entities;
 
 import static org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion.NON_NULL;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +32,9 @@ public class IssueFields {
   private JiraUser reporter;
   private Date created;
   private List<IssueAttachment> attachment;
+
+  private List<String> labels = new ArrayList<String>();
+  private int storyPoints;
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -152,5 +156,22 @@ public class IssueFields {
     this.reporter = reporter;
   }
 
+  public List<String> getLabels() {
+    return labels;
+  }
+
+  public void setLabels(List<String> labels) {
+    this.labels = labels;
+  }
+
+  @JsonView(IssueView.Filtered.class)
+  public int getStoryPoints() {
+    storyPoints = 11;
+    return storyPoints;
+  }
+
+  public void setStoryPoints(int storyPoints) {
+    this.storyPoints = storyPoints;
+  }
 
 }

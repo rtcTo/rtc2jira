@@ -3,3 +3,8 @@ Before running the tool:
 1. In the target Jira project, configure the Edit/View Issue screen so that it contains all issue fields you will be importing. See the Jira documentation.
    Fields normally missing from the default Edit/View screen are:
    - resolution 
+   - Story Points (n.b. custom field)
+   
+ 2. Find id of Story Points custom field (this is a built-in custom id; the id may be different in different Jira instances). Insert id in appropriate place in code
+ 3.
+   

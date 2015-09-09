@@ -1,0 +1,141 @@
+/////////////// Get name, getStringIdentifier of state object. 
+ICombinedWorkflowInfos wfInfo = service.findCombinedWorkflowInfos(projectArea, monitor); 
+//IWorkflowInfo wfInfo = service.findWorkflowInfo(workItem, monitor); 
+
+Identifier<IState>[] stateIds = wfInfo.getAllStateIds(); 
+
+Identifier<IState> selectedState = null; 
+
+for(Identifier<IState> s :stateIds){ 
+
+System.out.println("getStateName:" + wfInfo.getStateName(s)); 
+System.out.println("getStringIdentifier:" + s.getStringIdentifier()); 
+System.out.println("getToString:" + s.toString()); 
+System.out.println("--------------------------------------"); 
+
+} 
+
+getStateName:Abandoned 
+getStringIdentifier:com.ibm.team.workitem.buildTrackingWorkflow.state.s7 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.workitem.buildTrackingWorkflow.state.s7 
+-------------------------------------- 
+getStateName:Done 
+getStringIdentifier:com.ibm.team.workitem.buildTrackingWorkflow.state.s3 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.workitem.buildTrackingWorkflow.state.s3 
+-------------------------------------- 
+getStateName:In Progress 
+getStringIdentifier:com.ibm.team.workitem.buildTrackingWorkflow.state.s2 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.workitem.buildTrackingWorkflow.state.s2 
+-------------------------------------- 
+getStateName:In Progress 
+getStringIdentifier:2 
+getToString:com.ibm.team.workitem.common.model.IState:2 
+-------------------------------------- 
+getStateName:New 
+getStringIdentifier:1 
+getToString:com.ibm.team.workitem.common.model.IState:1 
+-------------------------------------- 
+getStateName:Reopened 
+getStringIdentifier:6 
+getToString:com.ibm.team.workitem.common.model.IState:6 
+-------------------------------------- 
+getStateName:Resolved 
+getStringIdentifier:3 
+getToString:com.ibm.team.workitem.common.model.IState:3 
+-------------------------------------- 
+getStateName:Verified 
+getStringIdentifier:4 
+getToString:com.ibm.team.workitem.common.model.IState:4 
+-------------------------------------- 
+getStateName:Approved 
+getStringIdentifier:com.ibm.team.rtc.workflow.adoption.state.s2 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.rtc.workflow.adoption.state.s2 
+-------------------------------------- 
+getStateName:Completed 
+getStringIdentifier:com.ibm.team.rtc.workflow.adoption.state.s4 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.rtc.workflow.adoption.state.s4 
+-------------------------------------- 
+getStateName:Proposed 
+getStringIdentifier:com.ibm.team.rtc.workflow.adoption.state.s1 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.rtc.workflow.adoption.state.s1 
+-------------------------------------- 
+getStateName:Rejected 
+getStringIdentifier:com.ibm.team.rtc.workflow.adoption.state.s3 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.rtc.workflow.adoption.state.s3 
+-------------------------------------- 
+getStateName:Done 
+getStringIdentifier:com.ibm.team.workitem.retrospectiveWorkflow.state.finished 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.workitem.retrospectiveWorkflow.state.finished 
+-------------------------------------- 
+getStateName:In Progress 
+getStringIdentifier:com.ibm.team.workitem.retrospectiveWorkflow.state.inprogress 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.workitem.retrospectiveWorkflow.state.inprogress 
+-------------------------------------- 
+getStateName:Invalid 
+getStringIdentifier:com.ibm.team.workitem.retrospectiveWorkflow.state.s1 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.workitem.retrospectiveWorkflow.state.s1 
+-------------------------------------- 
+getStateName:New 
+getStringIdentifier:com.ibm.team.workitem.retrospectiveWorkflow.state.new 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.workitem.retrospectiveWorkflow.state.new 
+-------------------------------------- 
+getStateName:Invalid 
+getStringIdentifier:com.ibm.team.workitem.taskWorkflow.state.s4 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.workitem.taskWorkflow.state.s4 
+-------------------------------------- 
+getStateName:Deferred 
+getStringIdentifier:com.ibm.team.apt.epic.workflow.state.s5 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.apt.epic.workflow.state.s5 
+-------------------------------------- 
+getStateName:Done 
+getStringIdentifier:com.ibm.team.apt.epic.workflow.state.s3 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.apt.epic.workflow.state.s3 
+-------------------------------------- 
+getStateName:In Progress 
+getStringIdentifier:com.ibm.team.apt.epic.workflow.state.s2 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.apt.epic.workflow.state.s2 
+-------------------------------------- 
+getStateName:Invalid 
+getStringIdentifier:com.ibm.team.apt.epic.workflow.state.s6 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.apt.epic.workflow.state.s6 
+-------------------------------------- 
+getStateName:New 
+getStringIdentifier:com.ibm.team.apt.epic.workflow.state.s1 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.apt.epic.workflow.state.s1 
+-------------------------------------- 
+getStateName:Invalid 
+getStringIdentifier:com.ibm.team.workitem.impedimentWorkflow.state.s3 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.workitem.impedimentWorkflow.state.s3 
+-------------------------------------- 
+getStateName:New 
+getStringIdentifier:com.ibm.team.workitem.impedimentWorkflow.state.s1 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.workitem.impedimentWorkflow.state.s1 
+-------------------------------------- 
+getStateName:Resolved 
+getStringIdentifier:com.ibm.team.workitem.impedimentWorkflow.state.s2 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.workitem.impedimentWorkflow.state.s2 
+-------------------------------------- 
+getStateName:Deferred 
+getStringIdentifier:com.ibm.team.apt.storyWorkflow.state.s1 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.apt.storyWorkflow.state.s1 
+-------------------------------------- 
+getStateName:Done 
+getStringIdentifier:com.ibm.team.apt.story.verified 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.apt.story.verified 
+-------------------------------------- 
+getStateName:Implemented 
+getStringIdentifier:com.ibm.team.apt.story.tested 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.apt.story.tested 
+-------------------------------------- 
+getStateName:In Progress 
+getStringIdentifier:com.ibm.team.apt.story.defined 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.apt.story.defined 
+-------------------------------------- 
+getStateName:New 
+getStringIdentifier:com.ibm.team.apt.story.idea 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.apt.story.idea 
+-------------------------------------- 
+getStateName:Invalid 
+getStringIdentifier:com.ibm.team.apt.storyWorkflow.state.s2 
+getToString:com.ibm.team.workitem.common.model.IState:com.ibm.team.apt.storyWorkflow.state.s2 
+--------------------------------------

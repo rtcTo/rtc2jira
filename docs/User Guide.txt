@@ -6,5 +6,5 @@ Before running the tool:
    - Story Points (n.b. custom field)
    
  2. Find id of Story Points custom field (this is a built-in custom id; the id may be different in different Jira instances). Insert id in appropriate place in code
- 3.
+ 3. Find the six transition id's for your Jira instance and set these as values of the corresponding properties in the settings.properties file. (Cf. comment in settings.properties for more information)
    

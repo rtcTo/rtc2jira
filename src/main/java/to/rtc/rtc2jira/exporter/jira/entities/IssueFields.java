@@ -157,6 +157,7 @@ public class IssueFields {
     this.reporter = reporter;
   }
 
+  @JsonView(IssueView.Update.class)
   public List<String> getLabels() {
     return labels;
   }

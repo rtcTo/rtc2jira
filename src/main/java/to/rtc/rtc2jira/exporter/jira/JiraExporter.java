@@ -24,6 +24,7 @@ import to.rtc.rtc2jira.exporter.jira.entities.IssueAttachment;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueComment;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueFields;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueResolution;
+import to.rtc.rtc2jira.exporter.jira.entities.IssueStatus;
 import to.rtc.rtc2jira.exporter.jira.entities.JiraUser;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
 import to.rtc.rtc2jira.exporter.jira.entities.ResolutionEnum;
@@ -50,7 +51,7 @@ public class JiraExporter implements Exporter {
   private Settings settings;
   private JiraRestAccess restAccess;
   private Optional<Project> projectOptional;
-  private int highestExistingId = -1;
+  private int highestExistingId = 6000;
   private MappingRegistry mappingRegistry = new MappingRegistry();
   private WorkItemTypeMapping workItemTypeMapping;
 
@@ -83,7 +84,7 @@ public class JiraExporter implements Exporter {
     }
   }
 
-  private void ensureWorkItemWithId(int workItemId) {
+  private void ensureWorkItemWithId(int workItemId) throws Exception {
     while (highestExistingId < workItemId) {
       int gap = workItemId - highestExistingId;
       gap = (gap <= 100) ? gap : 100;
@@ -91,7 +92,7 @@ public class JiraExporter implements Exporter {
     }
   }
 
-  private void createDummyIssues(int total) {
+  private void createDummyIssues(int total) throws Exception {
     if (projectOptional.isPresent()) {
       // build request entity
       Project project = projectOptional.get();
@@ -123,7 +124,8 @@ public class JiraExporter implements Exporter {
         double minutes = Math.floor(duration / (1000 * 60));
         LOGGER.log(Level.INFO, "Bulk creation of " + issues.size() + " items took " + minutes + " min. and ");
       } else {
-        System.err.println("Problems while bulk creating issues: " + postResponse.getEntity(String.class));
+        String errorMessage = "Problems while bulk creating issues: " + postResponse.getEntity(String.class);
+        throw new Exception(errorMessage);
       }
     }
   }
@@ -143,11 +145,27 @@ public class JiraExporter implements Exporter {
   }
 
   private void persistIssue(ODocument item, Issue issue) {
-    boolean success = updateIssueInJira(issue);
+    Issue lastExportedIssue = getLastExportedInfo(item);
+    boolean success = updateIssueInJira(issue, lastExportedIssue);
     if (success) {
       storeReference(issue, item);
-      storeTimestampOfLastExport(item);
+      cacheInfoOfLastExport(issue, item);
     }
+  }
+
+  private Issue getLastExportedInfo(ODocument item) {
+    String lastExportedStatus = item.field(FieldNames.JIRA_LAST_EXPORTED_STATUS);
+    Issue lastExportedIssue = new Issue();
+    // status
+    IssueStatus status;
+    if (lastExportedStatus == null || lastExportedStatus.isEmpty()) {
+      status = IssueStatus.createToDo();
+    } else {
+      StatusEnum statusEnum = StatusEnum.forJiraId(lastExportedStatus);
+      status = statusEnum.getIssueStatus();
+    }
+    lastExportedIssue.getFields().setStatus(status);
+    return lastExportedIssue;
   }
 
   private void persistAttachments(ODocument item, Issue issue) throws IOException {
@@ -227,13 +245,13 @@ public class JiraExporter implements Exporter {
         of(FieldNames.JIRA_ID_LINK, jiraIssue.getId()));
   }
 
-  void storeTimestampOfLastExport(ODocument workItem) {
+  void cacheInfoOfLastExport(Issue jiraIssue, ODocument workItem) {
     store.setFields(
         workItem, //
         of(FieldNames.JIRA_EXPORT_TIMESTAMP,
-            StorageQuery.getField(workItem, FieldNames.MODIFIED, Date.from(Instant.now()))));
+            StorageQuery.getField(workItem, FieldNames.MODIFIED, Date.from(Instant.now()))),
+        of(FieldNames.JIRA_LAST_EXPORTED_STATUS, jiraIssue.getFields().getStatus().getId()));
   }
-
 
   private Optional<Project> getProject() {
     Project projectConfig = new Project();
@@ -251,11 +269,11 @@ public class JiraExporter implements Exporter {
     }
   }
 
-  private boolean updateIssueInJira(Issue issue) {
+  private boolean updateIssueInJira(Issue issue, Issue lastExportedIssue) {
     ClientResponse postResponse = restAccess.put("/issue/" + issue.getKey(), issue);
     if (isResponseOk(postResponse)) {
       boolean result = true;
-      String transitionId = getTransitionId(issue);
+      String transitionId = getTransitionId(issue.getFields().getStatus(), lastExportedIssue.getFields().getStatus());
       if (!StatusEnum.NO_TRANSITION.equals(transitionId)) {
         result = doTransition(issue, transitionId);
       }
@@ -266,12 +284,8 @@ public class JiraExporter implements Exporter {
     }
   }
 
-  String getTransitionId(Issue issue) {
-    ClientResponse postResponse = restAccess.get("/issue/" + issue.getKey());
-    Issue responseIssue = postResponse.getEntity(Issue.class);
-    StatusEnum currentStatus = responseIssue.getFields().getStatus().getStatusEnum();
-    StatusEnum targetStatus = issue.getFields().getStatus().getStatusEnum();
-    return currentStatus.getTransitionId(targetStatus);
+  String getTransitionId(IssueStatus targetStatus, IssueStatus currentStatus) {
+    return currentStatus.getStatusEnum().getTransitionId(targetStatus.getStatusEnum());
   }
 
   private boolean doTransition(Issue issue, String transitionId) {

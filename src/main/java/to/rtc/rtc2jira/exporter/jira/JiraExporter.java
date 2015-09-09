@@ -50,7 +50,7 @@ public class JiraExporter implements Exporter {
   private Settings settings;
   private JiraRestAccess restAccess;
   private Optional<Project> projectOptional;
-  private int highestExistingId = 5802;
+  private int highestExistingId = -1;
   private MappingRegistry mappingRegistry = new MappingRegistry();
   private WorkItemTypeMapping workItemTypeMapping;
 

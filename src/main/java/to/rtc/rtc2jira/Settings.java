@@ -40,6 +40,15 @@ public class Settings {
   private static final String JIRA_PROJECTKEY = "jira.projectkey";
   private static final String JIRA_FORCE_UPDATE = "jira.forceupdate";
 
+  private static final String JIRA_TRANSITION_TODO_INPROGRESS = "jira.transitions.todoToInprogress.id";
+  private static final String JIRA_TRANSITION_TODO_DONE = "jira.transitions.todoToDone.id";
+
+  private static final String JIRA_TRANSITION_INPROGRESS_TODO = "jira.transitions.inprogressToTodo.id";
+  private static final String JIRA_TRANSITION_INPROGRESS_DONE = "jira.transitions.inprogressToDone.id";
+
+  private static final String JIRA_TRANSITION_DONE_TODO = "jira.transitions.doneToTodo.id";
+  private static final String JIRA_TRANSITION_DONE_INPROGRESS = "jira.transitions.doneToInprogress.id";
+
   private static final String SYSOUT_EXPORTER = "sysout.exporter";
 
   private static final Settings instance = new Settings();
@@ -183,4 +192,29 @@ public class Settings {
   public boolean isSystemOutExporterConfigured() {
     return Boolean.parseBoolean(props.getProperty(SYSOUT_EXPORTER));
   }
+
+  public String getJiraTransitionTodoInprogress() {
+    return props.getProperty(JIRA_TRANSITION_TODO_INPROGRESS);
+  }
+
+  public String getJiraTransitionTodoDone() {
+    return props.getProperty(JIRA_TRANSITION_TODO_DONE);
+  }
+
+  public String getJiraTransitionInprogressTodo() {
+    return props.getProperty(JIRA_TRANSITION_INPROGRESS_TODO);
+  }
+
+  public String getJiraTransitionInprogressDone() {
+    return props.getProperty(JIRA_TRANSITION_INPROGRESS_DONE);
+  }
+
+  public String getJiraTransitionDoneTodo() {
+    return props.getProperty(JIRA_TRANSITION_DONE_TODO);
+  }
+
+  public String getJiraTransitionDoneInprogress() {
+    return props.getProperty(JIRA_TRANSITION_DONE_INPROGRESS);
+  }
+
 }

@@ -32,6 +32,7 @@ public class IssueFields {
   private JiraUser reporter;
   private Date created;
   private List<IssueAttachment> attachment;
+  private IssueStatus status;
 
   private List<String> labels = new ArrayList<String>();
   private int storyPoints;
@@ -172,6 +173,15 @@ public class IssueFields {
 
   public void setStoryPoints(int storyPoints) {
     this.storyPoints = storyPoints;
+  }
+
+  @JsonView(IssueView.Read.class)
+  public IssueStatus getStatus() {
+    return status;
+  }
+
+  public void setStatus(IssueStatus status) {
+    this.status = status;
   }
 
 }

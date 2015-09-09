@@ -23,8 +23,11 @@ import to.rtc.rtc2jira.exporter.jira.entities.Issue;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueAttachment;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueComment;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueFields;
+import to.rtc.rtc2jira.exporter.jira.entities.IssueResolution;
 import to.rtc.rtc2jira.exporter.jira.entities.JiraUser;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
+import to.rtc.rtc2jira.exporter.jira.entities.ResolutionEnum;
+import to.rtc.rtc2jira.exporter.jira.entities.StatusEnum;
 import to.rtc.rtc2jira.exporter.jira.mapping.MappingRegistry;
 import to.rtc.rtc2jira.exporter.jira.mapping.WorkItemTypeMapping;
 import to.rtc.rtc2jira.storage.Attachment;
@@ -251,9 +254,34 @@ public class JiraExporter implements Exporter {
   private boolean updateIssueInJira(Issue issue) {
     ClientResponse postResponse = restAccess.put("/issue/" + issue.getKey(), issue);
     if (isResponseOk(postResponse)) {
-      return true;
+      boolean result = true;
+      String transitionId = getTransitionId(issue);
+      if (!StatusEnum.NO_TRANSITION.equals(transitionId)) {
+        result = doTransition(issue, transitionId);
+      }
+      return result;
     } else {
       System.err.println("Problems while updating issue: " + postResponse.getEntity(String.class));
+      return false;
+    }
+  }
+
+  String getTransitionId(Issue issue) {
+    ClientResponse postResponse = restAccess.get("/issue/" + issue.getKey());
+    Issue responseIssue = postResponse.getEntity(Issue.class);
+    StatusEnum currentStatus = responseIssue.getFields().getStatus().getStatusEnum();
+    StatusEnum targetStatus = issue.getFields().getStatus().getStatusEnum();
+    return currentStatus.getTransitionId(targetStatus);
+  }
+
+  private boolean doTransition(Issue issue, String transitionId) {
+    String entity = "{\"transition\":{\"id\":" + transitionId + "}}";
+    ClientResponse postResponse =
+        restAccess.post("/issue/" + issue.getKey() + "/transitions?expand=transitions.fields", entity);
+    if (isResponseOk(postResponse)) {
+      return true;
+    } else {
+      System.err.println("Problems while transitioning issue: " + postResponse.getEntity(String.class));
       return false;
     }
   }
@@ -269,6 +297,11 @@ public class JiraExporter implements Exporter {
 
     for (Entry<String, Object> entry : workItem) {
       mappingRegistry.map(entry, issue, store);
+    }
+    // set resolution to appropriate default, otherwise it will be set to "fixed" whenever status is
+    // "done", even if issue is not a defect
+    if (issueFields.getStatus().getStatusEnum() == StatusEnum.done && issueFields.getResolution() == null) {
+      issueFields.setResolution(new IssueResolution(ResolutionEnum.done));
     }
     issue.setKey(settings.getJiraProjectKey() + '-' + workItem.field(FieldNames.ID));
     return issue;

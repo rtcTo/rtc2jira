@@ -44,7 +44,9 @@ public abstract class BaseEntity {
   abstract public String getPath();
 
   @JsonView(IssueView.Filtered.class)
-  abstract public String getSelfPath();
+  public String getSelfPath() {
+    return getPath() + "/" + getId();
+  }
 
   @JsonView(IssueView.Read.class)
   public String getKey() {

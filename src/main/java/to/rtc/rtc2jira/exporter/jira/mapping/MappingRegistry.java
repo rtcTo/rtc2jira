@@ -25,8 +25,9 @@ public class MappingRegistry {
     registry.put(FieldNames.DUE_DATE, new DueDateMapping());
     registry.put(FieldNames.DESCRIPTION, new DescriptionMapping());
     registry.put(FieldNames.WORK_ITEM_TYPE, new WorkItemTypeMapping());
-    registry.put(FieldNames.RESOLUTION_DATE, new ResolutiondateMapping());
+    registry.put(FieldNames.STATE, new StatusMapping());
     registry.put(FieldNames.RESOLUTION, new ResolutionMapping());
+    registry.put(FieldNames.RESOLUTION_DATE, new ResolutiondateMapping());
     registry.put(FieldNames.CREATOR, new ReporterMapping());
     registry.put(FieldNames.TAGS, new LabelsMapping());
   }

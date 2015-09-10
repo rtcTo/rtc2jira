@@ -20,7 +20,7 @@ public class OwnerMapping extends BaseUserMapping {
   public void map(Entry<String, Object> attribute, Issue issue, StorageEngine storage) {
     String formattedStr = (String) attribute.getValue();
     JiraUser jiraUser = getUser(formattedStr);
-    issue.getFields().setOwner(jiraUser);
+    issue.getFields().setAssignee(jiraUser);
   }
 
   private JiraUser getUser(String contributorStr) {

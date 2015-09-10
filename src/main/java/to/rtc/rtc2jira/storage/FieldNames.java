@@ -16,15 +16,15 @@ public interface FieldNames {
   String DESCRIPTION = "description"; // DONE
   String WORK_ITEM_TYPE = "workItemType"; // DONE
   String ACCEPTANCE_CRITERIAS = "acceptanceCriterias"; // DONE: custom field
-  String MODIFIED = "modified"; // TODO = updated (can't be PUT)
+  String MODIFIED = "modified"; // IGNORE = updated (can't be PUT)
   String CREATIONDATE = "creationDate"; // DONE (custom field)
   String COMMENTS = "internalComments"; // DONE
   String PRIORITY = "priority";
   String SEVERITY = "severity";
-  String OWNER = "owner"; // TODO: custom field?
+  String OWNER = "owner"; // TODO = assignee
   String CREATOR = "creator"; // DONE = reporter
   String MODIFIED_BY = "modifiedBy"; // no match. ignore
-  String RESOLVER = "resolver"; // TODO? custom field
+  String RESOLVER = "resolver"; // DONE custom field
   String RESOLUTION = "resolution"; // DONE (rtc 1=Fixed, 2=Duplicate/Rejected, 3=WorksAsDesigned,
                                     // 4=WorksForMe,
                                     // 5=Invalid)

@@ -317,14 +317,6 @@ public class JiraExporter implements Exporter {
     if (issueFields.getStatus().getStatusEnum() == StatusEnum.done && issueFields.getResolution() == null) {
       issueFields.setResolution(new IssueResolution(ResolutionEnum.done));
     }
-    // set jira assignee
-    if (issueFields.getResolver() != null) {
-      issueFields.setAssignee(issueFields.getResolver());
-    } else if (issueFields.getOwner() != null) {
-      issueFields.setAssignee(issueFields.getOwner());
-    } else if (issueFields.getReporter() != null) {
-      issueFields.setAssignee(issueFields.getReporter());
-    }
     // set jira key
     issue.setKey(settings.getJiraProjectKey() + '-' + workItem.field(FieldNames.ID));
     return issue;

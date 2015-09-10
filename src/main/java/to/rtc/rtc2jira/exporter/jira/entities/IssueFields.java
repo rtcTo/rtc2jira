@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -36,6 +37,7 @@ public class IssueFields {
 
   private List<String> labels = new ArrayList<String>();
   private int storyPoints;
+  private Date rtcCreated;
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -166,9 +168,8 @@ public class IssueFields {
     this.labels = labels;
   }
 
-  @JsonView(IssueView.Filtered.class)
+  @XmlElement(name = "customfield_10005")
   public int getStoryPoints() {
-    storyPoints = 11;
     return storyPoints;
   }
 
@@ -184,5 +185,17 @@ public class IssueFields {
   public void setStatus(IssueStatus status) {
     this.status = status;
   }
+
+  @XmlJavaTypeAdapter(JiraDateStringAdapter.class)
+  @XmlElement(name = "customfield_10100")
+  public Date getRtcCreated() {
+    return rtcCreated;
+  }
+
+  public void setRtcCreated(Date rtcCreated) {
+    this.rtcCreated = rtcCreated;
+  }
+
+
 
 }

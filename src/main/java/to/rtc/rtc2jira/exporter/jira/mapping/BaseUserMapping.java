@@ -30,6 +30,9 @@ public abstract class BaseUserMapping implements Mapping {
 
 
   JiraUser getUser(JiraUser jiraUser) {
+    if ("unassigned".equals(jiraUser.getName().toLowerCase()))
+      return null;
+
     if (!existingUserEmails.contains(jiraUser.getEmailAddress())) {
       ClientResponse clientResponse = restAccess.get(jiraUser.getSelfPath());
       if (clientResponse.getStatus() == 200) {

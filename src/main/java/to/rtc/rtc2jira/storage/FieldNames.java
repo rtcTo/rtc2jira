@@ -15,9 +15,9 @@ public interface FieldNames {
   String SUMMARY = "summary"; // DONE
   String DESCRIPTION = "description"; // DONE
   String WORK_ITEM_TYPE = "workItemType"; // DONE
-  String ACCEPTANCE_CRITERIAS = "acceptanceCriterias"; // TODO: custom field (or description)
+  String ACCEPTANCE_CRITERIAS = "acceptanceCriterias"; // DONE: custom field
   String MODIFIED = "modified"; // TODO = updated (can't be PUT)
-  String CREATIONDATE = "creationDate"; // NOT POSSIBLE
+  String CREATIONDATE = "creationDate"; // DONE (custom field)
   String COMMENTS = "internalComments"; // DONE
   String PRIORITY = "priority";
   String SEVERITY = "severity";
@@ -32,10 +32,10 @@ public interface FieldNames {
   String CATEGORY = "category";
   String ARCHIVED = "archived";
   String PROJECT_AREA = "projectArea";
-  String STORY_POINTS = "storyPoints";
+  String STORY_POINTS = "storyPoints"; // DONE
   String CUSTOM_ATTRIBUTES = "customAttributes";
-  String STATE = "state";
-  String TAGS = "tags";
+  String STATE = "state"; // DONE
+  String TAGS = "tags"; // DONE
   String ITERATION_LABEL = "iterationLabel";
   String GITHUB_WORKITEM_LINK = "githubissuenumber";
   String JIRA_ID_LINK = "jiraid";

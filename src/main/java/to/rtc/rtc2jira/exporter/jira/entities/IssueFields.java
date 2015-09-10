@@ -31,6 +31,7 @@ public class IssueFields {
   private Date resolutiondate;
   private JiraUser creator;
   private JiraUser reporter;
+  private JiraUser owner;
   private Date created;
   private List<IssueAttachment> attachment;
   private IssueStatus status;
@@ -204,6 +205,15 @@ public class IssueFields {
 
   public void setAcceptanceCriteria(String acceptanceCriteria) {
     this.acceptanceCriteria = acceptanceCriteria;
+  }
+
+  @XmlElement(name = "customfield_10103")
+  public JiraUser getOwner() {
+    return owner;
+  }
+
+  public void setOwner(JiraUser owner) {
+    this.owner = owner;
   }
 
 

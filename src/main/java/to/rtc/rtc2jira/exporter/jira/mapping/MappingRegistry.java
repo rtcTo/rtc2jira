@@ -32,6 +32,7 @@ public class MappingRegistry {
     registry.put(FieldNames.TAGS, new LabelsMapping());
     registry.put(FieldNames.CREATIONDATE, new CreationDateMapping());
     registry.put(FieldNames.STORY_POINTS, new StoryPointsMapping());
+    registry.put(FieldNames.ACCEPTANCE_CRITERIAS, new AcceptanceCriteriaMapping());
   }
 
   public void map(Entry<String, Object> attribute, Issue issue, StorageEngine storage) {

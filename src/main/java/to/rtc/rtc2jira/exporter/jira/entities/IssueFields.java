@@ -35,6 +35,7 @@ public class IssueFields {
   private List<IssueAttachment> attachment;
   private IssueStatus status;
 
+  private String acceptanceCriteria;
   private List<String> labels = new ArrayList<String>();
   private int storyPoints;
   private Date rtcCreated;
@@ -168,15 +169,6 @@ public class IssueFields {
     this.labels = labels;
   }
 
-  @XmlElement(name = "customfield_10005")
-  public int getStoryPoints() {
-    return storyPoints;
-  }
-
-  public void setStoryPoints(int storyPoints) {
-    this.storyPoints = storyPoints;
-  }
-
   @JsonView(IssueView.Read.class)
   public IssueStatus getStatus() {
     return status;
@@ -184,6 +176,15 @@ public class IssueFields {
 
   public void setStatus(IssueStatus status) {
     this.status = status;
+  }
+
+  @XmlElement(name = "customfield_10005")
+  public int getStoryPoints() {
+    return storyPoints;
+  }
+
+  public void setStoryPoints(int storyPoints) {
+    this.storyPoints = storyPoints;
   }
 
   @XmlJavaTypeAdapter(JiraDateStringAdapter.class)
@@ -194,6 +195,15 @@ public class IssueFields {
 
   public void setRtcCreated(Date rtcCreated) {
     this.rtcCreated = rtcCreated;
+  }
+
+  @XmlElement(name = "customfield_10101")
+  public String getAcceptanceCriteria() {
+    return acceptanceCriteria;
+  }
+
+  public void setAcceptanceCriteria(String acceptanceCriteria) {
+    this.acceptanceCriteria = acceptanceCriteria;
   }
 
 

@@ -30,6 +30,7 @@ public class MappingRegistry {
     registry.put(FieldNames.RESOLUTION_DATE, new ResolutiondateMapping());
     registry.put(FieldNames.CREATOR, new ReporterMapping());
     registry.put(FieldNames.OWNER, new OwnerMapping());
+    registry.put(FieldNames.RESOLVER, new ResolverMapping());
     registry.put(FieldNames.TAGS, new LabelsMapping());
     registry.put(FieldNames.CREATIONDATE, new CreationDateMapping());
     registry.put(FieldNames.STORY_POINTS, new StoryPointsMapping());

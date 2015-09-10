@@ -32,6 +32,8 @@ public class IssueFields {
   private JiraUser creator;
   private JiraUser reporter;
   private JiraUser owner;
+  private JiraUser assignee;
+  private JiraUser resolver;
   private Date created;
   private List<IssueAttachment> attachment;
   private IssueStatus status;
@@ -179,6 +181,14 @@ public class IssueFields {
     this.status = status;
   }
 
+  public JiraUser getAssignee() {
+    return assignee;
+  }
+
+  public void setAssignee(JiraUser assignee) {
+    this.assignee = assignee;
+  }
+
   @XmlElement(name = "customfield_10005")
   public int getStoryPoints() {
     return storyPoints;
@@ -214,6 +224,15 @@ public class IssueFields {
 
   public void setOwner(JiraUser owner) {
     this.owner = owner;
+  }
+
+  @XmlElement(name = "customfield_10104")
+  public JiraUser getResolver() {
+    return resolver;
+  }
+
+  public void setResolver(JiraUser resolver) {
+    this.resolver = resolver;
   }
 
 

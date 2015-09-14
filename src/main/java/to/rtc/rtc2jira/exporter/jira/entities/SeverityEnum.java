@@ -19,7 +19,7 @@ public enum SeverityEnum {
     return rtcId;
   }
 
-  public String getJiraId() {
+  public String getJiraPriorityId() {
     return jiraId;
   }
 

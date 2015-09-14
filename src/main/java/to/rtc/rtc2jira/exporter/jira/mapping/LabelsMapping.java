@@ -4,7 +4,6 @@
 package to.rtc.rtc2jira.exporter.jira.mapping;
 
 import java.util.List;
-import java.util.Map.Entry;
 
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
 import to.rtc.rtc2jira.storage.StorageEngine;
@@ -16,9 +15,9 @@ import to.rtc.rtc2jira.storage.StorageEngine;
 public class LabelsMapping implements Mapping {
 
   @Override
-  public void map(Entry<String, Object> attribute, Issue issue, StorageEngine storage) {
+  public void map(Object value, Issue issue, StorageEngine storage) {
     @SuppressWarnings("unchecked")
-    List<String> labels = (List<String>) attribute.getValue();
+    List<String> labels = (List<String>) value;
     issue.getFields().setLabels(labels);
   }
 }

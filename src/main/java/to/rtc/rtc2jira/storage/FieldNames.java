@@ -19,9 +19,9 @@ public interface FieldNames {
   String MODIFIED = "modified"; // IGNORE = updated (can't be PUT)
   String CREATIONDATE = "creationDate"; // DONE (custom field)
   String COMMENTS = "internalComments"; // DONE
-  String PRIORITY = "priority";
-  String SEVERITY = "severity";
-  String OWNER = "owner"; // TODO = assignee
+  String PRIORITY = "priority"; // DONE
+  String SEVERITY = "severity"; // DONE
+  String OWNER = "owner"; // DONE = assignee
   String CREATOR = "creator"; // DONE = reporter
   String MODIFIED_BY = "modifiedBy"; // no match. ignore
   String RESOLVER = "resolver"; // DONE custom field

@@ -3,13 +3,16 @@
  */
 package to.rtc.rtc2jira.exporter.jira.mapping;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
 import to.rtc.rtc2jira.storage.FieldNames;
 import to.rtc.rtc2jira.storage.StorageEngine;
+
+import com.orientechnologies.orient.core.record.impl.ODocument;
 
 /**
  * @author roman.schaller
@@ -17,7 +20,7 @@ import to.rtc.rtc2jira.storage.StorageEngine;
  */
 public class MappingRegistry {
 
-  private final Map<String, Mapping> registry = new HashMap<>();
+  private final Map<String, Mapping> registry = new LinkedHashMap<>();
 
   public MappingRegistry() {
     registry.put(FieldNames.ID, new IdMapping());
@@ -35,9 +38,19 @@ public class MappingRegistry {
     registry.put(FieldNames.CREATIONDATE, new CreationDateMapping());
     registry.put(FieldNames.STORY_POINTS, new StoryPointsMapping());
     registry.put(FieldNames.ACCEPTANCE_CRITERIAS, new AcceptanceCriteriaMapping());
+    registry.put(FieldNames.SEVERITY, new SeverityMapping());
+    registry.put(FieldNames.PRIORITY, new PriorityMapping());
   }
 
-  public void map(Entry<String, Object> attribute, Issue issue, StorageEngine storage) {
+  public void map(ODocument workItem, Issue issue, StorageEngine storage) {
+    Set<Entry<String, Mapping>> mappers = registry.entrySet();
+    for (Entry<String, Mapping> mapper : mappers) {
+      Object field = workItem.field(mapper.getKey());
+      mapper.getValue().map(field, issue, storage);
+    }
+  }
+
+  private void map(Entry<String, Object> attribute, Issue issue, StorageEngine storage) {
     Mapping mapping = registry.get(attribute.getKey());
     if (mapping != null) {
       mapping.map(attribute, issue, storage);

@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -308,10 +307,8 @@ public class JiraExporter implements Exporter {
     Issue issue = new Issue();
     IssueFields issueFields = issue.getFields();
     issueFields.setProject(project);
+    mappingRegistry.map(workItem, issue, store);
 
-    for (Entry<String, Object> entry : workItem) {
-      mappingRegistry.map(entry, issue, store);
-    }
     // set resolution to appropriate default, otherwise it will be set to "fixed" whenever status is
     // "done", even if issue is not a defect
     if (issueFields.getStatus().getStatusEnum() == StatusEnum.done && issueFields.getResolution() == null) {

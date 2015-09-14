@@ -13,7 +13,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
@@ -48,8 +47,8 @@ public class WorkItemTypeMapping implements Mapping {
   }
 
   @Override
-  public void map(Entry<String, Object> attribute, Issue issue, StorageEngine storage) {
-    String workitemType = (String) attribute.getValue();
+  public void map(Object value, Issue issue, StorageEngine storage) {
+    String workitemType = (String) value;
     IssueFields issueFields = issue.getFields();
     ProjectOverview project = issueFields.getProject();
     switch (workitemType) {

@@ -30,7 +30,7 @@ public interface FieldNames {
                                     // 5=Invalid)
   String RESOLUTION_DATE = "resolutionDate"; // TODO = resolutiondate (can't be PUT)
   String CATEGORY = "category";
-  String ARCHIVED = "archived";
+  String ARCHIVED = "archived"; // DONE
   String PROJECT_AREA = "projectArea";
   String STORY_POINTS = "storyPoints"; // DONE
   String CUSTOM_ATTRIBUTES = "customAttributes";

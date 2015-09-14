@@ -40,6 +40,7 @@ public class MappingRegistry {
     registry.put(FieldNames.ACCEPTANCE_CRITERIAS, new AcceptanceCriteriaMapping());
     registry.put(FieldNames.SEVERITY, new SeverityMapping());
     registry.put(FieldNames.PRIORITY, new PriorityMapping());
+    registry.put(FieldNames.ARCHIVED, new ArchivedMapping());
   }
 
   public void map(ODocument workItem, Issue issue, StorageEngine storage) {

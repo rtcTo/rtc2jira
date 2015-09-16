@@ -13,6 +13,6 @@ public class ResolutiondateMapping implements Mapping {
 
   @Override
   public void map(Object value, Issue issue, StorageEngine storage) {
-    issue.getFields().setResolutiondate((Date) value);
+    issue.getFields().setRtcResolutiondate((Date) value);
   }
 }

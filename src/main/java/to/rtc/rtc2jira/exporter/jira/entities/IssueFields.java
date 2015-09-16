@@ -29,6 +29,7 @@ public class IssueFields {
   private Date updated;
   private IssueResolution resolution;
   private Date resolutiondate;
+  private Date rtcResolutiondate;
   private JiraUser creator;
   private JiraUser reporter;
   private JiraUser assignee;
@@ -123,6 +124,7 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Read.class)
+  @XmlJavaTypeAdapter(JiraDateStringAdapter.class)
   public Date getCreated() {
     return created;
   }
@@ -141,12 +143,23 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Read.class)
+  @XmlJavaTypeAdapter(JiraDateStringAdapter.class)
   public Date getResolutiondate() {
     return resolutiondate;
   }
 
   public void setResolutiondate(Date resolutiondate) {
     this.resolutiondate = resolutiondate;
+  }
+
+  @XmlElement(name = "customfield_10205")
+  @XmlJavaTypeAdapter(JiraDateStringAdapter.class)
+  public Date getRtcResolutiondate() {
+    return rtcResolutiondate;
+  }
+
+  public void setRtcResolutiondate(Date rtcResolutiondate) {
+    this.rtcResolutiondate = rtcResolutiondate;
   }
 
   public IssueResolution getResolution() {

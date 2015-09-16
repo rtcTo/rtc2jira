@@ -18,7 +18,6 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.WebResource.Builder;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
-import com.sun.jersey.api.client.filter.LoggingFilter;
 import com.sun.jersey.multipart.FormDataMultiPart;
 
 /**
@@ -47,7 +46,7 @@ public class JiraRestAccess {
     ClientConfig cfg = new DefaultClientConfig();
     cfg.getSingletons().add(jacksonJsonProvider);
     this.client = Client.create(cfg);
-    this.client.addFilter(new LoggingFilter(System.out));
+    // this.client.addFilter(new LoggingFilter(System.out));
   }
 
   public <T> T get(String resource, GenericType<T> type) {

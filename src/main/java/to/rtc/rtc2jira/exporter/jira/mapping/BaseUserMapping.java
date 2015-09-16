@@ -34,7 +34,7 @@ public abstract class BaseUserMapping implements Mapping {
       return null;
 
     if (!existingUserEmails.contains(jiraUser.getEmailAddress())) {
-      ClientResponse clientResponse = restAccess.get(jiraUser.getSelfPath());
+      ClientResponse clientResponse = getRestAccess().get(jiraUser.getSelfPath());
       if (clientResponse.getStatus() == 200) {
         existingUserEmails.add(jiraUser.getEmailAddress());
       } else {
@@ -46,7 +46,7 @@ public abstract class BaseUserMapping implements Mapping {
 
 
   JiraUser createUser(JiraUser jiraUser) {
-    ClientResponse clientResponse = restAccess.post(jiraUser.getPath(), jiraUser);
+    ClientResponse clientResponse = getRestAccess().post(jiraUser.getPath(), jiraUser);
     if (clientResponse.getStatus() == 201) {
       jiraUser = clientResponse.getEntity(JiraUser.class);
       existingUserEmails.add(jiraUser.getEmailAddress());
@@ -55,5 +55,11 @@ public abstract class BaseUserMapping implements Mapping {
     }
     return jiraUser;
   }
+
+
+  protected JiraRestAccess getRestAccess() {
+    return restAccess;
+  }
+
 
 }

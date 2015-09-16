@@ -305,6 +305,10 @@ public class JiraExporter implements Exporter {
 
   Issue createIssueFromWorkItem(ODocument workItem, Project project) {
     Issue issue = new Issue();
+    String id = workItem.field(FieldNames.ID);
+    issue.setId(id);
+    String key = settings.getJiraProjectKey() + '-' + id;
+    issue.setKey(key);
     IssueFields issueFields = issue.getFields();
     issueFields.setProject(project);
     mappingRegistry.map(workItem, issue, store);
@@ -314,8 +318,6 @@ public class JiraExporter implements Exporter {
     if (issueFields.getStatus().getStatusEnum() == StatusEnum.done && issueFields.getResolution() == null) {
       issueFields.setResolution(new IssueResolution(ResolutionEnum.done));
     }
-    // set jira key
-    issue.setKey(settings.getJiraProjectKey() + '-' + workItem.field(FieldNames.ID));
     return issue;
   }
 

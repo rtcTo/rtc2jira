@@ -23,7 +23,6 @@ public class MappingRegistry {
   private final Map<String, Mapping> registry = new LinkedHashMap<>();
 
   public MappingRegistry() {
-    registry.put(FieldNames.ID, new IdMapping());
     registry.put(FieldNames.SUMMARY, new SummaryMapping());
     registry.put(FieldNames.DUE_DATE, new DueDateMapping());
     registry.put(FieldNames.DESCRIPTION, new DescriptionMapping());
@@ -42,6 +41,7 @@ public class MappingRegistry {
     registry.put(FieldNames.PRIORITY, new PriorityMapping());
     registry.put(FieldNames.ARCHIVED, new ArchivedMapping());
     registry.put(FieldNames.CATEGORY, new JiraCategoryMapping());
+    registry.put(FieldNames.SUBSCRIPTIONS, new WatcherMapping());
   }
 
   public void map(ODocument workItem, Issue issue, StorageEngine storage) {
@@ -49,13 +49,6 @@ public class MappingRegistry {
     for (Entry<String, Mapping> mapper : mappers) {
       Object field = workItem.field(mapper.getKey());
       mapper.getValue().map(field, issue, storage);
-    }
-  }
-
-  private void map(Entry<String, Object> attribute, Issue issue, StorageEngine storage) {
-    Mapping mapping = registry.get(attribute.getKey());
-    if (mapping != null) {
-      mapping.map(attribute, issue, storage);
     }
   }
 

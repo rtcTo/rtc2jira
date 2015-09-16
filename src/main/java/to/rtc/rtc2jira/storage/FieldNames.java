@@ -43,6 +43,6 @@ public interface FieldNames {
   String JIRA_EXPORT_TIMESTAMP = "jiraExportTimestamp";
   String JIRA_LAST_EXPORTED_STATUS = "lastExportedStatus";
   String DUE_DATE = "dueDate"; // DONE
-  String SUBSCRIPTIONS = "subscriptions";
+  String SUBSCRIPTIONS = "subscriptions"; // DONE
 
 }

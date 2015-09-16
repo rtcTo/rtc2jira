@@ -39,7 +39,8 @@ public class Issue extends BaseEntity {
 
   @Override
   public String getSelfPath() {
-    return getPath() + "/" + getKey();
+    String key = getKey() != null ? getKey() : getId();
+    return getPath() + "/" + key;
   }
 
   @JsonView(IssueView.Filtered.class)

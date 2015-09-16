@@ -37,12 +37,12 @@ public interface FieldNames {
   String STATE = "state"; // DONE
   String TAGS = "tags"; // DONE
   String ITERATION_LABEL = "iterationLabel";
+  String DUE_DATE = "dueDate"; // DONE
+  String SUBSCRIPTIONS = "subscriptions"; // DONE
   String GITHUB_WORKITEM_LINK = "githubissuenumber";
   String JIRA_ID_LINK = "jiraid";
   String JIRA_KEY_LINK = "jiraKey";
   String JIRA_EXPORT_TIMESTAMP = "jiraExportTimestamp";
   String JIRA_LAST_EXPORTED_STATUS = "lastExportedStatus";
-  String DUE_DATE = "dueDate"; // DONE
-  String SUBSCRIPTIONS = "subscriptions"; // DONE
 
 }

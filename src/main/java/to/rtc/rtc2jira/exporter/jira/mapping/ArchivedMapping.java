@@ -14,6 +14,10 @@ public class ArchivedMapping implements Mapping {
 
   @Override
   public void map(Object value, Issue issue, StorageEngine storage) {
-    // do nothing (only jira projects can be archived)
+    if (Boolean.FALSE.equals(value)) {
+      issue.getFields().setArchived(false);
+    } else {
+      issue.getFields().setArchived(true);
+    }
   }
 }

@@ -31,7 +31,6 @@ public class IssueFields {
   private Date resolutiondate;
   private JiraUser creator;
   private JiraUser reporter;
-  private JiraUser owner;
   private JiraUser assignee;
   private JiraUser resolver;
   private Date created;
@@ -42,6 +41,9 @@ public class IssueFields {
   private List<String> labels = new ArrayList<String>();
   private int storyPoints;
   private Date rtcCreated;
+  private boolean archived;
+  private Group filedAgainst;
+  private Group team;
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -217,15 +219,6 @@ public class IssueFields {
     this.acceptanceCriteria = acceptanceCriteria;
   }
 
-  @XmlElement(name = "customfield_10103")
-  public JiraUser getOwner() {
-    return owner;
-  }
-
-  public void setOwner(JiraUser owner) {
-    this.owner = owner;
-  }
-
   @XmlElement(name = "customfield_10104")
   public JiraUser getResolver() {
     return resolver;
@@ -233,6 +226,34 @@ public class IssueFields {
 
   public void setResolver(JiraUser resolver) {
     this.resolver = resolver;
+  }
+
+  @XmlElement(name = "customfield_10204")
+  @XmlJavaTypeAdapter(ArchivedTypeAdapter.class)
+  public Boolean isArchived() {
+    return archived;
+  }
+
+  public void setArchived(Boolean archived) {
+    this.archived = archived;
+  }
+
+  @XmlElement(name = "customfield_10201")
+  public Group getFiledAgainst() {
+    return filedAgainst;
+  }
+
+  public void setFiledAgainst(Group filedAgainst) {
+    this.filedAgainst = filedAgainst;
+  }
+
+  @XmlElement(name = "customfield_10203")
+  public Group getTeam() {
+    return team;
+  }
+
+  public void setTeam(Group team) {
+    this.team = team;
   }
 
 

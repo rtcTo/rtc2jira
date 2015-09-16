@@ -41,6 +41,7 @@ public class MappingRegistry {
     registry.put(FieldNames.SEVERITY, new SeverityMapping());
     registry.put(FieldNames.PRIORITY, new PriorityMapping());
     registry.put(FieldNames.ARCHIVED, new ArchivedMapping());
+    registry.put(FieldNames.CATEGORY, new JiraCategoryMapping());
   }
 
   public void map(ODocument workItem, Issue issue, StorageEngine storage) {

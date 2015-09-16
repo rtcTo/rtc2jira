@@ -26,3 +26,15 @@ jira.forceupdate=false
 # proxy.host=myProxy.com
 # proxy.port=8080
 # non.proxy.hosts=*.local
+
+#find the transition id's for your Jira instance by calling GET on the following resource:
+#<JIRA_URL>:<JIRA_PORT>/rest/api/latest/issue/<JIRA_ISSUE>/transitions?expand=transitions.fields
+#Tip: execute call 3 times, with issue in different state each time
+jira.transitions.todoToInprogress.id=?
+jira.transitions.todoToDone.id=?
+
+jira.transitions.inprogressToTodo.id=?
+jira.transitions.inprogressToDone.id=?
+
+jira.transitions.doneToTodo.id=?
+jira.transitions.doneToInprogress.id=?

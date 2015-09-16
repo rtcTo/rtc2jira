@@ -1,5 +1,6 @@
 package to.rtc.rtc2jira.importer.mapping.spi;
 
+import com.ibm.team.process.internal.common.ProjectArea;
 import com.ibm.team.repository.client.IItemManager;
 import com.ibm.team.repository.client.ITeamRepository;
 import com.ibm.team.repository.client.internal.ItemManager;
@@ -41,6 +42,10 @@ public abstract class MappingAdapter implements Mapping {
     return ITeamRepository.class.cast(getWorkItem().getOrigin());
   }
 
+  protected ProjectArea getProjectArea() {
+    return fetchCompleteItem(getWorkItem().getProjectArea());
+  }
+
   @SuppressWarnings("unchecked")
   protected <T> T getValue(IAttribute attribute) {
     return (T) workItem.getValue(attribute);
@@ -50,12 +55,13 @@ public abstract class MappingAdapter implements Mapping {
   protected <T> T fetchCompleteItem(IItemHandle itemHandle) {
     T completeItem = null;
     try {
-      IItemManager itemManager =
-          ITeamRepository.class.cast(getWorkItem().getOrigin()).itemManager();
+      IItemManager itemManager = getTeamRepository().itemManager();
       completeItem = (T) itemManager.fetchCompleteItem(itemHandle, ItemManager.DEFAULT, null);
     } catch (TeamRepositoryException e) {
       e.printStackTrace();
     }
     return completeItem;
   }
+
+
 }

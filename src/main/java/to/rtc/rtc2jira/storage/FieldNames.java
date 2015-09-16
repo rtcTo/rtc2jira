@@ -29,7 +29,7 @@ public interface FieldNames {
                                     // 4=WorksForMe,
                                     // 5=Invalid)
   String RESOLUTION_DATE = "resolutionDate"; // TODO = resolutiondate (can't be PUT)
-  String CATEGORY = "category";
+  String CATEGORY = "category"; // DONE
   String ARCHIVED = "archived"; // DONE
   String PROJECT_AREA = "projectArea";
   String STORY_POINTS = "storyPoints"; // DONE

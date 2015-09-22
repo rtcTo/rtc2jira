@@ -44,6 +44,7 @@ public class MappingRegistry {
     registry.put(FieldNames.CATEGORY, new JiraCategoryMapping());
     registry.put(FieldNames.SUBSCRIPTIONS, new WatcherMapping());
     registry.put(FieldNames.ITERATION_LABEL, new IterationMapping());
+    registry.put(FieldNames.ESTIMATED_TIME, new EstimatedHoursMapping());
   }
 
   public void map(ODocument workItem, Issue issue, StorageEngine storage) {

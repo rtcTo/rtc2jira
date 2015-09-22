@@ -41,6 +41,7 @@ public interface FieldNames {
   String SUBSCRIPTIONS = "subscriptions"; // TEST
   String GITHUB_WORKITEM_LINK = "githubissuenumber";
   String PTF = "ptf"; // TEST
+  String ESTIMATED_TIME = "estimatedtime";
   String JIRA_ID_LINK = "jiraid";
   String JIRA_KEY_LINK = "jiraKey";
   String JIRA_EXPORT_TIMESTAMP = "jiraExportTimestamp";

@@ -54,6 +54,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.DUE_DATE, new DateMapping(FieldNames.DUE_DATE));
     register(RTCIdentifierConstants.SUBSCRIPTIONS, new SubscriptionsMapping());
     register(RTCIdentifierConstants.STATE_TRANSITIONS, new NullMapping());
+    register(RTCIdentifierConstants.ESTIMATED_HOURS, new IntegerMapping(FieldNames.ESTIMATED_TIME));
   };
 
   public static DefaultMappingRegistry getInstance() {

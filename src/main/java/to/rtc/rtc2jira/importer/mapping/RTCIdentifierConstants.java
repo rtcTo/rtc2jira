@@ -45,4 +45,6 @@ public interface RTCIdentifierConstants {
   public static final String RESOLUTION_DATE = "resolutionDate";
   public static final String DUE_DATE = "dueDate";
   public static final String PTF = "ptf";
+  public static final String ESTIMATED_HOURS = "estimatedh";
+  public static final String REFERENCE_MODEL = "referencemodel";
 }

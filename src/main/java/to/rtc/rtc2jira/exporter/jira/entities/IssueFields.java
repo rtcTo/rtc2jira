@@ -48,6 +48,7 @@ public class IssueFields {
   private JiraRadioItem archived;
   private Group team;
   private Set<IssueLink> issuelinks = new HashSet<IssueLink>();
+  private Timetracking timetracking;
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -290,6 +291,15 @@ public class IssueFields {
 
   public void setPtf(String ptf) {
     this.ptf = ptf;
+  }
+
+  @JsonView(IssueView.Update.class)
+  public Timetracking getTimetracking() {
+    return timetracking;
+  }
+
+  public void setTimetracking(Timetracking timetracking) {
+    this.timetracking = timetracking;
   }
 
 

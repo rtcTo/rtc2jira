@@ -26,6 +26,7 @@ public class MappingRegistry {
     registry.put(FieldNames.SUMMARY, new SummaryMapping());
     registry.put(FieldNames.DUE_DATE, new DueDateMapping());
     registry.put(FieldNames.DESCRIPTION, new DescriptionMapping());
+    registry.put(FieldNames.PTF, new PtfMapping());
     registry.put(FieldNames.WORK_ITEM_TYPE, new WorkItemTypeMapping());
     registry.put(FieldNames.STATE, new StatusMapping());
     registry.put(FieldNames.RESOLUTION, new ResolutionMapping());
@@ -42,6 +43,7 @@ public class MappingRegistry {
     registry.put(FieldNames.ARCHIVED, new ArchivedMapping());
     registry.put(FieldNames.CATEGORY, new JiraCategoryMapping());
     registry.put(FieldNames.SUBSCRIPTIONS, new WatcherMapping());
+    registry.put(FieldNames.ITERATION_LABEL, new IterationMapping());
   }
 
   public void map(ODocument workItem, Issue issue, StorageEngine storage) {

@@ -66,6 +66,7 @@ public class IssueComment extends BaseEntity {
     this.issue = issue;
   }
 
+  @JsonView(IssueView.Read.class)
   public JiraUser getAuthor() {
     return author;
   }

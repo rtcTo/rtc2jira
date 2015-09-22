@@ -3,27 +3,24 @@ package to.rtc.rtc2jira.exporter.jira.mapping;
 import java.util.HashMap;
 import java.util.Map;
 
-import to.rtc.rtc2jira.Settings;
+import to.rtc.rtc2jira.exporter.jira.JiraExporter;
 import to.rtc.rtc2jira.exporter.jira.JiraRestAccess;
 import to.rtc.rtc2jira.exporter.jira.entities.Group;
 
 import com.sun.jersey.api.client.ClientResponse;
 
 public class TeamAreaHandler {
+  public static final TeamAreaHandler INSTANCE;
+
 
   private Map<String, Group> alreadyExistingGroups;
 
   private JiraRestAccess access;
 
-  static public final TeamAreaHandler INSTANCE;
 
   static {
-    Settings settings = Settings.getInstance();
-    JiraRestAccess restAccess =
-        new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(), settings.getJiraPassword());
-    INSTANCE = new TeamAreaHandler(restAccess);
+    INSTANCE = new TeamAreaHandler(JiraExporter.INSTANCE.getRestAccess());
   }
-
 
   private TeamAreaHandler(JiraRestAccess access) {
     this.access = access;
@@ -55,5 +52,6 @@ public class TeamAreaHandler {
     }
     return result;
   }
+
 
 }

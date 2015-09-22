@@ -1,6 +1,8 @@
 package to.rtc.rtc2jira.exporter.jira.entities;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -13,6 +15,7 @@ public class Issue extends BaseEntity {
   private IssueFields fields;
 
 
+  @JsonView(IssueView.Read.class)
   public String getExpand() {
     return expand;
   }
@@ -52,5 +55,63 @@ public class Issue extends BaseEntity {
     getFields().setCreated(created);
   }
 
+
+  /**
+   * Should return collection with only one item
+   * 
+   * @return
+   */
+  public Set<IssueLink> categoryLinks() {
+    Set<IssueLink> result = new HashSet<IssueLink>();
+    Set<IssueLink> issuelinks = getFields().getIssuelinks();
+    for (IssueLink issueLink : issuelinks) {
+      issueLink.setReferencingIssue(this);
+      if (issueLink.getType().equals(IssueLinkType.CATEGORY)) {
+        result.add(issueLink);
+      }
+    }
+    return result;
+  }
+
+  /**
+   * Should return collection with only one item
+   * 
+   * @return
+   */
+  public Set<IssueLink> iterationLinks() {
+    Set<IssueLink> result = new HashSet<IssueLink>();
+    Set<IssueLink> issuelinks = getFields().getIssuelinks();
+    for (IssueLink issueLink : issuelinks) {
+      issueLink.setReferencingIssue(this);
+      if (issueLink.getType().equals(IssueLinkType.ITERATION)) {
+        result.add(issueLink);
+      }
+    }
+    return result;
+  }
+
+  /**
+   * Should return collection with only one item
+   * 
+   * @return
+   */
+  public Set<IssueLink> hierarchyLinks() {
+    Set<IssueLink> result = new HashSet<IssueLink>();
+    Set<IssueLink> issuelinks = getFields().getIssuelinks();
+    for (IssueLink issueLink : issuelinks) {
+      issueLink.setReferencingIssue(this);
+      if (issueLink.getType().equals(IssueLinkType.HIERARCHY)) {
+        result.add(issueLink);
+      }
+    }
+    return result;
+  }
+
+
+  public Issue asReferenceObject() {
+    Issue result = new Issue();
+    result.setKey(this.getKey());
+    return result;
+  }
 
 }

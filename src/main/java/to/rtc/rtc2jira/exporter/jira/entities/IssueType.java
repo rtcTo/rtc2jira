@@ -5,13 +5,51 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonView;
 
+import to.rtc.rtc2jira.Settings;
+
 @XmlRootElement
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IssueType extends NamedEntity {
 
+  public static final IssueType TASK;
+  public static final IssueType SUB_TASK;
+  public static final IssueType USER_STORY;
+  public static final IssueType EPIC;
+  public static final IssueType BUG;
+  public static final IssueType NEW_FEATURE;
+  public static final IssueType IMPROVEMENT;
+  public static final IssueType BUSINESS_NEED;
+  public static final IssueType CATEGORY;
+  public static final IssueType ITERATION;
+
+  static {
+    TASK = new IssueType("3", "Task");
+    SUB_TASK = new IssueType("5", "Sub-task");
+    USER_STORY = new IssueType("10001", "User Story");
+    EPIC = new IssueType("10000", "Epic");
+    BUG = new IssueType("1", "Bug");
+    NEW_FEATURE = new IssueType("2", "New Feature");
+    IMPROVEMENT = new IssueType("4", "Improvement");
+    BUSINESS_NEED = new IssueType("10002", "Business Need");
+    CATEGORY = new IssueType(Settings.getInstance().getJiraIssuetypeCategoryId(), "Category");
+    ITERATION = new IssueType(Settings.getInstance().getJiraIssuetypeIterationId(), "Iteration");
+  }
+
+  public IssueType() {}
+
+  public IssueType(String id, String name) {
+    super(id, name);
+  }
+
   private String description;
   private boolean subtask;
 
+  @JsonView(IssueView.Update.class)
+  @Override
+  public String getKey() {
+    // TODO Auto-generated method stub
+    return super.getKey();
+  }
 
   public String getDescription() {
     return description;
@@ -39,5 +77,6 @@ public class IssueType extends NamedEntity {
   public String getSelfPath() {
     return "/issuetype/" + getId();
   }
+
 
 }

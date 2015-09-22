@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import to.rtc.rtc2jira.Settings;
+import to.rtc.rtc2jira.exporter.jira.JiraExporter;
 import to.rtc.rtc2jira.exporter.jira.JiraRestAccess;
 import to.rtc.rtc2jira.exporter.jira.entities.JiraUser;
 
@@ -16,7 +16,7 @@ import com.sun.jersey.api.client.ClientResponse;
  *
  */
 public abstract class BaseUserMapping implements Mapping {
-  private static final Logger LOGGER = Logger.getLogger(WorkItemTypeMapping.class.getName());
+  private static final Logger LOGGER = Logger.getLogger(BaseUserMapping.class.getName());
 
   Set<String> existingUserEmails = new HashSet<String>(500);
 
@@ -24,8 +24,7 @@ public abstract class BaseUserMapping implements Mapping {
 
   BaseUserMapping() {
     super();
-    Settings settings = Settings.getInstance();
-    restAccess = new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(), settings.getJiraPassword());
+    restAccess = JiraExporter.INSTANCE.getRestAccess();
   }
 
 

@@ -49,7 +49,7 @@ public class JiraExporterTest {
       }
     };
 
-    JiraExporter jiraExporter = new JiraExporter();
+    JiraExporter jiraExporter = JiraExporter.INSTANCE;
     jiraExporter.initialize(settings, store);
     jiraExporter.isConfigured();
 
@@ -76,7 +76,7 @@ public class JiraExporterTest {
       }
     };
 
-    JiraExporter jiraExporter = new JiraExporter();
+    JiraExporter jiraExporter = JiraExporter.INSTANCE;
     jiraExporter.initialize(settings, store);
     boolean isConfigured = jiraExporter.isConfigured();
     assertEquals(true, isConfigured);
@@ -103,7 +103,7 @@ public class JiraExporterTest {
       }
     };
 
-    JiraExporter jiraExporter = new JiraExporter();
+    JiraExporter jiraExporter = JiraExporter.INSTANCE;
 
     try {
       jiraExporter.initialize(settings, store);
@@ -132,7 +132,7 @@ public class JiraExporterTest {
       }
     };
 
-    JiraExporter jiraExporter = new JiraExporter();
+    JiraExporter jiraExporter = JiraExporter.INSTANCE;
     jiraExporter.initialize(settings, store);
     jiraExporter.createOrUpdateItem(workItem);
 

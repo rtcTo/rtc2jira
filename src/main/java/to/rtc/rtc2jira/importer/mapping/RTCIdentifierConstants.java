@@ -44,4 +44,5 @@ public interface RTCIdentifierConstants {
   public static final String TARGET = "target";
   public static final String RESOLUTION_DATE = "resolutionDate";
   public static final String DUE_DATE = "dueDate";
+  public static final String PTF = "ptf";
 }

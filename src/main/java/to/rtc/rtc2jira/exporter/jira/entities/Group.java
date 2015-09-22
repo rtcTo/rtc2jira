@@ -22,6 +22,11 @@ public class Group extends NamedEntity {
   }
 
 
+  @JsonView(IssueView.class)
+  public String getKey() {
+    return super.getKey();
+  };
+
   @Override
   @JsonView(IssueView.Filtered.class)
   public String getId() {

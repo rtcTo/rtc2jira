@@ -49,6 +49,14 @@ public class Settings {
   private static final String JIRA_TRANSITION_DONE_TODO = "jira.transitions.doneToTodo.id";
   private static final String JIRA_TRANSITION_DONE_INPROGRESS = "jira.transitions.doneToInprogress.id";
 
+  private static final String JIRA_ISSUETYPE_CATEGORY_ID = "jira.issueType.category.id";
+  private static final String JIRA_ISSUETYPE_ITERATION_ID = "jira.issueType.iteration.id";
+
+  private static final String JIRA_LINKTYPE_HIERARCHY_ID = "jira.linkType.hierarchy.id";
+  private static final String JIRA_LINKTYPE_CATEGORY_ID = "jira.linkType.category.id";
+  private static final String JIRA_LINKTYPE_ITERATION_ID = "jira.linkType.iteration.id";
+
+
   private static final String SYSOUT_EXPORTER = "sysout.exporter";
 
   private static final Settings instance = new Settings();
@@ -215,6 +223,26 @@ public class Settings {
 
   public String getJiraTransitionDoneInprogress() {
     return props.getProperty(JIRA_TRANSITION_DONE_INPROGRESS);
+  }
+
+  public String getJiraIssuetypeCategoryId() {
+    return props.getProperty(JIRA_ISSUETYPE_CATEGORY_ID);
+  }
+
+  public String getJiraIssuetypeIterationId() {
+    return props.getProperty(JIRA_ISSUETYPE_ITERATION_ID);
+  }
+
+  public String getJiraLinktypeHierarchyId() {
+    return props.getProperty(JIRA_LINKTYPE_HIERARCHY_ID);
+  }
+
+  public String getJiraLinktypeCategoryId() {
+    return props.getProperty(JIRA_LINKTYPE_CATEGORY_ID);
+  }
+
+  public String getJiraLinktypeIterationId() {
+    return props.getProperty(JIRA_LINKTYPE_ITERATION_ID);
   }
 
 }

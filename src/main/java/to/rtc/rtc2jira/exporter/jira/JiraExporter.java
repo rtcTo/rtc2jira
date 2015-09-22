@@ -46,13 +46,20 @@ import com.sun.jersey.multipart.file.FileDataBodyPart;
 
 public class JiraExporter implements Exporter {
   private static final Logger LOGGER = Logger.getLogger(JiraExporter.class.getName());
+  public static final JiraExporter INSTANCE;
   private StorageEngine store;
   private Settings settings;
   private JiraRestAccess restAccess;
   private Optional<Project> projectOptional;
   private int highestExistingId = 6000;
-  private MappingRegistry mappingRegistry = new MappingRegistry();
+  private MappingRegistry mappingRegistry;
   private WorkItemTypeMapping workItemTypeMapping;
+
+  static {
+    INSTANCE = new JiraExporter();
+  }
+
+  private JiraExporter() {};
 
   @Override
   public boolean isConfigured() {
@@ -63,13 +70,16 @@ public class JiraExporter implements Exporter {
   public void initialize(Settings settings, StorageEngine store) throws Exception {
     this.settings = settings;
     this.store = store;
-    restAccess = new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(), settings.getJiraPassword());
-    ClientResponse response = restAccess.get("/myself");
+    setRestAccess(new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(), settings.getJiraPassword()));
+    // ClientResponse response = getRestAccess().get("/myself");
+    ClientResponse response = getRestAccess().get("/issue/WOR-137");
+
     if (response.getStatus() != Status.OK.getStatusCode()) {
       throw new RuntimeException("Unable to connect to jira repository: " + response.toString());
     }
     this.projectOptional = getProject();
-    this.workItemTypeMapping = new WorkItemTypeMapping(restAccess);
+    mappingRegistry = new MappingRegistry();
+    this.workItemTypeMapping = new WorkItemTypeMapping();
   }
 
   @Override
@@ -109,7 +119,7 @@ public class JiraExporter implements Exporter {
       // post request
       long startTime = System.currentTimeMillis();
       LOGGER.log(Level.INFO, "Starting bulk creation of " + total + " items.");
-      ClientResponse postResponse = restAccess.post("/issue/bulk", postEntity);
+      ClientResponse postResponse = getRestAccess().post("/issue/bulk", postEntity);
       if (postResponse.getStatus() == Status.CREATED.getStatusCode()) {
         BulkCreateResponseEntity respEntity = postResponse.getEntity(BulkCreateResponseEntity.class);
         List<Issue> issues = respEntity.getIssues();
@@ -186,7 +196,7 @@ public class JiraExporter implements Exporter {
         }
       }
       if (newlyAdded > 0) {
-        ClientResponse clientResponse = restAccess.postMultiPart(issue.getSelfPath() + "/attachments", multiPart);
+        ClientResponse clientResponse = getRestAccess().postMultiPart(issue.getSelfPath() + "/attachments", multiPart);
         if (isResponseOk(clientResponse)) {
           // refresh list of already exported attachments
           List<IssueAttachment> responseAttachments =
@@ -211,7 +221,7 @@ public class JiraExporter implements Exporter {
           JiraUser jiraUser = persistUser(comment);
           issueComment.setAuthor(jiraUser);
           issueComment.setCreated(comment.getDate());
-          ClientResponse cr = restAccess.post(issueComment.getPath(), issueComment);
+          ClientResponse cr = getRestAccess().post(issueComment.getPath(), issueComment);
           IssueComment issueCommentPosted = cr.getEntity(IssueComment.class);
           issueComment.setId(issueCommentPosted.getId());
           issueCommentPosted.setIssue(issue);
@@ -228,9 +238,9 @@ public class JiraExporter implements Exporter {
 
   private JiraUser persistUser(Comment comment) {
     JiraUser jiraUser = JiraUser.createFromComment(comment);
-    ClientResponse cr = restAccess.get(jiraUser.getSelfPath());
+    ClientResponse cr = getRestAccess().get(jiraUser.getSelfPath());
     if (!isResponseOk(cr)) {
-      ClientResponse postResponse = restAccess.post(jiraUser.getPath(), jiraUser);
+      ClientResponse postResponse = getRestAccess().post(jiraUser.getPath(), jiraUser);
       if (isResponseOk(postResponse)) {
         jiraUser = postResponse.getEntity(JiraUser.class);
       }
@@ -255,11 +265,11 @@ public class JiraExporter implements Exporter {
   private Optional<Project> getProject() {
     Project projectConfig = new Project();
     projectConfig.setKey(settings.getJiraProjectKey());
-    return Optional.ofNullable(restAccess.get(projectConfig.getSelfPath(), Project.class));
+    return Optional.ofNullable(getRestAccess().get(projectConfig.getSelfPath(), Project.class));
   }
 
   Issue createIssueInJira(Issue issue) {
-    ClientResponse postResponse = restAccess.post(issue.getPath(), issue);
+    ClientResponse postResponse = getRestAccess().post(issue.getPath(), issue);
     if (postResponse.getStatus() == Status.CREATED.getStatusCode()) {
       return postResponse.getEntity(Issue.class);
     } else {
@@ -269,7 +279,7 @@ public class JiraExporter implements Exporter {
   }
 
   private boolean updateIssueInJira(Issue issue, Issue lastExportedIssue) {
-    ClientResponse postResponse = restAccess.put("/issue/" + issue.getKey(), issue);
+    ClientResponse postResponse = getRestAccess().put("/issue/" + issue.getKey(), issue);
     if (isResponseOk(postResponse)) {
       boolean result = true;
       String transitionId = getTransitionId(issue.getFields().getStatus(), lastExportedIssue.getFields().getStatus());
@@ -290,7 +300,7 @@ public class JiraExporter implements Exporter {
   private boolean doTransition(Issue issue, String transitionId) {
     String entity = "{\"transition\":{\"id\":" + transitionId + "}}";
     ClientResponse postResponse =
-        restAccess.post("/issue/" + issue.getKey() + "/transitions?expand=transitions.fields", entity);
+        getRestAccess().post("/issue/" + issue.getKey() + "/transitions?expand=transitions.fields", entity);
     if (isResponseOk(postResponse)) {
       return true;
     } else {
@@ -309,14 +319,20 @@ public class JiraExporter implements Exporter {
     issue.setId(id);
     String key = settings.getJiraProjectKey() + '-' + id;
     issue.setKey(key);
-    IssueFields issueFields = issue.getFields();
-    issueFields.setProject(project);
-    mappingRegistry.map(workItem, issue, store);
-
-    // set resolution to appropriate default, otherwise it will be set to "fixed" whenever status is
-    // "done", even if issue is not a defect
-    if (issueFields.getStatus().getStatusEnum() == StatusEnum.done && issueFields.getResolution() == null) {
-      issueFields.setResolution(new IssueResolution(ResolutionEnum.done));
+    ClientResponse cr = getRestAccess().get(issue.getSelfPath());
+    if (cr.getStatus() == 200) {
+      issue = cr.getEntity(Issue.class);
+      IssueFields issueFields = issue.getFields();
+      issueFields.setProject(project);
+      mappingRegistry.map(workItem, issue, store);
+      // set resolution to appropriate default, otherwise it will be set to "fixed" whenever status
+      // is "done", even if issue is not a defect
+      if (issueFields.getStatus().getStatusEnum() == StatusEnum.done && issueFields.getResolution() == null) {
+        issueFields.setResolution(new IssueResolution(ResolutionEnum.done));
+      }
+    } else {
+      issue = null;
+      LOGGER.log(Level.SEVERE, "A problem occurred while retrieving an issue: " + cr.getEntity(String.class));
     }
     return issue;
   }
@@ -324,5 +340,13 @@ public class JiraExporter implements Exporter {
 
   private boolean isResponseOk(ClientResponse cr) {
     return cr.getStatus() >= Status.OK.getStatusCode() && cr.getStatus() <= Status.PARTIAL_CONTENT.getStatusCode();
+  }
+
+  public JiraRestAccess getRestAccess() {
+    return restAccess;
+  }
+
+  private void setRestAccess(JiraRestAccess restAccess) {
+    this.restAccess = restAccess;
   }
 }

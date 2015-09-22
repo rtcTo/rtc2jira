@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import com.ibm.team.workitem.common.model.IAttribute;
-import com.ibm.team.workitem.common.model.IWorkItem;
-import com.orientechnologies.orient.core.record.impl.ODocument;
-
 import to.rtc.rtc2jira.importer.mapping.spi.Mapping;
 import to.rtc.rtc2jira.importer.mapping.spi.MappingRegistry;
 import to.rtc.rtc2jira.storage.FieldNames;
+
+import com.ibm.team.workitem.common.model.IAttribute;
+import com.ibm.team.workitem.common.model.IWorkItem;
+import com.orientechnologies.orient.core.record.impl.ODocument;
 
 public class DefaultMappingRegistry implements MappingRegistry {
   private final static DefaultMappingRegistry INSTANCE = new DefaultMappingRegistry();
@@ -24,6 +24,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.DESCRIPTION, new StringMapping(FieldNames.DESCRIPTION));
     register(RTCIdentifierConstants.WORK_ITEM_TYPE, new StringMapping(FieldNames.WORK_ITEM_TYPE));
     register(RTCIdentifierConstants.ACCEPTANCE_CRITERIAS, new StringMapping(FieldNames.ACCEPTANCE_CRITERIAS));
+    register(RTCIdentifierConstants.PTF, new StringMapping(FieldNames.PTF));
     register(RTCIdentifierConstants.MODIFIED, new TimestampMapping(FieldNames.MODIFIED));
     register(RTCIdentifierConstants.CREATIONDATE, new TimestampMapping(FieldNames.CREATIONDATE));
     register(RTCIdentifierConstants.COMMENTS, new CommentMapping());

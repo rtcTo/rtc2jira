@@ -75,6 +75,11 @@ public class JiraRestAccess {
     return postResponse.getEntity(responseType);
   }
 
+  public ClientResponse delete(String resource) {
+    objectMapper.setSerializationConfig(objectMapper.getSerializationConfig().withView(IssueView.Read.class));
+    return createJsonResponseBuilder(resource).delete(ClientResponse.class);
+  }
+
   public ClientResponse get(String resource) {
     // because of jersey's non-RFC2396 handling of spaces
     resource = resource.replace("+", "%2B");

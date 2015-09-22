@@ -45,7 +45,7 @@ public class ExportManager {
     if (exporters == null) {
       exporters = new ArrayList<>();
       exporters.add(new GitHubExporter());
-      exporters.add(new JiraExporter());
+      exporters.add(JiraExporter.INSTANCE);
       exporters.add(new LoggingExporter());
     }
     return exporters;

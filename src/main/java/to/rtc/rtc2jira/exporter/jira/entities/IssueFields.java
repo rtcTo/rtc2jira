@@ -4,7 +4,9 @@ import static org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion.NON_NULL
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -20,9 +22,10 @@ import org.codehaus.jackson.map.annotate.JsonView;
 public class IssueFields {
 
   private IssueType issuetype;
-  private ProjectOverview project;
+  private Project project;
   private String summary;
   private String description;
+  private String ptf;
   private IssuePriority priority;
   private Date duedate;
   private IssueCommentContainer comment = new IssueCommentContainer();
@@ -42,9 +45,9 @@ public class IssueFields {
   private List<String> labels = new ArrayList<String>();
   private int storyPoints;
   private Date rtcCreated;
-  private boolean archived;
-  private Group filedAgainst;
+  private JiraRadioItem archived;
   private Group team;
+  private Set<IssueLink> issuelinks = new HashSet<IssueLink>();
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -54,11 +57,11 @@ public class IssueFields {
     this.issuetype = issuetype;
   }
 
-  public ProjectOverview getProject() {
+  public Project getProject() {
     return project;
   }
 
-  public void setProject(ProjectOverview project) {
+  public void setProject(Project project) {
     this.project = project;
   }
 
@@ -70,6 +73,7 @@ public class IssueFields {
     this.summary = summary;
   }
 
+  @JsonView(IssueView.Update.class)
   public String getDescription() {
     return description;
   }
@@ -158,6 +162,7 @@ public class IssueFields {
     return rtcResolutiondate;
   }
 
+  @JsonView(IssueView.Update.class)
   public void setRtcResolutiondate(Date rtcResolutiondate) {
     this.rtcResolutiondate = rtcResolutiondate;
   }
@@ -166,10 +171,12 @@ public class IssueFields {
     return resolution;
   }
 
+  @JsonView(IssueView.Update.class)
   public void setResolution(IssueResolution resolution) {
     this.resolution = resolution;
   }
 
+  @JsonView(IssueView.Update.class)
   public JiraUser getReporter() {
     return reporter;
   }
@@ -196,6 +203,7 @@ public class IssueFields {
     this.status = status;
   }
 
+  @JsonView(IssueView.Update.class)
   public JiraUser getAssignee() {
     return assignee;
   }
@@ -204,6 +212,7 @@ public class IssueFields {
     this.assignee = assignee;
   }
 
+  @JsonView(IssueView.Update.class)
   @XmlElement(name = "customfield_10005")
   public int getStoryPoints() {
     return storyPoints;
@@ -213,6 +222,7 @@ public class IssueFields {
     this.storyPoints = storyPoints;
   }
 
+  @JsonView(IssueView.Update.class)
   @XmlJavaTypeAdapter(JiraDateStringAdapter.class)
   @XmlElement(name = "customfield_10100")
   public Date getRtcCreated() {
@@ -223,6 +233,7 @@ public class IssueFields {
     this.rtcCreated = rtcCreated;
   }
 
+  @JsonView(IssueView.Update.class)
   @XmlElement(name = "customfield_10101")
   public String getAcceptanceCriteria() {
     return acceptanceCriteria;
@@ -232,6 +243,7 @@ public class IssueFields {
     this.acceptanceCriteria = acceptanceCriteria;
   }
 
+  @JsonView(IssueView.Update.class)
   @XmlElement(name = "customfield_10104")
   public JiraUser getResolver() {
     return resolver;
@@ -242,24 +254,16 @@ public class IssueFields {
   }
 
   @XmlElement(name = "customfield_10204")
-  @XmlJavaTypeAdapter(ArchivedTypeAdapter.class)
-  public Boolean isArchived() {
+  @JsonView(IssueView.Update.class)
+  public JiraRadioItem isArchived() {
     return archived;
   }
 
-  public void setArchived(Boolean archived) {
+  public void setArchived(JiraRadioItem archived) {
     this.archived = archived;
   }
 
-  @XmlElement(name = "customfield_10201")
-  public Group getFiledAgainst() {
-    return filedAgainst;
-  }
-
-  public void setFiledAgainst(Group filedAgainst) {
-    this.filedAgainst = filedAgainst;
-  }
-
+  @JsonView(IssueView.Update.class)
   @XmlElement(name = "customfield_10203")
   public Group getTeam() {
     return team;
@@ -267,6 +271,25 @@ public class IssueFields {
 
   public void setTeam(Group team) {
     this.team = team;
+  }
+
+  @JsonView(IssueView.Read.class)
+  public Set<IssueLink> getIssuelinks() {
+    return issuelinks;
+  }
+
+  public void setIssuelinks(Set<IssueLink> issuelinks) {
+    this.issuelinks = issuelinks;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10206")
+  public String getPtf() {
+    return ptf;
+  }
+
+  public void setPtf(String ptf) {
+    this.ptf = ptf;
   }
 
 

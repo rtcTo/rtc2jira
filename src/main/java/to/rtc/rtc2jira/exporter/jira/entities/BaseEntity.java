@@ -48,7 +48,6 @@ public abstract class BaseEntity {
     return getPath() + "/" + getId();
   }
 
-  @JsonView(IssueView.Read.class)
   public String getKey() {
     return key;
   }

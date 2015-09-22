@@ -1,6 +1,6 @@
 package to.rtc.rtc2jira;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertSame;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class ExportManagerTest {
 
   @Mocked
   private Settings settingsMock;
-  @Mocked 
+  @Mocked
   private Exporter exporter;
   @Mocked
   private RepositoryService _service;
@@ -43,10 +43,9 @@ public class ExportManagerTest {
   public void setUp() throws Exception {
     engine = testDbRule.getEngine();
   }
-      
+
   @Test
-  public void testExport_EmptyDB_ExpectNoExport(@Mocked IssueService issueServiceMock)
-      throws Exception {
+  public void testExport_EmptyDB_ExpectNoExport(@Mocked IssueService issueServiceMock) throws Exception {
     new Expectations() {
       {
         exporter.isConfigured();
@@ -61,10 +60,9 @@ public class ExportManagerTest {
         exporter.initialize(settingsMock, engine);
         times = 1;
 
-        issueServiceMock.createIssue(withInstanceOf(IRepositoryIdProvider.class),
-            withInstanceOf(Issue.class));
+        issueServiceMock.createIssue(withInstanceOf(IRepositoryIdProvider.class), withInstanceOf(Issue.class));
         times = 0;
-        
+
         exporter.createOrUpdateItem(withInstanceOf(ODocument.class));
         times = 0;
       }
@@ -77,7 +75,7 @@ public class ExportManagerTest {
     new Expectations() {
       {
         exporter.isConfigured();
-        result = true;        
+        result = true;
       }
     };
     engine.withDB(db -> {
@@ -92,7 +90,7 @@ public class ExportManagerTest {
       {
         exporter.initialize(settingsMock, engine);
         times = 1;
-        
+
         exporter.createOrUpdateItem(withInstanceOf(ODocument.class));
         times = 2;
       }
@@ -103,18 +101,18 @@ public class ExportManagerTest {
     ODocument doc = new ODocument("WorkItem");
     doc.field("ID", id);
     doc.save();
-  }  
-    
-  
+  }
+
+
   @Test
   public void testAddExporters() throws Exception {
     ExportManager exportManager = new ExportManager();
     GitHubExporter gitHubExporter = new GitHubExporter();
-    JiraExporter jiraExporter = new JiraExporter();
+    JiraExporter jiraExporter = JiraExporter.INSTANCE;
     exportManager.addExporters(gitHubExporter, jiraExporter);
     List<Exporter> exporters = exportManager.getExporters();
     assertSame(gitHubExporter, exporters.get(0));
-    assertSame(jiraExporter, exporters.get(1));    
+    assertSame(jiraExporter, exporters.get(1));
   }
 
 }

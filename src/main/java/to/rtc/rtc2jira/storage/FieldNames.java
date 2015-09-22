@@ -29,17 +29,18 @@ public interface FieldNames {
                                     // 4=WorksForMe,
                                     // 5=Invalid)
   String RESOLUTION_DATE = "resolutionDate"; // TODO = resolutiondate (can't be PUT)
-  String CATEGORY = "category"; // DONE
+  String CATEGORY = "category"; // TEST
   String ARCHIVED = "archived"; // DONE
   String PROJECT_AREA = "projectArea";
   String STORY_POINTS = "storyPoints"; // DONE
   String CUSTOM_ATTRIBUTES = "customAttributes";
   String STATE = "state"; // DONE
   String TAGS = "tags"; // DONE
-  String ITERATION_LABEL = "iterationLabel";
+  String ITERATION_LABEL = "iterationLabel"; // TEST target
   String DUE_DATE = "dueDate"; // DONE
-  String SUBSCRIPTIONS = "subscriptions"; // DONE
+  String SUBSCRIPTIONS = "subscriptions"; // TEST
   String GITHUB_WORKITEM_LINK = "githubissuenumber";
+  String PTF = "ptf"; // TEST
   String JIRA_ID_LINK = "jiraid";
   String JIRA_KEY_LINK = "jiraKey";
   String JIRA_EXPORT_TIMESTAMP = "jiraExportTimestamp";

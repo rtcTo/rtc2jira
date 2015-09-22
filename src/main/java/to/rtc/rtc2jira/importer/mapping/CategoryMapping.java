@@ -30,6 +30,7 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
 public class CategoryMapping extends MappingAdapter {
 
   public static final String NO_TEAM = "NO_TEAM";
+  public static final String NO_CATEGORY = "NO_CATEGORY";
 
   public static final String FIELD_SEPARATOR = "|#|";
 
@@ -45,6 +46,9 @@ public class CategoryMapping extends MappingAdapter {
     ICategoryHandle categoryHandle = getValue(attribute);
     Category category = fetchCompleteItem(categoryHandle);
     String categoryQualifiedName = getCategoryQualifiedName(category.getCategoryId());
+    if (categoryQualifiedName == null || categoryQualifiedName.isEmpty()) {
+      categoryQualifiedName = NO_CATEGORY;
+    }
     ITeamAreaHandle defaultTeamArea = category.getDefaultTeamArea();
     String teamAreaQualifiedName = getTeamAreaQualifiedName(defaultTeamArea);
     if (teamAreaQualifiedName == null || teamAreaQualifiedName.isEmpty()) {

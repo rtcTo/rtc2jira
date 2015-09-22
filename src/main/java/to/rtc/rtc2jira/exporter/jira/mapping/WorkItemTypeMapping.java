@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import to.rtc.rtc2jira.Settings;
+import to.rtc.rtc2jira.exporter.jira.JiraExporter;
 import to.rtc.rtc2jira.exporter.jira.JiraRestAccess;
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueFields;
@@ -37,14 +37,11 @@ public class WorkItemTypeMapping implements Mapping {
   private Map<String, List<IssueType>> existingIssueTypes;
   private JiraRestAccess restAccess;
 
-  public WorkItemTypeMapping(JiraRestAccess restAccess) {
-    this.restAccess = restAccess;
-  }
 
   public WorkItemTypeMapping() {
-    Settings settings = Settings.getInstance();
-    restAccess = new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(), settings.getJiraPassword());
+    this.restAccess = JiraExporter.INSTANCE.getRestAccess();
   }
+
 
   @Override
   public void map(Object value, Issue issue, StorageEngine storage) {

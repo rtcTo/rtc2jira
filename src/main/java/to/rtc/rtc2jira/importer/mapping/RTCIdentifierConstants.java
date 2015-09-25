@@ -47,4 +47,5 @@ public interface RTCIdentifierConstants {
   public static final String PTF = "ptf";
   public static final String ESTIMATED_HOURS = "estimatedh";
   public static final String REFERENCE_MODEL = "referencemodel";
+  public static final String PROJECT_NAME = "projektname";
 }

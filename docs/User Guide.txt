@@ -18,4 +18,6 @@ This id must be inserted in the annotation of the accessor method in the IssueFi
 5. For users to have access to the Group Picker gui when editing "Team Group" and "Filed Against" fields, they must first be granted the browse_users permission.
 
 6. In order to enter a "timeestimate", the admistrator must activate time tracking
+
+7. After creating the custom fields, enter custom field option values in the CustomFieldOption class as needed.
    

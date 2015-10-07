@@ -51,7 +51,7 @@ public class JiraExporter implements Exporter {
   private Settings settings;
   private JiraRestAccess restAccess;
   private Optional<Project> projectOptional;
-  private int highestExistingId = 6000;
+  private int highestExistingId = -1;
   private MappingRegistry mappingRegistry;
   private WorkItemTypeMapping workItemTypeMapping;
 
@@ -131,7 +131,9 @@ public class JiraExporter implements Exporter {
         long endTime = System.currentTimeMillis();
         long duration = endTime - startTime;
         double minutes = Math.floor(duration / (1000 * 60));
-        LOGGER.log(Level.INFO, "Bulk creation of " + issues.size() + " items took " + minutes + " min. and ");
+        double seconds = (duration % (1000 * 60)) / 1000;
+        LOGGER.log(Level.INFO, "Bulk creation of " + issues.size() + " items took " + (int) minutes + " min. and "
+            + seconds + " sec.");
       } else {
         String errorMessage = "Problems while bulk creating issues: " + postResponse.getEntity(String.class);
         throw new Exception(errorMessage);

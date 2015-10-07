@@ -49,6 +49,7 @@ public class IssueFields {
   private Group team;
   private Set<IssueLink> issuelinks = new HashSet<IssueLink>();
   private Timetracking timetracking;
+  private CustomFieldOption bisonProjectName;
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -300,6 +301,16 @@ public class IssueFields {
 
   public void setTimetracking(Timetracking timetracking) {
     this.timetracking = timetracking;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10300")
+  public CustomFieldOption getBisonProjectName() {
+    return bisonProjectName;
+  }
+
+  public void setBisonProjectName(CustomFieldOption bisonProjectName) {
+    this.bisonProjectName = bisonProjectName;
   }
 
 

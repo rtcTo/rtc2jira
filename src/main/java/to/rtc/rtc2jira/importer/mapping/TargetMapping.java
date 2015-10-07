@@ -80,9 +80,9 @@ public class TargetMapping extends MappingAdapter {
   public void afterWorkItem(ODocument doc) {
     if (iterationInfo != null) {
       String iterationJson = iterationInfo.marshall();
-      doc.field(FieldNames.ITERATION_LABEL, iterationJson);
+      doc.field(FieldNames.ITERATION_INFO, iterationJson);
     } else {
-      doc.field(FieldNames.ITERATION_LABEL, NO_ITERATION);
+      doc.field(FieldNames.ITERATION_INFO, NO_ITERATION);
     }
   }
 

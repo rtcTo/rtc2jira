@@ -11,13 +11,28 @@ This id must be inserted in the annotation of the story points accessor method i
 
 3. Create the following custom fields and add them to the Edit/View Issue screen. Then find the id that has been assigned to this field (with a "get" issue rest request). 
 This id must be inserted in the annotation of the accessor method in the IssueFields class, e.g. @XmlElement(name = "<id-goes-here>")
+(TODO: list custom fields)
 
 4. Find the six "transition" id's for your Jira instance and set these as values of the corresponding properties in the settings.properties file.
   (Cf. comment in settings.properties for more information)
+
+5.a. Create new issue types: certain complex properties will be migrated as issues and referenced by the owner issue by way of issue linking. Category and Iteration are two properties
+such properties. For each, a new issue type "Category" and "Iteration" must be created. The id of these types must be entered in the settings.properties file.
+
+5.b. Create new issue link types: a new issue link type needs to be created for each new issue type:
+
+-name: Category; outward: filed against; inward: filed against me 
+(for referencing a category) 
+
+-name: Iteration; outward: planned for; inward: planned for me
+(for referencing an iteration)
+
+Furthermore, a new issue link type must be created to allow hierarchical relationships. Categories and iterations can have a parent.
+-name: Hierarchy; outward: parent; inward: children
   
-5. For users to have access to the Group Picker gui when editing "Team Group" and "Filed Against" fields, they must first be granted the browse_users permission.
+6. For users to have access to the Group Picker gui when editing "Team Group" and "Filed Against" fields, they must first be granted the browse_users permission.
 
-6. In order to enter a "timeestimate", the admistrator must activate time tracking
+7. In order to enter a "timeestimate", the admistrator must activate time tracking
 
-7. After creating the custom fields, enter custom field option values in the CustomFieldOption class as needed.
+8. When creating custom fields with drop-down values, create a corresponding java enum for the values where the Jira id can be stored and accessed (e.g. BisonProjectEnum)
    

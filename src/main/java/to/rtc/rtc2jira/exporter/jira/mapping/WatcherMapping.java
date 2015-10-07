@@ -29,22 +29,31 @@ public class WatcherMapping extends BaseUserMapping {
   public void map(Object value, Issue issue, StorageEngine storage) {
     @SuppressWarnings("unchecked")
     List<String> userList = (List<String>) value;
+    List<JiraUser> watchersFromRtc = new ArrayList<JiraUser>();
     List<JiraUser> existingWatchers = new ArrayList<JiraUser>();
     List<JiraUser> watchersToDelete = new ArrayList<JiraUser>();
+    List<JiraUser> watchersToAdd = new ArrayList<JiraUser>();
     Watchers response = getExistingWatchers(issue);
     if (response != null) {
       existingWatchers = response.getWatchers();
     }
-    List<JiraUser> watchersToAdd = new ArrayList<JiraUser>();
     for (String formattedStr : userList) {
       JiraUser jiraUser = getUser(formattedStr);
-      watchersToAdd.add(jiraUser);
+      watchersFromRtc.add(jiraUser);
     }
+
     for (JiraUser jiraUser : existingWatchers) {
-      if (!watchersToAdd.contains(jiraUser)) {
+      if (!watchersFromRtc.contains(jiraUser)) {
         watchersToDelete.add(jiraUser);
       }
     }
+
+    for (JiraUser jiraUser : watchersFromRtc) {
+      if (!existingWatchers.contains(jiraUser)) {
+        watchersToAdd.add(jiraUser);
+      }
+    }
+
     removeWatchers(watchersToDelete, issue);
     addWatchers(watchersToAdd, issue);
   }

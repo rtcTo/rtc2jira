@@ -1,10 +1,15 @@
 package to.rtc.rtc2jira.exporter.jira.entities;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.codehaus.jackson.map.annotate.JsonView;
 
+@XmlRootElement
 public class CustomFieldOption extends BaseEntity {
 
   private String value;
+
+  protected CustomFieldOption() {}
 
   public CustomFieldOption(String id) {
     super(id);

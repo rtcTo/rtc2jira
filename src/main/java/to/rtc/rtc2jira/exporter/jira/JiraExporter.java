@@ -133,7 +133,7 @@ public class JiraExporter implements Exporter {
         double minutes = Math.floor(duration / (1000 * 60));
         double seconds = (duration % (1000 * 60)) / 1000;
         LOGGER.log(Level.INFO, "Bulk creation of " + issues.size() + " items took " + (int) minutes + " min. and "
-            + seconds + " sec.");
+            + (int) seconds + " sec.");
       } else {
         String errorMessage = "Problems while bulk creating issues: " + postResponse.getEntity(String.class);
         throw new Exception(errorMessage);

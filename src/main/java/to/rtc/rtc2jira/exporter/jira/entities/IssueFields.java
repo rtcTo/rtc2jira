@@ -50,6 +50,7 @@ public class IssueFields {
   private Set<IssueLink> issuelinks = new HashSet<IssueLink>();
   private Timetracking timetracking;
   private CustomFieldOption bisonProjectName;
+  private CustomFieldOption refModel;
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -311,6 +312,16 @@ public class IssueFields {
 
   public void setBisonProjectName(CustomFieldOption bisonProjectName) {
     this.bisonProjectName = bisonProjectName;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10400")
+  public CustomFieldOption getRefModel() {
+    return refModel;
+  }
+
+  public void setRefModel(CustomFieldOption refModel) {
+    this.refModel = refModel;
   }
 
 

@@ -38,11 +38,12 @@ public interface FieldNames {
   String TAGS = "tags"; // DONE
   String ITERATION_INFO = "iterationLabel"; // TEST target
   String DUE_DATE = "dueDate"; // DONE
-  String SUBSCRIPTIONS = "subscriptions"; // TEST
+  String SUBSCRIPTIONS = "subscriptions"; // DONE
   String GITHUB_WORKITEM_LINK = "githubissuenumber";
   String PTF = "ptf"; // DONE
   String ESTIMATED_TIME = "estimatedtime"; // DONE
   String BISON_PROJECT_NAME = "bisonProjectName"; // DONE
+  String REF_MODEL = "refModel"; // DONE
   String JIRA_ID_LINK = "jiraid";
   String JIRA_KEY_LINK = "jiraKey";
   String JIRA_EXPORT_TIMESTAMP = "jiraExportTimestamp";

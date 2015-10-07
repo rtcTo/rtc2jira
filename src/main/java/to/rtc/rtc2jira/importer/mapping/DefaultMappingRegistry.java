@@ -56,6 +56,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.STATE_TRANSITIONS, new NullMapping());
     register(RTCIdentifierConstants.ESTIMATED_HOURS, new IntegerMapping(FieldNames.ESTIMATED_TIME));
     register(RTCIdentifierConstants.PROJECT_NAME, new BisonProjectMapping());
+    register(RTCIdentifierConstants.REFERENCE_MODEL, new RefModelMapping());
   };
 
   public static DefaultMappingRegistry getInstance() {

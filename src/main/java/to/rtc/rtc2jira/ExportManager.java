@@ -32,6 +32,7 @@ public class ExportManager {
           exporter.createOrUpdateItem(workItem);
           LOGGER.info("Exported workitem " + workItem.field(FieldNames.ID));
         }
+        exporter.postExport();
       }
     }
   }

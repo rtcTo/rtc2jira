@@ -49,6 +49,7 @@ public abstract class BaseUserMapping implements Mapping {
     if (clientResponse.getStatus() == 201) {
       jiraUser = clientResponse.getEntity(JiraUser.class);
       existingUserEmails.add(jiraUser.getEmailAddress());
+      JiraExporter.INSTANCE.onCreateUser(jiraUser);
     } else {
       LOGGER.log(Level.SEVERE, "Problems while creating user " + clientResponse.getEntity(String.class));
     }

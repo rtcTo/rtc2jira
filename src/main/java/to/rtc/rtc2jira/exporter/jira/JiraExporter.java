@@ -6,8 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +25,8 @@ import to.rtc.rtc2jira.exporter.jira.entities.IssueAttachment;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueComment;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueFields;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueResolution;
+import to.rtc.rtc2jira.exporter.jira.entities.IssueSearch;
+import to.rtc.rtc2jira.exporter.jira.entities.IssueSearch.IssueSearchResult;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueStatus;
 import to.rtc.rtc2jira.exporter.jira.entities.JiraUser;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
@@ -54,6 +58,7 @@ public class JiraExporter implements Exporter {
   private int highestExistingId = -1;
   private MappingRegistry mappingRegistry;
   private WorkItemTypeMapping workItemTypeMapping;
+  private Set<String> createdUsers = new HashSet<String>(500);
 
   static {
     INSTANCE = new JiraExporter();
@@ -71,8 +76,8 @@ public class JiraExporter implements Exporter {
     this.settings = settings;
     this.store = store;
     setRestAccess(new JiraRestAccess(settings.getJiraUrl(), settings.getJiraUser(), settings.getJiraPassword()));
-    // ClientResponse response = getRestAccess().get("/myself");
-    ClientResponse response = getRestAccess().get("/issue/WOR-137");
+    ClientResponse response = getRestAccess().get("/myself");
+    // ClientResponse response = getRestAccess().get("/issue/WOR-137");
 
     if (response.getStatus() != Status.OK.getStatusCode()) {
       throw new RuntimeException("Unable to connect to jira repository: " + response.toString());
@@ -94,6 +99,17 @@ public class JiraExporter implements Exporter {
   }
 
   private void ensureWorkItemWithId(int workItemId) throws Exception {
+    if (highestExistingId == -1) {
+      IssueSearchResult searchResult =
+          IssueSearch.INSTANCE.run("project = '" + settings.getJiraProjectKey() + "' ORDER BY id DESC");
+      if (searchResult.getTotal() > 0) {
+        Issue last = searchResult.getIssues().get(0);
+        highestExistingId = extractId(last.getKey());
+      } else {
+        highestExistingId = 0;
+      }
+    }
+
     while (highestExistingId < workItemId) {
       int gap = workItemId - highestExistingId;
       gap = (gap <= 100) ? gap : 100;
@@ -124,9 +140,7 @@ public class JiraExporter implements Exporter {
         BulkCreateResponseEntity respEntity = postResponse.getEntity(BulkCreateResponseEntity.class);
         List<Issue> issues = respEntity.getIssues();
         if (!issues.isEmpty()) {
-          String highestAsString =
-              issues.get(issues.size() - 1).getKey().replace(settings.getJiraProjectKey() + '-', "");
-          highestExistingId = Integer.parseInt(highestAsString);
+          highestExistingId = extractId(issues.get(issues.size() - 1).getKey());
         }
         long endTime = System.currentTimeMillis();
         long duration = endTime - startTime;
@@ -153,6 +167,20 @@ public class JiraExporter implements Exporter {
         throw new Exception("Fatal error - could not open attachment directory while exporting", e);
       }
     }
+  }
+
+  private String getKey(ODocument item) {
+    String key = null;
+    if (projectOptional.isPresent()) {
+      String id = item.field(FieldNames.ID);
+      key = settings.getJiraProjectKey() + '-' + id;
+    }
+    return key;
+  }
+
+  private int extractId(String key) {
+    String[] split = key.split("-");
+    return Integer.parseInt(split[1]);
   }
 
   private void persistIssue(ODocument item, Issue issue) {
@@ -319,7 +347,7 @@ public class JiraExporter implements Exporter {
     Issue issue = new Issue();
     String id = workItem.field(FieldNames.ID);
     issue.setId(id);
-    String key = settings.getJiraProjectKey() + '-' + id;
+    String key = getKey(workItem);
     issue.setKey(key);
     ClientResponse cr = getRestAccess().get(issue.getSelfPath());
     if (cr.getStatus() == 200) {
@@ -350,5 +378,27 @@ public class JiraExporter implements Exporter {
 
   private void setRestAccess(JiraRestAccess restAccess) {
     this.restAccess = restAccess;
+  }
+
+  @Override
+  public void postExport() throws Exception {
+    // deactivate new users during testing phase (lower costs)
+    for (String email : createdUsers) {
+      JiraUser jiraUser = new JiraUser();
+      jiraUser.setEmailAddress(email);
+      String name = email.split("@")[0];
+      jiraUser.setName(name);
+      jiraUser.setKey(name);
+      jiraUser.setActive(false);
+      ClientResponse putResponse = getRestAccess().delete("/group/user?groupname=jira-users&username=" + name);
+      if (putResponse.getStatus() != 200) {
+        LOGGER.log(Level.SEVERE, "Problems while removing user " + jiraUser.getEmailAddress()
+            + "  from jira-users group. " + putResponse.getEntity(String.class));
+      }
+    }
+  }
+
+  public void onCreateUser(JiraUser newUser) {
+    createdUsers.add(newUser.getEmailAddress());
   }
 }

@@ -1,7 +1,14 @@
 package to.rtc.rtc2jira.exporter.github;
 
-import static to.rtc.rtc2jira.storage.FieldNames.*;
-import static to.rtc.rtc2jira.storage.WorkItemTypes.*;
+import static to.rtc.rtc2jira.storage.FieldNames.DESCRIPTION;
+import static to.rtc.rtc2jira.storage.FieldNames.ID;
+import static to.rtc.rtc2jira.storage.FieldNames.SUMMARY;
+import static to.rtc.rtc2jira.storage.FieldNames.WORK_ITEM_TYPE;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.BUSINESSNEED;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.DEFECT;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.TASK;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -143,6 +150,11 @@ public class GitHubExporter implements Exporter {
     int color = colorRandom.nextInt(maxColor);
     String colorAsHex = Integer.toHexString(color);
     return colorAsHex;
+  }
+
+  @Override
+  public void postExport() throws Exception {
+    // do nothing
   }
 
 }

@@ -17,6 +17,7 @@ public class JiraUser extends NamedEntity {
     jiraUser.setName(segs[0]);
     jiraUser.setDisplayName(comment.getCreaterName());
     jiraUser.setEmailAddress(comment.getCreatorEmail().toLowerCase());
+    jiraUser.setActive(false);
     return jiraUser;
   }
 
@@ -24,7 +25,7 @@ public class JiraUser extends NamedEntity {
   private String emailAddress;
   private String password = "bison2015";
   private String displayName;
-  private String active;
+  private boolean active = false;
   private String timeZone;
 
 
@@ -57,12 +58,11 @@ public class JiraUser extends NamedEntity {
     this.displayName = displayName;
   }
 
-  @JsonView(IssueView.Read.class)
-  public String getActive() {
+  public boolean getActive() {
     return active;
   }
 
-  public void setActive(String active) {
+  public void setActive(boolean active) {
     this.active = active;
   }
 

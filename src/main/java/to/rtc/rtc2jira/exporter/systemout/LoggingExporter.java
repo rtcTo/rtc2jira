@@ -42,4 +42,9 @@ public class LoggingExporter implements Exporter {
     }
   }
 
+  @Override
+  public void postExport() throws Exception {
+    // do nothing
+  }
+
 }

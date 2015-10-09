@@ -15,4 +15,6 @@ public interface Exporter {
 
   void createOrUpdateItem(ODocument item) throws Exception;
 
+  void postExport() throws Exception;
+
 }

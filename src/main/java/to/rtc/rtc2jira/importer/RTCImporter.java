@@ -46,12 +46,15 @@ public class RTCImporter {
     this.storageEngine = storageEngine;
     this.permissionDeniedWorkitems = new LinkedList<>();
     this.notPresentWorkitems = new LinkedList<>();
+  }
 
-    if (Settings.getInstance().isDryRunImport()) {
+  private ODocument getDryRunDoc() {
+    if (dryRunDoc == null) {
       dryRunDoc = new ODocument("WorkItem");
       dryRunDoc.field(ID, "dryrun");
       dryRunDoc.field(Attachment.EXPORTED_ATTACHMENTS_PROPERTY, new SeparatedStringList());
     }
+    return dryRunDoc;
   }
 
   public static boolean isLoginPossible(Settings settings) {
@@ -144,7 +147,7 @@ public class RTCImporter {
         List<ODocument> result = db.query(query, workItem.getId());
         final ODocument doc;
         if (Settings.getInstance().isDryRunImport()) {
-          doc = dryRunDoc;
+          doc = getDryRunDoc();
         } else if (result.size() > 0) {
           doc = result.get(0);
         } else {

@@ -5,6 +5,8 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public enum StateEnum {
   abandoned(StatusEnum.done, "com.ibm.team.workitem.buildTrackingWorkflow.state.s7"), //
@@ -33,6 +35,7 @@ public enum StateEnum {
 
   final private StatusEnum jiraStatus;
   final private Set<String> rctLiterals;
+  static private final Logger LOGGER = Logger.getLogger(StateEnum.class.getName());
 
   private StateEnum(StatusEnum jiraStatus, String... rtcLiterals) {
     this.jiraStatus = jiraStatus;
@@ -49,12 +52,21 @@ public enum StateEnum {
 
   public static Optional<StateEnum> forRtcLiteral(String literal) {
     EnumSet<StateEnum> all = EnumSet.allOf(StateEnum.class);
-    return all.stream().filter(item -> item.getRctLiterals().contains(literal)).findFirst();
+    Optional<StateEnum> first = all.stream().filter(item -> item.getRctLiterals().contains(literal)).findFirst();
+    if (!first.isPresent()) {
+      LOGGER.log(Level.SEVERE, "Could not find a StateEnum entry for the rtc id " + literal);
+    }
+    return first;
   }
 
   public static Optional<StateEnum> forJiraLiteral(String literal) {
     EnumSet<StateEnum> all = EnumSet.allOf(StateEnum.class);
-    return all.stream().filter(item -> item.getStatusEnum().getJiraId().equals(literal)).findFirst();
+    Optional<StateEnum> first =
+        all.stream().filter(item -> item.getStatusEnum().getJiraId().equals(literal)).findFirst();
+    if (!first.isPresent()) {
+      LOGGER.log(Level.SEVERE, "Could not find a StateEnum entry for the jira id " + literal);
+    }
+    return first;
   }
 
 

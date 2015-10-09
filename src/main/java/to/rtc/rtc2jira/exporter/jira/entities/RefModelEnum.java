@@ -2,6 +2,8 @@ package to.rtc.rtc2jira.exporter.jira.entities;
 
 import java.util.EnumSet;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public enum RefModelEnum {
 
@@ -29,6 +31,7 @@ public enum RefModelEnum {
 
   private String rctId;
   private String jiraId;
+  static private final Logger LOGGER = Logger.getLogger(RefModelEnum.class.getName());
 
   private RefModelEnum(String rctId, String jiraId) {
     this.rctId = rctId;
@@ -57,12 +60,20 @@ public enum RefModelEnum {
 
   public static final Optional<RefModelEnum> forJiraId(String jiraId) {
     EnumSet<RefModelEnum> all = EnumSet.allOf(RefModelEnum.class);
-    return all.stream().filter(item -> item.getJiraId().equals(jiraId)).findFirst();
+    Optional<RefModelEnum> first = all.stream().filter(item -> item.getJiraId().equals(jiraId)).findFirst();
+    if (!first.isPresent()) {
+      LOGGER.log(Level.SEVERE, "Could not find a RefModelEnum entry for the jira id " + jiraId);
+    }
+    return first;
   }
 
   public static final Optional<RefModelEnum> forRtcId(String rtcId) {
     EnumSet<RefModelEnum> all = EnumSet.allOf(RefModelEnum.class);
-    return all.stream().filter(item -> item.getRctId().equals(rtcId)).findFirst();
+    Optional<RefModelEnum> first = all.stream().filter(item -> item.getRctId().equals(rtcId)).findFirst();
+    if (!first.isPresent()) {
+      LOGGER.log(Level.SEVERE, "Could not find a RefModelEnum entry for the rtc id " + rtcId);
+    }
+    return first;
   }
 
 

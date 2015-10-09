@@ -44,6 +44,7 @@ public interface FieldNames {
   String ESTIMATED_TIME = "estimatedtime"; // DONE
   String BISON_PROJECT_NAME = "bisonProjectName"; // DONE
   String REF_MODEL = "refModel"; // DONE
+  String EP_REQ_NR = "ep_req_nr";
   String JIRA_ID_LINK = "jiraid";
   String JIRA_KEY_LINK = "jiraKey";
   String JIRA_EXPORT_TIMESTAMP = "jiraExportTimestamp";

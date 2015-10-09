@@ -47,6 +47,7 @@ public class MappingRegistry {
     registry.put(FieldNames.ESTIMATED_TIME, new EstimatedHoursMapping());
     registry.put(FieldNames.BISON_PROJECT_NAME, new BisonProjectNameMapping());
     registry.put(FieldNames.REF_MODEL, new RefModelMapping());
+    registry.put(FieldNames.EP_REQ_NR, new EpReqNrMapping());
   }
 
   public void map(ODocument workItem, Issue issue, StorageEngine storage) {

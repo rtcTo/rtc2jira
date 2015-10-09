@@ -51,6 +51,7 @@ public class IssueFields {
   private Timetracking timetracking;
   private CustomFieldOption bisonProjectName;
   private CustomFieldOption refModel;
+  private Integer epReqNr;
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -322,6 +323,16 @@ public class IssueFields {
 
   public void setRefModel(CustomFieldOption refModel) {
     this.refModel = refModel;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10401")
+  public Integer getEpReqNr() {
+    return epReqNr;
+  }
+
+  public void setEpReqNr(Integer epReqNr) {
+    this.epReqNr = epReqNr;
   }
 
 

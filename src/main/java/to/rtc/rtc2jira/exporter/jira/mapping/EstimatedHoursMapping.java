@@ -6,6 +6,7 @@ package to.rtc.rtc2jira.exporter.jira.mapping;
 import java.util.EnumSet;
 
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
+import to.rtc.rtc2jira.exporter.jira.entities.IssueResolution;
 import to.rtc.rtc2jira.exporter.jira.entities.ResolutionEnum;
 import to.rtc.rtc2jira.exporter.jira.entities.Timetracking;
 import to.rtc.rtc2jira.storage.StorageEngine;
@@ -26,7 +27,8 @@ public class EstimatedHoursMapping implements Mapping {
     int minutes = hours * 360;
     Timetracking timetracking = new Timetracking();
     timetracking.setOriginalEstimate(minutes + "m");
-    if (NO_REMAINING_TIME.contains(issue.getFields().getResolution().getEnum())) {
+    IssueResolution resolution = issue.getFields().getResolution();
+    if (resolution != null && NO_REMAINING_TIME.contains(resolution.getEnum())) {
       timetracking.setRemainingEstimate("0m");
     }
     issue.getFields().setTimetracking(timetracking);

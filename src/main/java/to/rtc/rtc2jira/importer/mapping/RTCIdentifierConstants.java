@@ -48,4 +48,10 @@ public interface RTCIdentifierConstants {
   public static final String ESTIMATED_HOURS = "estimatedh";
   public static final String REFERENCE_MODEL = "referencemodel";
   public static final String PROJECT_NAME = "projektname";
+  public static final String MINIMAL_ESTIMATE = "com.ibm.team.apt.estimate.minimal";
+  public static final String MAXIMAL_ESTIMATE = "com.ibm.team.apt.estimate.maximal";
+  public static final String NEW_RANKING = "com.ibm.team.apt.attribute.planitem.newRanking._pm7NmRYUEd6L1tNIGdz5qQ";
+  public static final String RANK = "com.ibm.team.apt.attribute.planitem.priority._pm7NmRYUEd6L1tNIGdz5qQ";
+  public static final String RELATED_PROJECTS = "related";
+  public static final String EP_REQ_NR = "ep-req-nr";
 }

@@ -59,6 +59,8 @@ public class Settings {
 
   private static final String SYSOUT_EXPORTER = "sysout.exporter";
 
+  private static final String DRY_RUN_IMPORT = "dry.run.import";
+
   private static final Settings instance = new Settings();
 
   private Properties props;
@@ -199,6 +201,10 @@ public class Settings {
 
   public boolean isSystemOutExporterConfigured() {
     return Boolean.parseBoolean(props.getProperty(SYSOUT_EXPORTER));
+  }
+
+  public boolean isDryRunImport() {
+    return Boolean.parseBoolean(props.getProperty(DRY_RUN_IMPORT));
   }
 
   public String getJiraTransitionTodoInprogress() {

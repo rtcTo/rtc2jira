@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.util.List;
 import java.util.logging.Logger;
 
+import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.storage.Attachment;
 import to.rtc.rtc2jira.storage.AttachmentStorage;
 
@@ -58,7 +59,7 @@ public class AttachmentHandler {
     String attachmentName = rtcAttachment.getName();
     if (attachmentName.startsWith("\\\\")) {
       LOGGER.info("***** I think I found a link: " + attachmentName);
-    } else {
+    } else if (!Settings.getInstance().isDryRunImport()) {
       Attachment att = attachmentStorage.createAttachment(workitemId, attachmentName);
       try (OutputStream out = att.openOutputStream()) {
         repo.contentManager().retrieveContent(rtcAttachment.getContent(), out, null);

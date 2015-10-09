@@ -2,6 +2,8 @@ package to.rtc.rtc2jira.exporter.jira.entities;
 
 import java.util.EnumSet;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public enum BisonProjectEnum {
 
@@ -103,6 +105,7 @@ public enum BisonProjectEnum {
 
   private String rctId;
   private String jiraId;
+  static private final Logger LOGGER = Logger.getLogger(BisonProjectEnum.class.getName());
 
   private BisonProjectEnum(String rctId, String jiraId) {
     this.rctId = rctId;
@@ -131,12 +134,20 @@ public enum BisonProjectEnum {
 
   public static final Optional<BisonProjectEnum> forJiraId(String jiraId) {
     EnumSet<BisonProjectEnum> all = EnumSet.allOf(BisonProjectEnum.class);
-    return all.stream().filter(item -> item.getJiraId().equals(jiraId)).findFirst();
+    Optional<BisonProjectEnum> first = all.stream().filter(item -> item.getJiraId().equals(jiraId)).findFirst();
+    if (!first.isPresent()) {
+      LOGGER.log(Level.SEVERE, "Could not find a BisonProjectEnum entry for the jira id " + jiraId);
+    }
+    return first;
   }
 
   public static final Optional<BisonProjectEnum> forRtcId(String rtcId) {
     EnumSet<BisonProjectEnum> all = EnumSet.allOf(BisonProjectEnum.class);
-    return all.stream().filter(item -> item.getRctId().equals(rtcId)).findFirst();
+    Optional<BisonProjectEnum> first = all.stream().filter(item -> item.getRctId().equals(rtcId)).findFirst();
+    if (!first.isPresent()) {
+      LOGGER.log(Level.SEVERE, "Could not find a BisonProjectEnum entry for the rtc id " + rtcId);
+    }
+    return first;
   }
 
 

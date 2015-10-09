@@ -1,5 +1,8 @@
 package to.rtc.rtc2jira.exporter.jira.entities;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import to.rtc.rtc2jira.Settings;
 
 public enum StatusEnum {
@@ -80,6 +83,7 @@ public enum StatusEnum {
   public static final String NO_TRANSITION = "noFriggingTransition";
   private String jiraId;
   private String statusName;
+  static private final Logger LOGGER = Logger.getLogger(StatusEnum.class.getName());
 
   public String getJiraId() {
     return jiraId;
@@ -107,8 +111,6 @@ public enum StatusEnum {
       case inprogress:
         result.setStatusCategory(StatusCategory.createInProgress());
         break;
-      default:
-        break;
     }
 
     return result;
@@ -124,6 +126,7 @@ public enum StatusEnum {
     } else if (done.getJiraId().equals(jiraId)) {
       return done;
     } else {
+      LOGGER.log(Level.SEVERE, "Could not find a StatusEnum entry for the jira id " + jiraId);
       return null;
     }
   }

@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import to.rtc.rtc2jira.exporter.Exporter;
-import to.rtc.rtc2jira.exporter.github.GitHubExporter;
-import to.rtc.rtc2jira.exporter.jira.JiraExporter;
-import to.rtc.rtc2jira.exporter.systemout.LoggingExporter;
 import to.rtc.rtc2jira.storage.FieldNames;
 import to.rtc.rtc2jira.storage.StorageEngine;
 import to.rtc.rtc2jira.storage.StorageQuery;
@@ -45,9 +42,6 @@ public class ExportManager {
   List<Exporter> getExporters() {
     if (exporters == null) {
       exporters = new ArrayList<>();
-      exporters.add(new GitHubExporter());
-      exporters.add(JiraExporter.INSTANCE);
-      exporters.add(new LoggingExporter());
     }
     return exporters;
   }

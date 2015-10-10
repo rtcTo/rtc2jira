@@ -52,6 +52,8 @@ public class IssueFields {
   private CustomFieldOption bisonProjectName;
   private CustomFieldOption refModel;
   private Integer epReqNr;
+  private Integer epReqNrUg;
+  private Integer dpReqNr;
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -335,6 +337,25 @@ public class IssueFields {
     this.epReqNr = epReqNr;
   }
 
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10402")
+  public Integer getEpReqNrUg() {
+    return epReqNrUg;
+  }
+
+  public void setEpReqNrUg(Integer epReqNrUg) {
+    this.epReqNrUg = epReqNrUg;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10403")
+  public Integer getDpReqNr() {
+    return dpReqNr;
+  }
+
+  public void setDpReqNr(Integer dpReqNr) {
+    this.dpReqNr = dpReqNr;
+  }
 
 
 }

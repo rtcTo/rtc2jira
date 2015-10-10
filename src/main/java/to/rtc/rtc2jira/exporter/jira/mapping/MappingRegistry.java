@@ -48,6 +48,8 @@ public class MappingRegistry {
     registry.put(FieldNames.BISON_PROJECT_NAME, new BisonProjectNameMapping());
     registry.put(FieldNames.REF_MODEL, new RefModelMapping());
     registry.put(FieldNames.EP_REQ_NR, new EpReqNrMapping());
+    registry.put(FieldNames.EP_REQ_NR_UG, new EpReqNrUgMapping());
+    registry.put(FieldNames.DP_REQ_NR, new DpReqNrMapping());
   }
 
   public void map(ODocument workItem, Issue issue, StorageEngine storage) {

@@ -7,15 +7,16 @@ import to.rtc.rtc2jira.exporter.jira.entities.Issue;
 import to.rtc.rtc2jira.storage.StorageEngine;
 
 /**
- * @author roman.schaller
+ * @author gustaf.hansen
  *
  */
-public class DescriptionMapping implements Mapping {
+public class EpReqNrUgMapping implements Mapping {
 
   @Override
   public void map(Object value, Issue issue, StorageEngine storage) {
-    String description = (String) value;
-    description = description.replaceAll("<br/>", "\r\n");
-    issue.getFields().setDescription(description);
+    if (value != null) {
+      Integer epReqNrUg = (Integer) value;
+      issue.getFields().setEpReqNrUg(epReqNrUg);
+    }
   }
 }

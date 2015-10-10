@@ -64,6 +64,9 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.RANK, new NullMapping());
     register(RTCIdentifierConstants.RELATED_PROJECTS, new NullMapping());
     register(RTCIdentifierConstants.EP_REQ_NR, new IntegerMapping(FieldNames.EP_REQ_NR));
+    register(RTCIdentifierConstants.EP_REQ_NR_UG, new IntegerMapping(FieldNames.EP_REQ_NR_UG));
+    register(RTCIdentifierConstants.DP_REQ_NR, new IntegerMapping(FieldNames.DP_REQ_NR));
+    register(RTCIdentifierConstants.PO_PREPLANNING_DONE, new NullMapping());
   };
 
   public static DefaultMappingRegistry getInstance() {

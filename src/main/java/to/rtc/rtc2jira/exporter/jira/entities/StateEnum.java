@@ -15,14 +15,23 @@ public enum StateEnum {
       "com.ibm.team.apt.story.verified"), //
   inProgress(StatusEnum.inprogress, "com.ibm.team.workitem.buildTrackingWorkflow.state.s2", "2",
       "com.ibm.team.workitem.retrospectiveWorkflow.state.inprogress", "com.ibm.team.apt.epic.workflow.state.s2",
-      "com.ibm.team.apt.story.defined"), //
+      "com.ibm.team.apt.story.defined", "com.ibm.team.workitem.businessneedWorkflow.state.s7"), //
   neww(StatusEnum.todo, "1", "com.ibm.team.workitem.retrospectiveWorkflow.state.new",
       "com.ibm.team.apt.epic.workflow.state.s1", "com.ibm.team.workitem.impedimentWorkflow.state.s1",
       "com.ibm.team.apt.story.idea"), //
   reopened(StatusEnum.todo, "6"), //
   resolved(StatusEnum.done, "3", "com.ibm.team.workitem.impedimentWorkflow.state.s2"), //
   verified(StatusEnum.done, "4"), //
-  approved(StatusEnum.done, "com.ibm.team.rtc.workflow.adoption.state.s2"), //
+  approved(StatusEnum.todo, "53", "com.ibm.team.rtc.workflow.adoption.state.s2"), // 53 business
+                                                                                  // need
+  closed(StatusEnum.done, "55"), // 55 business need
+  developmentDone(StatusEnum.done, "com.ibm.team.workitem.businessneedWorkflow.state.s6"), // business
+                                                                                           // need
+  estimationOk(StatusEnum.todo, "com.ibm.team.workitem.businessneedWorkflow.state.s2"), // business
+                                                                                        // need
+  unqualified(StatusEnum.todo, "51"), // 51 business need
+  readyProduction(StatusEnum.todo, "com.ibm.team.workitem.businessneedWorkflow.state.s5"), // business
+  // need
   completed(StatusEnum.done, "com.ibm.team.rtc.workflow.adoption.state.s4"), //
   proposed(StatusEnum.todo, "com.ibm.team.rtc.workflow.adoption.state.s1"), //
   rejected(StatusEnum.done, "com.ibm.team.rtc.workflow.adoption.state.s3"), //

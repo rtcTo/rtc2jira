@@ -61,5 +61,7 @@ public interface RTCIdentifierConstants {
   public static final String SECOND_ESTIMATION = "projektbudget";
   public static final String BUDGET = "marktbudget";
   public static final String TEST_SCRIPT_IDS = "testscriptids";
+  public static final String SILO_RANKING = "silorank";
+  public static final String COMPETENCE_CENTER = "competencecenter";
 
 }

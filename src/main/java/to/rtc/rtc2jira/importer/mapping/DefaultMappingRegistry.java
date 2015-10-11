@@ -71,6 +71,8 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.SECOND_ESTIMATION, new NullMapping());
     register(RTCIdentifierConstants.BUDGET, new IntegerMapping(FieldNames.MARKET_BUDGET));
     register(RTCIdentifierConstants.TEST_SCRIPT_IDS, new NullMapping());
+    register(RTCIdentifierConstants.SILO_RANKING, new NullMapping());
+    register(RTCIdentifierConstants.COMPETENCE_CENTER, new CompetenceCenterMapping());
   };
 
   public static DefaultMappingRegistry getInstance() {

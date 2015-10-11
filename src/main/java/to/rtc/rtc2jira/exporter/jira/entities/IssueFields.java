@@ -55,6 +55,7 @@ public class IssueFields {
   private Integer epReqNrUg;
   private Integer dpReqNr;
   private Integer marketBudget;
+  private CustomFieldOption competenceCenter;
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -366,6 +367,16 @@ public class IssueFields {
 
   public void setMarketBudget(Integer marketBudget) {
     this.marketBudget = marketBudget;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10405")
+  public CustomFieldOption getCompetenceCenter() {
+    return competenceCenter;
+  }
+
+  public void setCompetenceCenter(CustomFieldOption competenceCenter) {
+    this.competenceCenter = competenceCenter;
   }
 
 

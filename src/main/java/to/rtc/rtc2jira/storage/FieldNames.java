@@ -48,6 +48,7 @@ public interface FieldNames {
   String EP_REQ_NR_UG = "ep_req_nr_ug";
   String DP_REQ_NR = "dp_req_nr";
   String MARKET_BUDGET = "marketBudget";
+  String COMPETENCE_CENTER = "competenceCenter";
   String JIRA_ID_LINK = "jiraid";
   String JIRA_KEY_LINK = "jiraKey";
   String JIRA_EXPORT_TIMESTAMP = "jiraExportTimestamp";

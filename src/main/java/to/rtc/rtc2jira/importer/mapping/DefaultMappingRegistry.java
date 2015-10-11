@@ -70,6 +70,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.DEVL_DEADLINE, new NullMapping());
     register(RTCIdentifierConstants.SECOND_ESTIMATION, new NullMapping());
     register(RTCIdentifierConstants.BUDGET, new IntegerMapping(FieldNames.MARKET_BUDGET));
+    register(RTCIdentifierConstants.TEST_SCRIPT_IDS, new NullMapping());
   };
 
   public static DefaultMappingRegistry getInstance() {

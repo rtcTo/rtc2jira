@@ -60,5 +60,6 @@ public interface RTCIdentifierConstants {
   public static final String DEVL_DEADLINE = "devldeadline";
   public static final String SECOND_ESTIMATION = "projektbudget";
   public static final String BUDGET = "marktbudget";
+  public static final String TEST_SCRIPT_IDS = "testscriptids";
 
 }

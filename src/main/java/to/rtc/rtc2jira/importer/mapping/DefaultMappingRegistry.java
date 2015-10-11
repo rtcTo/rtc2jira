@@ -74,6 +74,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.SILO_RANKING, new NullMapping());
     register(RTCIdentifierConstants.COMPETENCE_CENTER, new CompetenceCenterMapping());
     register(RTCIdentifierConstants.CUSTOMER, new NullMapping());
+    register(RTCIdentifierConstants.SEQUENCE_CREATION_BN, new NullMapping());
   };
 
   public static DefaultMappingRegistry getInstance() {

@@ -59,6 +59,7 @@ public class JiraExporter implements Exporter {
   private MappingRegistry mappingRegistry;
   private WorkItemTypeMapping workItemTypeMapping;
   private Set<String> createdUsers = new HashSet<String>(500);
+  private Set<String> existingUsers = new HashSet<String>(500);
 
   static {
     INSTANCE = new JiraExporter();
@@ -401,4 +402,9 @@ public class JiraExporter implements Exporter {
   public void onCreateUser(JiraUser newUser) {
     createdUsers.add(newUser.getEmailAddress());
   }
+
+  public Set<String> getExistingUsers() {
+    return existingUsers;
+  }
+
 }

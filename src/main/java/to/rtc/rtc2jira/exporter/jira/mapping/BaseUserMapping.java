@@ -1,7 +1,5 @@
 package to.rtc.rtc2jira.exporter.jira.mapping;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,8 +16,6 @@ import com.sun.jersey.api.client.ClientResponse;
 public abstract class BaseUserMapping implements Mapping {
   private static final Logger LOGGER = Logger.getLogger(BaseUserMapping.class.getName());
 
-  Set<String> existingUserEmails = new HashSet<String>(500);
-
   private JiraRestAccess restAccess;
 
   BaseUserMapping() {
@@ -32,10 +28,10 @@ public abstract class BaseUserMapping implements Mapping {
     if ("unassigned".equals(jiraUser.getName().toLowerCase()))
       return null;
 
-    if (!existingUserEmails.contains(jiraUser.getEmailAddress())) {
+    if (!JiraExporter.INSTANCE.getExistingUsers().contains(jiraUser.getEmailAddress())) {
       ClientResponse clientResponse = getRestAccess().get(jiraUser.getSelfPath());
       if (clientResponse.getStatus() == 200) {
-        existingUserEmails.add(jiraUser.getEmailAddress());
+        JiraExporter.INSTANCE.getExistingUsers().add(jiraUser.getEmailAddress());
       } else {
         jiraUser = createUser(jiraUser);
       }
@@ -48,7 +44,7 @@ public abstract class BaseUserMapping implements Mapping {
     ClientResponse clientResponse = getRestAccess().post(jiraUser.getPath(), jiraUser);
     if (clientResponse.getStatus() == 201) {
       jiraUser = clientResponse.getEntity(JiraUser.class);
-      existingUserEmails.add(jiraUser.getEmailAddress());
+      JiraExporter.INSTANCE.getExistingUsers().add(jiraUser.getEmailAddress());
       JiraExporter.INSTANCE.onCreateUser(jiraUser);
     } else {
       LOGGER.log(Level.SEVERE, "Problems while creating user " + clientResponse.getEntity(String.class));

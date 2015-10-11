@@ -54,6 +54,7 @@ public class IssueFields {
   private Integer epReqNr;
   private Integer epReqNrUg;
   private Integer dpReqNr;
+  private Integer marketBudget;
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -355,6 +356,16 @@ public class IssueFields {
 
   public void setDpReqNr(Integer dpReqNr) {
     this.dpReqNr = dpReqNr;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10404")
+  public Integer getMarketBudget() {
+    return marketBudget;
+  }
+
+  public void setMarketBudget(Integer marketBudget) {
+    this.marketBudget = marketBudget;
   }
 
 

@@ -50,6 +50,7 @@ public class MappingRegistry {
     registry.put(FieldNames.EP_REQ_NR, new EpReqNrMapping());
     registry.put(FieldNames.EP_REQ_NR_UG, new EpReqNrUgMapping());
     registry.put(FieldNames.DP_REQ_NR, new DpReqNrMapping());
+    registry.put(FieldNames.MARKET_BUDGET, new MarketBudgetMapping());
   }
 
   public void map(ODocument workItem, Issue issue, StorageEngine storage) {

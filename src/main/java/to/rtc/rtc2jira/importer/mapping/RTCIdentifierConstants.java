@@ -57,4 +57,8 @@ public interface RTCIdentifierConstants {
   public static final String EP_REQ_NR_UG = "ep-req-nr.ug";
   public static final String DP_REQ_NR = "dp-req-nr.";
   public static final String PO_PREPLANNING_DONE = "popreplanningdone";
+  public static final String DEVL_DEADLINE = "devldeadline";
+  public static final String SECOND_ESTIMATION = "projektbudget";
+  public static final String BUDGET = "marktbudget";
+
 }

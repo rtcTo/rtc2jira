@@ -10,14 +10,14 @@ import to.rtc.rtc2jira.storage.StorageEngine;
  * @author gustaf.hansen
  *
  */
-public class EpReqNrUgMapping implements Mapping {
+public class MarketBudgetMapping implements Mapping {
 
   @Override
   public void map(Object value, Issue issue, StorageEngine storage) {
     if (value != null) {
-      Integer epReqNrUg = (Integer) value;
-      if (epReqNrUg > 0) {
-        issue.getFields().setEpReqNrUg(epReqNrUg);
+      Integer budget = (Integer) value;
+      if (budget > 0) {
+        issue.getFields().setMarketBudget(budget);
       }
     }
   }

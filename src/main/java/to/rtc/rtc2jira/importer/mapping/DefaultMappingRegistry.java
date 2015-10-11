@@ -75,6 +75,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.COMPETENCE_CENTER, new CompetenceCenterMapping());
     register(RTCIdentifierConstants.CUSTOMER, new NullMapping());
     register(RTCIdentifierConstants.SEQUENCE_CREATION_BN, new NullMapping());
+    register(RTCIdentifierConstants.TIMESLOT, new NullMapping());
   };
 
   public static DefaultMappingRegistry getInstance() {

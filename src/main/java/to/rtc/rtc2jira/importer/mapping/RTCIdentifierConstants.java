@@ -63,5 +63,6 @@ public interface RTCIdentifierConstants {
   public static final String TEST_SCRIPT_IDS = "testscriptids";
   public static final String SILO_RANKING = "silorank";
   public static final String COMPETENCE_CENTER = "competencecenter";
+  public static final String CUSTOMER = "customer";
 
 }

@@ -6,10 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -58,8 +56,6 @@ public class JiraExporter implements Exporter {
   private int highestExistingId = -1;
   private MappingRegistry mappingRegistry;
   private WorkItemTypeMapping workItemTypeMapping;
-  private Set<String> createdUsers = new HashSet<String>(500);
-  private Set<String> existingUsers = new HashSet<String>(500);
 
   static {
     INSTANCE = new JiraExporter();
@@ -384,27 +380,7 @@ public class JiraExporter implements Exporter {
   @Override
   public void postExport() throws Exception {
     // deactivate new users during testing phase (lower costs)
-    for (String email : createdUsers) {
-      JiraUser jiraUser = new JiraUser();
-      jiraUser.setEmailAddress(email);
-      String name = email.split("@")[0];
-      jiraUser.setName(name);
-      jiraUser.setKey(name);
-      jiraUser.setActive(false);
-      ClientResponse putResponse = getRestAccess().delete("/group/user?groupname=jira-users&username=" + name);
-      if (putResponse.getStatus() != 200) {
-        LOGGER.log(Level.SEVERE, "Problems while removing user " + jiraUser.getEmailAddress()
-            + "  from jira-users group. " + putResponse.getEntity(String.class));
-      }
-    }
-  }
-
-  public void onCreateUser(JiraUser newUser) {
-    createdUsers.add(newUser.getEmailAddress());
-  }
-
-  public Set<String> getExistingUsers() {
-    return existingUsers;
+    JiraUserManager.INSTANCE.deactivateUsers();
   }
 
 }

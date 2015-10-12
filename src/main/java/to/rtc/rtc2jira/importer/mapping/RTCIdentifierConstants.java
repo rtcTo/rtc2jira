@@ -53,6 +53,7 @@ public interface RTCIdentifierConstants {
   public static final String NEW_RANKING = "com.ibm.team.apt.attribute.planitem.newRanking._pm7NmRYUEd6L1tNIGdz5qQ";
   public static final String RANK = "com.ibm.team.apt.attribute.planitem.priority._pm7NmRYUEd6L1tNIGdz5qQ";
   public static final String RELATED_PROJECTS = "related";
+  public static final String INDUSTRY_SECTOR = "industry";
   public static final String EP_REQ_NR = "ep-req-nr";
   public static final String EP_REQ_NR_UG = "ep-req-nr.ug";
   public static final String DP_REQ_NR = "dp-req-nr.";

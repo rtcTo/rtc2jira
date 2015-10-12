@@ -3,22 +3,21 @@
  */
 package to.rtc.rtc2jira.exporter.jira.mapping;
 
+import java.util.List;
+
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
-import to.rtc.rtc2jira.exporter.jira.entities.JiraRadioItem;
 import to.rtc.rtc2jira.storage.StorageEngine;
 
 /**
  * @author gustaf.hansen
  *
  */
-public class ArchivedMapping implements Mapping {
+public class RelatedProjectsMapping implements Mapping {
 
   @Override
   public void map(Object value, Issue issue, StorageEngine storage) {
-    if (Boolean.TRUE.equals(value)) {
-      issue.getFields().setArchived(JiraRadioItem.YES_ARCHIVED);
-    } else {
-      issue.getFields().setArchived(JiraRadioItem.NONE);
-    }
+    @SuppressWarnings("unchecked")
+    List<String> labels = (List<String>) value;
+    issue.getFields().setRelatedProjects(labels);
   }
 }

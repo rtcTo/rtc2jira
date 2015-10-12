@@ -11,14 +11,14 @@ import to.rtc.rtc2jira.storage.StorageEngine;
  * @author gustaf.hansen
  *
  */
-public class ArchivedMapping implements Mapping {
+public class PoPreplanningDoneMapping implements Mapping {
 
   @Override
   public void map(Object value, Issue issue, StorageEngine storage) {
     if (Boolean.TRUE.equals(value)) {
-      issue.getFields().setArchived(JiraRadioItem.YES_ARCHIVED);
+      issue.getFields().setPoPreplanningDone(JiraRadioItem.YES_PO_PREPLANNING);
     } else {
-      issue.getFields().setArchived(JiraRadioItem.NONE);
+      issue.getFields().setPoPreplanningDone(JiraRadioItem.NONE);
     }
   }
 }

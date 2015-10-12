@@ -5,12 +5,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class JiraRadioItem {
   private String value;
+  private String id = "";
 
-  static public final JiraRadioItem YES = new JiraRadioItem(true);
-  static public final JiraRadioItem NONE = new JiraRadioItem(false);
+  static public final JiraRadioItem YES_ARCHIVED = new JiraRadioItem(true, "10101");
+  static public final JiraRadioItem YES_PO_PREPLANNING = new JiraRadioItem(true, "10383");
+  static public final JiraRadioItem NONE = new JiraRadioItem(false, "");
 
-  JiraRadioItem(boolean archived) {
+  JiraRadioItem(boolean archived, String id) {
     value = archived ? "Yes" : "None";
+    setId(id);
   }
 
   public String getValue() {
@@ -19,5 +22,13 @@ public class JiraRadioItem {
 
   public void setValue(String value) {
     this.value = value;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 }

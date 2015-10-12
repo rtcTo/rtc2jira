@@ -56,6 +56,9 @@ public class IssueFields {
   private Integer dpReqNr;
   private Integer marketBudget;
   private CustomFieldOption competenceCenter;
+  private JiraRadioItem poPreplanningDone;
+  private List<String> relatedProjects = new ArrayList<String>();
+  private List<String> industrySector = new ArrayList<String>();
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -377,6 +380,36 @@ public class IssueFields {
 
   public void setCompetenceCenter(CustomFieldOption competenceCenter) {
     this.competenceCenter = competenceCenter;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10406")
+  public JiraRadioItem isPoPreplanningDone() {
+    return poPreplanningDone;
+  }
+
+  public void setPoPreplanningDone(JiraRadioItem poPreplanningDone) {
+    this.poPreplanningDone = poPreplanningDone;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10407")
+  public List<String> getRelatedProjects() {
+    return relatedProjects;
+  }
+
+  public void setRelatedProjects(List<String> relatedProjects) {
+    this.relatedProjects = relatedProjects;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10408")
+  public List<String> getIndustrySector() {
+    return industrySector;
+  }
+
+  public void setIndustrySector(List<String> industrySector) {
+    this.industrySector = industrySector;
   }
 
 

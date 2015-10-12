@@ -52,6 +52,9 @@ public class MappingRegistry {
     registry.put(FieldNames.DP_REQ_NR, new DpReqNrMapping());
     registry.put(FieldNames.MARKET_BUDGET, new MarketBudgetMapping());
     registry.put(FieldNames.COMPETENCE_CENTER, new CompetenceCenterMapping());
+    registry.put(FieldNames.PO_PREPLANNING_DONE, new PoPreplanningDoneMapping());
+    registry.put(FieldNames.RELATED_PROJECTS, new RelatedProjectsMapping());
+    registry.put(FieldNames.INDUSTRY_SECTOR, new IndustrySectorMapping());
   }
 
   public void map(ODocument workItem, Issue issue, StorageEngine storage) {

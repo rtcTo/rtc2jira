@@ -68,5 +68,6 @@ public interface RTCIdentifierConstants {
   public static final String SEQUENCE_CREATION_BN = "sequencecreationbn";
   public static final String TIMESLOT = "timeslot";
   public static final String PRODUCT_OWNER = "productowner";
+  public static final String TARGET_RELEASE = "targetrelease";
 
 }

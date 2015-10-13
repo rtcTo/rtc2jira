@@ -80,6 +80,7 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.SEQUENCE_CREATION_BN, new NullMapping()); // OK
     register(RTCIdentifierConstants.TIMESLOT, new TimeSlotMapping()); // NOK done
     register(RTCIdentifierConstants.PRODUCT_OWNER, new ContributorMapping(FieldNames.PRODUCT_OWNER));
+    register(RTCIdentifierConstants.TARGET_RELEASE, new NullMapping()); // OK
   };
 
   public static DefaultMappingRegistry getInstance() {

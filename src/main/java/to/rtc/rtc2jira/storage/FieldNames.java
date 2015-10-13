@@ -57,6 +57,8 @@ public interface FieldNames {
   String TEST_SCRIPT_IDs = "testScriptIds";
   String TIME_SLOT = "timeSlot";
   String SILO_RANKING = "siloRanking";
+  String PRODUCT_OWNER = "productOwner";
+  String CUSTOMER = "customer";
   String JIRA_ID_LINK = "jiraid";
   String JIRA_KEY_LINK = "jiraKey";
   String JIRA_EXPORT_TIMESTAMP = "jiraExportTimestamp";

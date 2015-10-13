@@ -67,5 +67,6 @@ public interface RTCIdentifierConstants {
   public static final String CUSTOMER = "customer";
   public static final String SEQUENCE_CREATION_BN = "sequencecreationbn";
   public static final String TIMESLOT = "timeslot";
+  public static final String PRODUCT_OWNER = "productowner";
 
 }

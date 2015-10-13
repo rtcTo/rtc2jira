@@ -60,6 +60,7 @@ public class MappingRegistry {
     registry.put(FieldNames.TEST_SCRIPT_IDs, new TestScriptIdsMapping());
     registry.put(FieldNames.TIME_SLOT, new JiraTimeSlotMapping());
     registry.put(FieldNames.SILO_RANKING, new JiraSiloRankingMapping());
+    registry.put(FieldNames.PRODUCT_OWNER, new ProductOwnerMapping());
   }
 
   public void map(ODocument workItem, Issue issue, StorageEngine storage) {

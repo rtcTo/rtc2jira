@@ -64,6 +64,7 @@ public class IssueFields {
   private String testScriptIds;
   private CustomFieldOption timeSlot;
   private Integer siloRanking;
+  private JiraUser productOwner;
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -466,6 +467,16 @@ public class IssueFields {
 
   public void setSiloRanking(Integer siloRanking) {
     this.siloRanking = siloRanking;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10506")
+  public JiraUser getProductOwner() {
+    return productOwner;
+  }
+
+  public void setProductOwner(JiraUser productOwner) {
+    this.productOwner = productOwner;
   }
 
 

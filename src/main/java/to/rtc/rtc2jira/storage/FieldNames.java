@@ -52,6 +52,11 @@ public interface FieldNames {
   String COMPETENCE_CENTER = "competenceCenter";
   String RELATED_PROJECTS = "relatedProjects";
   String INDUSTRY_SECTOR = "industrySector";
+  String DEVL_DEADLINE = "developerDeadline";
+  String SECOND_ESTIMATION = "secondEstimation";
+  String TEST_SCRIPT_IDs = "testScriptIds";
+  String TIME_SLOT = "timeSlot";
+  String SILO_RANKING = "siloRanking";
   String JIRA_ID_LINK = "jiraid";
   String JIRA_KEY_LINK = "jiraKey";
   String JIRA_EXPORT_TIMESTAMP = "jiraExportTimestamp";

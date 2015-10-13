@@ -87,7 +87,7 @@ public abstract class MappingAdapter implements Mapping {
       targetEnumeration = fWorkItemCommon.resolveEnumeration(attributeHandle, null);
       List<? extends ILiteral> literals = targetEnumeration.getEnumerationLiterals();
       for (ILiteral targetLiteral : literals) {
-        map.put(targetLiteral.getName(), targetLiteral.getIdentifier2().getStringIdentifier());
+        map.put(targetLiteral.getIdentifier2().getStringIdentifier(), targetLiteral.getName());
       }
     } catch (TeamRepositoryException e) {
       LOGGER.log(Level.SEVERE, "Problem while collecting value literals of enumeration", e);

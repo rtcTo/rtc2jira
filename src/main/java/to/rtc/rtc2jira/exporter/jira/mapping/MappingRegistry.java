@@ -55,6 +55,11 @@ public class MappingRegistry {
     registry.put(FieldNames.PO_PREPLANNING_DONE, new PoPreplanningDoneMapping());
     registry.put(FieldNames.RELATED_PROJECTS, new RelatedProjectsMapping());
     registry.put(FieldNames.INDUSTRY_SECTOR, new IndustrySectorMapping());
+    registry.put(FieldNames.DEVL_DEADLINE, new JiraDevlDeadlineMapping());
+    registry.put(FieldNames.SECOND_ESTIMATION, new SecondEstimationMapping());
+    registry.put(FieldNames.TEST_SCRIPT_IDs, new TestScriptIdsMapping());
+    registry.put(FieldNames.TIME_SLOT, new JiraTimeSlotMapping());
+    registry.put(FieldNames.SILO_RANKING, new JiraSiloRankingMapping());
   }
 
   public void map(ODocument workItem, Issue issue, StorageEngine storage) {

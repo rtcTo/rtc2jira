@@ -35,4 +35,6 @@ Furthermore, a new issue link type must be created to allow hierarchical relatio
 7. In order to enter a "timeestimate", the admistrator must activate time tracking
 
 8. When creating custom fields with drop-down values, create a corresponding java enum for the values where the Jira id can be stored and accessed (e.g. BisonProjectEnum)
+
+9. Custom Boolean fields are Radio Buttons with only a Yes option. A JiraRadioItem constant must be created for each instance.
    

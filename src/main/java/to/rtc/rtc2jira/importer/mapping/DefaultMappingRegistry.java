@@ -68,15 +68,15 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.DP_REQ_NR, new IntegerMapping(FieldNames.DP_REQ_NR));
     register(RTCIdentifierConstants.PO_PREPLANNING_DONE, new BooleanMapping(FieldNames.PO_PREPLANNING_DONE)); // NOK
                                                                                                               // done
-    register(RTCIdentifierConstants.DEVL_DEADLINE, new NullMapping());// NOK
-    register(RTCIdentifierConstants.SECOND_ESTIMATION, new NullMapping());// NOK
+    register(RTCIdentifierConstants.DEVL_DEADLINE, new DevlDeadlineMapping());// NOK
+    register(RTCIdentifierConstants.SECOND_ESTIMATION, new IntegerMapping(FieldNames.SECOND_ESTIMATION));// NOK
     register(RTCIdentifierConstants.BUDGET, new IntegerMapping(FieldNames.MARKET_BUDGET));
-    register(RTCIdentifierConstants.TEST_SCRIPT_IDS, new NullMapping());// NOK
-    register(RTCIdentifierConstants.SILO_RANKING, new NullMapping()); // NOK
+    register(RTCIdentifierConstants.TEST_SCRIPT_IDS, new StringMapping(FieldNames.TEST_SCRIPT_IDs));// NOK
+    register(RTCIdentifierConstants.SILO_RANKING, new SiloRankingMapping()); // NOK
     register(RTCIdentifierConstants.COMPETENCE_CENTER, new CompetenceCenterMapping());
     register(RTCIdentifierConstants.CUSTOMER, new NullMapping()); // NOK
     register(RTCIdentifierConstants.SEQUENCE_CREATION_BN, new NullMapping()); // OK
-    register(RTCIdentifierConstants.TIMESLOT, new NullMapping()); // NOK
+    register(RTCIdentifierConstants.TIMESLOT, new TimeSlotMapping()); // NOK
   };
 
   public static DefaultMappingRegistry getInstance() {

@@ -59,6 +59,11 @@ public class IssueFields {
   private JiraRadioItem poPreplanningDone;
   private List<String> relatedProjects = new ArrayList<String>();
   private List<String> industrySector = new ArrayList<String>();
+  private CustomFieldOption devlDeadline;
+  private Integer secondEstimation;
+  private String testScriptIds;
+  private CustomFieldOption timeSlot;
+  private Integer siloRanking;
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -411,6 +416,58 @@ public class IssueFields {
   public void setIndustrySector(List<String> industrySector) {
     this.industrySector = industrySector;
   }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10500")
+  public CustomFieldOption getDevlDeadline() {
+    return devlDeadline;
+  }
+
+  public void setDevlDeadline(CustomFieldOption devlDeadline) {
+    this.devlDeadline = devlDeadline;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10501")
+  public Integer getSecondEstimation() {
+    return secondEstimation;
+  }
+
+  public void setSecondEstimation(Integer secondEstimation) {
+    this.secondEstimation = secondEstimation;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10502")
+  public String getTestScriptIds() {
+    return testScriptIds;
+  }
+
+  public void setTestScriptIds(String testScriptIds) {
+    this.testScriptIds = testScriptIds;
+  }
+
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10503")
+  public CustomFieldOption getTimeSlot() {
+    return timeSlot;
+  }
+
+  public void setTimeSlot(CustomFieldOption timeSlot) {
+    this.timeSlot = timeSlot;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10505")
+  public Integer getSiloRanking() {
+    return siloRanking;
+  }
+
+  public void setSiloRanking(Integer siloRanking) {
+    this.siloRanking = siloRanking;
+  }
+
 
 
 }

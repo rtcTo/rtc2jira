@@ -75,12 +75,21 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.TEST_SCRIPT_IDS, new StringMapping(FieldNames.TEST_SCRIPT_IDs));// NOK
                                                                                                     // done
     register(RTCIdentifierConstants.SILO_RANKING, new SiloRankingMapping()); // NOK done
+    register(RTCIdentifierConstants.SILO_RANKING_OLD, new NullMapping()); // NOK done
     register(RTCIdentifierConstants.COMPETENCE_CENTER, new CompetenceCenterMapping());
-    register(RTCIdentifierConstants.CUSTOMER, new NullMapping()); // NOK
     register(RTCIdentifierConstants.SEQUENCE_CREATION_BN, new NullMapping()); // OK
     register(RTCIdentifierConstants.TIMESLOT, new TimeSlotMapping()); // NOK done
     register(RTCIdentifierConstants.PRODUCT_OWNER, new ContributorMapping(FieldNames.PRODUCT_OWNER));
     register(RTCIdentifierConstants.TARGET_RELEASE, new NullMapping()); // OK
+    register(RTCIdentifierConstants.CLASSIFICATION_TRADING_FIRM, new NullMapping());
+    register(RTCIdentifierConstants.TEST_COVERAGE, new NullMapping());
+    register(RTCIdentifierConstants.STAKEHOLDER, new NullMapping());
+    register(RTCIdentifierConstants.BUSINESS_VALUE_CHF, new NullMapping());
+    register(RTCIdentifierConstants.SUPERIOR_TARGET, new NullMapping());
+    register(RTCIdentifierConstants.ROADMAP, new BooleanMapping(FieldNames.ROADMAP));
+    register(RTCIdentifierConstants.CUSTOMER, new CustomerMapping()); // NOK
+    register(RTCIdentifierConstants.REALISED_BY_IDM, new RealisedByIdmMapping()); // NOK
+    register(RTCIdentifierConstants.IMPLEMENTATION_LEVEL, new ImplementationLevelMapping()); // NOK
   };
 
   public static DefaultMappingRegistry getInstance() {

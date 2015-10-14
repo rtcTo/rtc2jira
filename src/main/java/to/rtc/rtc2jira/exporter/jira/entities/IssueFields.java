@@ -65,6 +65,12 @@ public class IssueFields {
   private CustomFieldOption timeSlot;
   private Integer siloRanking;
   private JiraUser productOwner;
+  private JiraRadioItem roadmap;
+
+  private CustomFieldOption customer;
+  private CustomFieldOption realisedByIDM;
+  private CustomFieldOption implementationLevel;
+
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -479,6 +485,45 @@ public class IssueFields {
     this.productOwner = productOwner;
   }
 
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10507")
+  public JiraRadioItem getRoadmap() {
+    return roadmap;
+  }
 
+  public void setRoadmap(JiraRadioItem roadmap) {
+    this.roadmap = roadmap;
+  }
+
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10508")
+  public CustomFieldOption getCustomer() {
+    return customer;
+  }
+
+  public void setCustomer(CustomFieldOption customer) {
+    this.customer = customer;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10509")
+  public CustomFieldOption getRealisedByIDM() {
+    return realisedByIDM;
+  }
+
+  public void setRealisedByIDM(CustomFieldOption realisedByIDM) {
+    this.realisedByIDM = realisedByIDM;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10510")
+  public CustomFieldOption getImplementationLevel() {
+    return implementationLevel;
+  }
+
+  public void setImplementationLevel(CustomFieldOption implementationLevel) {
+    this.implementationLevel = implementationLevel;
+  }
 
 }

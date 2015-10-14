@@ -63,11 +63,19 @@ public interface RTCIdentifierConstants {
   public static final String BUDGET = "marktbudget";
   public static final String TEST_SCRIPT_IDS = "testscriptids";
   public static final String SILO_RANKING = "silorank";
+  public static final String SILO_RANKING_OLD = "siloranking";
   public static final String COMPETENCE_CENTER = "competencecenter";
-  public static final String CUSTOMER = "customer";
   public static final String SEQUENCE_CREATION_BN = "sequencecreationbn";
   public static final String TIMESLOT = "timeslot";
   public static final String PRODUCT_OWNER = "productowner";
   public static final String TARGET_RELEASE = "targetrelease";
-
+  public static final String CLASSIFICATION_TRADING_FIRM = "classificationtradingfirm";
+  public static final String TEST_COVERAGE = "testcoverage";
+  public static final String STAKEHOLDER = "stakeholder";
+  public static final String BUSINESS_VALUE_CHF = "businessvaluechf";
+  public static final String SUPERIOR_TARGET = "superiortarget";
+  public static final String ROADMAP = "roadmap";
+  public static final String CUSTOMER = "customer";
+  public static final String REALISED_BY_IDM = "realisebyidm";
+  public static final String IMPLEMENTATION_LEVEL = "implementationlevel";
 }

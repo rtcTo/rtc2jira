@@ -58,7 +58,10 @@ public interface FieldNames {
   String TIME_SLOT = "timeSlot";
   String SILO_RANKING = "siloRanking";
   String PRODUCT_OWNER = "productOwner";
+  String ROADMAP = "roadmap";
   String CUSTOMER = "customer";
+  String REALISED_BY_IDM = "realisedByIDM";
+  String IMPLEMENTATION_LEVEL = "implementationLevel";
   String JIRA_ID_LINK = "jiraid";
   String JIRA_KEY_LINK = "jiraKey";
   String JIRA_EXPORT_TIMESTAMP = "jiraExportTimestamp";

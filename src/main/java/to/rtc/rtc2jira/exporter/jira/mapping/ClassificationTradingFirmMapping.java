@@ -10,7 +10,7 @@ import to.rtc.rtc2jira.storage.StorageEngine;
  * @author roman.schaller
  *
  */
-public class DescriptionMapping implements Mapping {
+public class ClassificationTradingFirmMapping implements Mapping {
 
   @Override
   public void map(Object value, Issue issue, StorageEngine storage) {

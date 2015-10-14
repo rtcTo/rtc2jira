@@ -61,6 +61,10 @@ public class MappingRegistry {
     registry.put(FieldNames.TIME_SLOT, new JiraTimeSlotMapping());
     registry.put(FieldNames.SILO_RANKING, new JiraSiloRankingMapping());
     registry.put(FieldNames.PRODUCT_OWNER, new ProductOwnerMapping());
+    registry.put(FieldNames.ROADMAP, new RoadmapMapping());
+    registry.put(FieldNames.CUSTOMER, new JiraCustomerMapping());
+    registry.put(FieldNames.REALISED_BY_IDM, new JiraRealisedByIdmMapping());
+    registry.put(FieldNames.IMPLEMENTATION_LEVEL, new JiraImplementationLevelMapping());
   }
 
   public void map(ODocument workItem, Issue issue, StorageEngine storage) {

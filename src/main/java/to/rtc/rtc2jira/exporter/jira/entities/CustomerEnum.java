@@ -5,12 +5,7 @@ import java.util.Optional;
 
 public enum CustomerEnum implements SelectionTypeEnum {
 
-  UNSET("customer.literal.l1", "EMPTY") {
-    @Override
-    public CustomFieldOption getCustomFieldOption() {
-      return null;
-    }
-  }, //
+  UNSET("customer.literal.l1", "-1"), //
   AGROLA("customer.literal.l2", "10440"), //
   Bison_Schweiz("customer.literal.l3", "10441"), //
   Bison_IT_Services("customer.literal.l4", "10442"), //

@@ -14,9 +14,13 @@ public class DpReqNrMapping implements Mapping {
 
   @Override
   public void map(Object value, Issue issue, StorageEngine storage) {
-    if (value != null) {
+    if (value == null) {
+      issue.getFields().setDpReqNr(null);
+    } else {
       Integer dpReqNr = (Integer) value;
-      if (dpReqNr > 0) {
+      if (dpReqNr <= 0) {
+        issue.getFields().setDpReqNr(null);
+      } else {
         issue.getFields().setDpReqNr(dpReqNr);
       }
     }

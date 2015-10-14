@@ -43,7 +43,7 @@ public class IssueFields {
 
   private String acceptanceCriteria;
   private List<String> labels = new ArrayList<String>();
-  private int storyPoints;
+  private Integer storyPoints;
   private Date rtcCreated;
   private JiraRadioItem archived;
   private Group team;
@@ -236,12 +236,12 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10005")
-  public int getStoryPoints() {
+  @XmlElement(name = "customfield_10005", nillable = true)
+  public Integer getStoryPoints() {
     return storyPoints;
   }
 
-  public void setStoryPoints(int storyPoints) {
+  public void setStoryPoints(Integer storyPoints) {
     this.storyPoints = storyPoints;
   }
 
@@ -320,6 +320,7 @@ public class IssueFields {
     return timetracking;
   }
 
+  @XmlElement(nillable = true)
   public void setTimetracking(Timetracking timetracking) {
     this.timetracking = timetracking;
   }
@@ -345,7 +346,7 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10401")
+  @XmlElement(name = "customfield_10401", nillable = true)
   public Integer getEpReqNr() {
     return epReqNr;
   }
@@ -355,7 +356,7 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10402")
+  @XmlElement(name = "customfield_10402", nillable = true)
   public Integer getEpReqNrUg() {
     return epReqNrUg;
   }
@@ -365,7 +366,7 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10403")
+  @XmlElement(name = "customfield_10403", nillable = true)
   public Integer getDpReqNr() {
     return dpReqNr;
   }
@@ -375,7 +376,7 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10404")
+  @XmlElement(name = "customfield_10404", nillable = true)
   public Integer getMarketBudget() {
     return marketBudget;
   }
@@ -466,7 +467,7 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10505")
+  @XmlElement(name = "customfield_10505", nillable = true)
   public Integer getSiloRanking() {
     return siloRanking;
   }

@@ -5,12 +5,7 @@ import java.util.Optional;
 
 public enum DevlDeadlineEnum implements SelectionTypeEnum {
 
-  UNSET("devldeadline.literal.l2", "EMPTY") {
-    @Override
-    public CustomFieldOption getCustomFieldOption() {
-      return null;
-    }
-  }, //
+  UNSET("devldeadline.literal.l2", "-1"), //
   FEN_14_5_20140728("devldeadline.literal.l1", "10400"), //
   FEN_14_6_20140908("devldeadline.literal.l3", "10401"), //
   BASE_14_5_20140714("devldeadline.literal.l4", "10402"), //

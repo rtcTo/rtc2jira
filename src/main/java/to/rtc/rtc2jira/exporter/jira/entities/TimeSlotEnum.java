@@ -5,12 +5,7 @@ import java.util.Optional;
 
 public enum TimeSlotEnum implements SelectionTypeEnum {
 
-  UNSET("timeslot.literal.l1", "EMPTY") {
-    @Override
-    public CustomFieldOption getCustomFieldOption() {
-      return null;
-    }
-  }, //
+  UNSET("timeslot.literal.l1", "-1"), //
   T2013_1("timeslot.literal.l9", "10425"), //
   T2013_2("timeslot.literal.l10", "10428"), //
   T2013_3("timeslot.literal.l2", "10429"), //

@@ -5,12 +5,7 @@ import java.util.Optional;
 
 public enum RealisedByIdmEnum implements SelectionTypeEnum {
 
-  UNSET("realisebyidm.literal.l1", "EMPTY") {
-    @Override
-    public CustomFieldOption getCustomFieldOption() {
-      return null;
-    }
-  }, //
+  UNSET("realisebyidm.literal.l1", "-1"), //
   IDM_Retail("realisebyidm.literal.l2", "10463"), //
   IDM_Weinhandel("realisebyidm.literal.l3", "10464"), //
   IDM_Basis_branchenneutral("realisebyidm.literal.l4", "10465"), //

@@ -9,7 +9,12 @@ import to.rtc.rtc2jira.ExportManager;
 
 public enum BisonProjectEnum {
 
-  UNSET("projektname.literal.l105", "10237"), //
+  UNSET("projektname.literal.l105", "10237") {
+    @Override
+    public CustomFieldOption getCustomFieldOption() {
+      return CustomFieldOption.NONE;
+    }
+  }, //
   Ametras_Moebel_Prototyp("projektname.literal.l119", "10200"), //
   App_Handelsvertreter("projektname.literal.l127", "10201"), //
   B4AGROLA_Betreuung("projektname.literal.l108", "10202"), //

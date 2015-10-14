@@ -14,9 +14,13 @@ public class EpReqNrUgMapping implements Mapping {
 
   @Override
   public void map(Object value, Issue issue, StorageEngine storage) {
-    if (value != null) {
+    if (value == null) {
+      issue.getFields().setEpReqNrUg(null);
+    } else {
       Integer epReqNrUg = (Integer) value;
-      if (epReqNrUg > 0) {
+      if (epReqNrUg <= 0) {
+        issue.getFields().setEpReqNrUg(null);
+      } else {
         issue.getFields().setEpReqNrUg(epReqNrUg);
       }
     }

@@ -14,9 +14,13 @@ public class EpReqNrMapping implements Mapping {
 
   @Override
   public void map(Object value, Issue issue, StorageEngine storage) {
-    if (value != null) {
+    if (value == null) {
+      issue.getFields().setEpReqNr(null);
+    } else {
       Integer epReqNr = (Integer) value;
-      if (epReqNr > 0) {
+      if (epReqNr <= 0) {
+        issue.getFields().setEpReqNr(null);
+      } else {
         issue.getFields().setEpReqNr(epReqNr);
       }
     }

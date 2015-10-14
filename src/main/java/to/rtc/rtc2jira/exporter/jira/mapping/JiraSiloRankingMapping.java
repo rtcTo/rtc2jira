@@ -14,9 +14,13 @@ public class JiraSiloRankingMapping implements Mapping {
 
   @Override
   public void map(Object value, Issue issue, StorageEngine storage) {
-    if (value != null) {
+    if (value == null) {
+      issue.getFields().setSiloRanking(null);
+    } else {
       Integer ranking = (Integer) value;
-      if (ranking > 0) {
+      if (ranking <= 0) {
+        issue.getFields().setSiloRanking(null);
+      } else {
         issue.getFields().setSiloRanking(ranking);
       }
     }

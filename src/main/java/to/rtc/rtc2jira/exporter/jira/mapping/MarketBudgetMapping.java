@@ -18,7 +18,11 @@ public class MarketBudgetMapping implements Mapping {
       Integer budget = (Integer) value;
       if (budget > 0) {
         issue.getFields().setMarketBudget(budget);
+      } else {
+        issue.getFields().setMarketBudget(null);
       }
+    } else {
+      issue.getFields().setMarketBudget(null);
     }
   }
 }

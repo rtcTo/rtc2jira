@@ -7,6 +7,8 @@ import org.codehaus.jackson.map.annotate.JsonView;
 @XmlRootElement
 public class CustomFieldOption extends BaseEntity {
 
+  static public final CustomFieldOption NONE = new CustomFieldOption("-1");
+
   private String value;
 
   protected CustomFieldOption() {}

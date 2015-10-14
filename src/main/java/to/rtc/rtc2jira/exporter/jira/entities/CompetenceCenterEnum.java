@@ -9,11 +9,7 @@ import to.rtc.rtc2jira.ExportManager;
 
 public enum CompetenceCenterEnum {
 
-  UNSET("competencecenter.literal.l1", "EMPTY") {
-    public CustomFieldOption getCustomFieldOption() {
-      return null;
-    }
-  }, //
+  UNSET("competencecenter.literal.l1", "-1"), //
   CC1_RETAIL("competencecenter.literal.l2", "10378"), //
   CC2_WHOLESALE("competencecenter.literal.l3", "10379"), //
   CC3_FLG("competencecenter.literal.l4", "10380"), //

@@ -19,7 +19,9 @@ public class TimeSlotMapping extends MappingAdapter {
   @Override
   public void acceptAttribute(IAttribute attribute) {
     Identifier<ILiteral> identifier = getValue(attribute);
-    value = identifier.getStringIdentifier();
+    if (identifier != null) {
+      value = identifier.getStringIdentifier();
+    }
   }
 
   @Override

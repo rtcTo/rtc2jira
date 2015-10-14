@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import to.rtc.rtc2jira.ExportManager;
 import to.rtc.rtc2jira.exporter.jira.entities.JiraUser;
 
 import com.sun.jersey.api.client.ClientResponse;
@@ -14,6 +15,9 @@ public class JiraUserManager {
   public static final JiraUserManager INSTANCE = new JiraUserManager();
 
   static final Logger LOGGER = Logger.getLogger(JiraUserManager.class.getName());
+  static {
+    LOGGER.addHandler(ExportManager.DEFAULT_LOG_HANDLER);
+  }
 
   private Set<String> createdUsers = new HashSet<String>(500);
   private Set<String> existingUsers = new HashSet<String>(500);

@@ -8,6 +8,8 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import to.rtc.rtc2jira.ExportManager;
+
 public enum StateEnum {
   abandoned(StatusEnum.done, "com.ibm.team.workitem.buildTrackingWorkflow.state.s7"), //
   done(StatusEnum.done, "com.ibm.team.workitem.buildTrackingWorkflow.state.s3",
@@ -45,6 +47,9 @@ public enum StateEnum {
   final private StatusEnum jiraStatus;
   final private Set<String> rctLiterals;
   static private final Logger LOGGER = Logger.getLogger(StateEnum.class.getName());
+  static {
+    LOGGER.addHandler(ExportManager.DEFAULT_LOG_HANDLER);
+  }
 
   private StateEnum(StatusEnum jiraStatus, String... rtcLiterals) {
     this.jiraStatus = jiraStatus;

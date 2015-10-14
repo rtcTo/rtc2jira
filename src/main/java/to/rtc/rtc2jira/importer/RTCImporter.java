@@ -5,8 +5,11 @@ import static to.rtc.rtc2jira.storage.FieldNames.ID;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.StreamHandler;
 
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.storage.Attachment;
@@ -34,6 +37,22 @@ import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
  */
 public class RTCImporter {
   private static final Logger LOGGER = Logger.getLogger(RTCImporter.class.getName());
+  public static final StreamHandler DEFAULT_LOG_HANDLER;
+
+  static {
+    FileHandler fh = null;
+    try {
+      fh = new FileHandler("C:/workspace/gitRepRtcToJira/rtc2jira/DefaultImportLog.log");
+      SimpleFormatter formatter = new SimpleFormatter();
+      fh.setFormatter(formatter);
+    } catch (SecurityException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    DEFAULT_LOG_HANDLER = fh;
+    LOGGER.addHandler(DEFAULT_LOG_HANDLER);
+  }
 
   private Settings settings;
   private StorageEngine storageEngine;

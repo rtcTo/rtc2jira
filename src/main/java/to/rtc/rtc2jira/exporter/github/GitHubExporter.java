@@ -26,6 +26,7 @@ import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.LabelService;
 import org.eclipse.egit.github.core.service.RepositoryService;
 
+import to.rtc.rtc2jira.ExportManager;
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.storage.FieldNames;
@@ -42,6 +43,10 @@ public class GitHubExporter implements Exporter {
   private Repository repository;
   private IssueService issueService;
   private GitHubStorage store;
+
+  static {
+    LOGGER.addHandler(ExportManager.DEFAULT_LOG_HANDLER);
+  }
 
   @Override
   public boolean isConfigured() {

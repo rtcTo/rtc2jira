@@ -16,7 +16,7 @@ public class JiraRealisedByIdmMapping extends AbstractSelectionTypeMapping<Reali
   @Override
   protected void setFieldValue(Issue issue, RealisedByIdmEnum theEnum) {
     CustomFieldOption value = theEnum != null ? theEnum.getCustomFieldOption() : null;
-    issue.getFields().setCustomer(value);
+    issue.getFields().setRealisedByIDM(value);
   }
 
   @Override

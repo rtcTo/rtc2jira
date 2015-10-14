@@ -2,6 +2,7 @@ package to.rtc.rtc2jira.importer.mapping;
 
 import java.util.logging.Logger;
 
+import to.rtc.rtc2jira.importer.RTCImporter;
 import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
 import to.rtc.rtc2jira.storage.FieldNames;
 
@@ -12,6 +13,9 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
 
 public class BisonProjectMapping extends MappingAdapter {
   static final Logger LOGGER = Logger.getLogger(BisonProjectMapping.class.getName());
+  static {
+    LOGGER.addHandler(RTCImporter.DEFAULT_LOG_HANDLER);
+  }
   private String value;
 
   @Override

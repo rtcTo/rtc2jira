@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import to.rtc.rtc2jira.importer.RTCImporter;
 import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
 
 import com.ibm.team.workitem.common.model.IAttribute;
@@ -20,6 +21,9 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
  */
 public class CustomAttributeMapping extends MappingAdapter {
   private static final Logger LOGGER = Logger.getLogger(CustomAttributeMapping.class.getName());
+  static {
+    LOGGER.addHandler(RTCImporter.DEFAULT_LOG_HANDLER);
+  }
 
   private Set<String> customAttributes = new HashSet<>();
 

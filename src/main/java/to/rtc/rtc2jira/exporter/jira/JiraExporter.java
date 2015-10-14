@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 import javax.ws.rs.core.MediaType;
 
+import to.rtc.rtc2jira.ExportManager;
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.exporter.jira.entities.BulkCreateContainer;
@@ -59,6 +60,7 @@ public class JiraExporter implements Exporter {
 
   static {
     INSTANCE = new JiraExporter();
+    LOGGER.addHandler(ExportManager.DEFAULT_LOG_HANDLER);
   }
 
   private JiraExporter() {};

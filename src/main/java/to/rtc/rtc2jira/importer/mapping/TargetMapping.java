@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import to.rtc.rtc2jira.importer.RTCImporter;
 import to.rtc.rtc2jira.importer.mapping.spi.MappingAdapter;
 import to.rtc.rtc2jira.storage.FieldNames;
 
@@ -30,6 +31,9 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
  */
 public class TargetMapping extends MappingAdapter {
   static final Logger LOGGER = Logger.getLogger(TargetMapping.class.getName());
+  static {
+    LOGGER.addHandler(RTCImporter.DEFAULT_LOG_HANDLER);
+  }
 
   public static final String NO_ITERATION = "NO_ITERATION";
 

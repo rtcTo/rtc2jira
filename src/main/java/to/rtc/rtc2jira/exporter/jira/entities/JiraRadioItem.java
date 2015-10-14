@@ -12,6 +12,8 @@ public class JiraRadioItem {
   static public final JiraRadioItem YES_ROADMAP = new JiraRadioItem(true, "10438");
   static public final JiraRadioItem NONE = new JiraRadioItem(false, "");
 
+  public JiraRadioItem() {}
+
   JiraRadioItem(boolean archived, String id) {
     value = archived ? "Yes" : "None";
     setId(id);

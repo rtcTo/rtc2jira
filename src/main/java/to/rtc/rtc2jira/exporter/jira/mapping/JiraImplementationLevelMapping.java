@@ -16,7 +16,7 @@ public class JiraImplementationLevelMapping extends AbstractSelectionTypeMapping
   @Override
   protected void setFieldValue(Issue issue, ImplementationLevelEnum theEnum) {
     CustomFieldOption value = theEnum != null ? theEnum.getCustomFieldOption() : null;
-    issue.getFields().setCustomer(value);
+    issue.getFields().setImplementationLevel(value);
   }
 
   @Override

@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import to.rtc.rtc2jira.ExportManager;
+
 public enum CompetenceCenterEnum {
 
   UNSET("competencecenter.literal.l1", "EMPTY") {
@@ -21,6 +23,9 @@ public enum CompetenceCenterEnum {
   private String rctId;
   private String jiraId;
   static private final Logger LOGGER = Logger.getLogger(CompetenceCenterEnum.class.getName());
+  static {
+    LOGGER.addHandler(ExportManager.DEFAULT_LOG_HANDLER);
+  }
 
   private CompetenceCenterEnum(String rctId, String jiraId) {
     this.rctId = rctId;

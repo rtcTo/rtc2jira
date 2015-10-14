@@ -3,6 +3,7 @@ package to.rtc.rtc2jira.exporter.jira.entities;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import to.rtc.rtc2jira.ExportManager;
 import to.rtc.rtc2jira.Settings;
 
 public enum StatusEnum {
@@ -84,6 +85,9 @@ public enum StatusEnum {
   private String jiraId;
   private String statusName;
   static private final Logger LOGGER = Logger.getLogger(StatusEnum.class.getName());
+  static {
+    LOGGER.addHandler(ExportManager.DEFAULT_LOG_HANDLER);
+  }
 
   public String getJiraId() {
     return jiraId;

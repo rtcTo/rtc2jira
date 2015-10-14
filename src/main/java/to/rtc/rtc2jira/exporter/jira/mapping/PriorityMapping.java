@@ -3,6 +3,7 @@ package to.rtc.rtc2jira.exporter.jira.mapping;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import to.rtc.rtc2jira.ExportManager;
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
 import to.rtc.rtc2jira.exporter.jira.entities.IssuePriority;
 import to.rtc.rtc2jira.exporter.jira.entities.PriorityEnum;
@@ -14,6 +15,9 @@ import to.rtc.rtc2jira.storage.StorageEngine;
  */
 public class PriorityMapping implements Mapping {
   static Logger LOGGER = Logger.getLogger(PriorityMapping.class.getName());
+  static {
+    LOGGER.addHandler(ExportManager.DEFAULT_LOG_HANDLER);
+  }
 
   @Override
   public void map(Object value, Issue issue, StorageEngine storage) {

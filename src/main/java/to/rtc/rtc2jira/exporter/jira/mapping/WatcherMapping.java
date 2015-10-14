@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import to.rtc.rtc2jira.ExportManager;
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
 import to.rtc.rtc2jira.exporter.jira.entities.JiraUser;
 import to.rtc.rtc2jira.importer.mapping.ContributorMapping;
@@ -23,6 +24,9 @@ import com.sun.jersey.api.client.ClientResponse;
  */
 public class WatcherMapping extends BaseUserMapping {
   static final Logger LOGGER = Logger.getLogger(WatcherMapping.class.getName());
+  static {
+    LOGGER.addHandler(ExportManager.DEFAULT_LOG_HANDLER);
+  }
 
 
   @Override

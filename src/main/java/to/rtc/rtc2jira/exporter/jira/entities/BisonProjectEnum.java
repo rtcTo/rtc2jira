@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import to.rtc.rtc2jira.ExportManager;
+
 public enum BisonProjectEnum {
 
   UNSET("projektname.literal.l105", "10237"), //
@@ -106,6 +108,9 @@ public enum BisonProjectEnum {
   private String rctId;
   private String jiraId;
   static private final Logger LOGGER = Logger.getLogger(BisonProjectEnum.class.getName());
+  static {
+    LOGGER.addHandler(ExportManager.DEFAULT_LOG_HANDLER);
+  }
 
   private BisonProjectEnum(String rctId, String jiraId) {
     this.rctId = rctId;

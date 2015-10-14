@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import to.rtc.rtc2jira.ExportManager;
 import to.rtc.rtc2jira.exporter.jira.entities.AddIssueLink;
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueFields;
@@ -23,6 +24,9 @@ import to.rtc.rtc2jira.storage.StorageEngine;
  */
 public class IterationMapping implements Mapping {
   static Logger LOGGER = Logger.getLogger(IterationMapping.class.getName());
+  static {
+    LOGGER.addHandler(ExportManager.DEFAULT_LOG_HANDLER);
+  }
 
   @Override
   public void map(Object value, Issue issue, StorageEngine storage) {

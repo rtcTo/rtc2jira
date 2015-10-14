@@ -29,6 +29,9 @@ import com.ibm.team.workitem.common.model.WorkItemEndPoints;
  */
 public class AttachmentHandler {
   private static final Logger LOGGER = Logger.getLogger(AttachmentHandler.class.getName());
+  static {
+    LOGGER.addHandler(RTCImporter.DEFAULT_LOG_HANDLER);
+  }
 
   private ITeamRepository repo;
   private AttachmentStorage attachmentStorage;

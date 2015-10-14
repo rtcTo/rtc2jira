@@ -18,6 +18,7 @@ import java.util.function.Supplier;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import to.rtc.rtc2jira.ExportManager;
 import to.rtc.rtc2jira.exporter.jira.JiraExporter;
 import to.rtc.rtc2jira.exporter.jira.JiraRestAccess;
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
@@ -33,6 +34,9 @@ import to.rtc.rtc2jira.storage.StorageEngine;
  */
 public class WorkItemTypeMapping implements Mapping {
   private static final Logger LOGGER = Logger.getLogger(WorkItemTypeMapping.class.getName());
+  static {
+    LOGGER.addHandler(ExportManager.DEFAULT_LOG_HANDLER);
+  }
 
   private Map<String, List<IssueType>> existingIssueTypes;
   private JiraRestAccess restAccess;

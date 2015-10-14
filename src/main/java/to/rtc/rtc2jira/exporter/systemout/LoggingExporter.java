@@ -6,6 +6,7 @@ package to.rtc.rtc2jira.exporter.systemout;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 
+import to.rtc.rtc2jira.ExportManager;
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.Exporter;
 import to.rtc.rtc2jira.storage.FieldNames;
@@ -19,6 +20,9 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
  */
 public class LoggingExporter implements Exporter {
   private static final Logger LOGGER = Logger.getLogger(LoggingExporter.class.getName());
+  static {
+    LOGGER.addHandler(ExportManager.DEFAULT_LOG_HANDLER);
+  }
 
   @Override
   public boolean isConfigured() {

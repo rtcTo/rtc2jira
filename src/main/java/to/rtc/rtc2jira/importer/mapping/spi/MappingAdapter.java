@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import to.rtc.rtc2jira.importer.RTCImporter;
 import to.rtc.rtc2jira.importer.mapping.RefModelMapping;
 
 import com.ibm.team.process.internal.common.ProjectArea;
@@ -32,6 +33,9 @@ import com.ibm.team.workitem.common.model.IWorkItem;
  */
 public abstract class MappingAdapter implements Mapping {
   static final Logger LOGGER = Logger.getLogger(RefModelMapping.class.getName());
+  static {
+    LOGGER.addHandler(RTCImporter.DEFAULT_LOG_HANDLER);
+  }
 
   private IWorkItem workItem;
 

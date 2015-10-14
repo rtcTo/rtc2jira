@@ -24,11 +24,13 @@ public class EstimatedHoursMapping implements Mapping {
   @Override
   public void map(Object value, Issue issue, StorageEngine storage) {
     if (value == null) {
-      issue.getFields().setTimetracking(null);
+      Timetracking timetracking = new Timetracking();
+      timetracking.setOriginalEstimate("0m");
     } else {
       int hours = ((Integer) value).intValue();
       if (hours <= 0) {
-        issue.getFields().setTimetracking(null);
+        Timetracking timetracking = new Timetracking();
+        timetracking.setOriginalEstimate("0m");
       } else {
         int minutes = hours * 360;
         Timetracking timetracking = new Timetracking();

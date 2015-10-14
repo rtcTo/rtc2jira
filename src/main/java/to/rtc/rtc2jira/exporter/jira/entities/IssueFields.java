@@ -320,7 +320,6 @@ public class IssueFields {
     return timetracking;
   }
 
-  @XmlElement(nillable = true)
   public void setTimetracking(Timetracking timetracking) {
     this.timetracking = timetracking;
   }

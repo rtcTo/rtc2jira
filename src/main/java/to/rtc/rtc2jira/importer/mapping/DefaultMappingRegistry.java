@@ -56,40 +56,40 @@ public class DefaultMappingRegistry implements MappingRegistry {
     register(RTCIdentifierConstants.STATE_TRANSITIONS, new NullMapping());
     register(RTCIdentifierConstants.ESTIMATED_HOURS, new IntegerMapping(FieldNames.ESTIMATED_TIME));
     register(RTCIdentifierConstants.PROJECT_NAME, new BisonProjectMapping());
+    register(RTCIdentifierConstants.PROJECT_NAME_DEPRECATED, new NullMapping());
     register(RTCIdentifierConstants.REFERENCE_MODEL, new RefModelMapping());
-    register(RTCIdentifierConstants.MAXIMAL_ESTIMATE, new NullMapping()); // OK
-    register(RTCIdentifierConstants.MINIMAL_ESTIMATE, new NullMapping()); // OK
+    register(RTCIdentifierConstants.MAXIMAL_ESTIMATE, new NullMapping());
+    register(RTCIdentifierConstants.MINIMAL_ESTIMATE, new NullMapping());
     register(RTCIdentifierConstants.NEW_RANKING, new NullMapping());
     register(RTCIdentifierConstants.RANK, new NullMapping());
-    register(RTCIdentifierConstants.RELATED_PROJECTS, new RelatedProjectsMapping());// NOK done
-    register(RTCIdentifierConstants.INDUSTRY_SECTOR, new IndustrySectorMapping()); // NOK done
+    register(RTCIdentifierConstants.RELATED_PROJECTS, new RelatedProjectsMapping());
+    register(RTCIdentifierConstants.INDUSTRY_SECTOR, new IndustrySectorMapping());
     register(RTCIdentifierConstants.EP_REQ_NR, new IntegerMapping(FieldNames.EP_REQ_NR));
     register(RTCIdentifierConstants.EP_REQ_NR_UG, new IntegerMapping(FieldNames.EP_REQ_NR_UG));
     register(RTCIdentifierConstants.DP_REQ_NR, new IntegerMapping(FieldNames.DP_REQ_NR));
-    register(RTCIdentifierConstants.PO_PREPLANNING_DONE, new BooleanMapping(FieldNames.PO_PREPLANNING_DONE)); // NOK
-                                                                                                              // done
-    register(RTCIdentifierConstants.DEVL_DEADLINE, new DevlDeadlineMapping());// NOK done
-    register(RTCIdentifierConstants.SECOND_ESTIMATION, new IntegerMapping(FieldNames.SECOND_ESTIMATION));// NOK
-                                                                                                         // done
+    register(RTCIdentifierConstants.PO_PREPLANNING_DONE, new BooleanMapping(FieldNames.PO_PREPLANNING_DONE));
+    register(RTCIdentifierConstants.DEVL_DEADLINE, new DevlDeadlineMapping());
+    register(RTCIdentifierConstants.SECOND_ESTIMATION, new IntegerMapping(FieldNames.SECOND_ESTIMATION));
     register(RTCIdentifierConstants.BUDGET, new IntegerMapping(FieldNames.MARKET_BUDGET));
-    register(RTCIdentifierConstants.TEST_SCRIPT_IDS, new StringMapping(FieldNames.TEST_SCRIPT_IDs));// NOK
-                                                                                                    // done
-    register(RTCIdentifierConstants.SILO_RANKING, new SiloRankingMapping()); // NOK done
-    register(RTCIdentifierConstants.SILO_RANKING_OLD, new NullMapping()); // NOK done
+    register(RTCIdentifierConstants.TEST_SCRIPT_IDS, new StringMapping(FieldNames.TEST_SCRIPT_IDs));
+    register(RTCIdentifierConstants.SILO_RANKING, new SiloRankingMapping());
+    register(RTCIdentifierConstants.SILO_RANKING_OLD, new NullMapping());
     register(RTCIdentifierConstants.COMPETENCE_CENTER, new CompetenceCenterMapping());
-    register(RTCIdentifierConstants.SEQUENCE_CREATION_BN, new NullMapping()); // OK
-    register(RTCIdentifierConstants.TIMESLOT, new TimeSlotMapping()); // NOK done
+    register(RTCIdentifierConstants.SEQUENCE_CREATION_BN, new NullMapping());
+    register(RTCIdentifierConstants.TIMESLOT, new TimeSlotMapping());
     register(RTCIdentifierConstants.PRODUCT_OWNER, new ContributorMapping(FieldNames.PRODUCT_OWNER));
-    register(RTCIdentifierConstants.TARGET_RELEASE, new NullMapping()); // OK
+    register(RTCIdentifierConstants.TARGET_RELEASE, new NullMapping());
     register(RTCIdentifierConstants.CLASSIFICATION_TRADING_FIRM, new NullMapping());
     register(RTCIdentifierConstants.TEST_COVERAGE, new NullMapping());
     register(RTCIdentifierConstants.STAKEHOLDER, new NullMapping());
     register(RTCIdentifierConstants.BUSINESS_VALUE_CHF, new NullMapping());
     register(RTCIdentifierConstants.SUPERIOR_TARGET, new NullMapping());
     register(RTCIdentifierConstants.ROADMAP, new BooleanMapping(FieldNames.ROADMAP));
-    register(RTCIdentifierConstants.CUSTOMER, new CustomerMapping()); // NOK
-    register(RTCIdentifierConstants.REALISED_BY_IDM, new RealisedByIdmMapping()); // NOK
-    register(RTCIdentifierConstants.IMPLEMENTATION_LEVEL, new ImplementationLevelMapping()); // NOK
+    register(RTCIdentifierConstants.CUSTOMER, new CustomerMapping());
+    register(RTCIdentifierConstants.REALISED_BY_IDM, new RealisedByIdmMapping());
+    register(RTCIdentifierConstants.IMPLEMENTATION_LEVEL, new ImplementationLevelMapping());
+    register(RTCIdentifierConstants.IMPACT, new NullMapping());
+    register(RTCIdentifierConstants.AFFECTED_TEAMS, new NullMapping());
   };
 
   public static DefaultMappingRegistry getInstance() {

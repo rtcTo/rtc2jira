@@ -48,6 +48,7 @@ public interface RTCIdentifierConstants {
   public static final String ESTIMATED_HOURS = "estimatedh";
   public static final String REFERENCE_MODEL = "referencemodel";
   public static final String PROJECT_NAME = "projektname";
+  public static final String PROJECT_NAME_DEPRECATED = "projectname";
   public static final String MINIMAL_ESTIMATE = "com.ibm.team.apt.estimate.minimal";
   public static final String MAXIMAL_ESTIMATE = "com.ibm.team.apt.estimate.maximal";
   public static final String NEW_RANKING = "com.ibm.team.apt.attribute.planitem.newRanking._pm7NmRYUEd6L1tNIGdz5qQ";
@@ -78,4 +79,6 @@ public interface RTCIdentifierConstants {
   public static final String CUSTOMER = "customer";
   public static final String REALISED_BY_IDM = "realisebyidm";
   public static final String IMPLEMENTATION_LEVEL = "implementationlevel";
+  public static final String IMPACT = "impact";
+  public static final String AFFECTED_TEAMS = "affectedTeams";
 }

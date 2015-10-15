@@ -40,7 +40,8 @@ public enum StateEnum {
   invalid(StatusEnum.done, "com.ibm.team.workitem.retrospectiveWorkflow.state.s1",
       "com.ibm.team.workitem.taskWorkflow.state.s4", "com.ibm.team.apt.epic.workflow.state.s6",
       "com.ibm.team.workitem.impedimentWorkflow.state.s3", "com.ibm.team.apt.storyWorkflow.state.s2"), //
-  deferred(StatusEnum.todo, "com.ibm.team.apt.epic.workflow.state.s5", "com.ibm.team.apt.storyWorkflow.state.s1"), //
+  deferred(StatusEnum.todo, "com.ibm.team.apt.epic.workflow.state.s5", "com.ibm.team.apt.storyWorkflow.state.s1", "54"), // 54
+                                                                                                                         // business
   implemented(StatusEnum.done, "com.ibm.team.apt.story.tested");
 
 

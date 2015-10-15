@@ -158,12 +158,14 @@ public class JiraExporter implements Exporter {
     if (projectOptional.isPresent()) {
       Project project = projectOptional.get();
       Issue issue = createIssueFromWorkItem(item, project);
-      persistIssue(item, issue);
-      persistNewComments(item, issue);
-      try {
-        persistAttachments(item, issue);
-      } catch (IOException e) {
-        throw new Exception("Fatal error - could not open attachment directory while exporting", e);
+      if (issue != null) {
+        persistIssue(item, issue);
+        persistNewComments(item, issue);
+        try {
+          persistAttachments(item, issue);
+        } catch (IOException e) {
+          throw new Exception("Fatal error - could not open attachment directory while exporting", e);
+        }
       }
     }
   }
@@ -342,6 +344,13 @@ public class JiraExporter implements Exporter {
     return Settings.getInstance().isForceUpdate();
   }
 
+  /**
+   * Returns null if cannot find corresponding jira issue
+   * 
+   * @param workItem
+   * @param project
+   * @return
+   */
   Issue createIssueFromWorkItem(ODocument workItem, Project project) {
     Issue issue = new Issue();
     String id = workItem.field(FieldNames.ID);
@@ -360,8 +369,13 @@ public class JiraExporter implements Exporter {
         issueFields.setResolution(new IssueResolution(ResolutionEnum.done));
       }
     } else {
+      String issueKey = issue.getKey();
+      LOGGER
+          .log(
+              Level.SEVERE,
+              "A problem occurred while retrieving the issue with the key " + issueKey + " : "
+                  + cr.getEntity(String.class));
       issue = null;
-      LOGGER.log(Level.SEVERE, "A problem occurred while retrieving an issue: " + cr.getEntity(String.class));
     }
     return issue;
   }

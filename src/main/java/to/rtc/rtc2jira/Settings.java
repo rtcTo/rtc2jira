@@ -7,6 +7,7 @@ import static java.nio.file.Files.newBufferedReader;
 import static java.nio.file.Paths.get;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.stream.Collectors;
@@ -126,7 +127,7 @@ public class Settings {
     return props.getProperty(RTC_PROJECTAREA);
   }
 
-  public Iterable<Integer> getRtcWorkItemRange() {
+  public Collection<Integer> getRtcWorkItemRange() {
     String rangesString = props.getProperty(RTC_WORKITEM_ID_RANGE);
     String[] ranges = rangesString.split(",");
     IntStream intStream = IntStream.of();

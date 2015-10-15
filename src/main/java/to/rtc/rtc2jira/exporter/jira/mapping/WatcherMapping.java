@@ -33,33 +33,35 @@ public class WatcherMapping extends BaseUserMapping {
   public void map(Object value, Issue issue, StorageEngine storage) {
     @SuppressWarnings("unchecked")
     List<String> userList = (List<String>) value;
-    List<JiraUser> watchersFromRtc = new ArrayList<JiraUser>();
-    List<JiraUser> existingWatchers = new ArrayList<JiraUser>();
-    List<JiraUser> watchersToDelete = new ArrayList<JiraUser>();
-    List<JiraUser> watchersToAdd = new ArrayList<JiraUser>();
-    Watchers response = getExistingWatchers(issue);
-    if (response != null) {
-      existingWatchers = response.getWatchers();
-    }
-    for (String formattedStr : userList) {
-      JiraUser jiraUser = getUser(formattedStr);
-      watchersFromRtc.add(jiraUser);
-    }
-
-    for (JiraUser jiraUser : existingWatchers) {
-      if (!watchersFromRtc.contains(jiraUser)) {
-        watchersToDelete.add(jiraUser);
+    if (userList != null) {
+      List<JiraUser> watchersFromRtc = new ArrayList<JiraUser>();
+      List<JiraUser> existingWatchers = new ArrayList<JiraUser>();
+      List<JiraUser> watchersToDelete = new ArrayList<JiraUser>();
+      List<JiraUser> watchersToAdd = new ArrayList<JiraUser>();
+      Watchers response = getExistingWatchers(issue);
+      if (response != null) {
+        existingWatchers = response.getWatchers();
       }
-    }
-
-    for (JiraUser jiraUser : watchersFromRtc) {
-      if (!existingWatchers.contains(jiraUser)) {
-        watchersToAdd.add(jiraUser);
+      for (String formattedStr : userList) {
+        JiraUser jiraUser = getUser(formattedStr);
+        watchersFromRtc.add(jiraUser);
       }
-    }
 
-    removeWatchers(watchersToDelete, issue);
-    addWatchers(watchersToAdd, issue);
+      for (JiraUser jiraUser : existingWatchers) {
+        if (!watchersFromRtc.contains(jiraUser)) {
+          watchersToDelete.add(jiraUser);
+        }
+      }
+
+      for (JiraUser jiraUser : watchersFromRtc) {
+        if (!existingWatchers.contains(jiraUser)) {
+          watchersToAdd.add(jiraUser);
+        }
+      }
+
+      removeWatchers(watchersToDelete, issue);
+      addWatchers(watchersToAdd, issue);
+    }
   }
 
   private JiraUser getUser(String contributorStr) {

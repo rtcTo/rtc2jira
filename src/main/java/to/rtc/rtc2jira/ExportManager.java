@@ -3,6 +3,8 @@ package to.rtc.rtc2jira;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -46,9 +48,17 @@ public class ExportManager {
     for (Exporter exporter : getExporters()) {
       if (exporter.isConfigured()) {
         exporter.initialize(settings, storageEngine);
+        Collection<Integer> rtcWorkItemRange = Settings.getInstance().getRtcWorkItemRange();
+        if (rtcWorkItemRange != null) {
+          rtcWorkItemRange = new HashSet<Integer>(rtcWorkItemRange);
+        }
         for (ODocument workItem : StorageQuery.getRTCWorkItems(storageEngine)) {
-          exporter.createOrUpdateItem(workItem);
-          LOGGER.info("Exported workitem " + workItem.field(FieldNames.ID));
+          String workItemId = workItem.field(FieldNames.ID);
+          Integer idSeq = Integer.valueOf(workItemId);
+          if (rtcWorkItemRange == null || rtcWorkItemRange.contains(idSeq)) {
+            exporter.createOrUpdateItem(workItem);
+            LOGGER.info("Exported workitem " + workItem.field(FieldNames.ID));
+          }
         }
         exporter.postExport();
       }

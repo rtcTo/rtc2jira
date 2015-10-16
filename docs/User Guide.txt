@@ -5,6 +5,8 @@ The import of the whole issue will fail if an unrecognized field is included. Se
    Fields normally missing from the default Edit/View screen are:
    - resolution 
    - Story Points (n.b. custom field)
+
+1.a. Add any missing issue types and update the following classes: IssueTypes, WorkItemTypes and WorkItemTypeMapping
    
 2. Find id of Story Points custom field (this is a built-in custom id; the id may be different in different Jira instances).
 This id must be inserted in the annotation of the story points accessor method in the IssueFields class, e.g. @XmlElement(name = "<id-goes-here>")

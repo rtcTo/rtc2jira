@@ -19,6 +19,7 @@ public class IssueType extends NamedEntity {
   public static final IssueType NEW_FEATURE;
   public static final IssueType IMPROVEMENT;
   public static final IssueType BUSINESS_NEED;
+  public static final IssueType IMPEDIMENT;
   public static final IssueType CATEGORY;
   public static final IssueType ITERATION;
 
@@ -31,6 +32,7 @@ public class IssueType extends NamedEntity {
     NEW_FEATURE = new IssueType("2", "New Feature");
     IMPROVEMENT = new IssueType("4", "Improvement");
     BUSINESS_NEED = new IssueType("10002", "Business Need");
+    IMPEDIMENT = new IssueType("10200", "Impediment");
     CATEGORY = new IssueType(Settings.getInstance().getJiraIssuetypeCategoryId(), "Category");
     ITERATION = new IssueType(Settings.getInstance().getJiraIssuetypeIterationId(), "Iteration");
   }
@@ -47,7 +49,6 @@ public class IssueType extends NamedEntity {
   @JsonView(IssueView.Update.class)
   @Override
   public String getKey() {
-    // TODO Auto-generated method stub
     return super.getKey();
   }
 

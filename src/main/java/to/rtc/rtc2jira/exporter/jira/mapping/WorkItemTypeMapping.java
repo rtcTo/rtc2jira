@@ -6,6 +6,7 @@ package to.rtc.rtc2jira.exporter.jira.mapping;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.BUSINESSNEED;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.DEFECT;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.EPIC;
+import static to.rtc.rtc2jira.storage.WorkItemTypes.IMPEDIMENT;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.STORY;
 import static to.rtc.rtc2jira.storage.WorkItemTypes.TASK;
 
@@ -64,6 +65,9 @@ public class WorkItemTypeMapping implements Mapping {
         break;
       case BUSINESSNEED:
         issueFields.setIssuetype(getIssueType("Business Need", project));
+        break;
+      case IMPEDIMENT:
+        issueFields.setIssuetype(getIssueType("Impediment", project));
         break;
       case DEFECT:
         issueFields.setIssuetype(getIssueType("Bug", project));

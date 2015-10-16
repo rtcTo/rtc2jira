@@ -83,6 +83,7 @@ public class JiraRestAccess {
   public ClientResponse get(String resource) {
     // because of jersey's non-RFC2396 handling of spaces
     resource = resource.replace("+", "%2B");
+    resource = resource.replace("&", "%26");
     resource = resource.replace(" ", "%20");
     objectMapper.setSerializationConfig(objectMapper.getSerializationConfig().withView(IssueView.Read.class));
     return createJsonResponseBuilder(resource).get(ClientResponse.class);

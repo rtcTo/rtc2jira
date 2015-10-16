@@ -30,6 +30,7 @@ public class CategoryHandler extends LinkHandler {
             AddIssueLink.createAddLink(IssueLinkType.HIERARCHY, currentCategory, previousCategory);
         linkIssues(addIssueLink);
       }
+      previousCategory = currentCategory;
     }
     return currentCategory;
   }

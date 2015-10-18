@@ -253,13 +253,19 @@ public class JiraExporter implements Exporter {
           issueComment.setAuthor(jiraUser);
           issueComment.setCreated(comment.getDate());
           ClientResponse cr = getRestAccess().post(issueComment.getPath(), issueComment);
-          IssueComment issueCommentPosted = cr.getEntity(IssueComment.class);
-          issueComment.setId(issueCommentPosted.getId());
-          issueCommentPosted.setIssue(issue);
-          // update document comment
-          comment.setJiraId(issueComment.getId());
+          if (cr.getStatus() == 201) {
+            IssueComment issueCommentPosted = cr.getEntity(IssueComment.class);
+            issueComment.setId(issueCommentPosted.getId());
+            issueCommentPosted.setIssue(issue);
+            // update document comment
+            comment.setJiraId(issueComment.getId());
+            issueComments.add(issueComment);
+          } else {
+            String entity = cr.getEntity(String.class);
+            LOGGER.severe("Could not add comment ****** " + comment.getComment()
+                + " ******* to the issue with the key " + issue.getKey() + ". Response entity: " + entity);
+          }
         }
-        issueComments.add(issueComment);
       }
       // save comments in item because IDs may have been added
       store.setFields(item, //

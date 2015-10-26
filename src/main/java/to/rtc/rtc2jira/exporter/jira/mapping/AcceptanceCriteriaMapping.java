@@ -15,6 +15,9 @@ public class AcceptanceCriteriaMapping implements Mapping {
   @Override
   public void map(Object value, Issue issue, StorageEngine storage) {
     String acceptanceCriteria = (String) value;
-    issue.getFields().setAcceptanceCriteria(acceptanceCriteria);
+    acceptanceCriteria = DescriptionMapping.convertHtmlToJiraMarkup(acceptanceCriteria);
+    if (acceptanceCriteria != null) {
+      issue.getFields().setAcceptanceCriteria(acceptanceCriteria);
+    }
   }
 }

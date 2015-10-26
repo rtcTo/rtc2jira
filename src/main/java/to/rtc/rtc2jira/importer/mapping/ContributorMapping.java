@@ -53,8 +53,12 @@ public class ContributorMapping extends MappingAdapter {
     String[] split = str.split(" <");
     JiraUser jiraUser = new JiraUser();
     jiraUser.setDisplayName(split[0]);
-    jiraUser.setEmailAddress(split[1]);
-    String[] segs = split[1].toLowerCase().split("@");
+    String emailAddress = split[1];
+    if (emailAddress == null || !emailAddress.contains("@")) {
+      emailAddress = "no_rtc_email@bison-group.com";
+    }
+    jiraUser.setEmailAddress(emailAddress);
+    String[] segs = emailAddress.toLowerCase().split("@");
     jiraUser.setKey(segs[0]);
     jiraUser.setName(segs[0]);
 

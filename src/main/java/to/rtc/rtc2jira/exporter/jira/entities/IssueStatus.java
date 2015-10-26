@@ -12,24 +12,24 @@ public class IssueStatus extends NamedEntity {
 
   public static IssueStatus createDone() {
     IssueStatus issueStatus = new IssueStatus();
-    issueStatus.setId(StatusEnum.done.getJiraId());
-    issueStatus.setName(StatusEnum.done.getStatusName());
+    issueStatus.setId(StateEnum.bug_verified.getJiraId());
+    issueStatus.setName(StateEnum.bug_verified.getStatusName());
     issueStatus.setStatusCategory(StatusCategory.createDone());
     return issueStatus;
   }
 
   public static IssueStatus createInProgress() {
     IssueStatus issueStatus = new IssueStatus();
-    issueStatus.setId(StatusEnum.inprogress.getJiraId());
-    issueStatus.setName(StatusEnum.inprogress.getStatusName());
+    issueStatus.setId(StateEnum.bug_inProgress.getJiraId());
+    issueStatus.setName(StateEnum.bug_inProgress.getStatusName());
     issueStatus.setStatusCategory(StatusCategory.createInProgress());
     return issueStatus;
   }
 
   public static IssueStatus createToDo() {
     IssueStatus issueStatus = new IssueStatus();
-    issueStatus.setId(StatusEnum.todo.getJiraId());
-    issueStatus.setName(StatusEnum.todo.getStatusName());
+    issueStatus.setId(StateEnum.bug_neww.getJiraId());
+    issueStatus.setName(StateEnum.bug_neww.getStatusName());
     issueStatus.setStatusCategory(StatusCategory.createToDo());
     return issueStatus;
   }
@@ -64,8 +64,19 @@ public class IssueStatus extends NamedEntity {
   }
 
   @JsonView(IssueView.Filtered.class)
-  public StatusEnum getStatusEnum() {
-    return StatusEnum.forJiraId(getId());
+  public StateEnum getStatusEnum(IssueType issueType) {
+    return StateEnum.forJiraId(getId(), issueType).orElse(null);
+  }
+
+
+  /**
+   * TODO implement
+   * 
+   * @param issueType
+   * @return
+   */
+  public static IssueStatus createStartingStatus(IssueType issueType) {
+    return StateEnum.bug_neww.getIssueStatus();
   }
 
 

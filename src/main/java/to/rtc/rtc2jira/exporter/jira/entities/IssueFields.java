@@ -236,7 +236,7 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10005", nillable = true)
+  @XmlElement(name = "customfield_10005")
   public Integer getStoryPoints() {
     return storyPoints;
   }

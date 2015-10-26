@@ -79,5 +79,24 @@ public class IssueType extends NamedEntity {
     return "/issuetype/" + getId();
   }
 
+  @Override
+  public int hashCode() {
+    int prime = 37;
+    int result = 1;
+    result = result * prime + getId().hashCode();
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this) {
+      return true;
+    }
+    if (!(obj instanceof IssueType)) {
+      return false;
+    }
+    return this.getId().equals(((IssueType) obj).getId());
+  }
+
 
 }

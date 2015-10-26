@@ -27,10 +27,11 @@ import to.rtc.rtc2jira.exporter.jira.entities.IssueResolution;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueSearch;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueSearch.IssueSearchResult;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueStatus;
+import to.rtc.rtc2jira.exporter.jira.entities.IssueType;
 import to.rtc.rtc2jira.exporter.jira.entities.JiraUser;
 import to.rtc.rtc2jira.exporter.jira.entities.Project;
 import to.rtc.rtc2jira.exporter.jira.entities.ResolutionEnum;
-import to.rtc.rtc2jira.exporter.jira.entities.StatusEnum;
+import to.rtc.rtc2jira.exporter.jira.entities.StateEnum;
 import to.rtc.rtc2jira.exporter.jira.mapping.MappingRegistry;
 import to.rtc.rtc2jira.exporter.jira.mapping.WorkItemTypeMapping;
 import to.rtc.rtc2jira.storage.Attachment;
@@ -185,26 +186,67 @@ public class JiraExporter implements Exporter {
   }
 
   private void persistIssue(ODocument item, Issue issue) {
-    Issue lastExportedIssue = getLastExportedInfo(item);
-    boolean success = updateIssueInJira(issue, lastExportedIssue);
-    if (success) {
+    Issue lastExportedIssue = getLastExportedInfo(item, issue.getFields().getIssuetype());
+    try {
+      updateIssueInJira(issue, lastExportedIssue);
       storeReference(issue, item);
       cacheInfoOfLastExport(issue, item);
+    } catch (Exception e) {
+      LOGGER.log(Level.SEVERE, "Error while updating in Jira", e);
     }
   }
 
-  private Issue getLastExportedInfo(ODocument item) {
+  private String migrateOldStatus(String oldStatusId, IssueType issueType) {
+    String result = oldStatusId;
+    if (result == null) {
+      result = "1"; // open
+      if (IssueType.BUSINESS_NEED.equals(issueType)) {
+        result = "10103";
+      }
+    } else if ("10000".equals(oldStatusId)) { // todo
+      result = "1"; // open
+      if (IssueType.BUSINESS_NEED.equals(issueType)) {
+        result = "10103";
+      }
+    } else if (IssueType.BUG.equals(issueType)) {
+      if ("10001".equals(oldStatusId)) { // done
+        result = "6"; // verified
+      }
+    } else if (IssueType.EPIC.equals(issueType)) {
+      // do nothing
+    } else if (IssueType.USER_STORY.equals(issueType)) {
+      // do nothing
+    } else if (IssueType.BUSINESS_NEED.equals(issueType)) {
+      if ("10001".equals(oldStatusId)) { // done
+        result = "6"; // verified
+      }
+    } else if (IssueType.IMPEDIMENT.equals(issueType)) {
+      if ("10001".equals(oldStatusId)) { // done
+        result = "5"; // verified
+      }
+    } else if (IssueType.TASK.equals(issueType)) {
+      if ("10001".equals(oldStatusId)) { // done
+        result = "5"; // verified
+      }
+    }
+
+    return result;
+  }
+
+
+  private Issue getLastExportedInfo(ODocument item, IssueType issueType) {
     String lastExportedStatus = item.field(FieldNames.JIRA_LAST_EXPORTED_STATUS);
+    lastExportedStatus = migrateOldStatus(lastExportedStatus, issueType);
     Issue lastExportedIssue = new Issue();
     // status
-    IssueStatus status;
-    if (lastExportedStatus == null || lastExportedStatus.isEmpty()) {
-      status = IssueStatus.createToDo();
-    } else {
-      StatusEnum statusEnum = StatusEnum.forJiraId(lastExportedStatus);
-      status = statusEnum.getIssueStatus();
+    lastExportedIssue.getFields().setStatus(IssueStatus.createStartingStatus(issueType));
+    Optional<StateEnum> stateOpt = StateEnum.forJiraId(lastExportedStatus, issueType);
+    stateOpt.ifPresent(se -> {
+      lastExportedIssue.getFields().setStatus(se.getIssueStatus());
+    });
+    if (!stateOpt.isPresent()) {
+      LOGGER.severe("No StateEnum found for last exported status, id = " + lastExportedStatus);
     }
-    lastExportedIssue.getFields().setStatus(status);
     return lastExportedIssue;
   }
 
@@ -315,23 +357,45 @@ public class JiraExporter implements Exporter {
     }
   }
 
-  private boolean updateIssueInJira(Issue issue, Issue lastExportedIssue) {
-    ClientResponse postResponse = getRestAccess().put("/issue/" + issue.getKey(), issue);
-    if (isResponseOk(postResponse)) {
-      boolean result = true;
-      String transitionId = getTransitionId(issue.getFields().getStatus(), lastExportedIssue.getFields().getStatus());
-      if (!StatusEnum.NO_TRANSITION.equals(transitionId)) {
-        result = doTransition(issue, transitionId);
-      }
-      return result;
+  private void updateIssueInJira(Issue issue, Issue lastExportedIssue) throws Exception {
+    // prepare status transition
+    IssueType issueType = issue.getFields().getIssuetype();
+    StateEnum targetStatus = issue.getFields().getStatus().getStatusEnum(issueType);
+    StateEnum currentStatus = lastExportedIssue.getFields().getStatus().getStatusEnum(issueType);
+    List<String> transitionPath = null;
+    if (!currentStatus.isEditable() && currentStatus == targetStatus) {
+      transitionPath = currentStatus.forceTransitionPath(targetStatus);
     } else {
-      System.err.println("Problems while updating issue: " + postResponse.getEntity(String.class));
-      return false;
+      transitionPath = currentStatus.getTransitionPath(targetStatus);
     }
-  }
-
-  String getTransitionId(IssueStatus targetStatus, IssueStatus currentStatus) {
-    return currentStatus.getStatusEnum().getTransitionId(targetStatus.getStatusEnum());
+    // put issue in editable state
+    if (!currentStatus.isEditable()) {
+      String intermediateTransitionId = transitionPath.remove(0);
+      if (!doTransition(issue, intermediateTransitionId)) {
+        throw new Exception();
+      };
+    }
+    // send put request
+    ClientResponse postResponse = getRestAccess().put("/issue/" + issue.getKey(), issue);
+    if (!isResponseOk(postResponse)) {
+      LOGGER.severe("Problems while updating issue: " + postResponse.getEntity(String.class));
+      throw new Exception();
+    } else {
+      while (transitionPath.size() > 0) {
+        String transitionId = transitionPath.remove(0);
+        if (!StateEnum.NO_TRANSITION.equals(transitionId)) {
+          if (!doTransition(issue, transitionId)) {
+            // revert status
+            issue.getFields().setStatus(lastExportedIssue.getFields().getStatus());
+            throw new Exception();
+          }
+        } else if (targetStatus != currentStatus) {
+          // revert status
+          issue.getFields().setStatus(lastExportedIssue.getFields().getStatus());
+          throw new Exception();
+        }
+      }
+    }
   }
 
   private boolean doTransition(Issue issue, String transitionId) {
@@ -341,7 +405,7 @@ public class JiraExporter implements Exporter {
     if (isResponseOk(postResponse)) {
       return true;
     } else {
-      System.err.println("Problems while transitioning issue: " + postResponse.getEntity(String.class));
+      LOGGER.severe("Problems while transitioning issue: " + postResponse.getEntity(String.class));
       return false;
     }
   }
@@ -371,7 +435,8 @@ public class JiraExporter implements Exporter {
       mappingRegistry.map(workItem, issue, store);
       // set resolution to appropriate default, otherwise it will be set to "fixed" whenever status
       // is "done", even if issue is not a defect
-      if (issueFields.getStatus().getStatusEnum() == StatusEnum.done && issueFields.getResolution() == null) {
+      if (issueFields.getStatus().getStatusEnum(issue.getFields().getIssuetype()).isFinished()
+          && issueFields.getResolution() == null) {
         issueFields.setResolution(new IssueResolution(ResolutionEnum.done));
       }
     } else {

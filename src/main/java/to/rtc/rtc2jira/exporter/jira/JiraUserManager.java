@@ -33,6 +33,7 @@ public class JiraUserManager {
     deactivationExclusionList.add("noreply@atlassian.com");
     deactivationExclusionList.add("urs.haller@bison-group.com");
     deactivationExclusionList.add("pedraita.dayana@bison-group.com");
+    deactivationExclusionList.add("leonard.chew@bison-group.com");
   }
 
   public void deactivateUsers() {

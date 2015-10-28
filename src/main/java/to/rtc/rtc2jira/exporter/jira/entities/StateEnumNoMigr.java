@@ -11,11 +11,10 @@ import java.util.logging.Logger;
 
 import to.rtc.rtc2jira.ExportManager;
 
-public enum StateEnum {
-  migr_resolved("5", "", null, "Resolved", null) {
+public enum StateEnumNoMigr {
+  bug_neww("1", "1", IssueType.BUG, "Open", null) {
 
-    @Override
-    public StateEnum getProxy() {
+    public StateEnumNoMigr getProxy() {
       return this;
     };
 
@@ -25,270 +24,8 @@ public enum StateEnum {
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      return StateEnum.getMigrationTransitionMap(this);
-    }
-  }, // 51 business need
-  migr_reopened("4", "", null, "Reopened", null) {
-
-    @Override
-    public StateEnum getProxy() {
-      return this;
-    };
-
-    @Override
-    protected StatusCategory createStatusCategory() {
-      return StatusCategory.createToDo();
-    }
-
-    @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      return StateEnum.getMigrationTransitionMap(this);
-    }
-  }, // 51 business need
-  migr_invalid("10101", "", null, "Invalid", null) {
-
-    @Override
-    public StateEnum getProxy() {
-      return this;
-    };
-
-    @Override
-    protected StatusCategory createStatusCategory() {
-      return StatusCategory.createToDo();
-    }
-
-    @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      return StateEnum.getMigrationTransitionMap(this);
-    }
-  }, // 51 business need
-  migr_implemented("10102", "", null, "Implemented", null) {
-
-    @Override
-    public StateEnum getProxy() {
-      return this;
-    };
-
-    @Override
-    protected StatusCategory createStatusCategory() {
-      return StatusCategory.createToDo();
-    }
-
-    @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      return StateEnum.getMigrationTransitionMap(this);
-    }
-  }, // 51 business need
-  migr_done("10001", "", null, "Done", null) {
-
-    @Override
-    public StateEnum getProxy() {
-      return this;
-    };
-
-    @Override
-    protected StatusCategory createStatusCategory() {
-      return StatusCategory.createToDo();
-    }
-
-    @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      return StateEnum.getMigrationTransitionMap(this);
-    }
-
-    @Override
-    public boolean isFinished() {
-      return true;
-    }
-
-  }, // 51 business need
-  migr_new("1", "", null, "Open", null) {
-
-    @Override
-    public StateEnum getProxy() {
-      return this;
-    };
-
-    @Override
-    protected StatusCategory createStatusCategory() {
-      return StatusCategory.createToDo();
-    }
-
-    @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      return StateEnum.getMigrationTransitionMap(this);
-    }
-  }, // 51 business need
-  migr_unqualified("10103", "", IssueType.BUSINESS_NEED, "Unqualified", null) {
-
-    @Override
-    public StateEnum getProxy() {
-      return this;
-    };
-
-    @Override
-    protected StatusCategory createStatusCategory() {
-      return StatusCategory.createToDo();
-    }
-
-    @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      return StateEnum.getMigrationTransitionMap(this);
-    }
-  }, // 51 business need
-  migr_qualified("10104", "", IssueType.BUSINESS_NEED, "Qualified", null) {
-
-    @Override
-    public StateEnum getProxy() {
-      return this;
-    };
-
-    @Override
-    protected StatusCategory createStatusCategory() {
-      return StatusCategory.createToDo();
-    }
-
-    @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      return StateEnum.getMigrationTransitionMap(this);
-    }
-  }, // ? just guessing
-  migr_estimationOk("10106", "", IssueType.BUSINESS_NEED, "Estimation OK", null) {
-
-    @Override
-    public StateEnum getProxy() {
-      return this;
-    };
-
-    @Override
-    protected StatusCategory createStatusCategory() {
-      return StatusCategory.createToDo();
-    }
-
-    @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      return StateEnum.getMigrationTransitionMap(this);
-    }
-  }, //
-  migr_approved("10105", "", IssueType.BUSINESS_NEED, "Approved", null) {
-    @Override
-    public StateEnum getProxy() {
-      return this;
-    };
-
-    @Override
-    protected StatusCategory createStatusCategory() {
-      return StatusCategory.createToDo();
-    }
-
-    @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      return StateEnum.getMigrationTransitionMap(this);
-    }
-  }, // 53 business need
-  migr_readyProduction("10107", "", IssueType.BUSINESS_NEED, "Ready for Production", null) {
-    @Override
-    public StateEnum getProxy() {
-      return this;
-    };
-
-    @Override
-    protected StatusCategory createStatusCategory() {
-      return StatusCategory.createToDo();
-    }
-
-    @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      return StateEnum.getMigrationTransitionMap(this);
-    }
-  }, // business
-  migr_inProgress("3", "", IssueType.BUSINESS_NEED, "In Progress", null) {
-
-    @Override
-    public StateEnum getProxy() {
-      return this;
-    };
-
-    @Override
-    protected StatusCategory createStatusCategory() {
-      return StatusCategory.createInProgress();
-    }
-
-    @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      return StateEnum.getMigrationTransitionMap(this);
-    }
-  }, //
-  migr_developmentDone("10108", "", IssueType.BUSINESS_NEED, "Development Done", null) {
-    @Override
-    public StateEnum getProxy() {
-      return this;
-    };
-
-    @Override
-    protected StatusCategory createStatusCategory() {
-      return StatusCategory.createInProgress();
-    }
-
-    @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      return StateEnum.getMigrationTransitionMap(this);
-    }
-  }, //
-  migr_deferred("10100", "", IssueType.BUSINESS_NEED, "Deferred", null) {
-    @Override
-    public StateEnum getProxy() {
-      return this;
-    };
-
-
-    @Override
-    protected StatusCategory createStatusCategory() {
-      return StatusCategory.createToDo();
-    }
-
-    @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      return StateEnum.getMigrationTransitionMap(this);
-    }
-  },
-  migr_closed("6", "", IssueType.BUSINESS_NEED, "Closed", null) {
-    @Override
-    public StateEnum getProxy() {
-      return this;
-    };
-
-    @Override
-    protected StatusCategory createStatusCategory() {
-      return StatusCategory.createDone();
-    }
-
-    @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      return StateEnum.getMigrationTransitionMap(this);
-    }
-
-    @Override
-    public boolean isFinished() {
-      return true;
-    }
-
-  },
-  //
-  // *********************************************************************************************************
-  //
-  //
-  bug_neww("1", "1", IssueType.BUG, "Open", migr_new) {
-
-    @Override
-    protected StatusCategory createStatusCategory() {
-      return StatusCategory.createToDo();
-    }
-
-    @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(bug_neww, NO_TRANSITION);
       transitionMap.put(bug_inProgress, "4");
       transitionMap.put(bug_resolved, "5");
@@ -297,7 +34,12 @@ public enum StateEnum {
       return transitionMap;
     }
   }, //
-  bug_inProgress("3", "2", IssueType.BUG, "In Progress", migr_inProgress) {
+  bug_inProgress("3", "2", IssueType.BUG, "In Progress", null) {
+
+    @Override
+    public StateEnumNoMigr getProxy() {
+      return this;
+    }
 
     @Override
     protected StatusCategory createStatusCategory() {
@@ -305,8 +47,8 @@ public enum StateEnum {
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(bug_neww, "301");
       transitionMap.put(bug_inProgress, NO_TRANSITION);
       transitionMap.put(bug_resolved, "5");
@@ -315,7 +57,11 @@ public enum StateEnum {
       return transitionMap;
     }
   }, //
-  bug_resolved("5", "3", IssueType.BUG, "Resolved", migr_resolved) {
+  bug_resolved("5", "3", IssueType.BUG, "Resolved", null) {
+    @Override
+    public StateEnumNoMigr getProxy() {
+      return this;
+    }
 
     @Override
     protected StatusCategory createStatusCategory() {
@@ -323,8 +69,8 @@ public enum StateEnum {
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(bug_neww, NO_TRANSITION);
       transitionMap.put(bug_inProgress, NO_TRANSITION);
       transitionMap.put(bug_resolved, NO_TRANSITION);
@@ -333,7 +79,11 @@ public enum StateEnum {
       return transitionMap;
     }
   }, //
-  bug_verified("6", "4", IssueType.BUG, "Closed", migr_closed) {
+  bug_verified("6", "4", IssueType.BUG, "Closed", null) {
+    @Override
+    public StateEnumNoMigr getProxy() {
+      return this;
+    }
 
     @Override
     protected StatusCategory createStatusCategory() {
@@ -341,8 +91,8 @@ public enum StateEnum {
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(bug_neww, NO_TRANSITION);
       transitionMap.put(bug_inProgress, NO_TRANSITION);
       transitionMap.put(bug_resolved, NO_TRANSITION);
@@ -361,9 +111,9 @@ public enum StateEnum {
       return true;
     }
   }, //
-  bug_reopened("4", "6", IssueType.BUG, "Reopened", migr_reopened) {
+  bug_reopened("4", "6", IssueType.BUG, "Reopened", null) {
     @Override
-    public StateEnum getProxy() {
+    public StateEnumNoMigr getProxy() {
       return this;
     }
 
@@ -373,8 +123,8 @@ public enum StateEnum {
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(bug_neww, NO_TRANSITION);
       transitionMap.put(bug_inProgress, "4");
       transitionMap.put(bug_resolved, "5");
@@ -386,15 +136,15 @@ public enum StateEnum {
   }, //
   //
   //
-  ep_neww("1", "com.ibm.team.apt.epic.workflow.state.s1", IssueType.EPIC, "Open", StateEnum.migr_new) {
+  ep_neww("1", "com.ibm.team.apt.epic.workflow.state.s1", IssueType.EPIC, "Open", StateEnumNoMigr.bug_neww) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createToDo();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(ep_neww, NO_TRANSITION);
       transitionMap.put(ep_inProgress, "4");
       transitionMap.put(ep_done, NO_TRANSITION);
@@ -403,16 +153,15 @@ public enum StateEnum {
       return transitionMap;
     }
   }, //
-  ep_inProgress("3", "com.ibm.team.apt.epic.workflow.state.s2", IssueType.EPIC, "In Progress",
-      StateEnum.migr_inProgress) {
+  ep_inProgress("3", "com.ibm.team.apt.epic.workflow.state.s2", IssueType.EPIC, "In Progress", StateEnumNoMigr.bug_inProgress) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createInProgress();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(ep_neww, "301");
       transitionMap.put(ep_inProgress, NO_TRANSITION);
       transitionMap.put(ep_done, "311");
@@ -421,15 +170,15 @@ public enum StateEnum {
       return transitionMap;
     }
   }, //
-  ep_done("10001", "com.ibm.team.apt.epic.workflow.state.s3", IssueType.EPIC, "Done", StateEnum.migr_done) {
+  ep_done("10001", "com.ibm.team.apt.epic.workflow.state.s3", IssueType.EPIC, "Done", StateEnumNoMigr.bug_verified) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createDone();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(ep_neww, "391");
       transitionMap.put(ep_inProgress, NO_TRANSITION);
       transitionMap.put(ep_done, NO_TRANSITION);
@@ -443,7 +192,7 @@ public enum StateEnum {
       return false;
     }
   }, //
-  ep_deferred("10100", "com.ibm.team.apt.epic.workflow.state.s5", IssueType.EPIC, "Deferred", StateEnum.migr_deferred) {
+  ep_deferred("10100", "com.ibm.team.apt.epic.workflow.state.s5", IssueType.EPIC, "Deferred", StateEnumNoMigr.bug_reopened) {
     @Override
     protected StatusCategory createStatusCategory() {
       // TODO Auto-generated method stub
@@ -451,8 +200,8 @@ public enum StateEnum {
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(ep_neww, "341");
       transitionMap.put(ep_inProgress, "351");
       transitionMap.put(ep_done, NO_TRANSITION);
@@ -461,15 +210,15 @@ public enum StateEnum {
       return transitionMap;
     }
   }, //
-  ep_invalid("10101", "com.ibm.team.apt.epic.workflow.state.s6", IssueType.EPIC, "Invalid", StateEnum.migr_invalid) {
+  ep_invalid("10101", "com.ibm.team.apt.epic.workflow.state.s6", IssueType.EPIC, "Invalid", StateEnumNoMigr.bug_reopened) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createToDo();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(ep_neww, "381");
       transitionMap.put(ep_inProgress, NO_TRANSITION);
       transitionMap.put(ep_done, NO_TRANSITION);
@@ -480,15 +229,15 @@ public enum StateEnum {
   }, //
   //
   //
-  us_neww("1", "com.ibm.team.apt.story.idea", IssueType.USER_STORY, "Open", StateEnum.migr_new) {
+  us_neww("1", "com.ibm.team.apt.story.idea", IssueType.USER_STORY, "Open", StateEnumNoMigr.bug_neww) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createToDo();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(us_neww, NO_TRANSITION);
       transitionMap.put(us_inProgress, "4");
       transitionMap.put(us_implemented, "331");
@@ -498,15 +247,15 @@ public enum StateEnum {
       return transitionMap;
     }
   }, //
-  us_inProgress("3", "com.ibm.team.apt.story.defined", IssueType.USER_STORY, "In Progress", StateEnum.migr_inProgress) {
+  us_inProgress("3", "com.ibm.team.apt.story.defined", IssueType.USER_STORY, "In Progress", StateEnumNoMigr.bug_inProgress) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createInProgress();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(us_neww, "301");
       transitionMap.put(us_inProgress, NO_TRANSITION);
       transitionMap.put(us_implemented, "351");
@@ -516,16 +265,15 @@ public enum StateEnum {
       return transitionMap;
     }
   }, //
-  us_implemented("10102", "com.ibm.team.apt.story.tested", IssueType.USER_STORY, "Implemented",
-      StateEnum.migr_implemented) {
+  us_implemented("10102", "com.ibm.team.apt.story.tested", IssueType.USER_STORY, "Implemented", StateEnumNoMigr.bug_resolved) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createInProgress();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(us_neww, "401");
       transitionMap.put(us_inProgress, NO_TRANSITION);
       transitionMap.put(us_implemented, NO_TRANSITION);
@@ -535,15 +283,15 @@ public enum StateEnum {
       return transitionMap;
     }
   }, //
-  us_done("10001", "com.ibm.team.apt.story.verified", IssueType.USER_STORY, "Done", StateEnum.migr_done) {
+  us_done("10001", "com.ibm.team.apt.story.verified", IssueType.USER_STORY, "Done", StateEnumNoMigr.bug_verified) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createDone();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(us_neww, "411");
       transitionMap.put(us_inProgress, NO_TRANSITION);
       transitionMap.put(us_implemented, NO_TRANSITION);
@@ -560,15 +308,15 @@ public enum StateEnum {
 
   }, //
   us_deferred("10100", "com.ibm.team.apt.storyWorkflow.state.s1", IssueType.USER_STORY, "Deferred",
-      StateEnum.migr_deferred) {
+      StateEnumNoMigr.bug_reopened) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createToDo();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(us_neww, "431");
       transitionMap.put(us_inProgress, "421");
       transitionMap.put(us_implemented, NO_TRANSITION);
@@ -579,15 +327,15 @@ public enum StateEnum {
     }
   }, //
   us_invalid("10101", "com.ibm.team.apt.storyWorkflow.state.s2", IssueType.USER_STORY, "Invalid",
-      StateEnum.migr_invalid) {
+      StateEnumNoMigr.bug_reopened) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createToDo();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(us_neww, "371");
       transitionMap.put(us_inProgress, NO_TRANSITION);
       transitionMap.put(us_implemented, NO_TRANSITION);
@@ -599,15 +347,15 @@ public enum StateEnum {
   }, //
   //
   //
-  bn_unqualified("10103", "51", IssueType.BUSINESS_NEED, "Unqualified", StateEnum.migr_unqualified) {
+  bn_unqualified("10103", "51", IssueType.BUSINESS_NEED, "Unqualified", StateEnumNoMigr.bug_neww) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createToDo();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(bn_unqualified, NO_TRANSITION);
       transitionMap.put(bn_qualified, "11");
       transitionMap.put(bn_approved, NO_TRANSITION);
@@ -620,15 +368,15 @@ public enum StateEnum {
       return transitionMap;
     }
   }, // 51 business need
-  bn_qualified("10104", "52", IssueType.BUSINESS_NEED, "Qualified", StateEnum.migr_qualified) {
+  bn_qualified("10104", "52", IssueType.BUSINESS_NEED, "Qualified", StateEnumNoMigr.bug_inProgress) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createToDo();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(bn_unqualified, NO_TRANSITION);
       transitionMap.put(bn_qualified, "21");
       transitionMap.put(bn_approved, "51");
@@ -642,7 +390,7 @@ public enum StateEnum {
     }
   }, // ? just guessing
   bn_estimationOk("10106", "com.ibm.team.workitem.businessneedWorkflow.state.s2", IssueType.BUSINESS_NEED,
-      "Estimation OK", StateEnum.migr_estimationOk) {
+      "Estimation OK", StateEnumNoMigr.bug_inProgress) {
 
     @Override
     protected StatusCategory createStatusCategory() {
@@ -650,8 +398,8 @@ public enum StateEnum {
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(bn_unqualified, "151");
       transitionMap.put(bn_qualified, "141");
       transitionMap.put(bn_approved, "131");
@@ -664,15 +412,15 @@ public enum StateEnum {
       return transitionMap;
     }
   }, //
-  bn_approved("10105", "53", IssueType.BUSINESS_NEED, "Approved", StateEnum.migr_approved) {
+  bn_approved("10105", "53", IssueType.BUSINESS_NEED, "Approved", StateEnumNoMigr.bug_inProgress) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createToDo();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(bn_unqualified, NO_TRANSITION);
       transitionMap.put(bn_qualified, "81");
       transitionMap.put(bn_approved, NO_TRANSITION);
@@ -686,15 +434,15 @@ public enum StateEnum {
     }
   }, // 53 business need
   bn_readyProduction("10107", "com.ibm.team.workitem.businessneedWorkflow.state.s5", IssueType.BUSINESS_NEED,
-      "Ready for Production", StateEnum.migr_readyProduction) {
+      "Ready for Production", StateEnumNoMigr.bug_inProgress) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createToDo();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(bn_unqualified, NO_TRANSITION);
       transitionMap.put(bn_qualified, NO_TRANSITION);
       transitionMap.put(bn_approved, "171");
@@ -708,15 +456,15 @@ public enum StateEnum {
     }
   }, // business
   bn_inProgress("3", "com.ibm.team.workitem.businessneedWorkflow.state.s7", IssueType.BUSINESS_NEED, "In Progress",
-      StateEnum.migr_inProgress) {
+      StateEnumNoMigr.bug_inProgress) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createInProgress();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(bn_unqualified, NO_TRANSITION);
       transitionMap.put(bn_qualified, NO_TRANSITION);
       transitionMap.put(bn_approved, NO_TRANSITION);
@@ -730,15 +478,15 @@ public enum StateEnum {
     }
   }, //
   bn_developmentDone("10108", "com.ibm.team.workitem.businessneedWorkflow.state.s6", IssueType.BUSINESS_NEED,
-      "Development Done", StateEnum.migr_developmentDone) {
+      "Development Done", StateEnumNoMigr.bug_inProgress) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createInProgress();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(bn_unqualified, NO_TRANSITION);
       transitionMap.put(bn_qualified, NO_TRANSITION);
       transitionMap.put(bn_approved, NO_TRANSITION);
@@ -751,7 +499,7 @@ public enum StateEnum {
       return transitionMap;
     }
   }, //
-  bn_deferred("10100", "54", IssueType.BUSINESS_NEED, "Deferred", StateEnum.migr_deferred) {
+  bn_deferred("10100", "54", IssueType.BUSINESS_NEED, "Deferred", StateEnumNoMigr.bug_reopened) {
 
     @Override
     protected StatusCategory createStatusCategory() {
@@ -759,8 +507,8 @@ public enum StateEnum {
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(bn_unqualified, "391");
       transitionMap.put(bn_qualified, "371");
       transitionMap.put(bn_approved, "321");
@@ -773,15 +521,15 @@ public enum StateEnum {
       return transitionMap;
     }
   },
-  bn_closed("6", "55", IssueType.BUSINESS_NEED, "Closed", StateEnum.migr_closed) {
+  bn_closed("6", "55", IssueType.BUSINESS_NEED, "Closed", StateEnumNoMigr.bug_verified) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createDone();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(bn_unqualified, "271");
       transitionMap.put(bn_qualified, NO_TRANSITION);
       transitionMap.put(bn_approved, NO_TRANSITION);
@@ -802,15 +550,15 @@ public enum StateEnum {
   },
   //
   //
-  imp_neww("1", "com.ibm.team.workitem.impedimentWorkflow.state.s1", IssueType.IMPEDIMENT, "Open", StateEnum.migr_new) {
+  imp_neww("1", "com.ibm.team.workitem.impedimentWorkflow.state.s1", IssueType.IMPEDIMENT, "Open", StateEnumNoMigr.bug_neww) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createToDo();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(imp_neww, NO_TRANSITION);
       transitionMap.put(imp_invalid, NO_TRANSITION);
       transitionMap.put(imp_resolved, NO_TRANSITION);
@@ -818,15 +566,15 @@ public enum StateEnum {
     }
   }, //
   imp_resolved("5", "com.ibm.team.workitem.impedimentWorkflow.state.s2", IssueType.IMPEDIMENT, "Resolved",
-      StateEnum.migr_resolved) {
+      StateEnumNoMigr.bug_resolved) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createDone();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(imp_neww, NO_TRANSITION);
       transitionMap.put(imp_invalid, NO_TRANSITION);
       transitionMap.put(imp_resolved, NO_TRANSITION);
@@ -840,15 +588,15 @@ public enum StateEnum {
 
   }, //
   imp_invalid("10101", "com.ibm.team.workitem.impedimentWorkflow.state.s3", IssueType.IMPEDIMENT, "Invalid",
-      StateEnum.migr_invalid) {
+      StateEnumNoMigr.bug_reopened) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createToDo();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(imp_neww, NO_TRANSITION);
       transitionMap.put(imp_invalid, NO_TRANSITION);
       transitionMap.put(imp_resolved, NO_TRANSITION);
@@ -857,15 +605,15 @@ public enum StateEnum {
   }, //
   //
   //
-  task_neww("1", "1", IssueType.TASK, "Open", StateEnum.migr_new) {
+  task_neww("1", "1", IssueType.TASK, "Open", StateEnumNoMigr.bug_neww) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createToDo();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(task_neww, NO_TRANSITION);
       transitionMap.put(task_inProgress, "51");
       transitionMap.put(task_invalid, "21");
@@ -873,15 +621,15 @@ public enum StateEnum {
       return transitionMap;
     }
   }, //
-  task_inProgress("3", "2", IssueType.TASK, "In Progress", StateEnum.migr_inProgress) {
+  task_inProgress("3", "2", IssueType.TASK, "In Progress", StateEnumNoMigr.bug_neww) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createToDo();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(task_neww, "71");
       transitionMap.put(task_inProgress, NO_TRANSITION);
       transitionMap.put(task_invalid, NO_TRANSITION);
@@ -889,15 +637,15 @@ public enum StateEnum {
       return transitionMap;
     }
   }, //
-  task_resolved("5", "3", IssueType.TASK, "Resolved", StateEnum.migr_resolved) {
+  task_resolved("5", "3", IssueType.TASK, "Resolved", StateEnumNoMigr.bug_resolved) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createDone();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(task_neww, "31");
       transitionMap.put(task_inProgress, NO_TRANSITION);
       transitionMap.put(task_invalid, NO_TRANSITION);
@@ -912,15 +660,15 @@ public enum StateEnum {
 
   }, //
   task_invalid("10101", "com.ibm.team.workitem.taskWorkflow.state.s4", IssueType.TASK, "Invalid",
-      StateEnum.migr_invalid) {
+      StateEnumNoMigr.bug_reopened) {
     @Override
     protected StatusCategory createStatusCategory() {
       return StatusCategory.createToDo();
     }
 
     @Override
-    protected Map<StateEnum, String> getTransitionMap() {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+    protected Map<StateEnumNoMigr, String> getTransitionMap() {
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       transitionMap.put(task_neww, "41");
       transitionMap.put(task_inProgress, NO_TRANSITION);
       transitionMap.put(task_invalid, NO_TRANSITION);
@@ -931,7 +679,7 @@ public enum StateEnum {
 
   public static final String NO_TRANSITION = "noFriggingTransition";
 
-  static private final Logger LOGGER = Logger.getLogger(StateEnum.class.getName());
+  static private final Logger LOGGER = Logger.getLogger(StateEnumNoMigr.class.getName());
   static {
     LOGGER.addHandler(ExportManager.DEFAULT_LOG_HANDLER);
   }
@@ -941,9 +689,9 @@ public enum StateEnum {
   private IssueType issueType;
   private String statusName;
   private IssueStatus issueStatus;
-  private StateEnum proxy;
+  private StateEnumNoMigr proxy;
 
-  private StateEnum(String jiraId, String rtcId, IssueType issueType, String statusName, StateEnum proxy) {
+  private StateEnumNoMigr(String jiraId, String rtcId, IssueType issueType, String statusName, StateEnumNoMigr proxy) {
     this.rtcId = rtcId;
     this.jiraId = jiraId;
     this.issueType = issueType;
@@ -967,59 +715,51 @@ public enum StateEnum {
     return statusName;
   }
 
-  public StateEnum getProxy() {
+  public StateEnumNoMigr getProxy() {
     return this.proxy;
   }
 
   public IssueStatus getIssueStatus() {
     if (issueStatus == null) {
-      issueStatus = createIssueStatus();
-      issueStatus.setStatusCategory(StatusCategory.createToDo());
+      IssueStatus result = createIssueStatus();
+      result.setStatusCategory(StatusCategory.createToDo());
     }
-    return issueStatus;
+    IssueStatus result = createIssueStatus();
+    result.setStatusCategory(StatusCategory.createToDo());
+    return result;
   }
 
   public CustomFieldOption getCustomFieldOption() {
     return new CustomFieldOption(getJiraId());
   }
 
-  public static Optional<StateEnum> forJiraId(String jiraId, IssueType issueType) {
-    EnumSet<StateEnum> all = EnumSet.allOf(StateEnum.class);
-    Optional<StateEnum> first =
-        all.stream()
-            .filter(
-                item -> item.getJiraId().equals(jiraId) && item.getIssueType() != null
-                    && item.getIssueType().equals(issueType)).findFirst();
-    if (first.isPresent()) {
-      first = Optional.of(first.get().getProxy());
-    } else if ("1".equals(jiraId)) {
-      first = Optional.of(StateEnum.migr_new);
-    }
-    return first;
+  public static Optional<StateEnumNoMigr> forJiraId(String jiraId, IssueType issueType) {
+    EnumSet<StateEnumNoMigr> all = EnumSet.allOf(StateEnumNoMigr.class);
+    return all
+        .stream()
+        .filter(
+            item -> item.getJiraId().equals(jiraId) && item.getIssueType() != null
+                && item.getIssueType().equals(issueType)).findFirst();
   }
 
-  public static Optional<StateEnum> forRtcId(String rtcId, IssueType issueType) {
+  public static Optional<StateEnumNoMigr> forRtcId(String rtcId, IssueType issueType) {
     // handle adoption item
     if ("com.ibm.team.rtc.workflow.adoption.state.s1".equals(rtcId)) {
-      return Optional.of(us_neww.getProxy());
+      return Optional.of(us_neww);
     } else if ("com.ibm.team.rtc.workflow.adoption.state.s2".equals(rtcId)) {
-      return Optional.of(us_inProgress.getProxy());
+      return Optional.of(us_inProgress);
     } else if ("com.ibm.team.rtc.workflow.adoption.state.s3".equals(rtcId)) {
-      return Optional.of(us_invalid.getProxy());
+      return Optional.of(us_invalid);
     } else if ("com.ibm.team.rtc.workflow.adoption.state.s4".equals(rtcId)) {
-      return Optional.of(us_done.getProxy());
+      return Optional.of(us_done);
     }
 
-    EnumSet<StateEnum> all = EnumSet.allOf(StateEnum.class);
-    Optional<StateEnum> first =
-        all.stream()
-            .filter(
-                item -> item.getRtcId().equals(rtcId) && item.getIssueType() != null
-                    && item.getIssueType().equals(issueType)).findFirst();
-    if (first.isPresent()) {
-      first = Optional.of(first.get().getProxy());
-    }
-    return first;
+    EnumSet<StateEnumNoMigr> all = EnumSet.allOf(StateEnumNoMigr.class);
+    return all
+        .stream()
+        .filter(
+            item -> item.getRtcId().equals(rtcId) && item.getIssueType() != null
+                && item.getIssueType().equals(issueType)).findFirst();
   }
 
   protected IssueStatus createIssueStatus() {
@@ -1036,11 +776,11 @@ public enum StateEnum {
 
   protected abstract StatusCategory createStatusCategory();
 
-  public List<String> getTransitionPath(StateEnum targetStatus) {
+  public List<String> getTransitionPath(StateEnumNoMigr targetStatus) {
     return getTransitionPath(targetStatus, false);
   }
 
-  public List<String> forceTransitionPath(StateEnum targetStatus) {
+  public List<String> forceTransitionPath(StateEnumNoMigr targetStatus) {
     return getTransitionPath(targetStatus, true);
   }
 
@@ -1051,15 +791,15 @@ public enum StateEnum {
    * @param force useful when need to temporarily navigate to editable state, then back
    * @return
    */
-  private List<String> getTransitionPath(StateEnum targetStatus, boolean force) {
+  private List<String> getTransitionPath(StateEnumNoMigr targetStatus, boolean force) {
     List<String> path = new ArrayList<String>();
     String directTansId = getTransitionId(targetStatus);
     // handle no direct path
     if ((NO_TRANSITION.equals(directTansId) && (!this.equals(targetStatus)) || force)) {
-      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+      Map<StateEnumNoMigr, String> transitionMap = new HashMap<StateEnumNoMigr, String>();
       getTransitionMap();
-      Set<StateEnum> keySet = transitionMap.keySet();
-      for (StateEnum stateEnum : keySet) {
+      Set<StateEnumNoMigr> keySet = transitionMap.keySet();
+      for (StateEnumNoMigr stateEnum : keySet) {
         if (stateEnum == targetStatus)
           continue;
         String intermediateTransId = getTransitionId(stateEnum);
@@ -1079,11 +819,11 @@ public enum StateEnum {
   }
 
 
-  private String getTransitionId(StateEnum targetStatus) {
-    if (this.getIssueType() != null && !this.getIssueType().equals(targetStatus.getIssueType()))
+  private String getTransitionId(StateEnumNoMigr targetStatus) {
+    if (!this.getIssueType().equals(targetStatus.getIssueType()))
       throw new IllegalArgumentException("Transition from start state '" + this.name() + "' to target state '"
           + targetStatus.name() + "' is not possible because they don't belong to the same set");
-    Map<StateEnum, String> transitionMap = getTransitionMap();
+    Map<StateEnumNoMigr, String> transitionMap = getTransitionMap();
     String result = transitionMap.get(targetStatus);
     if (result == null) {
       throw new IllegalArgumentException("Target status for transition from start state '" + this.name()
@@ -1094,34 +834,12 @@ public enum StateEnum {
   }
 
 
-  abstract protected Map<StateEnum, String> getTransitionMap();
+  abstract protected Map<StateEnumNoMigr, String> getTransitionMap();
 
   // Override this in "done" states
   public boolean isEditable() {
     return true;
   }
 
-  static private Map<StateEnum, String> getMigrationTransitionMap(StateEnum fromState) {
-    Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
-    transitionMap.put(migr_resolved, "71");
-    transitionMap.put(migr_reopened, "61");
-    transitionMap.put(migr_invalid, "51");
-    transitionMap.put(migr_implemented, "41");
-    transitionMap.put(migr_new, "21");
-    transitionMap.put(migr_done, "31");
-    transitionMap.put(migr_unqualified, "11");
-    transitionMap.put(migr_qualified, "81");
-    transitionMap.put(migr_approved, "101");
-    transitionMap.put(migr_estimationOk, "111");
-    transitionMap.put(migr_readyProduction, "121");
-    transitionMap.put(migr_inProgress, "131");
-    transitionMap.put(migr_developmentDone, "141");
-    transitionMap.put(migr_closed, "151");
-    transitionMap.put(migr_deferred, "91");
-    // replace from state value
-    transitionMap.put(fromState, NO_TRANSITION);
-    return transitionMap;
-
-  }
 
 }

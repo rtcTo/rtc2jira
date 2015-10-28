@@ -99,6 +99,7 @@ public class JiraExporter implements Exporter {
   }
 
   private void ensureWorkItemWithId(int workItemId) throws Exception {
+    // get current highest id from server, if necessary
     if (highestExistingId == -1) {
       IssueSearchResult searchResult =
           IssueSearch.INSTANCE.run("project = '" + settings.getJiraProjectKey() + "' ORDER BY id DESC");
@@ -108,6 +109,12 @@ public class JiraExporter implements Exporter {
       } else {
         highestExistingId = 0;
       }
+    }
+
+    // set target to total export item count, if necessary
+    int totalItemsToExport = Settings.getInstance().getTotalItems();
+    if (totalItemsToExport > 0 && totalItemsToExport > workItemId) {
+      workItemId = totalItemsToExport;
     }
 
     while (highestExistingId < workItemId) {
@@ -198,12 +205,7 @@ public class JiraExporter implements Exporter {
 
   private String migrateOldStatus(String oldStatusId, IssueType issueType) {
     String result = oldStatusId;
-    if (result == null) {
-      result = "1"; // open
-      if (IssueType.BUSINESS_NEED.equals(issueType)) {
-        result = "10103";
-      }
-    } else if ("10000".equals(oldStatusId)) { // todo
+    if ("10000".equals(oldStatusId)) { // todo
       result = "1"; // open
       if (IssueType.BUSINESS_NEED.equals(issueType)) {
         result = "10103";
@@ -240,12 +242,14 @@ public class JiraExporter implements Exporter {
     Issue lastExportedIssue = new Issue();
     // status
     lastExportedIssue.getFields().setStatus(IssueStatus.createStartingStatus(issueType));
-    Optional<StateEnum> stateOpt = StateEnum.forJiraId(lastExportedStatus, issueType);
-    stateOpt.ifPresent(se -> {
-      lastExportedIssue.getFields().setStatus(se.getIssueStatus());
-    });
-    if (!stateOpt.isPresent()) {
-      LOGGER.severe("No StateEnum found for last exported status, id = " + lastExportedStatus);
+    if (lastExportedStatus != null) {
+      Optional<StateEnum> stateOpt = StateEnum.forJiraId(lastExportedStatus, issueType);
+      stateOpt.ifPresent(se -> {
+        lastExportedIssue.getFields().setStatus(se.getIssueStatus());
+      });
+      if (!stateOpt.isPresent()) {
+        LOGGER.severe("No StateEnum found for last exported status, id = " + lastExportedStatus);
+      }
     }
     return lastExportedIssue;
   }
@@ -432,6 +436,7 @@ public class JiraExporter implements Exporter {
       issue = cr.getEntity(Issue.class);
       IssueFields issueFields = issue.getFields();
       issueFields.setProject(project);
+      workItem.field(FieldNames.JIRA_LAST_EXPORTED_STATUS, issueFields.getStatus().getId());
       mappingRegistry.map(workItem, issue, store);
       // set resolution to appropriate default, otherwise it will be set to "fixed" whenever status
       // is "done", even if issue is not a defect

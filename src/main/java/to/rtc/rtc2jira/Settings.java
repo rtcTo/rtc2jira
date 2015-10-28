@@ -40,6 +40,7 @@ public class Settings {
   private static final String JIRA_URL = "jira.url";
   private static final String JIRA_PROJECTKEY = "jira.projectkey";
   private static final String JIRA_FORCE_UPDATE = "jira.forceupdate";
+  private static final String JIRA_ITEMS_TOTAL = "jira.items.total";
 
   private static final String JIRA_TRANSITION_TODO_INPROGRESS = "jira.transitions.todoToInprogress.id";
   private static final String JIRA_TRANSITION_TODO_DONE = "jira.transitions.todoToDone.id";
@@ -198,6 +199,10 @@ public class Settings {
 
   public boolean isForceUpdate() {
     return Boolean.parseBoolean(props.getProperty(JIRA_FORCE_UPDATE, Boolean.toString(false)));
+  }
+
+  public int getTotalItems() {
+    return Integer.parseInt(props.getProperty(JIRA_ITEMS_TOTAL, "0"));
   }
 
   public boolean isSystemOutExporterConfigured() {

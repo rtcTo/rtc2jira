@@ -76,7 +76,7 @@ public class IssueStatus extends NamedEntity {
    * @return
    */
   public static IssueStatus createStartingStatus(IssueType issueType) {
-    return StateEnum.bug_neww.getIssueStatus();
+    return StateEnum.migr_new.getIssueStatus();
   }
 
 

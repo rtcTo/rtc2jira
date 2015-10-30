@@ -32,4 +32,14 @@ public class IterationHandler extends LinkHandler {
     return iterationIssue;
   }
 
+  String getIterationQName(IterationInfo iterInfo) {
+    String result = iterInfo.name;
+    if (iterInfo.parent != null) {
+      iterInfo = iterInfo.parent;
+      result = iterInfo.name + "/" + result;
+    }
+    return result;
+  }
+
+
 }

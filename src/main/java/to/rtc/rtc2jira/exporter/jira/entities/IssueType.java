@@ -14,6 +14,7 @@ public class IssueType extends NamedEntity {
   public static final IssueType TASK;
   public static final IssueType SUB_TASK;
   public static final IssueType USER_STORY;
+  public static final IssueType STORY;
   public static final IssueType EPIC;
   public static final IssueType BUG;
   public static final IssueType NEW_FEATURE;
@@ -27,6 +28,7 @@ public class IssueType extends NamedEntity {
     TASK = new IssueType("3", "Task");
     SUB_TASK = new IssueType("5", "Sub-task");
     USER_STORY = new IssueType("10001", "User Story");
+    STORY = new IssueType("10300", "Story");
     EPIC = new IssueType("10000", "Epic");
     BUG = new IssueType("1", "Bug");
     NEW_FEATURE = new IssueType("2", "New Feature");

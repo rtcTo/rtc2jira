@@ -81,4 +81,5 @@ public interface RTCIdentifierConstants {
   public static final String IMPLEMENTATION_LEVEL = "implementationlevel";
   public static final String IMPACT = "impact";
   public static final String AFFECTED_TEAMS = "affectedTeams";
+  public static final String PARENT = "parent";
 }

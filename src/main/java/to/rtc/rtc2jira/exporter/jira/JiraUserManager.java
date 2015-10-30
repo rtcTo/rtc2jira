@@ -102,7 +102,8 @@ public class JiraUserManager {
       existingUsers.add(jiraUser.getEmailAddress());
       createdUsers.add(jiraUser.getEmailAddress());
     } else {
-      LOGGER.log(Level.SEVERE, "Problems while creating user " + clientResponse.getEntity(String.class));
+      LOGGER.log(Level.SEVERE,
+          "Problems while creating user '" + jiraUser.getName() + "'" + clientResponse.getEntity(String.class));
     }
     return jiraUser;
   }

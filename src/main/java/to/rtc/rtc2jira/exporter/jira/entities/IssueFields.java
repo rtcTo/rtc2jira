@@ -71,6 +71,11 @@ public class IssueFields {
   private CustomFieldOption realisedByIDM;
   private CustomFieldOption implementationLevel;
 
+  private String filedAgainst;
+  private String plannedFor;
+  private String epicLink;
+  private Issue parent;
+
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -524,6 +529,44 @@ public class IssueFields {
 
   public void setImplementationLevel(CustomFieldOption implementationLevel) {
     this.implementationLevel = implementationLevel;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10700")
+  public String getFiledAgainst() {
+    return filedAgainst;
+  }
+
+  public void setFiledAgainst(String filedAgainst) {
+    this.filedAgainst = filedAgainst;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10701")
+  public String getPlannedFor() {
+    return plannedFor;
+  }
+
+  public void setPlannedFor(String plannedFor) {
+    this.plannedFor = plannedFor;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10009")
+  public String getEpicLink() {
+    return epicLink;
+  }
+
+  public void setEpicLink(String epicLink) {
+    this.epicLink = epicLink;
+  }
+
+  public Issue getParent() {
+    return parent;
+  }
+
+  public void setParent(Issue parent) {
+    this.parent = parent;
   }
 
 }

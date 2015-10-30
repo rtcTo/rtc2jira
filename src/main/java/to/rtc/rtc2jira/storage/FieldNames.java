@@ -62,6 +62,7 @@ public interface FieldNames {
   String CUSTOMER = "customer";
   String REALISED_BY_IDM = "realisedByIDM";
   String IMPLEMENTATION_LEVEL = "implementationLevel";
+  String PARENT = "parent";
   String JIRA_ID_LINK = "jiraid";
   String JIRA_KEY_LINK = "jiraKey";
   String JIRA_EXPORT_TIMESTAMP = "jiraExportTimestamp";

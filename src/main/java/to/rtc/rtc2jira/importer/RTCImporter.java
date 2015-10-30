@@ -3,6 +3,7 @@ package to.rtc.rtc2jira.importer;
 import static to.rtc.rtc2jira.storage.FieldNames.ID;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.FileHandler;
@@ -13,19 +14,25 @@ import java.util.logging.StreamHandler;
 
 import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.storage.Attachment;
+import to.rtc.rtc2jira.storage.FieldNames;
 import to.rtc.rtc2jira.storage.StorageEngine;
 
+import com.ibm.team.links.common.IReference;
+import com.ibm.team.repository.client.IItemManager;
 import com.ibm.team.repository.client.ILoginHandler2;
 import com.ibm.team.repository.client.ILoginInfo2;
 import com.ibm.team.repository.client.ITeamRepository;
 import com.ibm.team.repository.client.TeamPlatform;
+import com.ibm.team.repository.client.internal.ItemManager;
 import com.ibm.team.repository.client.login.UsernameAndPasswordLoginInfo;
 import com.ibm.team.repository.common.PermissionDeniedException;
 import com.ibm.team.repository.common.TeamRepositoryException;
 import com.ibm.team.workitem.client.IWorkItemClient;
+import com.ibm.team.workitem.common.IWorkItemCommon;
 import com.ibm.team.workitem.common.internal.util.SeparatedStringList;
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.ibm.team.workitem.common.model.IWorkItem;
+import com.ibm.team.workitem.common.model.IWorkItemHandle;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 
@@ -177,10 +184,43 @@ public class RTCImporter {
         saveAttributes(workItemClient, workItem, doc);
         attachmentHandler.saveAttachements(workItem);
 
-        if (!Settings.getInstance().isDryRunImport()) {
-          doc.save();
-        }
-      });
+
+
+        // handle parent
+
+          try {
+            IWorkItemCommon clientLibrary = (IWorkItemCommon) repo.getClientLibrary(IWorkItemCommon.class);
+            List<IReference> references;
+            references =
+                clientLibrary.resolveWorkItemReferences(workItem, null).getReferences(
+                    com.ibm.team.workitem.common.model.WorkItemEndPoints.PARENT_WORK_ITEM);
+            if (!references.isEmpty()) {
+              IReference iReference = references.get(0);
+              if (iReference.isItemReference()) {
+                Object resolvedRef = iReference.resolve();
+                if (resolvedRef instanceof IWorkItemHandle) {
+                  IWorkItemHandle handle = (IWorkItemHandle) resolvedRef;
+                  IItemManager itemManager = repo.itemManager();
+                  IWorkItem completeItem = (IWorkItem) itemManager.fetchCompleteItem(handle, ItemManager.DEFAULT, null);
+                  List<String> itemInfo = new ArrayList<String>();
+                  itemInfo.add("" + completeItem.getId());
+                  itemInfo.add(completeItem.getWorkItemType());
+                  doc.field(FieldNames.PARENT, itemInfo);
+                }
+              }
+            }
+          } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "A problem occurred while retrieving the item parent", e);
+          }
+
+
+          if (!Settings.getInstance().isDryRunImport()) {
+            doc.save();
+          }
+        });
+
+
+
     } catch (RuntimeException e) {
       LOGGER.log(Level.SEVERE, "***** Problem processing workitem " + workItemId, e);
     }

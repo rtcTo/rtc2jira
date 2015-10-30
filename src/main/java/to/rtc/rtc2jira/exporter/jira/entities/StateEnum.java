@@ -480,6 +480,124 @@ public enum StateEnum {
   }, //
   //
   //
+  story_neww("1", "com.ibm.team.apt.story.idea", IssueType.STORY, "Open", StateEnum.migr_new) {
+    @Override
+    protected StatusCategory createStatusCategory() {
+      return StatusCategory.createToDo();
+    }
+
+    @Override
+    protected Map<StateEnum, String> getTransitionMap() {
+      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+      transitionMap.put(us_neww, NO_TRANSITION);
+      transitionMap.put(us_inProgress, "4");
+      transitionMap.put(us_implemented, "331");
+      transitionMap.put(us_done, "341");
+      transitionMap.put(us_deferred, "311");
+      transitionMap.put(us_invalid, "321");
+      return transitionMap;
+    }
+  }, //
+  story_inProgress("3", "com.ibm.team.apt.story.defined", IssueType.STORY, "In Progress", StateEnum.migr_inProgress) {
+    @Override
+    protected StatusCategory createStatusCategory() {
+      return StatusCategory.createInProgress();
+    }
+
+    @Override
+    protected Map<StateEnum, String> getTransitionMap() {
+      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+      transitionMap.put(us_neww, "301");
+      transitionMap.put(us_inProgress, NO_TRANSITION);
+      transitionMap.put(us_implemented, "351");
+      transitionMap.put(us_done, NO_TRANSITION);
+      transitionMap.put(us_deferred, "361");
+      transitionMap.put(us_invalid, NO_TRANSITION);
+      return transitionMap;
+    }
+  }, //
+  story_implemented("10102", "com.ibm.team.apt.story.tested", IssueType.STORY, "Implemented",
+      StateEnum.migr_implemented) {
+    @Override
+    protected StatusCategory createStatusCategory() {
+      return StatusCategory.createInProgress();
+    }
+
+    @Override
+    protected Map<StateEnum, String> getTransitionMap() {
+      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+      transitionMap.put(us_neww, "401");
+      transitionMap.put(us_inProgress, NO_TRANSITION);
+      transitionMap.put(us_implemented, NO_TRANSITION);
+      transitionMap.put(us_done, "391");
+      transitionMap.put(us_deferred, "381");
+      transitionMap.put(us_invalid, NO_TRANSITION);
+      return transitionMap;
+    }
+  }, //
+  story_done("10001", "com.ibm.team.apt.story.verified", IssueType.STORY, "Done", StateEnum.migr_done) {
+    @Override
+    protected StatusCategory createStatusCategory() {
+      return StatusCategory.createDone();
+    }
+
+    @Override
+    protected Map<StateEnum, String> getTransitionMap() {
+      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+      transitionMap.put(us_neww, "411");
+      transitionMap.put(us_inProgress, NO_TRANSITION);
+      transitionMap.put(us_implemented, NO_TRANSITION);
+      transitionMap.put(us_done, NO_TRANSITION);
+      transitionMap.put(us_deferred, NO_TRANSITION);
+      transitionMap.put(us_invalid, NO_TRANSITION);
+      return transitionMap;
+    }
+
+    @Override
+    public boolean isFinished() {
+      return false;
+    }
+
+  }, //
+  story_deferred("10100", "com.ibm.team.apt.storyWorkflow.state.s1", IssueType.STORY, "Deferred",
+      StateEnum.migr_deferred) {
+    @Override
+    protected StatusCategory createStatusCategory() {
+      return StatusCategory.createToDo();
+    }
+
+    @Override
+    protected Map<StateEnum, String> getTransitionMap() {
+      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+      transitionMap.put(us_neww, "431");
+      transitionMap.put(us_inProgress, "421");
+      transitionMap.put(us_implemented, NO_TRANSITION);
+      transitionMap.put(us_done, NO_TRANSITION);
+      transitionMap.put(us_deferred, NO_TRANSITION);
+      transitionMap.put(us_invalid, "441");
+      return transitionMap;
+    }
+  }, //
+  story_invalid("10101", "com.ibm.team.apt.storyWorkflow.state.s2", IssueType.STORY, "Invalid", StateEnum.migr_invalid) {
+    @Override
+    protected StatusCategory createStatusCategory() {
+      return StatusCategory.createToDo();
+    }
+
+    @Override
+    protected Map<StateEnum, String> getTransitionMap() {
+      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+      transitionMap.put(us_neww, "371");
+      transitionMap.put(us_inProgress, NO_TRANSITION);
+      transitionMap.put(us_implemented, NO_TRANSITION);
+      transitionMap.put(us_done, NO_TRANSITION);
+      transitionMap.put(us_deferred, NO_TRANSITION);
+      transitionMap.put(us_invalid, NO_TRANSITION);
+      return transitionMap;
+    }
+  }, //
+  //
+  //
   us_neww("1", "com.ibm.team.apt.story.idea", IssueType.USER_STORY, "Open", StateEnum.migr_new) {
     @Override
     protected StatusCategory createStatusCategory() {
@@ -855,6 +973,79 @@ public enum StateEnum {
       return transitionMap;
     }
   }, //
+  //
+  //
+  subtask_neww("1", "1", IssueType.SUB_TASK, "Open", StateEnum.migr_new) {
+    @Override
+    protected StatusCategory createStatusCategory() {
+      return StatusCategory.createToDo();
+    }
+
+    @Override
+    protected Map<StateEnum, String> getTransitionMap() {
+      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+      transitionMap.put(task_neww, NO_TRANSITION);
+      transitionMap.put(task_inProgress, "51");
+      transitionMap.put(task_invalid, "21");
+      transitionMap.put(task_resolved, "11");
+      return transitionMap;
+    }
+  }, //
+  subtask_inProgress("3", "2", IssueType.SUB_TASK, "In Progress", StateEnum.migr_inProgress) {
+    @Override
+    protected StatusCategory createStatusCategory() {
+      return StatusCategory.createToDo();
+    }
+
+    @Override
+    protected Map<StateEnum, String> getTransitionMap() {
+      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+      transitionMap.put(task_neww, "71");
+      transitionMap.put(task_inProgress, NO_TRANSITION);
+      transitionMap.put(task_invalid, NO_TRANSITION);
+      transitionMap.put(task_resolved, "61");
+      return transitionMap;
+    }
+  }, //
+  subtask_resolved("5", "3", IssueType.SUB_TASK, "Resolved", StateEnum.migr_resolved) {
+    @Override
+    protected StatusCategory createStatusCategory() {
+      return StatusCategory.createDone();
+    }
+
+    @Override
+    protected Map<StateEnum, String> getTransitionMap() {
+      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+      transitionMap.put(task_neww, "31");
+      transitionMap.put(task_inProgress, NO_TRANSITION);
+      transitionMap.put(task_invalid, NO_TRANSITION);
+      transitionMap.put(task_resolved, NO_TRANSITION);
+      return transitionMap;
+    }
+
+    @Override
+    public boolean isFinished() {
+      return false;
+    }
+
+  }, //
+  subtask_invalid("10101", "com.ibm.team.workitem.taskWorkflow.state.s4", IssueType.SUB_TASK, "Invalid",
+      StateEnum.migr_invalid) {
+    @Override
+    protected StatusCategory createStatusCategory() {
+      return StatusCategory.createToDo();
+    }
+
+    @Override
+    protected Map<StateEnum, String> getTransitionMap() {
+      Map<StateEnum, String> transitionMap = new HashMap<StateEnum, String>();
+      transitionMap.put(task_neww, "41");
+      transitionMap.put(task_inProgress, NO_TRANSITION);
+      transitionMap.put(task_invalid, NO_TRANSITION);
+      transitionMap.put(task_resolved, NO_TRANSITION);
+      return transitionMap;
+    }
+  },
   //
   //
   task_neww("1", "1", IssueType.TASK, "Open", StateEnum.migr_new) {

@@ -182,9 +182,13 @@ public class JiraExporter implements Exporter {
     String key = null;
     if (projectOptional.isPresent()) {
       String id = item.field(FieldNames.ID);
-      key = settings.getJiraProjectKey() + '-' + id;
+      key = getIssueKey(id);
     }
     return key;
+  }
+
+  public String getIssueKey(String rtcId) {
+    return settings.getJiraProjectKey() + '-' + rtcId;
   }
 
   private int extractId(String key) {
@@ -218,17 +222,23 @@ public class JiraExporter implements Exporter {
       // do nothing
     } else if (IssueType.USER_STORY.equals(issueType)) {
       // do nothing
+    } else if (IssueType.STORY.equals(issueType)) {
+      // do nothing
     } else if (IssueType.BUSINESS_NEED.equals(issueType)) {
       if ("10001".equals(oldStatusId)) { // done
-        result = "6"; // verified
+        result = "6";
       }
     } else if (IssueType.IMPEDIMENT.equals(issueType)) {
       if ("10001".equals(oldStatusId)) { // done
-        result = "5"; // verified
+        result = "5";
       }
     } else if (IssueType.TASK.equals(issueType)) {
       if ("10001".equals(oldStatusId)) { // done
-        result = "5"; // verified
+        result = "5";
+      }
+    } else if (IssueType.SUB_TASK.equals(issueType)) {
+      if ("10001".equals(oldStatusId)) { // done
+        result = "5";
       }
     }
 

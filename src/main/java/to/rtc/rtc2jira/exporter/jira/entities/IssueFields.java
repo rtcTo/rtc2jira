@@ -75,6 +75,7 @@ public class IssueFields {
   private String plannedFor;
   private String epicLink;
   private Issue parent;
+  private String epicName;
 
 
   public IssueType getIssuetype() {
@@ -567,6 +568,16 @@ public class IssueFields {
 
   public void setParent(Issue parent) {
     this.parent = parent;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10008")
+  public String getEpicName() {
+    return epicName;
+  }
+
+  public void setEpicName(String epicName) {
+    this.epicName = epicName;
   }
 
 }

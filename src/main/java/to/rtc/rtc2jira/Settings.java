@@ -41,6 +41,8 @@ public class Settings {
   private static final String JIRA_PROJECTKEY = "jira.projectkey";
   private static final String JIRA_FORCE_UPDATE = "jira.forceupdate";
   private static final String JIRA_ITEMS_TOTAL = "jira.items.total";
+  private static final String JIRA_BOARDS_ALL = "jira.boards.all";
+
 
   private static final String JIRA_TRANSITION_TODO_INPROGRESS = "jira.transitions.todoToInprogress.id";
   private static final String JIRA_TRANSITION_TODO_DONE = "jira.transitions.todoToDone.id";
@@ -203,6 +205,10 @@ public class Settings {
 
   public int getTotalItems() {
     return Integer.parseInt(props.getProperty(JIRA_ITEMS_TOTAL, "0"));
+  }
+
+  public int getAllBoard() {
+    return Integer.parseInt(props.getProperty(JIRA_BOARDS_ALL, "-1"));
   }
 
   public boolean isSystemOutExporterConfigured() {

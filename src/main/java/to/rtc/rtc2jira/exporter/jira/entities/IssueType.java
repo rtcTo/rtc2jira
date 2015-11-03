@@ -27,6 +27,7 @@ public class IssueType extends NamedEntity {
   static {
     TASK = new IssueType("3", "Task");
     SUB_TASK = new IssueType("5", "Sub-task");
+    SUB_TASK.setSubtask(true);
     USER_STORY = new IssueType("10001", "User Story");
     STORY = new IssueType("10300", "Story");
     EPIC = new IssueType("10000", "Epic");
@@ -91,6 +92,9 @@ public class IssueType extends NamedEntity {
 
   @Override
   public boolean equals(Object obj) {
+    if (obj == null) {
+      return false;
+    }
     if (obj == this) {
       return true;
     }

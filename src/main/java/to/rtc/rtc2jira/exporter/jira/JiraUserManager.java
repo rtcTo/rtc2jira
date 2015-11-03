@@ -1,14 +1,17 @@
 package to.rtc.rtc2jira.exporter.jira;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import to.rtc.rtc2jira.ExportManager;
+import to.rtc.rtc2jira.Settings;
 import to.rtc.rtc2jira.exporter.jira.entities.JiraUser;
 
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.GenericType;
 
 public class JiraUserManager {
 
@@ -37,6 +40,19 @@ public class JiraUserManager {
   }
 
   public void deactivateUsers() {
+
+    ClientResponse response =
+        getRestAccess().get("/user/assignable/search?project=" + Settings.getInstance().getJiraProjectKey());
+    if (response.getStatus() == 200) {
+      List<JiraUser> allUsers = response.getEntity(new GenericType<List<JiraUser>>() {});
+      for (JiraUser jiraUser : allUsers) {
+        String emailAddress = jiraUser.getEmailAddress();
+        if (emailAddress != null && emailAddress.toLowerCase().contains("bison")) {
+          existingUsers.add(emailAddress.toLowerCase());
+        }
+      }
+    }
+
     for (String email : existingUsers) {
       if (!deactivationExclusionList.contains(email)) {
         JiraUser jiraUser = new JiraUser();

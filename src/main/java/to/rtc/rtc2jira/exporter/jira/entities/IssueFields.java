@@ -76,6 +76,7 @@ public class IssueFields {
   private String epicLink;
   private Issue parent;
   private String epicName;
+  private List<Version> fixVersions = new ArrayList<Version>();
 
 
   public IssueType getIssuetype() {
@@ -579,5 +580,14 @@ public class IssueFields {
   public void setEpicName(String epicName) {
     this.epicName = epicName;
   }
+
+  public List<Version> getFixVersions() {
+    return fixVersions;
+  }
+
+  public void setFixVersions(List<Version> versions) {
+    this.fixVersions = versions;
+  }
+
 
 }

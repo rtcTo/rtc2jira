@@ -111,6 +111,9 @@ public class Issue extends BaseEntity {
   public Issue asReferenceObject() {
     Issue result = new Issue();
     result.setKey(this.getKey());
+    if (this.getId() != null && !this.getId().isEmpty()) {
+      result.setId(this.getId());
+    }
     return result;
   }
 

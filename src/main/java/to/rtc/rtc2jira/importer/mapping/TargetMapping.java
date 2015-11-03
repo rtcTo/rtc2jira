@@ -21,7 +21,6 @@ import to.rtc.rtc2jira.storage.FieldNames;
 
 import com.ibm.team.process.internal.common.Iteration;
 import com.ibm.team.process.internal.common.IterationHandle;
-import com.ibm.team.process.internal.common.IterationType;
 import com.ibm.team.workitem.common.model.IAttribute;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 
@@ -65,20 +64,23 @@ public class TargetMapping extends MappingAdapter {
     if (iteration.getParent() != null) {
       iterationInfo.parent = fromRtcIteration(fetchCompleteItem(iteration.getParent()));
     }
-    if (iteration.getIterationType() != null) {
-      IterationType iterationType = fetchCompleteItem(iteration.getIterationType());
-      iterationInfo.iterationType = iterationType.getLabel();
+    String name = iterationInfo.name.toLowerCase();
+    if (name.contains("backlog")) {
+      iterationInfo.iterationType = RtcIterationType.backlog;
+      iterationInfo.hasDeliverable = true;
+    } else if (name.contains("timeslot")) {
+      iterationInfo.iterationType = RtcIterationType.timeslot;
+    } else if (name.contains("release")) {
+      iterationInfo.iterationType = RtcIterationType.release;
+      iterationInfo.hasDeliverable = true;
+    } else if (name.contains("sprint")) {
+      iterationInfo.iterationType = RtcIterationType.sprint;
     } else {
-      if (iterationInfo.name.toLowerCase().contains("release")) {
-        iterationInfo.iterationType = "Release";
-        iterationInfo.hasDeliverable = true;
-      } else {
-        iterationInfo.iterationType = "Sprint";
-      }
+      LOGGER.severe("No iteration type could be assigned to the iteration '" + name + "'");
+      iterationInfo.iterationType = RtcIterationType.unknown;
     }
     return iterationInfo;
   }
-
 
   @Override
   public void afterWorkItem(ODocument doc) {
@@ -102,7 +104,7 @@ public class TargetMapping extends MappingAdapter {
     public IterationInfo parent;
     public boolean hasDeliverable;
     public boolean archived;
-    public String iterationType;
+    public RtcIterationType iterationType;
     @JsonIgnore
     private ObjectMapper objectMapper;
 
@@ -138,6 +140,10 @@ public class TargetMapping extends MappingAdapter {
       }
 
     }
+  }
+
+  public enum RtcIterationType {
+    backlog, timeslot, release, sprint, unknown
   }
 
 }

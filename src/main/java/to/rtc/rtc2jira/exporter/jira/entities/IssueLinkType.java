@@ -16,6 +16,7 @@ public class IssueLinkType extends NamedEntity {
   public final static IssueLinkType HIERARCHY;
   public final static IssueLinkType CATEGORY;
   public final static IssueLinkType ITERATION;
+  public final static IssueLinkType STORY_TASKS;
 
   static {
     BLOCKS = new IssueLinkType("10000", "Blocks");
@@ -25,6 +26,7 @@ public class IssueLinkType extends NamedEntity {
     HIERARCHY = new IssueLinkType(Settings.getInstance().getJiraLinktypeHierarchyId(), "Hierarchy");
     CATEGORY = new IssueLinkType(Settings.getInstance().getJiraLinktypeCategoryId(), "Category");
     ITERATION = new IssueLinkType(Settings.getInstance().getJiraLinktypeIterationId(), "Iteration");
+    STORY_TASKS = new IssueLinkType("10500", "Story Tasks");
   }
 
   String inward;

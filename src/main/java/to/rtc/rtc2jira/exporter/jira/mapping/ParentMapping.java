@@ -67,8 +67,8 @@ public class ParentMapping implements Mapping {
   private void handleStoryParent(String parentKey, Issue childIssue) {
     Issue parentStory = new Issue();
     parentStory.setKey(parentKey);
-    if (childIssue.getFields().getIssuetype().equals(IssueType.SUB_TASK)) {
-      childIssue.getFields().setParent(parentStory.asReferenceObject());
+    if (childIssue.getFields().getIssuetype().equals(IssueType.TASK)) {
+      StoryTaskHandler.INSTANCE.addTaskToStory(childIssue, parentStory);
     }
   }
 

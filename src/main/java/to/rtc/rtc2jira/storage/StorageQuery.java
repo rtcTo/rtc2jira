@@ -19,6 +19,20 @@ public class StorageQuery {
     return result;
   }
 
+  public static final ODocument getRTCWorkItem(StorageEngine engine, String workItemId) {
+    final ODocument[] result = new ODocument[1];
+    result[0] = null;
+    engine.withDB(db -> {
+      OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<ODocument>("select * from WorkItem");
+      List<ODocument> queryResults = db.query(query);
+      if (queryResults.size() > 0) {
+        result[0] = queryResults.get(0);
+      }
+    });
+    return result[0];
+  }
+
+
   /**
    * Retrieves the fieldValue from a given document with a name
    * 

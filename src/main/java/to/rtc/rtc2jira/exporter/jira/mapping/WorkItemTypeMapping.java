@@ -58,7 +58,7 @@ public class WorkItemTypeMapping implements Mapping {
         issueFields.setIssuetype(getIssueType("Task", project));
         break;
       case STORY:
-        issueFields.setIssuetype(getIssueType("User Story", project));
+        issueFields.setIssuetype(getIssueType("Story", project));
         break;
       case EPIC:
         issueFields.setIssuetype(getIssueType("Epic", project));

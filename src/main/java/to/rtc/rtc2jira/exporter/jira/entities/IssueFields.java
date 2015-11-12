@@ -100,6 +100,9 @@ public class IssueFields {
   }
 
   public void setSummary(String summary) {
+    if (summary != null && summary.length() > 254) {
+      summary = summary.substring(0, 250) + "...";
+    }
     this.summary = summary;
   }
 

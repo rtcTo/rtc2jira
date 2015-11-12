@@ -67,12 +67,13 @@ public class TargetMapping extends MappingAdapter {
     String name = iterationInfo.name.toLowerCase();
     if (name.contains("backlog")) {
       iterationInfo.iterationType = RtcIterationType.backlog;
-      iterationInfo.hasDeliverable = true;
     } else if (name.contains("timeslot")) {
       iterationInfo.iterationType = RtcIterationType.timeslot;
     } else if (name.contains("release")) {
       iterationInfo.iterationType = RtcIterationType.release;
       iterationInfo.hasDeliverable = true;
+    } else if (name.contains("parking")) {
+      iterationInfo.iterationType = RtcIterationType.sprint;
     } else if (name.contains("sprint")) {
       iterationInfo.iterationType = RtcIterationType.sprint;
     } else {
@@ -143,7 +144,7 @@ public class TargetMapping extends MappingAdapter {
   }
 
   public enum RtcIterationType {
-    backlog, timeslot, release, sprint, unknown
+    backlog, timeslot, release, sprint, parking, unknown
   }
 
 }

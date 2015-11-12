@@ -31,7 +31,7 @@ public class BisonProjectNameMapping implements Mapping {
       BisonProjectEnum.forRtcId(projectId).ifPresent(
           (projectEnum) -> issue.getFields().setBisonProjectName(projectEnum.getCustomFieldOption()));
 
-      if (issue.getFields().getStatus() == null) {
+      if (issue.getFields().getBisonProjectName() == null) {
         LOGGER.log(Level.SEVERE, "No project mapping found for rtc project name literal '" + projectId + "'");
       }
     }

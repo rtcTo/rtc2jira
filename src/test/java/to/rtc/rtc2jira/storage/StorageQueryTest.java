@@ -33,16 +33,15 @@ public class StorageQueryTest {
 
   @Test
   public void testGetWorkItems_TwoWorkItems_ShouldReturnThem() {
-    List<ODocument> createdWorkItemsSorted =
-        Stream.of(createWorkItem(1, storage), createWorkItem(2, storage)) //
-            .sorted().collect(Collectors.toList());
+    List<ODocument> createdWorkItemsSorted = Stream.of(createWorkItem(1, storage), createWorkItem(2, storage)) //
+        .sorted().collect(Collectors.toList());
 
     List<ODocument> storedWorkItems = StorageQuery.getRTCWorkItems(storage);
 
     assertEquals(2, storedWorkItems.size());
     List<ODocument> storedWorkItemsSorted = storedWorkItems.stream() //
         .sorted().collect(Collectors.toList());
-    assertEquals(createdWorkItemsSorted, storedWorkItemsSorted);
+    assertEquals(createdWorkItemsSorted.get(0).field(FieldNames.ID), storedWorkItemsSorted.get(0).field(FieldNames.ID));
   }
 
   @Test

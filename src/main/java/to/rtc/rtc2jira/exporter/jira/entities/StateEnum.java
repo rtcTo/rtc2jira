@@ -362,10 +362,6 @@ public enum StateEnum {
     }
   }, //
   bug_reopened("4", "6", IssueType.BUG, "Reopened", migr_reopened) {
-    @Override
-    public StateEnum getProxy() {
-      return this;
-    }
 
     @Override
     protected StatusCategory createStatusCategory() {

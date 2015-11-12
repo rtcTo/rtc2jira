@@ -21,8 +21,7 @@ public class StorageEngine implements Closeable, AutoCloseable {
 
   public StorageEngine() throws Exception {
     server = OServerMain.create();
-    server.startup(Thread.currentThread().getContextClassLoader()
-        .getResourceAsStream("orientconf.xml"));
+    server.startup(Thread.currentThread().getContextClassLoader().getResourceAsStream("orientconf.xml"));
     server.activate();
     attachmentStorage = new AttachmentStorage();
     url = "plocal:./databases/rtc2jira";

@@ -54,6 +54,7 @@ public class ExportManager {
         }
         for (ODocument workItem : StorageQuery.getRTCWorkItems(storageEngine)) {
           String workItemId = workItem.field(FieldNames.ID);
+          workItem = StorageQuery.getRTCWorkItem(storageEngine, Integer.parseInt(workItemId));
           Integer idSeq = Integer.valueOf(workItemId);
           if (rtcWorkItemRange == null || rtcWorkItemRange.contains(idSeq)) {
             exporter.createOrUpdateItem(workItem);

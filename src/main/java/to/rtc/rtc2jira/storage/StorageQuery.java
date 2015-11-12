@@ -12,19 +12,19 @@ public class StorageQuery {
   public static final List<ODocument> getRTCWorkItems(StorageEngine engine) {
     final List<ODocument> result = new ArrayList<>();
     engine.withDB(db -> {
-      OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<ODocument>("select * from WorkItem");
+      OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<ODocument>("select ID from WorkItem");
       List<ODocument> queryResults = db.query(query);
       result.addAll(queryResults);
     });
     return result;
   }
 
-  public static final ODocument getRTCWorkItem(StorageEngine engine, String workItemId) {
+  public static final ODocument getRTCWorkItem(StorageEngine engine, final int workItemId) {
     final ODocument[] result = new ODocument[1];
+    OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<ODocument>("select * from WorkItem where ID = :ID");
     result[0] = null;
     engine.withDB(db -> {
-      OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<ODocument>("select * from WorkItem");
-      List<ODocument> queryResults = db.query(query);
+      List<ODocument> queryResults = db.query(query, workItemId);
       if (queryResults.size() > 0) {
         result[0] = queryResults.get(0);
       }

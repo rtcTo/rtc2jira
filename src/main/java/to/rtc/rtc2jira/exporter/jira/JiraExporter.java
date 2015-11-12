@@ -6,8 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,6 +51,7 @@ import com.sun.jersey.multipart.FormDataMultiPart;
 import com.sun.jersey.multipart.file.FileDataBodyPart;
 
 public class JiraExporter implements Exporter {
+  private static final String DUMMY_SUMMARY_TEXT = "Dummy";
   private static final Logger LOGGER = Logger.getLogger(JiraExporter.class.getName());
   public static final JiraExporter INSTANCE;
   private StorageEngine store;
@@ -58,6 +61,7 @@ public class JiraExporter implements Exporter {
   private int highestExistingId = -1;
   private MappingRegistry mappingRegistry;
   private WorkItemTypeMapping workItemTypeMapping;
+  private Set<Integer> updatedItems = new HashSet<Integer>();
 
   static {
     INSTANCE = new JiraExporter();
@@ -87,14 +91,20 @@ public class JiraExporter implements Exporter {
     this.workItemTypeMapping = new WorkItemTypeMapping();
   }
 
+  public void createOrUpdateItem(int rtcId) throws Exception {
+    ODocument workItem = StorageQuery.getRTCWorkItem(this.store, rtcId);
+    createOrUpdateItem(workItem);
+  }
+
   @Override
   public void createOrUpdateItem(ODocument item) throws Exception {
-    String workItemId = item.field(FieldNames.ID);
-    ensureWorkItemWithId(Integer.parseInt(workItemId));
+    int workItemId = Integer.parseInt(item.field(FieldNames.ID));
+    ensureWorkItemWithId(workItemId);
     Date modified = StorageQuery.getField(item, FieldNames.MODIFIED, Date.from(Instant.now()));
     Date lastExport = StorageQuery.getField(item, FieldNames.JIRA_EXPORT_TIMESTAMP, new Date(0));
     if (Settings.getInstance().isForceUpdate() || modified.compareTo(lastExport) > 0) {
       updateItem(item);
+      updatedItems.add(Integer.valueOf(workItemId));
     }
   }
 
@@ -135,7 +145,7 @@ public class JiraExporter implements Exporter {
         IssueFields fields = issue.getFields();
         fields.setProject(project);
         fields.setIssuetype(workItemTypeMapping.getIssueType("Task", project));
-        fields.setSummary("Dummy");
+        fields.setSummary(DUMMY_SUMMARY_TEXT);
         fields.setDescription("This is just a dummy issue. Delete it after successfully migrating to Jira.");
         issueUpdates.add(new BulkCreateEntry(fields));
       }
@@ -191,7 +201,24 @@ public class JiraExporter implements Exporter {
     return settings.getJiraProjectKey() + '-' + rtcId;
   }
 
-  private int extractId(String key) {
+  public void updateIfStillDummy(String jiraKey) throws Exception {
+    int rtcId = extractId(jiraKey);
+    if (!this.updatedItems.contains(Integer.valueOf(rtcId))) {
+      Issue issue = new Issue();
+      issue.setKey(jiraKey);
+      ClientResponse cr = getRestAccess().get(issue.getSelfPath());
+      if (cr.getStatus() == 200) {
+        issue = cr.getEntity(Issue.class);
+        if (DUMMY_SUMMARY_TEXT.equals(issue.getFields().getSummary())) {
+          createOrUpdateItem(rtcId);
+        } else {
+          updatedItems.add(Integer.valueOf(rtcId));
+        }
+      }
+    }
+  }
+
+  int extractId(String key) {
     String[] split = key.split("-");
     return Integer.parseInt(split[1]);
   }
@@ -446,7 +473,7 @@ public class JiraExporter implements Exporter {
       issue = cr.getEntity(Issue.class);
       IssueFields issueFields = issue.getFields();
       issueFields.setProject(project);
-      workItem.field(FieldNames.JIRA_LAST_EXPORTED_STATUS, issueFields.getStatus().getId());
+      store.setFields(workItem, of(FieldNames.JIRA_LAST_EXPORTED_STATUS, issueFields.getStatus().getId()));
       mappingRegistry.map(workItem, issue, store);
       // set resolution to appropriate default, otherwise it will be set to "fixed" whenever status
       // is "done", even if issue is not a defect

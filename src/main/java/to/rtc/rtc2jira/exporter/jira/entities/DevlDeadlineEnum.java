@@ -30,7 +30,15 @@ public enum DevlDeadlineEnum implements SelectionTypeEnum {
   LANDI_15_3_20151116("devldeadline.literal.l23", "10421"), //
   LCH_15_2_2015("devldeadline.literal.l24", "10422"), //
   LCH_15_3_2015("devldeadline.literal.l25", "10423"), //
-  FEN_15_2("devldeadline.literal.l26", "10424");
+  FEN_15_2("devldeadline.literal.l26", "10424"), //
+  LCH_15_4_2015("devldeadline.literal.l27", "10601"), //
+  BASE_15_5_20151116("devldeadline.literal.l28", "10602"), //
+  BASE_15_6("devldeadline.literal.l29", "10603"), //
+  FEN_16_1("devldeadline.literal.l30", "10604"), //
+  LCH_16_1("devldeadline.literal.l31", "10605"), //
+  LCH_16_2("devldeadline.literal.l32", "10606"), //
+  LCH_16_3("devldeadline.literal.l33", "10607"), //
+  FEN_16_2("devldeadline.literal.l34", "10608");
 
   private String rctId;
   private String jiraId;

@@ -77,8 +77,16 @@ public class TargetMapping extends MappingAdapter {
     } else if (name.contains("sprint")) {
       iterationInfo.iterationType = RtcIterationType.sprint;
     } else {
-      LOGGER.severe("No iteration type could be assigned to the iteration '" + name + "'");
-      iterationInfo.iterationType = RtcIterationType.unknown;
+      LOGGER.warning("No unequivocal iteration type could be assigned to the iteration '" + name + "'");
+      if (name != null && name.contains(".")) {
+        iterationInfo.iterationType = RtcIterationType.release;
+      } else if (name != null && name.contains("/")) {
+        iterationInfo.iterationType = RtcIterationType.timeslot;
+      } else if (name != null && name.contains("201")) {
+        iterationInfo.iterationType = RtcIterationType.timeslot;
+      } else {
+        iterationInfo.iterationType = RtcIterationType.unknown;
+      }
     }
     return iterationInfo;
   }

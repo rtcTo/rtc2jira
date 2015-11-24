@@ -12,7 +12,7 @@ import org.codehaus.jackson.map.annotate.JsonView;
 public class Issue extends BaseEntity {
 
   private String expand;
-  private IssueFields fields;
+  private IssueFields fields = new IssueFields();
 
 
   @JsonView(IssueView.Read.class)
@@ -25,9 +25,6 @@ public class Issue extends BaseEntity {
   }
 
   public IssueFields getFields() {
-    if (fields == null) {
-      fields = new IssueFields();
-    }
     return fields;
   }
 
@@ -114,6 +111,7 @@ public class Issue extends BaseEntity {
     if (this.getId() != null && !this.getId().isEmpty()) {
       result.setId(this.getId());
     }
+    result.setFields(null);
     return result;
   }
 

@@ -2,6 +2,7 @@ package to.rtc.rtc2jira.exporter.jira.mapping;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import to.rtc.rtc2jira.exporter.jira.JiraRestAccess;
 import to.rtc.rtc2jira.exporter.jira.entities.AddIssueLink;
@@ -16,6 +17,8 @@ import to.rtc.rtc2jira.exporter.jira.entities.Project;
 import com.sun.jersey.api.client.ClientResponse;
 
 public class LinkHandler {
+  public static Logger LOGGER = Logger.getLogger(LinkHandler.class.getName());
+
   Map<String, Issue> alreadyExistingNames;
   JiraRestAccess access;
 
@@ -72,7 +75,9 @@ public class LinkHandler {
     if (post.getStatus() == 204) {
       return true;
     } else {
-      // LOG PROBLEM
+      LOGGER.severe("A problem occurred while trying to remove the issue link '" + issueLink.getType().getName()
+          + "' from issue '" + issueLink.getInwardIssue().getId() + "' to issue '"
+          + issueLink.getOutwardIssue().getId() + "': Response entity: " + post.getEntity(String.class));
       return false;
     }
   }
@@ -81,10 +86,11 @@ public class LinkHandler {
   public AddIssueLink linkIssues(AddIssueLink addIssueLink) {
     ClientResponse post = access.post("/issueLink", addIssueLink);
     if (post.getStatus() == 201) {
-      addIssueLink.getInwardIssue().getFields().getIssuelinks().add(addIssueLink);
       return addIssueLink;
     } else {
-      // LOG PROBLEM
+      LOGGER.severe("A problem occurred while trying to add the issue link '" + addIssueLink.getType().getName()
+          + "' from issue '" + addIssueLink.getInwardIssue().getId() + "' to issue '"
+          + addIssueLink.getOutwardIssue().getId() + "': Response entity: " + post.getEntity(String.class));
       return null;
     }
   }

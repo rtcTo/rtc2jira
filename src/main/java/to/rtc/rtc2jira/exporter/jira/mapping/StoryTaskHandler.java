@@ -21,7 +21,10 @@ public class StoryTaskHandler extends LinkHandler {
 
   public void addTaskToStory(Issue task, Issue story) {
     AddIssueLink addIssueLink = AddIssueLink.createAddLink(IssueLinkType.STORY_TASKS, task, story);
-    linkIssues(addIssueLink);
+    addIssueLink = linkIssues(addIssueLink);
+    if (addIssueLink != null) {
+      task.getFields().getIssuelinks().add(addIssueLink);
+    }
   }
 
 

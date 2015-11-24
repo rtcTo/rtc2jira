@@ -107,7 +107,8 @@ public enum BisonProjectEnum {
   PROD_OotB("projektname.literal.l18", "10352"), //
   PROD_Performance_2013("projektname.literal.l79", "10353"), //
   PROD_Speed("projektname.literal.l13", "10354"), //
-  BEST_PQ_Maintenance("projektname.literal.l107", "10355");
+  BEST_PQ_Maintenance("projektname.literal.l107", "10355"), //
+  FLaGschiff("projektname.literal.l134", "10600");
 
 
   private String rctId;

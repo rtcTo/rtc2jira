@@ -55,7 +55,8 @@ public class IterationHandler extends LinkHandler {
       version.setName(iterationInfo.name);
       version.setReleaseDate(iterationInfo.endDate);
       version.setProjectId(Integer.parseInt(project.getId()));
-      if (System.currentTimeMillis() < iterationInfo.endDate.toInstant().toEpochMilli()) {
+      if (iterationInfo.endDate == null
+          || System.currentTimeMillis() < iterationInfo.endDate.toInstant().toEpochMilli()) {
         version.setReleased(false);
       }
       ClientResponse post = access.post(version.getPath(), version);

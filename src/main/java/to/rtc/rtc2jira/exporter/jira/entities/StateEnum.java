@@ -1267,7 +1267,8 @@ public enum StateEnum {
 
 
   private String getTransitionId(StateEnum targetStatus) {
-    if (this.getIssueType() != null && !this.getIssueType().equals(targetStatus.getIssueType()))
+    if (this.getIssueType() != null && targetStatus.getIssueType() != null
+        && !this.getIssueType().equals(targetStatus.getIssueType()))
       throw new IllegalArgumentException("Transition from start state '" + this.name() + "' to target state '"
           + targetStatus.name() + "' is not possible because they don't belong to the same set");
     Map<StateEnum, String> transitionMap = getTransitionMap();

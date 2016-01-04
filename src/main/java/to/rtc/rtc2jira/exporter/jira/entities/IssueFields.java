@@ -584,6 +584,7 @@ public class IssueFields {
     this.epicName = epicName;
   }
 
+  @JsonView(IssueView.Update.class)
   public List<Version> getFixVersions() {
     return fixVersions;
   }

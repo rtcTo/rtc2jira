@@ -507,9 +507,6 @@ public class JiraExporter implements Exporter {
   }
 
   @Override
-  public void postExport() throws Exception {
-    // deactivate new users during testing phase (lower costs)
-    JiraUserManager.INSTANCE.deactivateUsers();
-  }
+  public void postExport() throws Exception {}
 
 }

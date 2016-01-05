@@ -37,6 +37,25 @@ public class JiraUserManager {
     deactivationExclusionList.add("urs.haller@bison-group.com");
     deactivationExclusionList.add("pedraita.dayana@bison-group.com");
     deactivationExclusionList.add("leonard.chew@bison-group.com");
+    // meadows
+    deactivationExclusionList.add("christian.oetterli@bison-group.com");
+    deactivationExclusionList.add("diethard.straka@bison-group.com");
+    deactivationExclusionList.add("dorian.nyffeler@bison-group.com");
+    deactivationExclusionList.add("florian.waibel@bison-group.com");
+    deactivationExclusionList.add("franz.ehrler@bison-group.com");
+    deactivationExclusionList.add("friendly.user@bison-group.com");
+    deactivationExclusionList.add("hendrik.schaefer@bison-group.com");
+    deactivationExclusionList.add("joachim.huber@bison-group.com");
+    deactivationExclusionList.add("johannes.eickhold@bison-group.com");
+    deactivationExclusionList.add("kurt.muff@bison-group.com");
+    deactivationExclusionList.add("marco.poli@bison-group.com");
+    deactivationExclusionList.add("matthias.bohlen@bison-group.com");
+    deactivationExclusionList.add("maximilian.koegel@bison-group.com");
+    deactivationExclusionList.add("michael.bruelisauer@bison-group.com");
+    deactivationExclusionList.add("mustapha.bouaaoud@bison-group.com");
+    deactivationExclusionList.add("patrick.reinhart@bison-group.com");
+    deactivationExclusionList.add("roland.bucher@bison-group.com");
+    deactivationExclusionList.add("leonard.chew@bison-group.com");
   }
 
   public void deactivateUsers() {
@@ -78,6 +97,7 @@ public class JiraUserManager {
 
   public void activateUser(JiraUser jiraUser) {
     jiraUser.setActive(true);
+    // add user to jira-users group
     ClientResponse putResponse = getRestAccess().post("/group/user?groupname=jira-users", jiraUser);
     if (putResponse.getStatus() != 201) {
       boolean logError = true;

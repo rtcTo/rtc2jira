@@ -5,8 +5,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonView;
 
-import to.rtc.rtc2jira.Settings;
-
 @XmlRootElement
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IssueType extends NamedEntity {
@@ -25,19 +23,19 @@ public class IssueType extends NamedEntity {
   public static final IssueType ITERATION;
 
   static {
-    TASK = new IssueType("3", "Task");
-    SUB_TASK = new IssueType("5", "Sub-task");
+    TASK = new IssueType("10100", "Aufgabe");
+    SUB_TASK = new IssueType("10101", "Unteraufgabe");
     SUB_TASK.setSubtask(true);
-    USER_STORY = new IssueType("10001", "User Story");
-    STORY = new IssueType("10300", "Story");
+    USER_STORY = new IssueType("11111", "User Story");
+    STORY = new IssueType("10001", "Story");
     EPIC = new IssueType("10000", "Epic");
-    BUG = new IssueType("1", "Bug");
-    NEW_FEATURE = new IssueType("2", "New Feature");
-    IMPROVEMENT = new IssueType("4", "Improvement");
-    BUSINESS_NEED = new IssueType("10002", "Business Need");
-    IMPEDIMENT = new IssueType("10200", "Impediment");
-    CATEGORY = new IssueType(Settings.getInstance().getJiraIssuetypeCategoryId(), "Category");
-    ITERATION = new IssueType(Settings.getInstance().getJiraIssuetypeIterationId(), "Iteration");
+    BUG = new IssueType("10102", "Bug");
+    NEW_FEATURE = new IssueType("22222", "New Feature");
+    IMPROVEMENT = new IssueType("33333", "Improvement");
+    BUSINESS_NEED = new IssueType("10200", "Business Need");
+    IMPEDIMENT = new IssueType("10201", "Impediment");
+    CATEGORY = new IssueType("44444", "Category");
+    ITERATION = new IssueType("10202", "Iteration");
   }
 
   public IssueType() {}

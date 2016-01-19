@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import to.rtc.rtc2jira.ExportManager;
 
 public enum StateEnum {
-  migr_resolved("5", "", null, "Resolved", null) {
+  migr_resolved("5", "", null, "Erledigt", null) {
 
     @Override
     public StateEnum getProxy() {
@@ -29,7 +29,7 @@ public enum StateEnum {
       return StateEnum.getMigrationTransitionMap(this);
     }
   }, // 51 business need
-  migr_reopened("4", "", null, "Reopened", null) {
+  migr_reopened("4", "", null, "Erneut geöffnet", null) {
 
     @Override
     public StateEnum getProxy() {
@@ -46,7 +46,7 @@ public enum StateEnum {
       return StateEnum.getMigrationTransitionMap(this);
     }
   }, // 51 business need
-  migr_invalid("10101", "", null, "Invalid", null) {
+  migr_invalid("10105", "", null, "Invalid", null) {
 
     @Override
     public StateEnum getProxy() {
@@ -63,7 +63,7 @@ public enum StateEnum {
       return StateEnum.getMigrationTransitionMap(this);
     }
   }, // 51 business need
-  migr_implemented("10102", "", null, "Implemented", null) {
+  migr_implemented("10104", "", null, "Implemented", null) {
 
     @Override
     public StateEnum getProxy() {
@@ -80,7 +80,7 @@ public enum StateEnum {
       return StateEnum.getMigrationTransitionMap(this);
     }
   }, // 51 business need
-  migr_done("10001", "", null, "Done", null) {
+  migr_done("10001", "", null, "Fertig", null) {
 
     @Override
     public StateEnum getProxy() {
@@ -103,7 +103,7 @@ public enum StateEnum {
     }
 
   }, // 51 business need
-  migr_new("1", "", null, "Open", null) {
+  migr_new("10108", "", null, "Start", null) {
 
     @Override
     public StateEnum getProxy() {
@@ -120,7 +120,7 @@ public enum StateEnum {
       return StateEnum.getMigrationTransitionMap(this);
     }
   }, // 51 business need
-  migr_unqualified("10103", "", IssueType.BUSINESS_NEED, "Unqualified", null) {
+  migr_unqualified("10109", "", IssueType.BUSINESS_NEED, "Unqualified", null) {
 
     @Override
     public StateEnum getProxy() {
@@ -137,7 +137,7 @@ public enum StateEnum {
       return StateEnum.getMigrationTransitionMap(this);
     }
   }, // 51 business need
-  migr_qualified("10104", "", IssueType.BUSINESS_NEED, "Qualified", null) {
+  migr_qualified("10106", "", IssueType.BUSINESS_NEED, "Qualified", null) {
 
     @Override
     public StateEnum getProxy() {
@@ -154,7 +154,7 @@ public enum StateEnum {
       return StateEnum.getMigrationTransitionMap(this);
     }
   }, // ? just guessing
-  migr_estimationOk("10106", "", IssueType.BUSINESS_NEED, "Estimation OK", null) {
+  migr_estimationOk("10103", "", IssueType.BUSINESS_NEED, "Estimation OK", null) {
 
     @Override
     public StateEnum getProxy() {
@@ -171,7 +171,7 @@ public enum StateEnum {
       return StateEnum.getMigrationTransitionMap(this);
     }
   }, //
-  migr_approved("10105", "", IssueType.BUSINESS_NEED, "Approved", null) {
+  migr_approved("10100", "", IssueType.BUSINESS_NEED, "Approved", null) {
     @Override
     public StateEnum getProxy() {
       return this;
@@ -203,7 +203,7 @@ public enum StateEnum {
       return StateEnum.getMigrationTransitionMap(this);
     }
   }, // business
-  migr_inProgress("3", "", IssueType.BUSINESS_NEED, "In Progress", null) {
+  migr_inProgress("3", "", IssueType.BUSINESS_NEED, "In Arbeit", null) {
 
     @Override
     public StateEnum getProxy() {
@@ -220,7 +220,7 @@ public enum StateEnum {
       return StateEnum.getMigrationTransitionMap(this);
     }
   }, //
-  migr_developmentDone("10108", "", IssueType.BUSINESS_NEED, "Development Done", null) {
+  migr_developmentDone("10102", "", IssueType.BUSINESS_NEED, "Development Done", null) {
     @Override
     public StateEnum getProxy() {
       return this;
@@ -236,7 +236,7 @@ public enum StateEnum {
       return StateEnum.getMigrationTransitionMap(this);
     }
   }, //
-  migr_deferred("10100", "", IssueType.BUSINESS_NEED, "Deferred", null) {
+  migr_deferred("10101", "", IssueType.BUSINESS_NEED, "Deferred", null) {
     @Override
     public StateEnum getProxy() {
       return this;
@@ -253,7 +253,7 @@ public enum StateEnum {
       return StateEnum.getMigrationTransitionMap(this);
     }
   },
-  migr_closed("6", "", IssueType.BUSINESS_NEED, "Closed", null) {
+  migr_closed("6", "", IssueType.BUSINESS_NEED, "Geschlossen", null) {
     @Override
     public StateEnum getProxy() {
       return this;

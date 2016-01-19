@@ -1,0 +1,72 @@
+[
+    {
+        "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10100",
+        "id": "10100",
+        "description": "Eine Aufgabe, die erledigt werden muss.",
+        "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+        "name": "Aufgabe",
+        "subtask": false,
+        "avatarId": 10318
+    },
+    {
+        "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10101",
+        "id": "10101",
+        "description": "Die Unteraufgabe des Vorgangs",
+        "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10316&avatarType=issuetype",
+        "name": "Unteraufgabe",
+        "subtask": true,
+        "avatarId": 10316
+    },
+    {
+        "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10001",
+        "id": "10001",
+        "description": "Von JIRA Software erstellt – nicht bearbeiten oder löschen. Vorgangstyp für eine User Story.",
+        "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/issuetypes/story.svg",
+        "name": "Story",
+        "subtask": false
+    },
+    {
+        "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10102",
+        "id": "10102",
+        "description": "Ein Problem, das die Funktionen des Produkts beeinträchtigt oder verhindert.",
+        "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10303&avatarType=issuetype",
+        "name": "Bug",
+        "subtask": false,
+        "avatarId": 10303
+    },
+    {
+        "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10000",
+        "id": "10000",
+        "description": "Von JIRA Software erstellt – nicht bearbeiten oder löschen. Vorgangstyp für eine große User Story, die unterteilt werden muss.",
+        "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/issuetypes/epic.svg",
+        "name": "Epic",
+        "subtask": false
+    },
+    {
+        "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10200",
+        "id": "10200",
+        "description": "A need of a business",
+        "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10300&avatarType=issuetype",
+        "name": "Business Need",
+        "subtask": false,
+        "avatarId": 10300
+    },
+    {
+        "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10201",
+        "id": "10201",
+        "description": "Blocks work",
+        "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10300&avatarType=issuetype",
+        "name": "Impediment",
+        "subtask": false,
+        "avatarId": 10300
+    },
+    {
+        "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10202",
+        "id": "10202",
+        "description": "Planning unit within which stories are implemented.",
+        "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10300&avatarType=issuetype",
+        "name": "Iteration",
+        "subtask": false,
+        "avatarId": 10300
+    }
+]

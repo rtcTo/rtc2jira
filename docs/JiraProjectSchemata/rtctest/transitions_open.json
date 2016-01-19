@@ -1,0 +1,275 @@
+{
+    "expand": "transitions",
+    "transitions": [
+        {
+            "id": "11",
+            "name": "Unqualified",
+            "to": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/10109",
+                "description": "",
+                "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/status_generic.gif",
+                "name": "Unqualified",
+                "id": "10109",
+                "statusCategory": {
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "blue-gray",
+                    "name": "Aufgaben"
+                }
+            }
+        },
+        {
+            "id": "21",
+            "name": "Open",
+            "to": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/10108",
+                "description": "",
+                "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/status_generic.gif",
+                "name": "Start",
+                "id": "10108",
+                "statusCategory": {
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/1",
+                    "id": 1,
+                    "key": "undefined",
+                    "colorName": "medium-gray",
+                    "name": "Keine Kategorie"
+                }
+            }
+        },
+        {
+            "id": "31",
+            "name": "Done",
+            "to": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/10001",
+                "description": "",
+                "iconUrl": "http://jira.bisdevdom.ch:8080/",
+                "name": "Fertig",
+                "id": "10001",
+                "statusCategory": {
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "green",
+                    "name": "Fertig"
+                }
+            }
+        },
+        {
+            "id": "41",
+            "name": "Implemented",
+            "to": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/10104",
+                "description": "",
+                "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/status_generic.gif",
+                "name": "Implemented",
+                "id": "10104",
+                "statusCategory": {
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "yellow",
+                    "name": "In Arbeit"
+                }
+            }
+        },
+        {
+            "id": "51",
+            "name": "Invalid",
+            "to": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/10105",
+                "description": "",
+                "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/status_generic.gif",
+                "name": "Invalid",
+                "id": "10105",
+                "statusCategory": {
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "blue-gray",
+                    "name": "Aufgaben"
+                }
+            }
+        },
+        {
+            "id": "61",
+            "name": "Reopened",
+            "to": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/4",
+                "description": "Dieser Vorgang war einmal erledigt, aber die Lösung wurde als fehlerhaft erachtet. Von hier aus können Vorgänge als zugewiesen oder erledigt markiert werden.",
+                "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/statuses/reopened.png",
+                "name": "Erneut geöffnet",
+                "id": "4",
+                "statusCategory": {
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "blue-gray",
+                    "name": "Aufgaben"
+                }
+            }
+        },
+        {
+            "id": "71",
+            "name": "Resolved",
+            "to": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/5",
+                "description": "Eine Lösung wurde ermittelt und wartet auf die Verifizierung durch den Benutzer, der das Problem gemeldet hat. Von hier aus können Vorgänge erneut geöffnet oder geschlossen werden.",
+                "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/statuses/resolved.png",
+                "name": "Erledigt",
+                "id": "5",
+                "statusCategory": {
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "green",
+                    "name": "Fertig"
+                }
+            }
+        },
+        {
+            "id": "81",
+            "name": "Qualified",
+            "to": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/10106",
+                "description": "",
+                "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/status_generic.gif",
+                "name": "Qualified",
+                "id": "10106",
+                "statusCategory": {
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "blue-gray",
+                    "name": "Aufgaben"
+                }
+            }
+        },
+        {
+            "id": "91",
+            "name": "Deferred",
+            "to": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/10101",
+                "description": "",
+                "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/status_generic.gif",
+                "name": "Deferred",
+                "id": "10101",
+                "statusCategory": {
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "blue-gray",
+                    "name": "Aufgaben"
+                }
+            }
+        },
+        {
+            "id": "101",
+            "name": "Approved",
+            "to": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/10100",
+                "description": "",
+                "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/status_generic.gif",
+                "name": "Approved",
+                "id": "10100",
+                "statusCategory": {
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "blue-gray",
+                    "name": "Aufgaben"
+                }
+            }
+        },
+        {
+            "id": "111",
+            "name": "Estimation OK",
+            "to": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/10103",
+                "description": "",
+                "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/status_generic.gif",
+                "name": "Estimation OK",
+                "id": "10103",
+                "statusCategory": {
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "blue-gray",
+                    "name": "Aufgaben"
+                }
+            }
+        },
+        {
+            "id": "121",
+            "name": "Ready for Production",
+            "to": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/10107",
+                "description": "",
+                "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/status_generic.gif",
+                "name": "Ready for Production",
+                "id": "10107",
+                "statusCategory": {
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "blue-gray",
+                    "name": "Aufgaben"
+                }
+            }
+        },
+        {
+            "id": "131",
+            "name": "In Progress",
+            "to": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/3",
+                "description": "Dieser Vorgang wird gerade durch den Bearbeiter bearbeitet.",
+                "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/statuses/inprogress.png",
+                "name": "In Arbeit",
+                "id": "3",
+                "statusCategory": {
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "yellow",
+                    "name": "In Arbeit"
+                }
+            }
+        },
+        {
+            "id": "141",
+            "name": "Development Done",
+            "to": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/10102",
+                "description": "",
+                "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/status_generic.gif",
+                "name": "Development Done",
+                "id": "10102",
+                "statusCategory": {
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "blue-gray",
+                    "name": "Aufgaben"
+                }
+            }
+        },
+        {
+            "id": "151",
+            "name": "Closed",
+            "to": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/6",
+                "description": "Der Vorgang wird als erledigt betrachtet, die Lösung ist korrekt. Geschlossene Vorgänge können erneut geöffnet werden.",
+                "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/statuses/closed.png",
+                "name": "Geschlossen",
+                "id": "6",
+                "statusCategory": {
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "green",
+                    "name": "Fertig"
+                }
+            }
+        }
+    ]
+}

@@ -6,11 +6,11 @@ import java.util.Optional;
 public enum RealisedByIdmEnum implements SelectionTypeEnum {
 
   UNSET("realisebyidm.literal.l1", "-1"), //
-  IDM_Retail("realisebyidm.literal.l2", "10463"), //
-  IDM_Weinhandel("realisebyidm.literal.l3", "10464"), //
-  IDM_Basis_branchenneutral("realisebyidm.literal.l4", "10465"), //
-  IDM_Saatgut("realisebyidm.literal.l5", "10466"), //
-  IDM_Brenn_und_Treibstoff("realisebyidm.literal.l6", "10467");
+  IDM_Retail("realisebyidm.literal.l2", "10207"), //
+  IDM_Weinhandel("realisebyidm.literal.l3", "10392"), //
+  IDM_Basis_branchenneutral("realisebyidm.literal.l4", "10393"), //
+  IDM_Saatgut("realisebyidm.literal.l5", "10394"), //
+  IDM_Brenn_und_Treibstoff("realisebyidm.literal.l6", "10395");
 
   private String rctId;
   private String jiraId;

@@ -5,27 +5,27 @@ import java.util.Optional;
 
 public enum RefModelEnum implements SelectionTypeEnum {
 
-  Standard("referencemodelenum.literal.l2", "10356"), //
-  AFB("referencemodelenum.literal.l4", "10357"), //
-  AMK("referencemodelenum.literal.l6", "10358"), //
-  BM1000("referencemodelenum.literal.l8", "10359"), //
-  BM3000("referencemodelenum.literal.l10", "10360"), //
-  BM4000("referencemodelenum.literal.l12", "10361"), //
-  DRWZ("referencemodelenum.literal.l14", "10362"), //
-  EAG("referencemodelenum.literal.l16", "10363"), //
-  Gero("referencemodelenum.literal.l18", "10364"), //
-  Inotex("referencemodelenum.literal.l20", "10365"), //
-  KSG("referencemodelenum.literal.l22", "10366"), //
-  RAgr("referencemodelenum.literal.l24", "10367"), //
-  RFen("referencemodelenum.literal.l26", "10368"), //
-  RGof("referencemodelenum.literal.l28", "10369"), //
-  RLap("referencemodelenum.literal.l30", "10370"), //
-  RLch("referencemodelenum.literal.l32", "10371"), //
-  RLdi("referencemodelenum.literal.l34", "10372"), //
-  RUfa("referencemodelenum.literal.l36", "10373"), //
-  TSH("referencemodelenum.literal.l38", "10374"), //
-  TGH("referencemodelenum.literal.l40", "10375"), //
-  TWS("referencemodelenum.literal.l43", "10376");
+  Standard("referencemodelenum.literal.l2", "10208"), //
+  AFB("referencemodelenum.literal.l4", "10309"), //
+  AMK("referencemodelenum.literal.l6", "10310"), //
+  BM1000("referencemodelenum.literal.l8", "10311"), //
+  BM3000("referencemodelenum.literal.l10", "10312"), //
+  BM4000("referencemodelenum.literal.l12", "10313"), //
+  DRWZ("referencemodelenum.literal.l14", "10314"), //
+  EAG("referencemodelenum.literal.l16", "10315"), //
+  Gero("referencemodelenum.literal.l18", "10316"), //
+  Inotex("referencemodelenum.literal.l20", "10317"), //
+  KSG("referencemodelenum.literal.l22", "10318"), //
+  RAgr("referencemodelenum.literal.l24", "10319"), //
+  RFen("referencemodelenum.literal.l26", "10320"), //
+  RGof("referencemodelenum.literal.l28", "10321"), //
+  RLap("referencemodelenum.literal.l30", "10322"), //
+  RLch("referencemodelenum.literal.l32", "10323"), //
+  RLdi("referencemodelenum.literal.l34", "10324"), //
+  RUfa("referencemodelenum.literal.l36", "10325"), //
+  TSH("referencemodelenum.literal.l38", "10326"), //
+  TGH("referencemodelenum.literal.l40", "10327"), //
+  TWS("referencemodelenum.literal.l43", "10328");
 
   private String rctId;
   private String jiraId;

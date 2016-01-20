@@ -6,17 +6,17 @@ import java.util.Optional;
 public enum TimeSlotEnum implements SelectionTypeEnum {
 
   UNSET("timeslot.literal.l1", "-1"), //
-  T2013_1("timeslot.literal.l9", "10425"), //
-  T2013_2("timeslot.literal.l10", "10428"), //
-  T2013_3("timeslot.literal.l2", "10429"), //
-  T2014_1("timeslot.literal.l3", "10430"), //
-  T2014_2("timeslot.literal.l4", "10431"), //
-  T2014_3("timeslot.literal.l5", "10432"), //
-  T2014_4("timeslot.literal.l11", "10433"), //
-  T2015_1("timeslot.literal.l6", "10434"), //
-  T2015_2("timeslot.literal.l7", "10435"), //
-  T2015_3("timeslot.literal.l8", "10436"), //
-  T2015_4("timeslot.literal.l12", "10437");
+  T2013_1("timeslot.literal.l9", "10210"), //
+  T2013_2("timeslot.literal.l10", "10361"), //
+  T2013_3("timeslot.literal.l2", "10362"), //
+  T2014_1("timeslot.literal.l3", "10363"), //
+  T2014_2("timeslot.literal.l4", "10364"), //
+  T2014_3("timeslot.literal.l5", "10365"), //
+  T2014_4("timeslot.literal.l11", "10366"), //
+  T2015_1("timeslot.literal.l6", "10367"), //
+  T2015_2("timeslot.literal.l7", "10368"), //
+  T2015_3("timeslot.literal.l8", "10369"), //
+  T2015_4("timeslot.literal.l12", "10370");
 
   private String rctId;
   private String jiraId;

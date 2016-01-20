@@ -189,9 +189,9 @@ public class IssueFields {
     this.resolutiondate = resolutiondate;
   }
 
-  @XmlElement(name = "customfield_10205")
+  @XmlElement(name = "customfield_10220")
   @XmlJavaTypeAdapter(JiraDateStringAdapter.class)
-  public Date getRtcResolutiondate() {
+  public Date getRtcResolutiondate() { // done
     return rtcResolutiondate;
   }
 
@@ -246,8 +246,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10005")
-  public Integer getStoryPoints() {
+  @XmlElement(name = "customfield_10002")
+  public Integer getStoryPoints() { // done
     return storyPoints;
   }
 
@@ -257,8 +257,8 @@ public class IssueFields {
 
   @JsonView(IssueView.Update.class)
   @XmlJavaTypeAdapter(JiraDateStringAdapter.class)
-  @XmlElement(name = "customfield_10100")
-  public Date getRtcCreated() {
+  @XmlElement(name = "customfield_10219")
+  public Date getRtcCreated() { // done
     return rtcCreated;
   }
 
@@ -267,8 +267,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10101")
-  public String getAcceptanceCriteria() {
+  @XmlElement(name = "customfield_10202")
+  public String getAcceptanceCriteria() { // done
     return acceptanceCriteria;
   }
 
@@ -277,8 +277,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10104")
-  public JiraUser getResolver() {
+  @XmlElement(name = "customfield_10224")
+  public JiraUser getResolver() { // done
     return resolver;
   }
 
@@ -286,9 +286,9 @@ public class IssueFields {
     this.resolver = resolver;
   }
 
-  @XmlElement(name = "customfield_10204")
+  @XmlElement(name = "customfield_10203")
   @JsonView(IssueView.Update.class)
-  public JiraRadioItem isArchived() {
+  public JiraRadioItem isArchived() { // done
     return archived;
   }
 
@@ -297,8 +297,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10203")
-  public Group getTeam() {
+  @XmlElement(name = "customfield_10228")
+  public Group getTeam() { // done
     return team;
   }
 
@@ -316,8 +316,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10206")
-  public String getPtf() {
+  @XmlElement(name = "customfield_10215")
+  public String getPtf() { // done
     return ptf;
   }
 
@@ -335,8 +335,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10300")
-  public CustomFieldOption getBisonProjectName() {
+  @XmlElement(name = "customfield_10218")
+  public CustomFieldOption getBisonProjectName() { // done
     return bisonProjectName;
   }
 
@@ -345,8 +345,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10400")
-  public CustomFieldOption getRefModel() {
+  @XmlElement(name = "customfield_10222")
+  public CustomFieldOption getRefModel() { // done
     return refModel;
   }
 
@@ -355,8 +355,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10401", nillable = true)
-  public Integer getEpReqNr() {
+  @XmlElement(name = "customfield_10209", nillable = true)
+  public Integer getEpReqNr() { // done
     return epReqNr;
   }
 
@@ -365,8 +365,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10402", nillable = true)
-  public Integer getEpReqNrUg() {
+  @XmlElement(name = "customfield_10210", nillable = true)
+  public Integer getEpReqNrUg() { // done
     return epReqNrUg;
   }
 
@@ -375,8 +375,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10403", nillable = true)
-  public Integer getDpReqNr() {
+  @XmlElement(name = "customfield_10207", nillable = true)
+  public Integer getDpReqNr() { // done
     return dpReqNr;
   }
 
@@ -385,8 +385,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10404", nillable = true)
-  public Integer getMarketBudget() {
+  @XmlElement(name = "customfield_10204", nillable = true)
+  public Integer getMarketBudget() { // done
     return marketBudget;
   }
 
@@ -395,8 +395,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10405")
-  public CustomFieldOption getCompetenceCenter() {
+  @XmlElement(name = "customfield_10205")
+  public CustomFieldOption getCompetenceCenter() { // done
     return competenceCenter;
   }
 
@@ -405,8 +405,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10406")
-  public JiraRadioItem isPoPreplanningDone() {
+  @XmlElement(name = "customfield_10214")
+  public JiraRadioItem isPoPreplanningDone() { // done
     return poPreplanningDone;
   }
 
@@ -415,8 +415,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10407")
-  public List<String> getRelatedProjects() {
+  @XmlElement(name = "customfield_10223")
+  public List<String> getRelatedProjects() { // done
     return relatedProjects;
   }
 
@@ -425,8 +425,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10408")
-  public List<String> getIndustrySector() {
+  @XmlElement(name = "customfield_10213")
+  public List<String> getIndustrySector() { // done
     return industrySector;
   }
 
@@ -435,8 +435,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10500")
-  public CustomFieldOption getDevlDeadline() {
+  @XmlElement(name = "customfield_10208")
+  public CustomFieldOption getDevlDeadline() { // done
     return devlDeadline;
   }
 
@@ -445,8 +445,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10501")
-  public Integer getSecondEstimation() {
+  @XmlElement(name = "customfield_10226")
+  public Integer getSecondEstimation() { // done
     return secondEstimation;
   }
 
@@ -455,8 +455,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10502")
-  public String getTestScriptIds() {
+  @XmlElement(name = "customfield_10229")
+  public String getTestScriptIds() { // done
     return testScriptIds;
   }
 
@@ -466,8 +466,8 @@ public class IssueFields {
 
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10503")
-  public CustomFieldOption getTimeSlot() {
+  @XmlElement(name = "customfield_10230")
+  public CustomFieldOption getTimeSlot() { // done
     return timeSlot;
   }
 
@@ -476,8 +476,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10505", nillable = true)
-  public Integer getSiloRanking() {
+  @XmlElement(name = "customfield_10227", nillable = true)
+  public Integer getSiloRanking() { // done
     return siloRanking;
   }
 
@@ -486,8 +486,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10506")
-  public JiraUser getProductOwner() {
+  @XmlElement(name = "customfield_10217")
+  public JiraUser getProductOwner() { // done
     return productOwner;
   }
 
@@ -496,8 +496,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10507")
-  public JiraRadioItem getRoadmap() {
+  @XmlElement(name = "customfield_10225")
+  public JiraRadioItem getRoadmap() { // done
     return roadmap;
   }
 
@@ -507,8 +507,8 @@ public class IssueFields {
 
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10508")
-  public CustomFieldOption getCustomer() {
+  @XmlElement(name = "customfield_10206")
+  public CustomFieldOption getCustomer() { // done
     return customer;
   }
 
@@ -517,8 +517,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10509")
-  public CustomFieldOption getRealisedByIDM() {
+  @XmlElement(name = "customfield_10221")
+  public CustomFieldOption getRealisedByIDM() { // done
     return realisedByIDM;
   }
 
@@ -527,8 +527,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10510")
-  public CustomFieldOption getImplementationLevel() {
+  @XmlElement(name = "customfield_10212")
+  public CustomFieldOption getImplementationLevel() { // done
     return implementationLevel;
   }
 
@@ -537,8 +537,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10700")
-  public String getFiledAgainst() {
+  @XmlElement(name = "customfield_10211")
+  public String getFiledAgainst() { // done
     return filedAgainst;
   }
 
@@ -547,8 +547,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10701")
-  public String getPlannedFor() {
+  @XmlElement(name = "customfield_10216")
+  public String getPlannedFor() { // done
     return plannedFor;
   }
 
@@ -557,8 +557,8 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10009")
-  public String getEpicLink() {
+  @XmlElement(name = "customfield_10006")
+  public String getEpicLink() { // done
     return epicLink;
   }
 
@@ -575,7 +575,7 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10008")
+  @XmlElement(name = "customfield_10206")
   public String getEpicName() {
     return epicName;
   }

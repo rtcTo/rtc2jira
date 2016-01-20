@@ -7,9 +7,9 @@ public class JiraRadioItem {
   private String value;
   private String id = "";
 
-  static public final JiraRadioItem YES_ARCHIVED = new JiraRadioItem(true, "10101");
-  static public final JiraRadioItem YES_PO_PREPLANNING = new JiraRadioItem(true, "10383");
-  static public final JiraRadioItem YES_ROADMAP = new JiraRadioItem(true, "10438");
+  static public final JiraRadioItem YES_ARCHIVED = new JiraRadioItem(true, "10200");
+  static public final JiraRadioItem YES_PO_PREPLANNING = new JiraRadioItem(true, "10205");
+  static public final JiraRadioItem YES_ROADMAP = new JiraRadioItem(true, "10209");
   static public final JiraRadioItem NONE = new JiraRadioItem(false, "");
 
   public JiraRadioItem() {}

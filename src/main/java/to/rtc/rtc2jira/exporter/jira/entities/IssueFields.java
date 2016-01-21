@@ -575,7 +575,7 @@ public class IssueFields {
   }
 
   @JsonView(IssueView.Update.class)
-  @XmlElement(name = "customfield_10206")
+  @XmlElement(name = "customfield_10008")
   public String getEpicName() {
     return epicName;
   }

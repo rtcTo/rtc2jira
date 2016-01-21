@@ -10,30 +10,6 @@ public class IssueStatus extends NamedEntity {
   private URL iconUrl;
   private StatusCategory statusCategory;
 
-  public static IssueStatus createDone() {
-    IssueStatus issueStatus = new IssueStatus();
-    issueStatus.setId(StateEnum.bug_verified.getJiraId());
-    issueStatus.setName(StateEnum.bug_verified.getStatusName());
-    issueStatus.setStatusCategory(StatusCategory.createDone());
-    return issueStatus;
-  }
-
-  public static IssueStatus createInProgress() {
-    IssueStatus issueStatus = new IssueStatus();
-    issueStatus.setId(StateEnum.bug_inProgress.getJiraId());
-    issueStatus.setName(StateEnum.bug_inProgress.getStatusName());
-    issueStatus.setStatusCategory(StatusCategory.createInProgress());
-    return issueStatus;
-  }
-
-  public static IssueStatus createToDo() {
-    IssueStatus issueStatus = new IssueStatus();
-    issueStatus.setId(StateEnum.bug_neww.getJiraId());
-    issueStatus.setName(StateEnum.bug_neww.getStatusName());
-    issueStatus.setStatusCategory(StatusCategory.createToDo());
-    return issueStatus;
-  }
-
   @Override
   public String getPath() {
     return "/status";

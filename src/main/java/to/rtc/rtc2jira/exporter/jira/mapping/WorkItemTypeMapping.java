@@ -55,22 +55,22 @@ public class WorkItemTypeMapping implements Mapping {
     ProjectOverview project = issueFields.getProject();
     switch (workitemType) {
       case TASK:
-        issueFields.setIssuetype(getIssueType("Task", project));
+        issueFields.setIssuetype(getIssueType(IssueType.TASK.getName(), project));
         break;
       case STORY:
-        issueFields.setIssuetype(getIssueType("Story", project));
+        issueFields.setIssuetype(getIssueType(IssueType.STORY.getName(), project));
         break;
       case EPIC:
-        issueFields.setIssuetype(getIssueType("Epic", project));
+        issueFields.setIssuetype(getIssueType(IssueType.EPIC.getName(), project));
         break;
       case BUSINESSNEED:
-        issueFields.setIssuetype(getIssueType("Business Need", project));
+        issueFields.setIssuetype(getIssueType(IssueType.BUSINESS_NEED.getName(), project));
         break;
       case IMPEDIMENT:
-        issueFields.setIssuetype(getIssueType("Impediment", project));
+        issueFields.setIssuetype(getIssueType(IssueType.IMPEDIMENT.getName(), project));
         break;
       case DEFECT:
-        issueFields.setIssuetype(getIssueType("Bug", project));
+        issueFields.setIssuetype(getIssueType(IssueType.BUG.getName(), project));
         break;
       default:
         LOGGER.warning("Cannot determine issuetype for unknown workitemType: " + workitemType);

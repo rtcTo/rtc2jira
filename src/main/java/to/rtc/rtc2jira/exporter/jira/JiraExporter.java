@@ -144,7 +144,7 @@ public class JiraExporter implements Exporter {
         Issue issue = new Issue();
         IssueFields fields = issue.getFields();
         fields.setProject(project);
-        fields.setIssuetype(workItemTypeMapping.getIssueType("Task", project));
+        fields.setIssuetype(workItemTypeMapping.getIssueType(IssueType.TASK.getName(), project));
         fields.setSummary(DUMMY_SUMMARY_TEXT);
         fields.setDescription("This is just a dummy issue. Delete it after successfully migrating to Jira.");
         issueUpdates.add(new BulkCreateEntry(fields));

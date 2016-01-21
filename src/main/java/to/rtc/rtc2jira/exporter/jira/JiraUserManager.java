@@ -15,7 +15,11 @@ import com.sun.jersey.api.client.GenericType;
 
 public class JiraUserManager {
 
+  private static final String ALREADY = "bereits";
+
   public static final JiraUserManager INSTANCE = new JiraUserManager();
+
+  public static final String BASIC_JIRA_USER_GROUP_NAME = "jira-software-users";
 
   static final Logger LOGGER = Logger.getLogger(JiraUserManager.class.getName());
   static {
@@ -88,7 +92,8 @@ public class JiraUserManager {
   public void deactivateUser(JiraUser jiraUser) {
     jiraUser.setActive(false);
     ClientResponse putResponse =
-        getRestAccess().delete("/group/user?groupname=jira-users&username=" + jiraUser.getName());
+        getRestAccess().delete(
+            "/group/user?groupname=" + BASIC_JIRA_USER_GROUP_NAME + "&username=" + jiraUser.getName());
     if (putResponse.getStatus() != 200) {
       LOGGER.log(Level.SEVERE, "Problems while removing user " + jiraUser.getEmailAddress()
           + "  from jira-users group. " + putResponse.getEntity(String.class));
@@ -98,22 +103,21 @@ public class JiraUserManager {
   public void activateUser(JiraUser jiraUser) {
     jiraUser.setActive(true);
     // add user to jira-users group
-    ClientResponse putResponse = getRestAccess().post("/group/user?groupname=jira-users", jiraUser);
+    ClientResponse putResponse = getRestAccess().post("/group/user?groupname=" + BASIC_JIRA_USER_GROUP_NAME, jiraUser);
     if (putResponse.getStatus() != 201) {
       boolean logError = true;
       String errorEntityAsJson = putResponse.getEntity(String.class);
       if (putResponse.getStatus() == 400) {
-        if (errorEntityAsJson.contains("already")) {
+        if (errorEntityAsJson.contains(ALREADY)) {
           logError = false;
         }
       }
       if (logError) {
-        LOGGER.log(Level.SEVERE, "Problems while adding user " + jiraUser.getEmailAddress() + "  to jira-users group. "
-            + errorEntityAsJson);
+        LOGGER.log(Level.SEVERE, "Problems while adding user " + jiraUser.getEmailAddress() + "  to "
+            + BASIC_JIRA_USER_GROUP_NAME + " group. " + errorEntityAsJson);
       }
     }
   }
-
 
   public JiraUser getUser(JiraUser jiraUser) {
     if ("unassigned".equals(jiraUser.getName().toLowerCase()))

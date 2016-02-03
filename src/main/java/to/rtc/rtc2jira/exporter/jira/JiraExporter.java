@@ -310,8 +310,13 @@ public class JiraExporter implements Exporter {
         }
       }
       if (newlyAdded > 0) {
-        ClientResponse clientResponse = getRestAccess().postMultiPart(issue.getSelfPath() + "/attachments", multiPart);
-        if (isResponseOk(clientResponse)) {
+        ClientResponse clientResponse = null;
+        try {
+          clientResponse = getRestAccess().postMultiPart(issue.getSelfPath() + "/attachments", multiPart);
+        } catch (Exception e) {
+          LOGGER.severe("Could not upload attachments");
+        }
+        if (clientResponse != null && isResponseOk(clientResponse)) {
           // refresh list of already exported attachments
           List<IssueAttachment> responseAttachments =
               clientResponse.getEntity(new GenericType<List<IssueAttachment>>() {});
@@ -449,10 +454,6 @@ public class JiraExporter implements Exporter {
       LOGGER.severe("Problems while transitioning issue: " + postResponse.getEntity(String.class));
       return false;
     }
-  }
-
-  boolean forceUpdate() {
-    return Settings.getInstance().isForceUpdate();
   }
 
   /**

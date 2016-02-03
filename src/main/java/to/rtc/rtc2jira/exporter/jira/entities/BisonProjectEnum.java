@@ -100,16 +100,37 @@ public enum BisonProjectEnum {
   Pilatus_Quattro_Restanzen("projektname.literal.l62", "10297"), // x
   MOD_BRA_Apollon_Finanz("projektname.literal.l17", "10298"), // x
   PROD_Mobile_Applications("projektname.literal.l106", "10299"), // x
-  B4LAP_EDI("projektname.literal.l85", "10300"), //
-  B4LAP_Phase_2("projektname.literal.l6", "10301"), //
-  PROD_Symphony4Bison("projektname.literal.l44", "10302"), //
-  PQ_Testabdeckung_Rest_Pilatus("projektname.literal.l36", "10303"), //
-  PROD_OotB("projektname.literal.l18", "10304"), //
-  PROD_Performance_2013("projektname.literal.l79", "10305"), //
-  PROD_Speed("projektname.literal.l13", "10306"), //
-  BEST_PQ_Maintenance("projektname.literal.l107", "10307"), //
-  FLaGschiff("projektname.literal.l134", "10308");
+  B4LAP_EDI("projektname.literal.l85", "10300"), // x
+  B4LAP_Phase_2("projektname.literal.l6", "10301"), // x
+  PROD_Symphony4Bison("projektname.literal.l44", "10302"), // x
+  PQ_Testabdeckung_Rest_Pilatus("projektname.literal.l36", "10303"), // x
+  PROD_OotB("projektname.literal.l18", "10304"), // x
+  PROD_Performance_2013("projektname.literal.l79", "10305"), // x
+  PROD_Speed("projektname.literal.l13", "10306"), // x
+  BEST_PQ_Maintenance("projektname.literal.l107", "10307"), // x
+  FLaGschiff("projektname.literal.l134", "10308"), // x
 
+  Systemunterhalt_Build_Test_Bereitstellung("projektname.literal.l17.mapped", "10405"), //
+  Proj20("projektname.literal.l28.mapped", "10406"), //
+  Last_Test("projektname.literal.l16.mapped", "10407"), //
+  Proj19("projektname.literal.l27.mapped", "10408"), //
+  Kurse_eLearning("projektname.literal.l19.mapped", "10409"), //
+  Redaktion("projektname.literal.l18.mapped", "10410"), //
+  Performance_Issues_Kunden_Intern("projektname.literal.l2.mapped", "10411"), //
+  LAB_Manager("projektname.literal.l6.mapped", "10412"), //
+  Performance_Test("projektname.literal.l13.mapped", "10413"), //
+  Proj16("projektname.literal.l24.mapped", "10414"), //
+  Projektname_auswählen("projektname.literal.l12.mapped", "10251"), // use SELECT from other list
+  Proj15("projektname.literal.l23.mapped", "10416"), //
+  Swisscom_DMC("projektname.literal.l4.mapped", "10417"), //
+  Systemvorgaben_Dokumentationen("projektname.literal.l15.mapped", "10418"), //
+  Proj18("projektname.literal.l26.mapped", "10419"), //
+  Proj17("projektname.literal.l25.mapped", "10420"), //
+  Testautomatisierung("projektname.literal.l20.mapped", "10421"), //
+  Sintra("projektname.literal.l8.mapped", "10422"), //
+  Tools("projektname.literal.l22.mapped", "10423"), //
+  Plattform_Test("projektname.literal.l10.mapped", "10424"), //
+  Coaching_Teststabilität("projektname.literal.l21.mapped", "10425"); //
 
   private String rctId;
   private String jiraId;

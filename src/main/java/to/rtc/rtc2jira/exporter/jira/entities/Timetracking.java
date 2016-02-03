@@ -7,8 +7,8 @@ public class Timetracking {
 
   String originalEstimate;
   String remainingEstimate;
-  int originalEstimateSeconds;
-  int remainingEstimateSeconds;
+  long originalEstimateSeconds;
+  long remainingEstimateSeconds;
 
   public String getOriginalEstimate() {
     return originalEstimate;
@@ -26,19 +26,19 @@ public class Timetracking {
     this.remainingEstimate = remainingEstimate;
   }
 
-  public int getOriginalEstimateSeconds() {
+  public long getOriginalEstimateSeconds() {
     return originalEstimateSeconds;
   }
 
-  public void setOriginalEstimateSeconds(int originalEstimateSeconds) {
+  public void setOriginalEstimateSeconds(long originalEstimateSeconds) {
     this.originalEstimateSeconds = originalEstimateSeconds;
   }
 
-  public int getRemainingEstimateSeconds() {
+  public long getRemainingEstimateSeconds() {
     return remainingEstimateSeconds;
   }
 
-  public void setRemainingEstimateSeconds(int remainingEstimateSeconds) {
+  public void setRemainingEstimateSeconds(long remainingEstimateSeconds) {
     this.remainingEstimateSeconds = remainingEstimateSeconds;
   }
 }

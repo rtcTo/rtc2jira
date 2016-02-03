@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 import to.rtc.rtc2jira.ExportManager;
 
 public enum ResolutionEnum {
-  fixed(1, 1, -1), wont_fix(5, 2, -1), duplicate(2, 3, -1), incomplete(8, 4, -1), cannotReproduce(4, 5, -1), done(-1,
-      10000, -1), wontDo(3, 10001, -1);
+  fixed(1, 10000, -1), wont_fix(5, 10001, -1), duplicate(2, 10002, -1), incomplete(8, 10003, -1), cannotReproduce(4,
+      10003, -1), done(-1, 10000, -1), wontDo(3, 10001, -1);
 
 
   final private int rtcId;

@@ -13,6 +13,7 @@ public class IssueLinkType extends NamedEntity {
   public final static IssueLinkType CLONERS;
   public final static IssueLinkType DUPLICATE;
   public final static IssueLinkType RELATES;
+  public final static IssueLinkType GIT_CODE_REVIEW;
   public final static IssueLinkType HIERARCHY;
   public final static IssueLinkType CATEGORY;
   public final static IssueLinkType ITERATION;
@@ -23,10 +24,11 @@ public class IssueLinkType extends NamedEntity {
     CLONERS = new IssueLinkType("10001", "Cloners");
     DUPLICATE = new IssueLinkType("10002", "Duplicate");
     RELATES = new IssueLinkType("10003", "Relates");
+    GIT_CODE_REVIEW = new IssueLinkType("10300", "Git Code Review");
     HIERARCHY = new IssueLinkType(Settings.getInstance().getJiraLinktypeHierarchyId(), "Hierarchy");
     CATEGORY = new IssueLinkType(Settings.getInstance().getJiraLinktypeCategoryId(), "Category");
     ITERATION = new IssueLinkType(Settings.getInstance().getJiraLinktypeIterationId(), "Iteration");
-    STORY_TASKS = new IssueLinkType("10500", "Story Tasks");
+    STORY_TASKS = new IssueLinkType("10400", "Story Tasks");
   }
 
   String inward;

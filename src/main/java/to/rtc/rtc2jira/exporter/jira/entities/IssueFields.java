@@ -47,6 +47,7 @@ public class IssueFields {
   private Date rtcCreated;
   private JiraRadioItem archived;
   private Group team;
+  private String teamName;
   private Set<IssueLink> issuelinks = new HashSet<IssueLink>();
   private Timetracking timetracking;
   private CustomFieldOption bisonProjectName;
@@ -305,6 +306,17 @@ public class IssueFields {
   public void setTeam(Group team) {
     this.team = team;
   }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10231")
+  public void setTeamName(String teamName) {
+    this.teamName = teamName;
+  }
+
+  public String getTeamName() {
+    return teamName;
+  }
+
 
   @JsonView(IssueView.Read.class)
   public Set<IssueLink> getIssuelinks() {

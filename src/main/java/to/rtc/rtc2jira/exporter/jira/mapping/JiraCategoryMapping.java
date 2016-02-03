@@ -5,7 +5,6 @@ package to.rtc.rtc2jira.exporter.jira.mapping;
 
 import java.util.regex.Pattern;
 
-import to.rtc.rtc2jira.exporter.jira.entities.Group;
 import to.rtc.rtc2jira.exporter.jira.entities.Issue;
 import to.rtc.rtc2jira.exporter.jira.entities.IssueFields;
 import to.rtc.rtc2jira.importer.mapping.CategoryMapping;
@@ -24,17 +23,17 @@ public class JiraCategoryMapping implements Mapping {
     String categoryQualifiedName = segs[0];
 
     IssueFields fields = issue.getFields();
-    TeamAreaHandler teamAreaHandler = TeamAreaHandler.INSTANCE;
 
     if (!CategoryMapping.NO_CATEGORY.equals(categoryQualifiedName)) {
       fields.setFiledAgainst(categoryQualifiedName);
     }
 
     if (!CategoryMapping.NO_TEAM.equals(segs[1])) {
-      Group teamArea = teamAreaHandler.getByName(segs[1]);
-      fields.setTeam(teamArea);
+      fields.setTeam(null);
+      fields.setTeamName(segs[1]);
     } else {
       fields.setTeam(null);
+      fields.setTeamName(null);
     }
   }
 

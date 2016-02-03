@@ -1,0 +1,170 @@
+{
+    "expand": "renderedFields,names,schema,transitions,operations,editmeta,changelog,versionedRepresentations",
+    "id": "10000",
+    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issue/10000",
+    "key": "RTCTEST-1",
+    "fields": {
+        "issuetype": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10100",
+            "id": "10100",
+            "description": "Eine Aufgabe, die erledigt werden muss.",
+            "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+            "name": "Aufgabe",
+            "subtask": false,
+            "avatarId": 10318
+        },
+        "timespent": null,
+        "project": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/project/10000",
+            "id": "10000",
+            "key": "RTCTEST",
+            "name": "RTC Test Import",
+            "avatarUrls": {
+                "48x48": "http://jira.bisdevdom.ch:8080/secure/projectavatar?avatarId=10011",
+                "24x24": "http://jira.bisdevdom.ch:8080/secure/projectavatar?size=small&avatarId=10011",
+                "16x16": "http://jira.bisdevdom.ch:8080/secure/projectavatar?size=xsmall&avatarId=10011",
+                "32x32": "http://jira.bisdevdom.ch:8080/secure/projectavatar?size=medium&avatarId=10011"
+            }
+        },
+        "customfield_10230": null,
+        "fixVersions": [],
+        "aggregatetimespent": null,
+        "resolution": null,
+        "customfield_10225": null,
+        "customfield_10226": null,
+        "customfield_10227": null,
+        "customfield_10228": null,
+        "customfield_10229": null,
+        "resolutiondate": null,
+        "workratio": -1,
+        "lastViewed": "2016-01-19T16:37:41.157+0100",
+        "watches": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issue/RTCTEST-1/watchers",
+            "watchCount": 1,
+            "isWatching": true
+        },
+        "created": "2016-01-19T16:37:39.000+0100",
+        "customfield_10220": null,
+        "priority": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/priority/3",
+            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/priorities/medium.svg",
+            "name": "Medium",
+            "id": "3"
+        },
+        "customfield_10221": null,
+        "customfield_10222": null,
+        "customfield_10223": null,
+        "labels": [],
+        "customfield_10224": null,
+        "customfield_10214": null,
+        "customfield_10215": null,
+        "customfield_10216": null,
+        "customfield_10217": null,
+        "customfield_10218": null,
+        "timeestimate": null,
+        "aggregatetimeoriginalestimate": null,
+        "versions": [],
+        "customfield_10219": null,
+        "issuelinks": [],
+        "assignee": null,
+        "updated": "2016-01-19T16:37:39.000+0100",
+        "status": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/10108",
+            "description": "",
+            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/status_generic.gif",
+            "name": "Start",
+            "id": "10108",
+            "statusCategory": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/1",
+                "id": 1,
+                "key": "undefined",
+                "colorName": "medium-gray",
+                "name": "Keine Kategorie"
+            }
+        },
+        "components": [],
+        "timeoriginalestimate": null,
+        "description": "This is just a dummy issue. Delete it after successfully migrating to Jira.",
+        "customfield_10210": null,
+        "customfield_10211": null,
+        "customfield_10212": null,
+        "timetracking": {},
+        "customfield_10213": null,
+        "customfield_10005": null,
+        "customfield_10203": null,
+        "customfield_10006": null,
+        "customfield_10204": null,
+        "customfield_10205": null,
+        "customfield_10206": null,
+        "attachment": [],
+        "customfield_10207": null,
+        "aggregatetimeestimate": null,
+        "customfield_10208": null,
+        "customfield_10209": null,
+        "summary": "Dummy",
+        "creator": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/user?username=rtc.import",
+            "name": "rtc.import",
+            "key": "rtc.import",
+            "emailAddress": "leonard@chew.ch",
+            "avatarUrls": {
+                "48x48": "http://www.gravatar.com/avatar/6cff27f61d6ca00ffb07872950cdf6bf?d=mm&s=48",
+                "24x24": "http://www.gravatar.com/avatar/6cff27f61d6ca00ffb07872950cdf6bf?d=mm&s=24",
+                "16x16": "http://www.gravatar.com/avatar/6cff27f61d6ca00ffb07872950cdf6bf?d=mm&s=16",
+                "32x32": "http://www.gravatar.com/avatar/6cff27f61d6ca00ffb07872950cdf6bf?d=mm&s=32"
+            },
+            "displayName": "RTC Import",
+            "active": true,
+            "timeZone": "Europe/Zurich"
+        },
+        "subtasks": [],
+        "reporter": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/user?username=rtc.import",
+            "name": "rtc.import",
+            "key": "rtc.import",
+            "emailAddress": "leonard@chew.ch",
+            "avatarUrls": {
+                "48x48": "http://www.gravatar.com/avatar/6cff27f61d6ca00ffb07872950cdf6bf?d=mm&s=48",
+                "24x24": "http://www.gravatar.com/avatar/6cff27f61d6ca00ffb07872950cdf6bf?d=mm&s=24",
+                "16x16": "http://www.gravatar.com/avatar/6cff27f61d6ca00ffb07872950cdf6bf?d=mm&s=16",
+                "32x32": "http://www.gravatar.com/avatar/6cff27f61d6ca00ffb07872950cdf6bf?d=mm&s=32"
+            },
+            "displayName": "RTC Import",
+            "active": true,
+            "timeZone": "Europe/Zurich"
+        },
+        "customfield_10000": null,
+        "aggregateprogress": {
+            "progress": 0,
+            "total": 0
+        },
+        "customfield_10001": null,
+        "customfield_10200": [],
+        "customfield_10201": null,
+        "customfield_10004": "0|hzzzzz:",
+        "customfield_10202": null,
+        "environment": null,
+        "duedate": null,
+        "progress": {
+            "progress": 0,
+            "total": 0
+        },
+        "comment": {
+            "startAt": 0,
+            "maxResults": 0,
+            "total": 0,
+            "comments": []
+        },
+        "votes": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issue/RTCTEST-1/votes",
+            "votes": 0,
+            "hasVoted": false
+        },
+        "worklog": {
+            "startAt": 0,
+            "maxResults": 20,
+            "total": 0,
+            "worklogs": []
+        }
+    }
+}

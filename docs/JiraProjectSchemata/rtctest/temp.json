@@ -1,0 +1,557 @@
+{
+    "expand": "renderedFields,names,schema,transitions,operations,editmeta,changelog,versionedRepresentations",
+    "id": "16386",
+    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issue/16386",
+    "key": "RTCTEST-6387",
+    "fields": {
+        "issuetype": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10001",
+            "id": "10001",
+            "description": "Von JIRA Software erstellt – nicht bearbeiten oder löschen. Vorgangstyp für eine User Story.",
+            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/issuetypes/story.svg",
+            "name": "Story",
+            "subtask": false
+        },
+        "timespent": null,
+        "project": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/project/10000",
+            "id": "10000",
+            "key": "RTCTEST",
+            "name": "RTC Test Import",
+            "avatarUrls": {
+                "48x48": "http://jira.bisdevdom.ch:8080/secure/projectavatar?avatarId=10011",
+                "24x24": "http://jira.bisdevdom.ch:8080/secure/projectavatar?size=small&avatarId=10011",
+                "16x16": "http://jira.bisdevdom.ch:8080/secure/projectavatar?size=xsmall&avatarId=10011",
+                "32x32": "http://jira.bisdevdom.ch:8080/secure/projectavatar?size=medium&avatarId=10011"
+            }
+        },
+        "customfield_10230": null,
+        "fixVersions": [
+            {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10006",
+                "id": "10006",
+                "name": "Release 12/05",
+                "archived": false,
+                "released": true,
+                "releaseDate": "2012-06-25"
+            }
+        ],
+        "customfield_10231": null,
+        "aggregatetimespent": null,
+        "resolution": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/resolution/10000",
+            "id": "10000",
+            "description": "Die Arbeit für diesen Vorgang wurde abgeschlossen.",
+            "name": "Fertig"
+        },
+        "customfield_10225": null,
+        "customfield_10226": null,
+        "customfield_10227": null,
+        "customfield_10229": null,
+        "resolutiondate": null,
+        "workratio": 0,
+        "lastViewed": null,
+        "watches": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issue/RTCTEST-6387/watchers",
+            "watchCount": 1,
+            "isWatching": false
+        },
+        "created": "2016-01-22T10:39:14.000+0100",
+        "customfield_10220": "2012-06-19T11:47:00.000+0200",
+        "priority": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/priority/3",
+            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/priorities/medium.svg",
+            "name": "Medium",
+            "id": "3"
+        },
+        "customfield_10221": null,
+        "customfield_10222": null,
+        "customfield_10223": null,
+        "labels": [],
+        "customfield_10224": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/user?username=peter.bossert",
+            "name": "peter.bossert",
+            "key": "peter.bossert",
+            "emailAddress": "peter.bossert@bison-group.com",
+            "avatarUrls": {
+                "48x48": "http://www.gravatar.com/avatar/745145c3b1012a4ae8fe4e62245884f5?d=mm&s=48",
+                "24x24": "http://www.gravatar.com/avatar/745145c3b1012a4ae8fe4e62245884f5?d=mm&s=24",
+                "16x16": "http://www.gravatar.com/avatar/745145c3b1012a4ae8fe4e62245884f5?d=mm&s=16",
+                "32x32": "http://www.gravatar.com/avatar/745145c3b1012a4ae8fe4e62245884f5?d=mm&s=32"
+            },
+            "displayName": "Bossert Peter",
+            "active": true,
+            "timeZone": "Europe/Zurich"
+        },
+        "customfield_10214": null,
+        "customfield_10215": null,
+        "customfield_10216": "Release 12/05/Sprint 24 (12/05)",
+        "customfield_10217": null,
+        "customfield_10218": null,
+        "timeestimate": 2235794400,
+        "aggregatetimeoriginalestimate": 2235794400,
+        "versions": [],
+        "customfield_10219": "2012-06-04T13:59:00.000+0200",
+        "issuelinks": [
+            {
+                "id": "13989",
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLink/13989",
+                "type": {
+                    "id": "10400",
+                    "name": "Story Tasks",
+                    "inward": "Tasks",
+                    "outward": "Story",
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLinkType/10400"
+                },
+                "inwardIssue": {
+                    "id": "16602",
+                    "key": "RTCTEST-6603",
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issue/16602",
+                    "fields": {
+                        "summary": "GUI changes on 812",
+                        "status": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/5",
+                            "description": "Eine Lösung wurde ermittelt und wartet auf die Verifizierung durch den Benutzer, der das Problem gemeldet hat. Von hier aus können Vorgänge erneut geöffnet oder geschlossen werden.",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/statuses/resolved.png",
+                            "name": "Erledigt",
+                            "id": "5",
+                            "statusCategory": {
+                                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/3",
+                                "id": 3,
+                                "key": "done",
+                                "colorName": "green",
+                                "name": "Fertig"
+                            }
+                        },
+                        "priority": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/priority/3",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/priorities/medium.svg",
+                            "name": "Medium",
+                            "id": "3"
+                        },
+                        "issuetype": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10100",
+                            "id": "10100",
+                            "description": "Eine Aufgabe, die erledigt werden muss.",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+                            "name": "Aufgabe",
+                            "subtask": false,
+                            "avatarId": 10318
+                        }
+                    }
+                }
+            },
+            {
+                "id": "13990",
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLink/13990",
+                "type": {
+                    "id": "10400",
+                    "name": "Story Tasks",
+                    "inward": "Tasks",
+                    "outward": "Story",
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLinkType/10400"
+                },
+                "inwardIssue": {
+                    "id": "16603",
+                    "key": "RTCTEST-6604",
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issue/16603",
+                    "fields": {
+                        "summary": "GUI changes on 813",
+                        "status": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/5",
+                            "description": "Eine Lösung wurde ermittelt und wartet auf die Verifizierung durch den Benutzer, der das Problem gemeldet hat. Von hier aus können Vorgänge erneut geöffnet oder geschlossen werden.",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/statuses/resolved.png",
+                            "name": "Erledigt",
+                            "id": "5",
+                            "statusCategory": {
+                                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/3",
+                                "id": 3,
+                                "key": "done",
+                                "colorName": "green",
+                                "name": "Fertig"
+                            }
+                        },
+                        "priority": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/priority/3",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/priorities/medium.svg",
+                            "name": "Medium",
+                            "id": "3"
+                        },
+                        "issuetype": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10100",
+                            "id": "10100",
+                            "description": "Eine Aufgabe, die erledigt werden muss.",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+                            "name": "Aufgabe",
+                            "subtask": false,
+                            "avatarId": 10318
+                        }
+                    }
+                }
+            },
+            {
+                "id": "13991",
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLink/13991",
+                "type": {
+                    "id": "10400",
+                    "name": "Story Tasks",
+                    "inward": "Tasks",
+                    "outward": "Story",
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLinkType/10400"
+                },
+                "inwardIssue": {
+                    "id": "16604",
+                    "key": "RTCTEST-6605",
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issue/16604",
+                    "fields": {
+                        "summary": "GUI changes on 814",
+                        "status": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/5",
+                            "description": "Eine Lösung wurde ermittelt und wartet auf die Verifizierung durch den Benutzer, der das Problem gemeldet hat. Von hier aus können Vorgänge erneut geöffnet oder geschlossen werden.",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/statuses/resolved.png",
+                            "name": "Erledigt",
+                            "id": "5",
+                            "statusCategory": {
+                                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/3",
+                                "id": 3,
+                                "key": "done",
+                                "colorName": "green",
+                                "name": "Fertig"
+                            }
+                        },
+                        "priority": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/priority/3",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/priorities/medium.svg",
+                            "name": "Medium",
+                            "id": "3"
+                        },
+                        "issuetype": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10100",
+                            "id": "10100",
+                            "description": "Eine Aufgabe, die erledigt werden muss.",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+                            "name": "Aufgabe",
+                            "subtask": false,
+                            "avatarId": 10318
+                        }
+                    }
+                }
+            },
+            {
+                "id": "13992",
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLink/13992",
+                "type": {
+                    "id": "10400",
+                    "name": "Story Tasks",
+                    "inward": "Tasks",
+                    "outward": "Story",
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLinkType/10400"
+                },
+                "inwardIssue": {
+                    "id": "16605",
+                    "key": "RTCTEST-6606",
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issue/16605",
+                    "fields": {
+                        "summary": "PTF",
+                        "status": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/5",
+                            "description": "Eine Lösung wurde ermittelt und wartet auf die Verifizierung durch den Benutzer, der das Problem gemeldet hat. Von hier aus können Vorgänge erneut geöffnet oder geschlossen werden.",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/statuses/resolved.png",
+                            "name": "Erledigt",
+                            "id": "5",
+                            "statusCategory": {
+                                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/3",
+                                "id": 3,
+                                "key": "done",
+                                "colorName": "green",
+                                "name": "Fertig"
+                            }
+                        },
+                        "priority": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/priority/3",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/priorities/medium.svg",
+                            "name": "Medium",
+                            "id": "3"
+                        },
+                        "issuetype": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10100",
+                            "id": "10100",
+                            "description": "Eine Aufgabe, die erledigt werden muss.",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+                            "name": "Aufgabe",
+                            "subtask": false,
+                            "avatarId": 10318
+                        }
+                    }
+                }
+            },
+            {
+                "id": "13993",
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLink/13993",
+                "type": {
+                    "id": "10400",
+                    "name": "Story Tasks",
+                    "inward": "Tasks",
+                    "outward": "Story",
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLinkType/10400"
+                },
+                "inwardIssue": {
+                    "id": "16606",
+                    "key": "RTCTEST-6607",
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issue/16606",
+                    "fields": {
+                        "summary": "Documentation",
+                        "status": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/5",
+                            "description": "Eine Lösung wurde ermittelt und wartet auf die Verifizierung durch den Benutzer, der das Problem gemeldet hat. Von hier aus können Vorgänge erneut geöffnet oder geschlossen werden.",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/statuses/resolved.png",
+                            "name": "Erledigt",
+                            "id": "5",
+                            "statusCategory": {
+                                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/3",
+                                "id": 3,
+                                "key": "done",
+                                "colorName": "green",
+                                "name": "Fertig"
+                            }
+                        },
+                        "priority": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/priority/3",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/priorities/medium.svg",
+                            "name": "Medium",
+                            "id": "3"
+                        },
+                        "issuetype": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10100",
+                            "id": "10100",
+                            "description": "Eine Aufgabe, die erledigt werden muss.",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+                            "name": "Aufgabe",
+                            "subtask": false,
+                            "avatarId": 10318
+                        }
+                    }
+                }
+            },
+            {
+                "id": "13994",
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLink/13994",
+                "type": {
+                    "id": "10400",
+                    "name": "Story Tasks",
+                    "inward": "Tasks",
+                    "outward": "Story",
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLinkType/10400"
+                },
+                "inwardIssue": {
+                    "id": "16607",
+                    "key": "RTCTEST-6608",
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issue/16607",
+                    "fields": {
+                        "summary": "Manual Tests",
+                        "status": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/5",
+                            "description": "Eine Lösung wurde ermittelt und wartet auf die Verifizierung durch den Benutzer, der das Problem gemeldet hat. Von hier aus können Vorgänge erneut geöffnet oder geschlossen werden.",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/statuses/resolved.png",
+                            "name": "Erledigt",
+                            "id": "5",
+                            "statusCategory": {
+                                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/3",
+                                "id": 3,
+                                "key": "done",
+                                "colorName": "green",
+                                "name": "Fertig"
+                            }
+                        },
+                        "priority": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/priority/3",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/priorities/medium.svg",
+                            "name": "Medium",
+                            "id": "3"
+                        },
+                        "issuetype": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10100",
+                            "id": "10100",
+                            "description": "Eine Aufgabe, die erledigt werden muss.",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+                            "name": "Aufgabe",
+                            "subtask": false,
+                            "avatarId": 10318
+                        }
+                    }
+                }
+            },
+            {
+                "id": "13995",
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLink/13995",
+                "type": {
+                    "id": "10400",
+                    "name": "Story Tasks",
+                    "inward": "Tasks",
+                    "outward": "Story",
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLinkType/10400"
+                },
+                "inwardIssue": {
+                    "id": "16608",
+                    "key": "RTCTEST-6609",
+                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issue/16608",
+                    "fields": {
+                        "summary": "PQ Tests update",
+                        "status": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/5",
+                            "description": "Eine Lösung wurde ermittelt und wartet auf die Verifizierung durch den Benutzer, der das Problem gemeldet hat. Von hier aus können Vorgänge erneut geöffnet oder geschlossen werden.",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/statuses/resolved.png",
+                            "name": "Erledigt",
+                            "id": "5",
+                            "statusCategory": {
+                                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/3",
+                                "id": 3,
+                                "key": "done",
+                                "colorName": "green",
+                                "name": "Fertig"
+                            }
+                        },
+                        "priority": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/priority/3",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/priorities/medium.svg",
+                            "name": "Medium",
+                            "id": "3"
+                        },
+                        "issuetype": {
+                            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10100",
+                            "id": "10100",
+                            "description": "Eine Aufgabe, die erledigt werden muss.",
+                            "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+                            "name": "Aufgabe",
+                            "subtask": false,
+                            "avatarId": 10318
+                        }
+                    }
+                }
+            }
+        ],
+        "assignee": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/user?username=andreas.renggli",
+            "name": "andreas.renggli",
+            "key": "andreas.renggli",
+            "emailAddress": "andreas.renggli@bison-group.com",
+            "avatarUrls": {
+                "48x48": "http://www.gravatar.com/avatar/5bbd26aa1dfab177f189f34aba0d1689?d=mm&s=48",
+                "24x24": "http://www.gravatar.com/avatar/5bbd26aa1dfab177f189f34aba0d1689?d=mm&s=24",
+                "16x16": "http://www.gravatar.com/avatar/5bbd26aa1dfab177f189f34aba0d1689?d=mm&s=16",
+                "32x32": "http://www.gravatar.com/avatar/5bbd26aa1dfab177f189f34aba0d1689?d=mm&s=32"
+            },
+            "displayName": "Renggli Andreas",
+            "active": true,
+            "timeZone": "Europe/Zurich"
+        },
+        "updated": "2016-01-22T21:30:57.000+0100",
+        "status": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/status/10001",
+            "description": "",
+            "iconUrl": "http://jira.bisdevdom.ch:8080/",
+            "name": "Fertig",
+            "id": "10001",
+            "statusCategory": {
+                "self": "http://jira.bisdevdom.ch:8080/rest/api/2/statuscategory/3",
+                "id": 3,
+                "key": "done",
+                "colorName": "green",
+                "name": "Fertig"
+            }
+        },
+        "components": [],
+        "timeoriginalestimate": 2235794400,
+        "description": "As a User of the Bison Process Finance, I want to have the GUI's more simple and easier to use.\r\n\r\nThe 3 GUI's\r\n- Movements of G/L accounts (814)\r\n- Debtor account movements (812)\r\n- Account movements creditor (813)\r\nshall be changed",
+        "customfield_10210": null,
+        "customfield_10211": "Finance",
+        "customfield_10212": null,
+        "timetracking": {
+            "originalEstimate": "15526w 1d 6h",
+            "remainingEstimate": "15526w 1d 6h",
+            "originalEstimateSeconds": 2235794400,
+            "remainingEstimateSeconds": 2235794400
+        },
+        "customfield_10213": null,
+        "customfield_10005": null,
+        "customfield_10203": null,
+        "customfield_10006": "RTCTEST-5709",
+        "customfield_10204": null,
+        "customfield_10205": null,
+        "customfield_10206": null,
+        "attachment": [],
+        "customfield_10207": null,
+        "aggregatetimeestimate": 2235794400,
+        "customfield_10208": null,
+        "customfield_10209": null,
+        "summary": "Account Movements: GUI Optimisation ",
+        "creator": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/user?username=rtc.import",
+            "name": "rtc.import",
+            "key": "rtc.import",
+            "emailAddress": "leonard@chew.ch",
+            "avatarUrls": {
+                "48x48": "http://www.gravatar.com/avatar/6cff27f61d6ca00ffb07872950cdf6bf?d=mm&s=48",
+                "24x24": "http://www.gravatar.com/avatar/6cff27f61d6ca00ffb07872950cdf6bf?d=mm&s=24",
+                "16x16": "http://www.gravatar.com/avatar/6cff27f61d6ca00ffb07872950cdf6bf?d=mm&s=16",
+                "32x32": "http://www.gravatar.com/avatar/6cff27f61d6ca00ffb07872950cdf6bf?d=mm&s=32"
+            },
+            "displayName": "RTC Import",
+            "active": true,
+            "timeZone": "Europe/Zurich"
+        },
+        "subtasks": [],
+        "reporter": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/user?username=andreas.renggli",
+            "name": "andreas.renggli",
+            "key": "andreas.renggli",
+            "emailAddress": "andreas.renggli@bison-group.com",
+            "avatarUrls": {
+                "48x48": "http://www.gravatar.com/avatar/5bbd26aa1dfab177f189f34aba0d1689?d=mm&s=48",
+                "24x24": "http://www.gravatar.com/avatar/5bbd26aa1dfab177f189f34aba0d1689?d=mm&s=24",
+                "16x16": "http://www.gravatar.com/avatar/5bbd26aa1dfab177f189f34aba0d1689?d=mm&s=16",
+                "32x32": "http://www.gravatar.com/avatar/5bbd26aa1dfab177f189f34aba0d1689?d=mm&s=32"
+            },
+            "displayName": "Renggli Andreas",
+            "active": true,
+            "timeZone": "Europe/Zurich"
+        },
+        "customfield_10000": null,
+        "aggregateprogress": {
+            "progress": 0,
+            "total": 2235794400,
+            "percent": 0
+        },
+        "customfield_10001": null,
+        "customfield_10002": 1.0,
+        "customfield_10200": [],
+        "customfield_10003": null,
+        "customfield_10201": null,
+        "customfield_10004": "0|i013f3:",
+        "customfield_10202": "- rename existing tab \"Allgemein / General\" in \"Detailsuche / Advanced Search\"\r\n- create a new tab called \"Allgemein\" / \"General\" at the top-left-side\r\n\r\n- this tab is at the first position\r\n- the following filter-criterias are in the header:\r\n   - G/L account\r\n   - Balance range\r\n   - Posting period from and to\r\n   - Voucher date from and to\r\n\r\n- the following filter-criterias shall be shown in the expander group: \"Additional Criterias\"\r\n  - Document  (Beleg)\r\n  - Invoice (Rechnung)\r\n  - Display pst cde (AnzeigebuchungsSI) \r\n   <i> Maybe it is necessary to think about the name of the caption because in the grid the name is BuSl. And maybe it would be nice to get a dropdown for the BuSl\r\n</i>  - Currency (Währung)\r\n  - OI text (OP Text)\r\n  - Posting text (Buchungstext)\r\n\r\nThe following Criterias shall be hidden but also used for the filter of the data:\r\n    Display compressed = \"Not compressed\"\r\n    Relevant = \"Relevant\"\r\n    Shadow Posting type = B00 Real posting\r\n\r\nOn the GUI Debtor shall the first criteria be \"Customer\" instead of G/L account\r\nOn the GUI Creditor shall the first criteria be \"Supplier\" instead of G/L account\r\n\r\n<i>On the expander group \"Detail criteria\" from 814 are two flags G/L account available. It has to be checked why it is like this and if there are no reason one of these flag could be removed.\r\n</i>\r\nThese chances affects the existing PQ-tests. PQ has to be informed before the next PQ run that they could generate an new Lib to ensure that the PQ tests runs without fail\r\n \r\nDetails of the columns in the grid are described in the attachement:\r\n<a href=\"https://sharepoint.bison-group.com/sites/BFN/scrum/finance/Documents/UserStory_Details/6387/6387_changes_on_GUI_814_etc.doc\">https://sharepoint.bison-group.com/sites/BFN/scrum/finance/Documents/UserStory_Details/6387/6387_changes_on_GUI_814_etc.doc</a>\r\n\r\n\r\n     ",
+        "environment": null,
+        "duedate": null,
+        "progress": {
+            "progress": 0,
+            "total": 2235794400,
+            "percent": 0
+        },
+        "comment": {
+            "startAt": 0,
+            "maxResults": 0,
+            "total": 0,
+            "comments": []
+        },
+        "votes": {
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issue/RTCTEST-6387/votes",
+            "votes": 0,
+            "hasVoted": false
+        },
+        "worklog": {
+            "startAt": 0,
+            "maxResults": 20,
+            "total": 0,
+            "worklogs": []
+        }
+    }
+}

@@ -1,0 +1,26 @@
+[
+    {
+        "self": "http://jira.bisdevdom.ch:8080/rest/api/2/resolution/10000",
+        "id": "10000",
+        "description": "Die Arbeit für diesen Vorgang wurde abgeschlossen.",
+        "name": "Fertig"
+    },
+    {
+        "self": "http://jira.bisdevdom.ch:8080/rest/api/2/resolution/10001",
+        "id": "10001",
+        "description": "This issue won't be actioned.",
+        "name": "Won't Do"
+    },
+    {
+        "self": "http://jira.bisdevdom.ch:8080/rest/api/2/resolution/10002",
+        "id": "10002",
+        "description": "Das Problem ist ein Duplikat eines bestehenden Problems.",
+        "name": "Duplikat"
+    },
+    {
+        "self": "http://jira.bisdevdom.ch:8080/rest/api/2/resolution/10003",
+        "id": "10003",
+        "description": "Alle Versuche, dieses Problem zu reproduzieren, sind fehlgeschlagen, oder zur Reproduktion des Problems waren nicht genügend Informationen verfügbar. Das Lesen des Codes ergab keine Hinweise auf die Ursache dieses Verhaltens. Wenn sich zu einem späteren Zeitpunkt mehr Informationen ergeben, öffnen Sie diesen Vorgang erneut.",
+        "name": "Kann nicht reproduziert werden"
+    }
+]

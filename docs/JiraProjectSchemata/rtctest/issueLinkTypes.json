@@ -1,0 +1,46 @@
+{
+    "issueLinkTypes": [
+        {
+            "id": "10000",
+            "name": "Blocks",
+            "inward": "is blocked by",
+            "outward": "blocks",
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLinkType/10000"
+        },
+        {
+            "id": "10001",
+            "name": "Cloners",
+            "inward": "is cloned by",
+            "outward": "clones",
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLinkType/10001"
+        },
+        {
+            "id": "10002",
+            "name": "Duplicate",
+            "inward": "is duplicated by",
+            "outward": "duplicates",
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLinkType/10002"
+        },
+        {
+            "id": "10300",
+            "name": "Git Code Review",
+            "inward": "opened during git code review in",
+            "outward": "git code review opened",
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLinkType/10300"
+        },
+        {
+            "id": "10003",
+            "name": "Relates",
+            "inward": "relates to",
+            "outward": "relates to",
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLinkType/10003"
+        },
+        {
+            "id": "10400",
+            "name": "Story Tasks",
+            "inward": "Tasks",
+            "outward": "Story",
+            "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issueLinkType/10400"
+        }
+    ]
+}

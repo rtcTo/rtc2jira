@@ -23,8 +23,8 @@ public class IssueType extends NamedEntity {
   public static final IssueType ITERATION;
 
   static {
-    TASK = new IssueType("10100", "Aufgabe");
-    SUB_TASK = new IssueType("10101", "Unteraufgabe");
+    TASK = new IssueType("10100", "Task");
+    SUB_TASK = new IssueType("10101", "Sub-task");
     SUB_TASK.setSubtask(true);
     USER_STORY = new IssueType("11111", "User Story");
     STORY = new IssueType("10001", "Story");

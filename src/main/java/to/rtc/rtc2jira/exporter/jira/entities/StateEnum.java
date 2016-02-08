@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import to.rtc.rtc2jira.ExportManager;
 
 public enum StateEnum {
-  migr_resolved("5", "Erledigt", "3", "com.ibm.team.workitem.impedimentWorkflow.state.s2") {
+  migr_resolved("5", "Resolved", "3", "com.ibm.team.workitem.impedimentWorkflow.state.s2") {
 
     @Override
     protected StatusCategory createStatusCategory() {
@@ -26,7 +26,7 @@ public enum StateEnum {
       return StateEnum.getMigrationTransitionMap(this);
     }
   }, // 51 business need
-  migr_reopened("4", "Erneut geöffnet", "6") {
+  migr_reopened("4", "Reopened", "6") {
 
     @Override
     protected StatusCategory createStatusCategory() {
@@ -64,7 +64,7 @@ public enum StateEnum {
       return StateEnum.getMigrationTransitionMap(this);
     }
   }, // 51 business need
-  migr_done("10001", "Fertig", "com.ibm.team.apt.epic.workflow.state.s3", "com.ibm.team.apt.story.verified") {
+  migr_done("10001", "Done", "com.ibm.team.apt.epic.workflow.state.s3", "com.ibm.team.apt.story.verified") {
 
     @Override
     protected StatusCategory createStatusCategory() {
@@ -155,7 +155,7 @@ public enum StateEnum {
       return StateEnum.getMigrationTransitionMap(this);
     }
   }, // business
-  migr_inProgress("3", "In Arbeit", "2", "com.ibm.team.apt.epic.workflow.state.s2", "com.ibm.team.apt.story.defined",
+  migr_inProgress("3", "In Progress", "2", "com.ibm.team.apt.epic.workflow.state.s2", "com.ibm.team.apt.story.defined",
       "com.ibm.team.workitem.businessneedWorkflow.state.s7") {
 
     @Override
@@ -193,7 +193,7 @@ public enum StateEnum {
       return StateEnum.getMigrationTransitionMap(this);
     }
   },
-  migr_closed("6", "Geschlossen", "4", "55") {
+  migr_closed("6", "Closed", "4", "55") {
 
     @Override
     protected StatusCategory createStatusCategory() {

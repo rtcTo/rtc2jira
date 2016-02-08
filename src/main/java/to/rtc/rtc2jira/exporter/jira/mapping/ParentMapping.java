@@ -57,7 +57,11 @@ public class ParentMapping implements Mapping {
         // do not re-add same link: causes server error
         fields.setEpicLink(null);
       } else {
-        setEpicLink(parentKey, fields);
+        // do not change link: causes server error
+        fields.setEpicLink(null);
+        LOGGER.warning("The epic link of issue '" + childIssue.getKey() + "' has been changed from '" + curEpicLink
+            + "' to '" + parentKey + "'");
+        // setEpicLink(parentKey, fields);
       }
     } else {
       setEpicLink(parentKey, fields);

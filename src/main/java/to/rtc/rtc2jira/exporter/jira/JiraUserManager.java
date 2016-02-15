@@ -113,7 +113,7 @@ public class JiraUserManager {
         }
       }
       if (logError) {
-        LOGGER.log(Level.SEVERE, "Problems while adding user " + jiraUser.getEmailAddress() + "  to "
+        LOGGER.log(Level.WARNING, "Problems while adding user " + jiraUser.getEmailAddress() + "  to "
             + BASIC_JIRA_USER_GROUP_NAME + " group. " + errorEntityAsJson);
       }
     }

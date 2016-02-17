@@ -78,7 +78,7 @@ public class IssueFields {
   private Issue parent;
   private String epicName;
   private List<Version> fixVersions = new ArrayList<Version>();
-
+  private String rtcProjectArea;
 
   public IssueType getIssuetype() {
     return issuetype;
@@ -603,6 +603,16 @@ public class IssueFields {
 
   public void setFixVersions(List<Version> versions) {
     this.fixVersions = versions;
+  }
+
+  @JsonView(IssueView.Update.class)
+  @XmlElement(name = "customfield_10402")
+  public String getRtcProjectArea() {
+    return rtcProjectArea;
+  }
+
+  public void setRtcProjectArea(String rtcProjectArea) {
+    this.rtcProjectArea = rtcProjectArea;
   }
 
 

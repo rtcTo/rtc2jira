@@ -103,8 +103,10 @@ public class JiraExporter implements Exporter {
     Date modified = StorageQuery.getField(item, FieldNames.MODIFIED, Date.from(Instant.now()));
     Date lastExport = StorageQuery.getField(item, FieldNames.JIRA_EXPORT_TIMESTAMP, new Date(0));
     if (Settings.getInstance().isForceUpdate() || modified.compareTo(lastExport) > 0) {
-      updateItem(item);
-      updatedItems.add(Integer.valueOf(workItemId));
+      if (!"SRVS Management".equals(item.field(FieldNames.PROJECT_AREA))) {
+        updateItem(item);
+        updatedItems.add(Integer.valueOf(workItemId));
+      }
     }
   }
 

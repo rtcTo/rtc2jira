@@ -66,6 +66,7 @@ public class MappingRegistry {
     registry.put(FieldNames.REALISED_BY_IDM, new JiraRealisedByIdmMapping());
     registry.put(FieldNames.IMPLEMENTATION_LEVEL, new JiraImplementationLevelMapping());
     registry.put(FieldNames.PARENT, new ParentMapping());
+    registry.put(FieldNames.PROJECT_AREA, new ProjectAreaMapping());
   }
 
   public void map(ODocument workItem, Issue issue, StorageEngine storage) {

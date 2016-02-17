@@ -6,66 +6,66 @@
                 "type": "issuetype",
                 "system": "issuetype"
             },
-            "name": "Vorgangstyp",
+            "name": "Issue Type",
             "operations": [],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10100",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/issuetype/10100",
                     "id": "10100",
-                    "description": "Eine Aufgabe, die erledigt werden muss.",
-                    "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
-                    "name": "Aufgabe",
+                    "description": "A task that needs to be done.",
+                    "iconUrl": "https://jira.bisdevdom.ch/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+                    "name": "Task",
                     "subtask": false,
                     "avatarId": 10318
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10001",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/issuetype/10001",
                     "id": "10001",
-                    "description": "Von JIRA Software erstellt – nicht bearbeiten oder löschen. Vorgangstyp für eine User Story.",
-                    "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/issuetypes/story.svg",
+                    "description": "Created by JIRA Software - do not edit or delete. Issue type for a user story.",
+                    "iconUrl": "https://jira.bisdevdom.ch/images/icons/issuetypes/story.svg",
                     "name": "Story",
                     "subtask": false
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10102",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/issuetype/10102",
                     "id": "10102",
-                    "description": "Ein Problem, das die Funktionen des Produkts beeinträchtigt oder verhindert.",
-                    "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10303&avatarType=issuetype",
+                    "description": "A problem which impairs or prevents the functions of the product.",
+                    "iconUrl": "https://jira.bisdevdom.ch/secure/viewavatar?size=xsmall&avatarId=10303&avatarType=issuetype",
                     "name": "Bug",
                     "subtask": false,
                     "avatarId": 10303
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10000",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/issuetype/10000",
                     "id": "10000",
-                    "description": "Von JIRA Software erstellt – nicht bearbeiten oder löschen. Vorgangstyp für eine große User Story, die unterteilt werden muss.",
-                    "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/issuetypes/epic.svg",
+                    "description": "Created by JIRA Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                    "iconUrl": "https://jira.bisdevdom.ch/images/icons/issuetypes/epic.svg",
                     "name": "Epic",
                     "subtask": false
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10200",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/issuetype/10200",
                     "id": "10200",
                     "description": "A need of a business",
-                    "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10300&avatarType=issuetype",
+                    "iconUrl": "https://jira.bisdevdom.ch/secure/viewavatar?size=xsmall&avatarId=10300&avatarType=issuetype",
                     "name": "Business Need",
                     "subtask": false,
                     "avatarId": 10300
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10201",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/issuetype/10201",
                     "id": "10201",
                     "description": "Blocks work",
-                    "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10300&avatarType=issuetype",
+                    "iconUrl": "https://jira.bisdevdom.ch/secure/viewavatar?size=xsmall&avatarId=10300&avatarType=issuetype",
                     "name": "Impediment",
                     "subtask": false,
                     "avatarId": 10300
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/issuetype/10202",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/issuetype/10202",
                     "id": "10202",
                     "description": "Planning unit within which stories are implemented.",
-                    "iconUrl": "http://jira.bisdevdom.ch:8080/secure/viewavatar?size=xsmall&avatarId=10300&avatarType=issuetype",
+                    "iconUrl": "https://jira.bisdevdom.ch/secure/viewavatar?size=xsmall&avatarId=10300&avatarType=issuetype",
                     "name": "Iteration",
                     "subtask": false,
                     "avatarId": 10300
@@ -85,57 +85,57 @@
             ],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10210",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10210",
                     "value": "2013-1",
                     "id": "10210"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10361",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10361",
                     "value": "2013-2",
                     "id": "10361"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10362",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10362",
                     "value": "2013-3",
                     "id": "10362"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10363",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10363",
                     "value": "2014-1",
                     "id": "10363"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10364",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10364",
                     "value": "2014-2",
                     "id": "10364"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10365",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10365",
                     "value": "2014-3",
                     "id": "10365"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10366",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10366",
                     "value": "2014-4",
                     "id": "10366"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10367",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10367",
                     "value": "2015-1",
                     "id": "10367"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10368",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10368",
                     "value": "2015-2",
                     "id": "10368"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10369",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10369",
                     "value": "2015-3",
                     "id": "10369"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10370",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10370",
                     "value": "2015-4",
                     "id": "10370"
                 }
@@ -148,7 +148,7 @@
                 "items": "version",
                 "system": "fixVersions"
             },
-            "name": "Lösungsversion(en)",
+            "name": "Fix Version/s",
             "operations": [
                 "set",
                 "add",
@@ -156,17 +156,17 @@
             ],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10000",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10000",
                     "id": "10000",
                     "name": "Release 12/08",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2012-10-08",
-                    "userReleaseDate": "08/Okt/12",
+                    "userReleaseDate": "08/Oct/12",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10001",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10001",
                     "id": "10001",
                     "name": "Release 12/07",
                     "archived": false,
@@ -176,7 +176,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10002",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10002",
                     "id": "10002",
                     "name": "Release 13/01",
                     "archived": false,
@@ -186,7 +186,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10003",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10003",
                     "id": "10003",
                     "name": "Release 13/09",
                     "archived": false,
@@ -196,17 +196,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10004",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10004",
                     "id": "10004",
                     "name": "Release 13/10",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2013-12-16",
-                    "userReleaseDate": "16/Dez/13",
+                    "userReleaseDate": "16/Dec/13",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10005",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10005",
                     "id": "10005",
                     "name": "Release 12/03",
                     "archived": false,
@@ -216,7 +216,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10006",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10006",
                     "id": "10006",
                     "name": "Release 12/05",
                     "archived": false,
@@ -226,17 +226,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10007",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10007",
                     "id": "10007",
                     "name": "Release 12/04",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2012-05-21",
-                    "userReleaseDate": "21/Mai/12",
+                    "userReleaseDate": "21/May/12",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10008",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10008",
                     "id": "10008",
                     "name": "Release 12/01",
                     "archived": false,
@@ -246,7 +246,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10009",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10009",
                     "id": "10009",
                     "name": "Release 12/09",
                     "archived": false,
@@ -256,17 +256,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10010",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10010",
                     "id": "10010",
                     "name": "Release 12/02",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2012-03-12",
-                    "userReleaseDate": "12/Mär/12",
+                    "userReleaseDate": "12/Mar/12",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10011",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10011",
                     "id": "10011",
                     "name": "Release 12/06",
                     "archived": false,
@@ -276,7 +276,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10012",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10012",
                     "id": "10012",
                     "name": "Timeslot 2015-2",
                     "archived": false,
@@ -286,27 +286,27 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10013",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10013",
                     "id": "10013",
                     "name": "Release 13/02",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2013-03-11",
-                    "userReleaseDate": "11/Mär/13",
+                    "userReleaseDate": "11/Mar/13",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10014",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10014",
                     "id": "10014",
                     "name": "Release 12/10",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2012-12-17",
-                    "userReleaseDate": "17/Dez/12",
+                    "userReleaseDate": "17/Dec/12",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10015",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10015",
                     "id": "10015",
                     "name": "Release 13/03",
                     "archived": false,
@@ -316,17 +316,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10016",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10016",
                     "id": "10016",
                     "name": "Release 13/04",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2013-05-20",
-                    "userReleaseDate": "20/Mai/13",
+                    "userReleaseDate": "20/May/13",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10017",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10017",
                     "id": "10017",
                     "name": "Release 14/03",
                     "archived": false,
@@ -336,7 +336,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10018",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10018",
                     "id": "10018",
                     "name": "Release 13/05",
                     "archived": false,
@@ -346,17 +346,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10019",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10019",
                     "id": "10019",
                     "name": "Release 13/08",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2013-10-07",
-                    "userReleaseDate": "07/Okt/13",
+                    "userReleaseDate": "07/Oct/13",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10020",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10020",
                     "id": "10020",
                     "name": "Release 13/07",
                     "archived": false,
@@ -366,27 +366,27 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10021",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10021",
                     "id": "10021",
                     "name": "Timeslot 2015-1",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2015-03-31",
-                    "userReleaseDate": "31/Mär/15",
+                    "userReleaseDate": "31/Mar/15",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10022",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10022",
                     "id": "10022",
                     "name": "Release 14/02",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2014-03-10",
-                    "userReleaseDate": "10/Mär/14",
+                    "userReleaseDate": "10/Mar/14",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10023",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10023",
                     "id": "10023",
                     "name": "Timeslot 2014-3",
                     "archived": false,
@@ -396,7 +396,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10024",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10024",
                     "id": "10024",
                     "name": "Release 13/06",
                     "archived": false,
@@ -406,7 +406,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10025",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10025",
                     "id": "10025",
                     "name": "Timeslot 2015-3",
                     "archived": false,
@@ -416,7 +416,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10026",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10026",
                     "id": "10026",
                     "name": "Release 14/01",
                     "archived": false,
@@ -426,7 +426,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10027",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10027",
                     "id": "10027",
                     "name": "Timeslot 2014-2",
                     "archived": false,
@@ -436,17 +436,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10028",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10028",
                     "id": "10028",
                     "name": "Timeslot 2014-4",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2014-12-31",
-                    "userReleaseDate": "31/Dez/14",
+                    "userReleaseDate": "31/Dec/14",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10029",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10029",
                     "id": "10029",
                     "name": "Timeslot 2014-1",
                     "archived": false,
@@ -456,7 +456,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10030",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10030",
                     "id": "10030",
                     "name": "Release 14/05",
                     "archived": false,
@@ -466,7 +466,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10031",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10031",
                     "id": "10031",
                     "name": "Timeslot 2016-1",
                     "archived": false,
@@ -477,27 +477,27 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10032",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10032",
                     "id": "10032",
                     "name": "Release 14/04",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2014-05-19",
-                    "userReleaseDate": "19/Mai/14",
+                    "userReleaseDate": "19/May/14",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10033",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10033",
                     "id": "10033",
                     "name": "Timeslot 2015-4",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2015-12-31",
-                    "userReleaseDate": "31/Dez/15",
+                    "userReleaseDate": "31/Dec/15",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10034",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10034",
                     "id": "10034",
                     "name": "Timeslot 2016-2",
                     "archived": false,
@@ -508,7 +508,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10035",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10035",
                     "id": "10035",
                     "name": "Release 14/06",
                     "archived": false,
@@ -518,7 +518,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10036",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10036",
                     "id": "10036",
                     "name": "Release 2.0",
                     "archived": false,
@@ -526,7 +526,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10037",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10037",
                     "id": "10037",
                     "name": "B4L 16.1",
                     "archived": false,
@@ -537,7 +537,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10038",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10038",
                     "id": "10038",
                     "name": "12/2015(O)",
                     "archived": false,
@@ -545,7 +545,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10039",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10039",
                     "id": "10039",
                     "name": "10/2015(O)",
                     "archived": false,
@@ -553,17 +553,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10040",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10040",
                     "id": "10040",
                     "name": "WIN3000 15.1",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2015-05-04",
-                    "userReleaseDate": "04/Mai/15",
+                    "userReleaseDate": "04/May/15",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10041",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10041",
                     "id": "10041",
                     "name": "02/2016(O)",
                     "archived": false,
@@ -571,7 +571,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10042",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10042",
                     "id": "10042",
                     "name": "BI B4L 15.2",
                     "archived": false,
@@ -581,7 +581,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10043",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10043",
                     "id": "10043",
                     "name": "05/2016(O)",
                     "archived": false,
@@ -589,7 +589,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10044",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10044",
                     "id": "10044",
                     "name": "03/2016(O)",
                     "archived": false,
@@ -597,7 +597,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10045",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10045",
                     "id": "10045",
                     "name": "02/2016(Z)",
                     "archived": false,
@@ -605,7 +605,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10046",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10046",
                     "id": "10046",
                     "name": "Migrationstool 16.1",
                     "archived": false,
@@ -616,7 +616,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10047",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10047",
                     "id": "10047",
                     "name": "04/2016(O)",
                     "archived": false,
@@ -624,7 +624,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10048",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10048",
                     "id": "10048",
                     "name": "11/2015(O)",
                     "archived": false,
@@ -632,7 +632,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10049",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10049",
                     "id": "10049",
                     "name": "01/2016(O)",
                     "archived": false,
@@ -640,29 +640,29 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10050",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10050",
                     "id": "10050",
                     "name": "2016",
                     "archived": false,
                     "released": false,
                     "releaseDate": "2016-12-31",
                     "overdue": false,
-                    "userReleaseDate": "31/Dez/16",
+                    "userReleaseDate": "31/Dec/16",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10051",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10051",
                     "id": "10051",
                     "name": "01/2016",
                     "archived": false,
                     "released": false,
                     "releaseDate": "2016-01-31",
-                    "overdue": false,
+                    "overdue": true,
                     "userReleaseDate": "31/Jan/16",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10052",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10052",
                     "id": "10052",
                     "name": "06/2016(O)",
                     "archived": false,
@@ -670,7 +670,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10053",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10053",
                     "id": "10053",
                     "name": "Migrationstool 15.4",
                     "archived": false,
@@ -680,7 +680,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10054",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10054",
                     "id": "10054",
                     "name": "07/2016(O)",
                     "archived": false,
@@ -688,7 +688,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10055",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10055",
                     "id": "10055",
                     "name": "07/2016",
                     "archived": false,
@@ -699,7 +699,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10056",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10056",
                     "id": "10056",
                     "name": "2017(O)",
                     "archived": false,
@@ -707,7 +707,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10057",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10057",
                     "id": "10057",
                     "name": "06/2016",
                     "archived": false,
@@ -718,7 +718,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10058",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10058",
                     "id": "10058",
                     "name": "04/2016",
                     "archived": false,
@@ -729,7 +729,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10059",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10059",
                     "id": "10059",
                     "name": "12/2015(Z)",
                     "archived": false,
@@ -737,7 +737,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10060",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10060",
                     "id": "10060",
                     "name": "03/2016(Z)",
                     "archived": false,
@@ -745,7 +745,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10061",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10061",
                     "id": "10061",
                     "name": "06/2016(Z)",
                     "archived": false,
@@ -753,7 +753,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10062",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10062",
                     "id": "10062",
                     "name": "Release 2013",
                     "archived": false,
@@ -761,7 +761,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10063",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10063",
                     "id": "10063",
                     "name": "Release 1.0",
                     "archived": false,
@@ -769,7 +769,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10064",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10064",
                     "id": "10064",
                     "name": "Release 1.1",
                     "archived": false,
@@ -777,27 +777,27 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10065",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10065",
                     "id": "10065",
                     "name": "2014",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2014-12-31",
-                    "userReleaseDate": "31/Dez/14",
+                    "userReleaseDate": "31/Dec/14",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10066",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10066",
                     "id": "10066",
                     "name": "2013",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2013-12-26",
-                    "userReleaseDate": "26/Dez/13",
+                    "userReleaseDate": "26/Dec/13",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10067",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10067",
                     "id": "10067",
                     "name": "09/2015(O)",
                     "archived": false,
@@ -805,7 +805,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10068",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10068",
                     "id": "10068",
                     "name": "05/2015(O)",
                     "archived": false,
@@ -813,7 +813,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10069",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10069",
                     "id": "10069",
                     "name": "B4L 15.3",
                     "archived": false,
@@ -823,7 +823,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10070",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10070",
                     "id": "10070",
                     "name": "11/2015(Z)",
                     "archived": false,
@@ -831,7 +831,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10071",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10071",
                     "id": "10071",
                     "name": "Migrationstool 15.2",
                     "archived": false,
@@ -841,7 +841,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10072",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10072",
                     "id": "10072",
                     "name": "06/2015(O)",
                     "archived": false,
@@ -849,7 +849,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10073",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10073",
                     "id": "10073",
                     "name": "09/2015(Z)",
                     "archived": false,
@@ -857,7 +857,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10074",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10074",
                     "id": "10074",
                     "name": "B4L 15.2",
                     "archived": false,
@@ -867,7 +867,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10075",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10075",
                     "id": "10075",
                     "name": "04/2015(O)",
                     "archived": false,
@@ -875,7 +875,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10076",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10076",
                     "id": "10076",
                     "name": "05/2015(Z)",
                     "archived": false,
@@ -883,27 +883,27 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10077",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10077",
                     "id": "10077",
                     "name": "BI B4L 15.1",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2015-05-04",
-                    "userReleaseDate": "04/Mai/15",
+                    "userReleaseDate": "04/May/15",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10078",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10078",
                     "id": "10078",
                     "name": "Migrationstool 15.1",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2015-05-31",
-                    "userReleaseDate": "31/Mai/15",
+                    "userReleaseDate": "31/May/15",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10079",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10079",
                     "id": "10079",
                     "name": "Migrationstool 15.3",
                     "archived": false,
@@ -913,7 +913,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10080",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10080",
                     "id": "10080",
                     "name": "BI B4L 15.3",
                     "archived": false,
@@ -921,17 +921,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10081",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10081",
                     "id": "10081",
                     "name": "B4L 15.1",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2015-05-20",
-                    "userReleaseDate": "20/Mai/15",
+                    "userReleaseDate": "20/May/15",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10082",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10082",
                     "id": "10082",
                     "name": "CRM 15.2",
                     "archived": false,
@@ -941,7 +941,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10083",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10083",
                     "id": "10083",
                     "name": "06/2015(Z)",
                     "archived": false,
@@ -949,7 +949,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10084",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10084",
                     "id": "10084",
                     "name": "CRM 15.1",
                     "archived": false,
@@ -959,7 +959,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10085",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10085",
                     "id": "10085",
                     "name": "10/2015(Z)",
                     "archived": false,
@@ -967,17 +967,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10086",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10086",
                     "id": "10086",
                     "name": "AGRONET 15.5",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2015-05-19",
-                    "userReleaseDate": "19/Mai/15",
+                    "userReleaseDate": "19/May/15",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10087",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10087",
                     "id": "10087",
                     "name": "AGRONET 15.8",
                     "archived": false,
@@ -987,7 +987,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10088",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10088",
                     "id": "10088",
                     "name": "08/2015(Z)",
                     "archived": false,
@@ -995,7 +995,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10089",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10089",
                     "id": "10089",
                     "name": "07/2015(O)",
                     "archived": false,
@@ -1003,7 +1003,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10090",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10090",
                     "id": "10090",
                     "name": "12/2016(O)",
                     "archived": false,
@@ -1011,7 +1011,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10091",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10091",
                     "id": "10091",
                     "name": "03/2015(Z)",
                     "archived": false,
@@ -1019,7 +1019,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10092",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10092",
                     "id": "10092",
                     "name": "AGRONET 15.6",
                     "archived": false,
@@ -1029,7 +1029,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10093",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10093",
                     "id": "10093",
                     "name": "04/2015(Z)",
                     "archived": false,
@@ -1037,7 +1037,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10094",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10094",
                     "id": "10094",
                     "name": "05/2016(Z)",
                     "archived": false,
@@ -1045,7 +1045,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10095",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10095",
                     "id": "10095",
                     "name": "2017(Z)",
                     "archived": false,
@@ -1053,18 +1053,18 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10096",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10096",
                     "id": "10096",
                     "name": "2018",
                     "archived": false,
                     "released": false,
                     "releaseDate": "2018-12-31",
                     "overdue": false,
-                    "userReleaseDate": "31/Dez/18",
+                    "userReleaseDate": "31/Dec/18",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10097",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10097",
                     "id": "10097",
                     "name": "Sage200 15.2",
                     "archived": false,
@@ -1074,7 +1074,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10098",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10098",
                     "id": "10098",
                     "name": "BI B4L 15.4",
                     "archived": false,
@@ -1082,7 +1082,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10099",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10099",
                     "id": "10099",
                     "name": "08/2016(O)",
                     "archived": false,
@@ -1090,7 +1090,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10100",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10100",
                     "id": "10100",
                     "name": "08/2015(O)",
                     "archived": false,
@@ -1098,7 +1098,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10101",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10101",
                     "id": "10101",
                     "name": "10/2016(O)",
                     "archived": false,
@@ -1106,18 +1106,18 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10102",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10102",
                     "id": "10102",
                     "name": "03/2016",
                     "archived": false,
                     "released": false,
                     "releaseDate": "2016-03-31",
                     "overdue": false,
-                    "userReleaseDate": "31/Mär/16",
+                    "userReleaseDate": "31/Mar/16",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10103",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10103",
                     "id": "10103",
                     "name": "07/2015(Z)",
                     "archived": false,
@@ -1125,18 +1125,18 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10104",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10104",
                     "id": "10104",
                     "name": "12/2016",
                     "archived": false,
                     "released": false,
                     "releaseDate": "2016-12-31",
                     "overdue": false,
-                    "userReleaseDate": "31/Dez/16",
+                    "userReleaseDate": "31/Dec/16",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10105",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10105",
                     "id": "10105",
                     "name": "09/2016(O)",
                     "archived": false,
@@ -1144,18 +1144,18 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10106",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10106",
                     "id": "10106",
                     "name": "05/2016",
                     "archived": false,
                     "released": false,
                     "releaseDate": "2016-05-31",
                     "overdue": false,
-                    "userReleaseDate": "31/Mai/16",
+                    "userReleaseDate": "31/May/16",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10107",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10107",
                     "id": "10107",
                     "name": "11/2016(O)",
                     "archived": false,
@@ -1163,7 +1163,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10108",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10108",
                     "id": "10108",
                     "name": "08/2016",
                     "archived": false,
@@ -1174,9 +1174,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10109",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10109",
                     "id": "10109",
                     "name": "01/2016(Z)",
+                    "archived": false,
+                    "released": false,
+                    "projectId": 10000
+                },
+                {
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10110",
+                    "id": "10110",
+                    "name": "Migrationstool 16.2",
                     "archived": false,
                     "released": false,
                     "projectId": 10000
@@ -1201,29 +1209,29 @@
                 "type": "resolution",
                 "system": "resolution"
             },
-            "name": "Lösung",
+            "name": "Resolution",
             "operations": [
                 "set"
             ],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/resolution/10000",
-                    "name": "Fertig",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/resolution/10000",
+                    "name": "Done",
                     "id": "10000"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/resolution/10001",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/resolution/10001",
                     "name": "Won't Do",
                     "id": "10001"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/resolution/10002",
-                    "name": "Duplikat",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/resolution/10002",
+                    "name": "Duplicate",
                     "id": "10002"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/resolution/10003",
-                    "name": "Kann nicht reproduziert werden",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/resolution/10003",
+                    "name": "Cannot Reproduce",
                     "id": "10003"
                 }
             ]
@@ -1241,7 +1249,7 @@
             ],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10209",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10209",
                     "value": "Yes",
                     "id": "10209"
                 }
@@ -1267,18 +1275,6 @@
                 "customId": 10227
             },
             "name": "Silo Ranking",
-            "operations": [
-                "set"
-            ]
-        },
-        "customfield_10228": {
-            "required": false,
-            "schema": {
-                "type": "group",
-                "custom": "com.atlassian.jira.plugin.system.customfieldtypes:grouppicker",
-                "customId": 10228
-            },
-            "name": "Team Group",
             "operations": [
                 "set"
             ]
@@ -1313,38 +1309,38 @@
                 "type": "priority",
                 "system": "priority"
             },
-            "name": "Priorität",
+            "name": "Priority",
             "operations": [
                 "set"
             ],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/priority/1",
-                    "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/priorities/highest.svg",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/priority/1",
+                    "iconUrl": "https://jira.bisdevdom.ch/images/icons/priorities/highest.svg",
                     "name": "Highest",
                     "id": "1"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/priority/2",
-                    "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/priorities/high.svg",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/priority/2",
+                    "iconUrl": "https://jira.bisdevdom.ch/images/icons/priorities/high.svg",
                     "name": "High",
                     "id": "2"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/priority/3",
-                    "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/priorities/medium.svg",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/priority/3",
+                    "iconUrl": "https://jira.bisdevdom.ch/images/icons/priorities/medium.svg",
                     "name": "Medium",
                     "id": "3"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/priority/4",
-                    "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/priorities/low.svg",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/priority/4",
+                    "iconUrl": "https://jira.bisdevdom.ch/images/icons/priorities/low.svg",
                     "name": "Low",
                     "id": "4"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/priority/5",
-                    "iconUrl": "http://jira.bisdevdom.ch:8080/images/icons/priorities/lowest.svg",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/priority/5",
+                    "iconUrl": "https://jira.bisdevdom.ch/images/icons/priorities/lowest.svg",
                     "name": "Lowest",
                     "id": "5"
                 }
@@ -1363,27 +1359,27 @@
             ],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10207",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10207",
                     "value": "IDM Retail",
                     "id": "10207"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10392",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10392",
                     "value": "IDM Weinhandel",
                     "id": "10392"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10393",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10393",
                     "value": "IDM Basis - branchenneutral",
                     "id": "10393"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10394",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10394",
                     "value": "IDM Saatgut",
                     "id": "10394"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10395",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10395",
                     "value": "IDM Brenn- und Treibstoff",
                     "id": "10395"
                 }
@@ -1402,107 +1398,107 @@
             ],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10208",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10208",
                     "value": "Standard",
                     "id": "10208"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10309",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10309",
                     "value": "AFB",
                     "id": "10309"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10310",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10310",
                     "value": "AMK",
                     "id": "10310"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10311",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10311",
                     "value": "BM1000",
                     "id": "10311"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10312",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10312",
                     "value": "BM3000",
                     "id": "10312"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10313",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10313",
                     "value": "BM4000",
                     "id": "10313"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10314",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10314",
                     "value": "DRWZ",
                     "id": "10314"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10315",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10315",
                     "value": "EAG",
                     "id": "10315"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10316",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10316",
                     "value": "Gero",
                     "id": "10316"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10317",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10317",
                     "value": "Inotex",
                     "id": "10317"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10318",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10318",
                     "value": "KSG",
                     "id": "10318"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10319",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10319",
                     "value": "RAgr",
                     "id": "10319"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10320",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10320",
                     "value": "RFen",
                     "id": "10320"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10321",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10321",
                     "value": "RGof",
                     "id": "10321"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10322",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10322",
                     "value": "RLap",
                     "id": "10322"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10323",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10323",
                     "value": "RLch",
                     "id": "10323"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10324",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10324",
                     "value": "RLdi",
                     "id": "10324"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10325",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10325",
                     "value": "RUfa",
                     "id": "10325"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10326",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10326",
                     "value": "TSH",
                     "id": "10326"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10327",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10327",
                     "value": "TGH",
                     "id": "10327"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10328",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10328",
                     "value": "TWS",
                     "id": "10328"
                 }
@@ -1517,7 +1513,7 @@
                 "customId": 10223
             },
             "name": "Related Projects",
-            "autoCompleteUrl": "http://jira.bisdevdom.ch:8080/rest/api/1.0/labels/10000/suggest?customFieldId=10223&query=",
+            "autoCompleteUrl": "https://jira.bisdevdom.ch/rest/api/1.0/labels/10000/suggest?customFieldId=10223&query=",
             "operations": [
                 "add",
                 "set",
@@ -1531,8 +1527,8 @@
                 "items": "string",
                 "system": "labels"
             },
-            "name": "Stichwörter",
-            "autoCompleteUrl": "http://jira.bisdevdom.ch:8080/rest/api/1.0/labels/suggest?query=",
+            "name": "Labels",
+            "autoCompleteUrl": "https://jira.bisdevdom.ch/rest/api/1.0/labels/suggest?query=",
             "operations": [
                 "add",
                 "set",
@@ -1547,7 +1543,7 @@
                 "customId": 10224
             },
             "name": "Resolver",
-            "autoCompleteUrl": "http://jira.bisdevdom.ch:8080/rest/api/1.0/users/picker?fieldName=customfield_10224&query=",
+            "autoCompleteUrl": "https://jira.bisdevdom.ch/rest/api/1.0/users/picker?fieldName=customfield_10224&query=",
             "operations": [
                 "set"
             ]
@@ -1565,7 +1561,7 @@
             ],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10205",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10205",
                     "value": "Yes",
                     "id": "10205"
                 }
@@ -1603,7 +1599,7 @@
                 "customId": 10217
             },
             "name": "Product Owner",
-            "autoCompleteUrl": "http://jira.bisdevdom.ch:8080/rest/api/1.0/users/picker?fieldName=customfield_10217&query=",
+            "autoCompleteUrl": "https://jira.bisdevdom.ch/rest/api/1.0/users/picker?fieldName=customfield_10217&query=",
             "operations": [
                 "set"
             ]
@@ -1621,582 +1617,582 @@
             ],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10206",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10206",
                     "value": "Ametras Möbel Prototyp",
                     "id": "10206"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10215",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10215",
                     "value": "App Handelsvertreter",
                     "id": "10215"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10216",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10216",
                     "value": "B4AGROLA Betreuung",
                     "id": "10216"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10217",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10217",
                     "value": "B4GOF Trading",
                     "id": "10217"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10218",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10218",
                     "value": "B4LANDI",
                     "id": "10218"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10219",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10219",
                     "value": "B4LAP Betreuung",
                     "id": "10219"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10220",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10220",
                     "value": "B4LCH Betreuung",
                     "id": "10220"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10221",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10221",
                     "value": "B4UFA",
                     "id": "10221"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10222",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10222",
                     "value": "B4PFB Pflanzenschutz",
                     "id": "10222"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10223",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10223",
                     "value": "Bison ITS Betreuung",
                     "id": "10223"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10224",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10224",
                     "value": "B4BGroup Systemfusion",
                     "id": "10224"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10225",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10225",
                     "value": "EAG Betreuung",
                     "id": "10225"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10226",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10226",
                     "value": "ERP Feldsaaten Freudenberger",
                     "id": "10226"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10227",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10227",
                     "value": "Hoyer-ERP-Gesamtlösung",
                     "id": "10227"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10228",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10228",
                     "value": "InoTex Betreuung",
                     "id": "10228"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10229",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10229",
                     "value": "KönigStahl Warschau",
                     "id": "10229"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10230",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10230",
                     "value": "RUAG Environment",
                     "id": "10230"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10231",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10231",
                     "value": "Uvavins",
                     "id": "10231"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10232",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10232",
                     "value": "PROD Performance DL",
                     "id": "10232"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10233",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10233",
                     "value": "PROD Split DL",
                     "id": "10233"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10234",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10234",
                     "value": "Backlog Agrar EL",
                     "id": "10234"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10235",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10235",
                     "value": "Backlog Multi Branch EL",
                     "id": "10235"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10236",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10236",
                     "value": "BL GH IDM",
                     "id": "10236"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10237",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10237",
                     "value": "Backlog Finance EL",
                     "id": "10237"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10238",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10238",
                     "value": "Backlog Retail EL",
                     "id": "10238"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10239",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10239",
                     "value": "Backlog Steel EL",
                     "id": "10239"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10240",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10240",
                     "value": "Backlog Technology EL",
                     "id": "10240"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10241",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10241",
                     "value": "Backlog Unterhalt & Optimierungen 2014",
                     "id": "10241"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10242",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10242",
                     "value": "Backlog Printing",
                     "id": "10242"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10243",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10243",
                     "value": "Backlog Mobile Strategie",
                     "id": "10243"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10244",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10244",
                     "value": "PROD NewCore",
                     "id": "10244"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10245",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10245",
                     "value": "Retail - Bison ESL",
                     "id": "10245"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10246",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10246",
                     "value": "Reservationen - Neu-Projekte",
                     "id": "10246"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10247",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10247",
                     "value": "REL GK Wartung",
                     "id": "10247"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10248",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10248",
                     "value": "REL Architektur",
                     "id": "10248"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10249",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10249",
                     "value": "REL Cross",
                     "id": "10249"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10250",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10250",
                     "value": "REL Maintenance",
                     "id": "10250"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10251",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10251",
                     "value": "---",
                     "id": "10251"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10252",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10252",
                     "value": "B4AGROLA",
                     "id": "10252"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10253",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10253",
                     "value": "DAKODA Branchenmodell Fertigung",
                     "id": "10253"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10254",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10254",
                     "value": "PROD E-Learning Aufbau_Betrieb 2013",
                     "id": "10254"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10255",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10255",
                     "value": "PROD Safira Ergonomie",
                     "id": "10255"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10256",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10256",
                     "value": "Frigemo Handelsfirmen",
                     "id": "10256"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10257",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10257",
                     "value": "RTC_SCM@Bison",
                     "id": "10257"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10258",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10258",
                     "value": "PROD PQ Cockpit",
                     "id": "10258"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10259",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10259",
                     "value": "PROD MilestoneRelease 2012",
                     "id": "10259"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10260",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10260",
                     "value": "B4LCH Phase 3",
                     "id": "10260"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10261",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10261",
                     "value": "PROD Base4Bison",
                     "id": "10261"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10262",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10262",
                     "value": "MOD_BRA Intersect",
                     "id": "10262"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10263",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10263",
                     "value": "App Handelsvertreter Abrechnung BiMX",
                     "id": "10263"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10264",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10264",
                     "value": "MOD_BRA_BDF",
                     "id": "10264"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10265",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10265",
                     "value": "PROD Feature4Bison",
                     "id": "10265"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10266",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10266",
                     "value": "PROD Evolution II",
                     "id": "10266"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10267",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10267",
                     "value": "Gero, Hoberg, Driesch",
                     "id": "10267"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10268",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10268",
                     "value": "MOD_BRA Basisentwicklung",
                     "id": "10268"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10269",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10269",
                     "value": "Partner und Sales Projekte",
                     "id": "10269"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10270",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10270",
                     "value": "PROD Modularisierung",
                     "id": "10270"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10271",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10271",
                     "value": "MOD_BRA Nemo Finanzintegration",
                     "id": "10271"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10272",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10272",
                     "value": "Andréfleurs",
                     "id": "10272"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10273",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10273",
                     "value": "REL Scrum-Team Arbeiten Altlasten",
                     "id": "10273"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10274",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10274",
                     "value": "B4KOWAG",
                     "id": "10274"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10275",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10275",
                     "value": "PROD Performance",
                     "id": "10275"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10276",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10276",
                     "value": "MOD_BRA Aufbau Retail",
                     "id": "10276"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10277",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10277",
                     "value": "DRWZ Phase III",
                     "id": "10277"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10278",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10278",
                     "value": "MOD_BRA CONSOLVO WE 2",
                     "id": "10278"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10279",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10279",
                     "value": "BM 10 Aufbau Standardmandant Stahl",
                     "id": "10279"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10280",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10280",
                     "value": "MOD_BRA Zinal Produktion",
                     "id": "10280"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10281",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10281",
                     "value": "Bison Technology DL",
                     "id": "10281"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10282",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10282",
                     "value": "MOD_BRA SAM4BITS",
                     "id": "10282"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10283",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10283",
                     "value": "BEST Performance",
                     "id": "10283"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10284",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10284",
                     "value": "B4BisonGroup Erweiterungen 2013",
                     "id": "10284"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10285",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10285",
                     "value": "PROD Optimierung Testumgebung 2013",
                     "id": "10285"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10286",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10286",
                     "value": "B4LCH Stock Optimizer",
                     "id": "10286"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10287",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10287",
                     "value": "EL TGH Multibranche",
                     "id": "10287"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10288",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10288",
                     "value": "Backlog DEVL EL",
                     "id": "10288"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10289",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10289",
                     "value": "PROD High Availability",
                     "id": "10289"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10290",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10290",
                     "value": "Standard Development",
                     "id": "10290"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10291",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10291",
                     "value": "MOD_BRA Zunder Branchen Stahl",
                     "id": "10291"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10292",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10292",
                     "value": "PROD Testdatenbasis",
                     "id": "10292"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10293",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10293",
                     "value": "PROD Easy Quattro",
                     "id": "10293"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10294",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10294",
                     "value": "Enterprise SITE",
                     "id": "10294"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10295",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10295",
                     "value": "B4LAP Sortieranlage",
                     "id": "10295"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10296",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10296",
                     "value": "MOD_BRA Seriennummer",
                     "id": "10296"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10297",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10297",
                     "value": "Pilatus Quattro Restanzen",
                     "id": "10297"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10298",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10298",
                     "value": "MOD_BRA Apollon Finanz",
                     "id": "10298"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10299",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10299",
                     "value": "PROD Mobile Applications",
                     "id": "10299"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10300",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10300",
                     "value": "B4LAP EDI",
                     "id": "10300"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10301",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10301",
                     "value": "B4LAP Phase 2",
                     "id": "10301"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10302",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10302",
                     "value": "PROD Symphony4Bison",
                     "id": "10302"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10303",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10303",
                     "value": "PQ Testabdeckung Rest. Pilatus",
                     "id": "10303"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10304",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10304",
                     "value": "PROD OotB",
                     "id": "10304"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10305",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10305",
                     "value": "PROD Performance 2013",
                     "id": "10305"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10306",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10306",
                     "value": "PROD Speed",
                     "id": "10306"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10307",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10307",
                     "value": "BEST PQ Maintenance",
                     "id": "10307"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10308",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10308",
                     "value": "FLaGschiff",
                     "id": "10308"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10405",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10405",
                     "value": "Systemunterhalt (Build / Test) / Bereitstellung",
                     "id": "10405"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10406",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10406",
                     "value": "Proj20",
                     "id": "10406"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10407",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10407",
                     "value": "Last-Test",
                     "id": "10407"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10408",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10408",
                     "value": "Proj19",
                     "id": "10408"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10409",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10409",
                     "value": "Kurse/eLearning",
                     "id": "10409"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10410",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10410",
                     "value": "Redaktion",
                     "id": "10410"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10411",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10411",
                     "value": "Performance-Issues Kunden / Intern",
                     "id": "10411"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10412",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10412",
                     "value": "LAB-Manager",
                     "id": "10412"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10413",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10413",
                     "value": "Performance-Test",
                     "id": "10413"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10414",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10414",
                     "value": "Proj16",
                     "id": "10414"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10415",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10415",
                     "value": "Projektname auswählen",
                     "id": "10415"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10416",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10416",
                     "value": "Proj15",
                     "id": "10416"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10417",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10417",
                     "value": "Swisscom DMC",
                     "id": "10417"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10418",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10418",
                     "value": "Systemvorgaben / Dokumentationen",
                     "id": "10418"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10419",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10419",
                     "value": "Proj18",
                     "id": "10419"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10420",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10420",
                     "value": "Proj17",
                     "id": "10420"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10421",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10421",
                     "value": "Testautomatisierung",
                     "id": "10421"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10422",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10422",
                     "value": "Sintra",
                     "id": "10422"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10423",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10423",
                     "value": "Tools",
                     "id": "10423"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10424",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10424",
                     "value": "Plattform-Test",
                     "id": "10424"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10425",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10425",
                     "value": "Coaching/Teststabilität",
                     "id": "10425"
                 }
@@ -2209,7 +2205,7 @@
                 "items": "version",
                 "system": "versions"
             },
-            "name": "betrifft Version(en)",
+            "name": "Affects Version/s",
             "operations": [
                 "set",
                 "add",
@@ -2217,17 +2213,17 @@
             ],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10000",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10000",
                     "id": "10000",
                     "name": "Release 12/08",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2012-10-08",
-                    "userReleaseDate": "08/Okt/12",
+                    "userReleaseDate": "08/Oct/12",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10001",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10001",
                     "id": "10001",
                     "name": "Release 12/07",
                     "archived": false,
@@ -2237,7 +2233,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10002",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10002",
                     "id": "10002",
                     "name": "Release 13/01",
                     "archived": false,
@@ -2247,7 +2243,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10003",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10003",
                     "id": "10003",
                     "name": "Release 13/09",
                     "archived": false,
@@ -2257,17 +2253,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10004",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10004",
                     "id": "10004",
                     "name": "Release 13/10",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2013-12-16",
-                    "userReleaseDate": "16/Dez/13",
+                    "userReleaseDate": "16/Dec/13",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10005",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10005",
                     "id": "10005",
                     "name": "Release 12/03",
                     "archived": false,
@@ -2277,7 +2273,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10006",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10006",
                     "id": "10006",
                     "name": "Release 12/05",
                     "archived": false,
@@ -2287,17 +2283,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10007",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10007",
                     "id": "10007",
                     "name": "Release 12/04",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2012-05-21",
-                    "userReleaseDate": "21/Mai/12",
+                    "userReleaseDate": "21/May/12",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10008",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10008",
                     "id": "10008",
                     "name": "Release 12/01",
                     "archived": false,
@@ -2307,7 +2303,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10009",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10009",
                     "id": "10009",
                     "name": "Release 12/09",
                     "archived": false,
@@ -2317,17 +2313,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10010",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10010",
                     "id": "10010",
                     "name": "Release 12/02",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2012-03-12",
-                    "userReleaseDate": "12/Mär/12",
+                    "userReleaseDate": "12/Mar/12",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10011",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10011",
                     "id": "10011",
                     "name": "Release 12/06",
                     "archived": false,
@@ -2337,7 +2333,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10012",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10012",
                     "id": "10012",
                     "name": "Timeslot 2015-2",
                     "archived": false,
@@ -2347,27 +2343,27 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10013",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10013",
                     "id": "10013",
                     "name": "Release 13/02",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2013-03-11",
-                    "userReleaseDate": "11/Mär/13",
+                    "userReleaseDate": "11/Mar/13",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10014",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10014",
                     "id": "10014",
                     "name": "Release 12/10",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2012-12-17",
-                    "userReleaseDate": "17/Dez/12",
+                    "userReleaseDate": "17/Dec/12",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10015",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10015",
                     "id": "10015",
                     "name": "Release 13/03",
                     "archived": false,
@@ -2377,17 +2373,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10016",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10016",
                     "id": "10016",
                     "name": "Release 13/04",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2013-05-20",
-                    "userReleaseDate": "20/Mai/13",
+                    "userReleaseDate": "20/May/13",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10017",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10017",
                     "id": "10017",
                     "name": "Release 14/03",
                     "archived": false,
@@ -2397,7 +2393,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10018",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10018",
                     "id": "10018",
                     "name": "Release 13/05",
                     "archived": false,
@@ -2407,17 +2403,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10019",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10019",
                     "id": "10019",
                     "name": "Release 13/08",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2013-10-07",
-                    "userReleaseDate": "07/Okt/13",
+                    "userReleaseDate": "07/Oct/13",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10020",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10020",
                     "id": "10020",
                     "name": "Release 13/07",
                     "archived": false,
@@ -2427,27 +2423,27 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10021",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10021",
                     "id": "10021",
                     "name": "Timeslot 2015-1",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2015-03-31",
-                    "userReleaseDate": "31/Mär/15",
+                    "userReleaseDate": "31/Mar/15",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10022",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10022",
                     "id": "10022",
                     "name": "Release 14/02",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2014-03-10",
-                    "userReleaseDate": "10/Mär/14",
+                    "userReleaseDate": "10/Mar/14",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10023",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10023",
                     "id": "10023",
                     "name": "Timeslot 2014-3",
                     "archived": false,
@@ -2457,7 +2453,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10024",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10024",
                     "id": "10024",
                     "name": "Release 13/06",
                     "archived": false,
@@ -2467,7 +2463,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10025",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10025",
                     "id": "10025",
                     "name": "Timeslot 2015-3",
                     "archived": false,
@@ -2477,7 +2473,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10026",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10026",
                     "id": "10026",
                     "name": "Release 14/01",
                     "archived": false,
@@ -2487,7 +2483,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10027",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10027",
                     "id": "10027",
                     "name": "Timeslot 2014-2",
                     "archived": false,
@@ -2497,17 +2493,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10028",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10028",
                     "id": "10028",
                     "name": "Timeslot 2014-4",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2014-12-31",
-                    "userReleaseDate": "31/Dez/14",
+                    "userReleaseDate": "31/Dec/14",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10029",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10029",
                     "id": "10029",
                     "name": "Timeslot 2014-1",
                     "archived": false,
@@ -2517,7 +2513,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10030",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10030",
                     "id": "10030",
                     "name": "Release 14/05",
                     "archived": false,
@@ -2527,7 +2523,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10031",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10031",
                     "id": "10031",
                     "name": "Timeslot 2016-1",
                     "archived": false,
@@ -2538,27 +2534,27 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10032",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10032",
                     "id": "10032",
                     "name": "Release 14/04",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2014-05-19",
-                    "userReleaseDate": "19/Mai/14",
+                    "userReleaseDate": "19/May/14",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10033",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10033",
                     "id": "10033",
                     "name": "Timeslot 2015-4",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2015-12-31",
-                    "userReleaseDate": "31/Dez/15",
+                    "userReleaseDate": "31/Dec/15",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10034",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10034",
                     "id": "10034",
                     "name": "Timeslot 2016-2",
                     "archived": false,
@@ -2569,7 +2565,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10035",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10035",
                     "id": "10035",
                     "name": "Release 14/06",
                     "archived": false,
@@ -2579,7 +2575,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10036",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10036",
                     "id": "10036",
                     "name": "Release 2.0",
                     "archived": false,
@@ -2587,7 +2583,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10037",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10037",
                     "id": "10037",
                     "name": "B4L 16.1",
                     "archived": false,
@@ -2598,7 +2594,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10038",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10038",
                     "id": "10038",
                     "name": "12/2015(O)",
                     "archived": false,
@@ -2606,7 +2602,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10039",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10039",
                     "id": "10039",
                     "name": "10/2015(O)",
                     "archived": false,
@@ -2614,17 +2610,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10040",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10040",
                     "id": "10040",
                     "name": "WIN3000 15.1",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2015-05-04",
-                    "userReleaseDate": "04/Mai/15",
+                    "userReleaseDate": "04/May/15",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10041",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10041",
                     "id": "10041",
                     "name": "02/2016(O)",
                     "archived": false,
@@ -2632,7 +2628,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10042",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10042",
                     "id": "10042",
                     "name": "BI B4L 15.2",
                     "archived": false,
@@ -2642,7 +2638,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10043",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10043",
                     "id": "10043",
                     "name": "05/2016(O)",
                     "archived": false,
@@ -2650,7 +2646,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10044",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10044",
                     "id": "10044",
                     "name": "03/2016(O)",
                     "archived": false,
@@ -2658,7 +2654,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10045",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10045",
                     "id": "10045",
                     "name": "02/2016(Z)",
                     "archived": false,
@@ -2666,7 +2662,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10046",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10046",
                     "id": "10046",
                     "name": "Migrationstool 16.1",
                     "archived": false,
@@ -2677,7 +2673,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10047",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10047",
                     "id": "10047",
                     "name": "04/2016(O)",
                     "archived": false,
@@ -2685,7 +2681,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10048",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10048",
                     "id": "10048",
                     "name": "11/2015(O)",
                     "archived": false,
@@ -2693,7 +2689,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10049",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10049",
                     "id": "10049",
                     "name": "01/2016(O)",
                     "archived": false,
@@ -2701,29 +2697,29 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10050",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10050",
                     "id": "10050",
                     "name": "2016",
                     "archived": false,
                     "released": false,
                     "releaseDate": "2016-12-31",
                     "overdue": false,
-                    "userReleaseDate": "31/Dez/16",
+                    "userReleaseDate": "31/Dec/16",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10051",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10051",
                     "id": "10051",
                     "name": "01/2016",
                     "archived": false,
                     "released": false,
                     "releaseDate": "2016-01-31",
-                    "overdue": false,
+                    "overdue": true,
                     "userReleaseDate": "31/Jan/16",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10052",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10052",
                     "id": "10052",
                     "name": "06/2016(O)",
                     "archived": false,
@@ -2731,7 +2727,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10053",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10053",
                     "id": "10053",
                     "name": "Migrationstool 15.4",
                     "archived": false,
@@ -2741,7 +2737,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10054",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10054",
                     "id": "10054",
                     "name": "07/2016(O)",
                     "archived": false,
@@ -2749,7 +2745,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10055",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10055",
                     "id": "10055",
                     "name": "07/2016",
                     "archived": false,
@@ -2760,7 +2756,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10056",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10056",
                     "id": "10056",
                     "name": "2017(O)",
                     "archived": false,
@@ -2768,7 +2764,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10057",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10057",
                     "id": "10057",
                     "name": "06/2016",
                     "archived": false,
@@ -2779,7 +2775,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10058",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10058",
                     "id": "10058",
                     "name": "04/2016",
                     "archived": false,
@@ -2790,7 +2786,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10059",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10059",
                     "id": "10059",
                     "name": "12/2015(Z)",
                     "archived": false,
@@ -2798,7 +2794,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10060",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10060",
                     "id": "10060",
                     "name": "03/2016(Z)",
                     "archived": false,
@@ -2806,7 +2802,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10061",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10061",
                     "id": "10061",
                     "name": "06/2016(Z)",
                     "archived": false,
@@ -2814,7 +2810,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10062",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10062",
                     "id": "10062",
                     "name": "Release 2013",
                     "archived": false,
@@ -2822,7 +2818,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10063",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10063",
                     "id": "10063",
                     "name": "Release 1.0",
                     "archived": false,
@@ -2830,7 +2826,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10064",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10064",
                     "id": "10064",
                     "name": "Release 1.1",
                     "archived": false,
@@ -2838,27 +2834,27 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10065",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10065",
                     "id": "10065",
                     "name": "2014",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2014-12-31",
-                    "userReleaseDate": "31/Dez/14",
+                    "userReleaseDate": "31/Dec/14",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10066",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10066",
                     "id": "10066",
                     "name": "2013",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2013-12-26",
-                    "userReleaseDate": "26/Dez/13",
+                    "userReleaseDate": "26/Dec/13",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10067",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10067",
                     "id": "10067",
                     "name": "09/2015(O)",
                     "archived": false,
@@ -2866,7 +2862,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10068",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10068",
                     "id": "10068",
                     "name": "05/2015(O)",
                     "archived": false,
@@ -2874,7 +2870,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10069",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10069",
                     "id": "10069",
                     "name": "B4L 15.3",
                     "archived": false,
@@ -2884,7 +2880,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10070",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10070",
                     "id": "10070",
                     "name": "11/2015(Z)",
                     "archived": false,
@@ -2892,7 +2888,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10071",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10071",
                     "id": "10071",
                     "name": "Migrationstool 15.2",
                     "archived": false,
@@ -2902,7 +2898,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10072",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10072",
                     "id": "10072",
                     "name": "06/2015(O)",
                     "archived": false,
@@ -2910,7 +2906,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10073",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10073",
                     "id": "10073",
                     "name": "09/2015(Z)",
                     "archived": false,
@@ -2918,7 +2914,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10074",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10074",
                     "id": "10074",
                     "name": "B4L 15.2",
                     "archived": false,
@@ -2928,7 +2924,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10075",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10075",
                     "id": "10075",
                     "name": "04/2015(O)",
                     "archived": false,
@@ -2936,7 +2932,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10076",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10076",
                     "id": "10076",
                     "name": "05/2015(Z)",
                     "archived": false,
@@ -2944,27 +2940,27 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10077",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10077",
                     "id": "10077",
                     "name": "BI B4L 15.1",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2015-05-04",
-                    "userReleaseDate": "04/Mai/15",
+                    "userReleaseDate": "04/May/15",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10078",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10078",
                     "id": "10078",
                     "name": "Migrationstool 15.1",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2015-05-31",
-                    "userReleaseDate": "31/Mai/15",
+                    "userReleaseDate": "31/May/15",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10079",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10079",
                     "id": "10079",
                     "name": "Migrationstool 15.3",
                     "archived": false,
@@ -2974,7 +2970,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10080",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10080",
                     "id": "10080",
                     "name": "BI B4L 15.3",
                     "archived": false,
@@ -2982,17 +2978,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10081",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10081",
                     "id": "10081",
                     "name": "B4L 15.1",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2015-05-20",
-                    "userReleaseDate": "20/Mai/15",
+                    "userReleaseDate": "20/May/15",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10082",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10082",
                     "id": "10082",
                     "name": "CRM 15.2",
                     "archived": false,
@@ -3002,7 +2998,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10083",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10083",
                     "id": "10083",
                     "name": "06/2015(Z)",
                     "archived": false,
@@ -3010,7 +3006,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10084",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10084",
                     "id": "10084",
                     "name": "CRM 15.1",
                     "archived": false,
@@ -3020,7 +3016,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10085",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10085",
                     "id": "10085",
                     "name": "10/2015(Z)",
                     "archived": false,
@@ -3028,17 +3024,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10086",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10086",
                     "id": "10086",
                     "name": "AGRONET 15.5",
                     "archived": false,
                     "released": true,
                     "releaseDate": "2015-05-19",
-                    "userReleaseDate": "19/Mai/15",
+                    "userReleaseDate": "19/May/15",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10087",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10087",
                     "id": "10087",
                     "name": "AGRONET 15.8",
                     "archived": false,
@@ -3048,7 +3044,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10088",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10088",
                     "id": "10088",
                     "name": "08/2015(Z)",
                     "archived": false,
@@ -3056,7 +3052,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10089",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10089",
                     "id": "10089",
                     "name": "07/2015(O)",
                     "archived": false,
@@ -3064,7 +3060,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10090",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10090",
                     "id": "10090",
                     "name": "12/2016(O)",
                     "archived": false,
@@ -3072,7 +3068,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10091",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10091",
                     "id": "10091",
                     "name": "03/2015(Z)",
                     "archived": false,
@@ -3080,7 +3076,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10092",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10092",
                     "id": "10092",
                     "name": "AGRONET 15.6",
                     "archived": false,
@@ -3090,7 +3086,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10093",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10093",
                     "id": "10093",
                     "name": "04/2015(Z)",
                     "archived": false,
@@ -3098,7 +3094,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10094",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10094",
                     "id": "10094",
                     "name": "05/2016(Z)",
                     "archived": false,
@@ -3106,7 +3102,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10095",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10095",
                     "id": "10095",
                     "name": "2017(Z)",
                     "archived": false,
@@ -3114,18 +3110,18 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10096",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10096",
                     "id": "10096",
                     "name": "2018",
                     "archived": false,
                     "released": false,
                     "releaseDate": "2018-12-31",
                     "overdue": false,
-                    "userReleaseDate": "31/Dez/18",
+                    "userReleaseDate": "31/Dec/18",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10097",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10097",
                     "id": "10097",
                     "name": "Sage200 15.2",
                     "archived": false,
@@ -3135,7 +3131,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10098",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10098",
                     "id": "10098",
                     "name": "BI B4L 15.4",
                     "archived": false,
@@ -3143,7 +3139,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10099",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10099",
                     "id": "10099",
                     "name": "08/2016(O)",
                     "archived": false,
@@ -3151,7 +3147,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10100",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10100",
                     "id": "10100",
                     "name": "08/2015(O)",
                     "archived": false,
@@ -3159,7 +3155,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10101",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10101",
                     "id": "10101",
                     "name": "10/2016(O)",
                     "archived": false,
@@ -3167,18 +3163,18 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10102",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10102",
                     "id": "10102",
                     "name": "03/2016",
                     "archived": false,
                     "released": false,
                     "releaseDate": "2016-03-31",
                     "overdue": false,
-                    "userReleaseDate": "31/Mär/16",
+                    "userReleaseDate": "31/Mar/16",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10103",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10103",
                     "id": "10103",
                     "name": "07/2015(Z)",
                     "archived": false,
@@ -3186,18 +3182,18 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10104",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10104",
                     "id": "10104",
                     "name": "12/2016",
                     "archived": false,
                     "released": false,
                     "releaseDate": "2016-12-31",
                     "overdue": false,
-                    "userReleaseDate": "31/Dez/16",
+                    "userReleaseDate": "31/Dec/16",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10105",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10105",
                     "id": "10105",
                     "name": "09/2016(O)",
                     "archived": false,
@@ -3205,18 +3201,18 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10106",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10106",
                     "id": "10106",
                     "name": "05/2016",
                     "archived": false,
                     "released": false,
                     "releaseDate": "2016-05-31",
                     "overdue": false,
-                    "userReleaseDate": "31/Mai/16",
+                    "userReleaseDate": "31/May/16",
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10107",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10107",
                     "id": "10107",
                     "name": "11/2016(O)",
                     "archived": false,
@@ -3224,7 +3220,7 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10108",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10108",
                     "id": "10108",
                     "name": "08/2016",
                     "archived": false,
@@ -3235,9 +3231,17 @@
                     "projectId": 10000
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/version/10109",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10109",
                     "id": "10109",
                     "name": "01/2016(Z)",
+                    "archived": false,
+                    "released": false,
+                    "projectId": 10000
+                },
+                {
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/version/10110",
+                    "id": "10110",
+                    "name": "Migrationstool 16.2",
                     "archived": false,
                     "released": false,
                     "projectId": 10000
@@ -3263,8 +3267,8 @@
                 "items": "issuelinks",
                 "system": "issuelinks"
             },
-            "name": "Verknüpfte Vorgänge",
-            "autoCompleteUrl": "http://jira.bisdevdom.ch:8080/rest/api/2/issue/picker?currentProjectId=&showSubTaskParent=true&showSubTasks=true&currentIssueKey=RTCTEST-1&query=",
+            "name": "Linked Issues",
+            "autoCompleteUrl": "https://jira.bisdevdom.ch/rest/api/2/issue/picker?currentProjectId=&showSubTaskParent=true&showSubTasks=true&currentIssueKey=RTC-1&query=",
             "operations": [
                 "add"
             ]
@@ -3275,8 +3279,8 @@
                 "type": "user",
                 "system": "assignee"
             },
-            "name": "Bearbeiter",
-            "autoCompleteUrl": "http://jira.bisdevdom.ch:8080/rest/api/latest/user/assignable/search?issueKey=RTCTEST-1&username=",
+            "name": "Assignee",
+            "autoCompleteUrl": "https://jira.bisdevdom.ch/rest/api/latest/user/assignable/search?issueKey=RTC-1&username=",
             "operations": [
                 "set"
             ]
@@ -3288,7 +3292,7 @@
                 "items": "component",
                 "system": "components"
             },
-            "name": "Komponente(n)",
+            "name": "Component/s",
             "operations": [
                 "add",
                 "set",
@@ -3302,7 +3306,7 @@
                 "type": "string",
                 "system": "description"
             },
-            "name": "Beschreibung",
+            "name": "Description",
             "operations": [
                 "set"
             ]
@@ -3344,52 +3348,52 @@
             ],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10204",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10204",
                     "value": "Standard/Basis Grosshandel",
                     "id": "10204"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10396",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10396",
                     "value": "BM1000 - Steel",
                     "id": "10396"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10397",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10397",
                     "value": "BM3000 - Retail",
                     "id": "10397"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10398",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10398",
                     "value": "BM4000 - Production",
                     "id": "10398"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10399",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10399",
                     "value": "Customer Individual",
                     "id": "10399"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10400",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10400",
                     "value": "Königstahl/Bogner",
                     "id": "10400"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10401",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10401",
                     "value": "Gero/H&D",
                     "id": "10401"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10402",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10402",
                     "value": "Landesprodukte/Agrola",
                     "id": "10402"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10403",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10403",
                     "value": "Landi",
                     "id": "10403"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10404",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10404",
                     "value": "Landi Schweiz",
                     "id": "10404"
                 }
@@ -3401,7 +3405,7 @@
                 "type": "timetracking",
                 "system": "timetracking"
             },
-            "name": "Zeitverfolgung",
+            "name": "Time Tracking",
             "operations": [
                 "set",
                 "edit"
@@ -3416,7 +3420,7 @@
                 "customId": 10213
             },
             "name": "Industry Sector",
-            "autoCompleteUrl": "http://jira.bisdevdom.ch:8080/rest/api/1.0/labels/10000/suggest?customFieldId=10213&query=",
+            "autoCompleteUrl": "https://jira.bisdevdom.ch/rest/api/1.0/labels/10000/suggest?customFieldId=10213&query=",
             "operations": [
                 "add",
                 "set",
@@ -3449,7 +3453,7 @@
             ],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10200",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10200",
                     "value": "Yes",
                     "id": "10200"
                 }
@@ -3480,6 +3484,18 @@
                 "set"
             ]
         },
+        "customfield_10402": {
+            "required": false,
+            "schema": {
+                "type": "string",
+                "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+                "customId": 10402
+            },
+            "name": "RTC Project Area",
+            "operations": [
+                "set"
+            ]
+        },
         "customfield_10205": {
             "required": false,
             "schema": {
@@ -3493,27 +3509,27 @@
             ],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10201",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10201",
                     "value": "CC1 - Retail",
                     "id": "10201"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10211",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10211",
                     "value": "CC2 - Wholesale",
                     "id": "10211"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10212",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10212",
                     "value": "CC3 - FLG (Fenaco)",
                     "id": "10212"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10213",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10213",
                     "value": "CC4 - Tech",
                     "id": "10213"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10214",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10214",
                     "value": "CC5 - Operational",
                     "id": "10214"
                 }
@@ -3532,112 +3548,112 @@
             ],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10202",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10202",
                     "value": "AGROLA AG",
                     "id": "10202"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10371",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10371",
                     "value": "Bison Schweiz AG",
                     "id": "10371"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10372",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10372",
                     "value": "Bison IT Services AG",
                     "id": "10372"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10373",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10373",
                     "value": "Eichenberger Gewinde AG",
                     "id": "10373"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10374",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10374",
                     "value": "Frigemo Handelsfirmen",
                     "id": "10374"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10375",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10375",
                     "value": "Gero, Hoberg&Driesch",
                     "id": "10375"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10376",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10376",
                     "value": "Kowag",
                     "id": "10376"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10377",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10377",
                     "value": "Landi",
                     "id": "10377"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10378",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10378",
                     "value": "Landi Schweiz",
                     "id": "10378"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10379",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10379",
                     "value": "Landesprodukte",
                     "id": "10379"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10380",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10380",
                     "value": "UFA AG",
                     "id": "10380"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10381",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10381",
                     "value": "Uvavins",
                     "id": "10381"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10382",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10382",
                     "value": "Wilhelm Hoyer KG",
                     "id": "10382"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10383",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10383",
                     "value": "DRWZ",
                     "id": "10383"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10384",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10384",
                     "value": "König Stahl",
                     "id": "10384"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10385",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10385",
                     "value": "Bogner Edelstahl",
                     "id": "10385"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10386",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10386",
                     "value": "Inotex",
                     "id": "10386"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10387",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10387",
                     "value": "AMETRAS INFORMATIK AG",
                     "id": "10387"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10388",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10388",
                     "value": "Fenaco",
                     "id": "10388"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10389",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10389",
                     "value": "Feldsaaten Freudenberger Gmbh&Co KG",
                     "id": "10389"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10390",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10390",
                     "value": "RUAG Environment",
                     "id": "10390"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10391",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10391",
                     "value": "Bison Maxess",
                     "id": "10391"
                 }
@@ -3650,7 +3666,7 @@
                 "items": "attachment",
                 "system": "attachment"
             },
-            "name": "Anhang",
+            "name": "Attachment",
             "operations": []
         },
         "customfield_10207": {
@@ -3678,167 +3694,167 @@
             ],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10203",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10203",
                     "value": "FEN 14.5 20140728",
                     "id": "10203"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10329",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10329",
                     "value": "FEN 14.6 20140908",
                     "id": "10329"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10330",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10330",
                     "value": "BASE 14.5 20140714",
                     "id": "10330"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10331",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10331",
                     "value": "BASE 14.6 20140825",
                     "id": "10331"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10332",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10332",
                     "value": "BASE 14.7 20141020",
                     "id": "10332"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10333",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10333",
                     "value": "BASE 14.8 20141215",
                     "id": "10333"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10334",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10334",
                     "value": "KS 14.3 20140602 prov.",
                     "id": "10334"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10335",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10335",
                     "value": "LCH 14.4 2014",
                     "id": "10335"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10336",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10336",
                     "value": "LANDI 14.4 20140616",
                     "id": "10336"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10337",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10337",
                     "value": "LANDI 14.6 20140908",
                     "id": "10337"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10338",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10338",
                     "value": "LANDI 14.8 20141117",
                     "id": "10338"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10339",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10339",
                     "value": "LCH 14.5 2014",
                     "id": "10339"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10340",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10340",
                     "value": "FEN 15.1 20150508",
                     "id": "10340"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10341",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10341",
                     "value": "BASE 15.1 20150209",
                     "id": "10341"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10342",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10342",
                     "value": "BASE 15.2 20150406",
                     "id": "10342"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10343",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10343",
                     "value": "BASE 15.3 20150601",
                     "id": "10343"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10344",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10344",
                     "value": "BASE 15.4 20150727",
                     "id": "10344"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10345",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10345",
                     "value": "FEN 14.7 20140929",
                     "id": "10345"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10346",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10346",
                     "value": "LCH 15.1 2015",
                     "id": "10346"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10347",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10347",
                     "value": "LANDI 15.1 20150504",
                     "id": "10347"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10348",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10348",
                     "value": "LANDI 15.2 20150907",
                     "id": "10348"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10349",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10349",
                     "value": "LANDI 15.3 20151116",
                     "id": "10349"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10350",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10350",
                     "value": "LCH 15.2 2015",
                     "id": "10350"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10351",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10351",
                     "value": "LCH 15.3 2015",
                     "id": "10351"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10352",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10352",
                     "value": "FEN 15.2",
                     "id": "10352"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10353",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10353",
                     "value": "LCH 15.4 2015",
                     "id": "10353"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10354",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10354",
                     "value": "BASE 15.5 20151116",
                     "id": "10354"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10355",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10355",
                     "value": "BASE 15.6",
                     "id": "10355"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10356",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10356",
                     "value": "FEN 16.1",
                     "id": "10356"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10357",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10357",
                     "value": "LCH 16.1",
                     "id": "10357"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10358",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10358",
                     "value": "LCH 16.2",
                     "id": "10358"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10359",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10359",
                     "value": "LCH 16.3",
                     "id": "10359"
                 },
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10360",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10360",
                     "value": "FEN 16.2",
                     "id": "10360"
                 }
@@ -3862,7 +3878,7 @@
                 "type": "string",
                 "system": "summary"
             },
-            "name": "Zusammenfassung",
+            "name": "Summary",
             "operations": [
                 "set"
             ]
@@ -3873,8 +3889,8 @@
                 "type": "user",
                 "system": "reporter"
             },
-            "name": "Autor",
-            "autoCompleteUrl": "http://jira.bisdevdom.ch:8080/rest/api/latest/user/search?username=",
+            "name": "Reporter",
+            "autoCompleteUrl": "https://jira.bisdevdom.ch/rest/api/latest/user/search?username=",
             "operations": [
                 "set"
             ]
@@ -3895,7 +3911,7 @@
             ],
             "allowedValues": [
                 {
-                    "self": "http://jira.bisdevdom.ch:8080/rest/api/2/customFieldOption/10000",
+                    "self": "https://jira.bisdevdom.ch/rest/api/2/customFieldOption/10000",
                     "value": "Impediment",
                     "id": "10000"
                 }
@@ -3910,7 +3926,7 @@
                 "customId": 10001
             },
             "name": "Epic/Theme",
-            "autoCompleteUrl": "http://jira.bisdevdom.ch:8080/rest/api/1.0/labels/10000/suggest?customFieldId=10001&query=",
+            "autoCompleteUrl": "https://jira.bisdevdom.ch/rest/api/1.0/labels/10000/suggest?customFieldId=10001&query=",
             "operations": [
                 "add",
                 "set",
@@ -3925,32 +3941,6 @@
                 "customId": 10002
             },
             "name": "Story Points",
-            "operations": [
-                "set"
-            ]
-        },
-        "customfield_10200": {
-            "required": false,
-            "schema": {
-                "type": "array",
-                "items": "string",
-                "custom": "com.xiplink.jira.git.jira_git_plugin:gitbranches",
-                "customId": 10200
-            },
-            "name": "gitBranch",
-            "operations": [
-                "set"
-            ]
-        },
-        "customfield_10201": {
-            "required": false,
-            "schema": {
-                "type": "array",
-                "items": "string",
-                "custom": "com.xiplink.jira.git.jira_git_plugin:gitcommitsreferenced",
-                "customId": 10201
-            },
-            "name": "gitCommitsReferenced",
             "operations": [
                 "set"
             ]
@@ -3986,7 +3976,7 @@
                 "type": "string",
                 "system": "environment"
             },
-            "name": "Umgebung",
+            "name": "Environment",
             "operations": [
                 "set"
             ]
@@ -3997,7 +3987,7 @@
                 "type": "date",
                 "system": "duedate"
             },
-            "name": "Fälligkeitsdatum",
+            "name": "Due Date",
             "operations": [
                 "set"
             ]
@@ -4009,7 +3999,7 @@
                 "items": "comment",
                 "system": "comment"
             },
-            "name": "Kommentar",
+            "name": "Comment",
             "operations": [
                 "add",
                 "edit",
@@ -4023,7 +4013,7 @@
                 "items": "worklog",
                 "system": "worklog"
             },
-            "name": "Arbeit protokollieren",
+            "name": "Log Work",
             "operations": [
                 "add"
             ]

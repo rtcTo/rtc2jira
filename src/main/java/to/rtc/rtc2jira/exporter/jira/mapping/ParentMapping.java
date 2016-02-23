@@ -47,7 +47,11 @@ public class ParentMapping implements Mapping {
   }
 
 
-  private void handleGenericParentChild(String parentKey, Issue childIssue) {}
+  private void handleGenericParentChild(String parentKey, Issue childIssue) {
+    Issue parent = new Issue();
+    parent.setKey(parentKey);
+    ParentChildHandler.INSTANCE.addParentChildLink(childIssue, parent);
+  }
 
   private void handleEpicParent(String parentKey, Issue childIssue) {
     IssueFields fields = childIssue.getFields();

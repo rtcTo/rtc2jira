@@ -51,6 +51,19 @@ public class ParentMapping implements Mapping {
     Issue parent = new Issue();
     parent.setKey(parentKey);
     ParentChildHandler.INSTANCE.addParentChildLink(childIssue, parent);
+
+    // clean up epic link
+    handleEpicLinkRemoval(childIssue);
+  }
+
+
+  private void handleEpicLinkRemoval(Issue childIssue) {
+    IssueFields fields = childIssue.getFields();
+    String curEpicLink = fields.getEpicLink();
+    if (curEpicLink != null) {
+      fields.setEpicLink(null);
+      LOGGER.warning("The epic link of issue '" + childIssue.getKey() + "' has been removed");
+    }
   }
 
   private void handleEpicParent(String parentKey, Issue childIssue) {
@@ -87,6 +100,9 @@ public class ParentMapping implements Mapping {
     if (childIssue.getFields().getIssuetype().equals(IssueType.TASK)) {
       StoryTaskHandler.INSTANCE.addTaskToStory(childIssue, parentStory);
     }
+
+    // clean up epic link
+    handleEpicLinkRemoval(childIssue);
   }
 
 }

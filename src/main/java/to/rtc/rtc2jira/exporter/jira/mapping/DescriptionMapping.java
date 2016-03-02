@@ -9,6 +9,7 @@ import java.io.StringReader;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
@@ -60,14 +61,25 @@ public class DescriptionMapping implements Mapping {
       text = text.replaceAll("</sub>", "~");
     }
 
-    // handle anchors
+    text = replaceHtmlAnchors(text, true);
 
+    // delete remaining html tags (open-close)
+    text = text.replaceAll("\\<.*?>", " ").replaceAll("\\s+", " ").trim();
+
+    // entities
+    text = StringEscapeUtils.unescapeHtml4(text);
+
+    return text;
+  }
+
+
+  public static String replaceHtmlAnchors(String text, boolean toJiraMarkup) {
     int found = text.indexOf("<a ", 0);
 
     while (found > -1) {
-      int anchorEnd = text.indexOf("</a>");
+      int anchorEnd = text.indexOf("</a>", found);
       anchorEnd += 4;
-      Node containerNode = parseXml(text.substring(found));
+      Node containerNode = parseXml(text.substring(found, anchorEnd));
       if (containerNode != null) {
         Node anchor = containerNode.getFirstChild();
         String textContent = anchor.getTextContent();
@@ -80,7 +92,7 @@ public class DescriptionMapping implements Mapping {
         } else {
           textContent = "";
         }
-        String jiraAnchor = "[" + textContent + link + "]";
+        String jiraAnchor = toJiraMarkup ? "[" + textContent + link + "]" : link;
         // insert Jira anchor
         text = text.substring(0, found) + jiraAnchor + (anchorEnd < text.length() ? text.substring(anchorEnd) : "");
       }
@@ -89,7 +101,6 @@ public class DescriptionMapping implements Mapping {
     }
     return text;
   }
-
 
   public static Node parseXml(String fragment) {
     // Wrap the fragment in an arbitrary element.

@@ -18,12 +18,15 @@ public class AcceptanceCriteriaMapping implements Mapping {
   public void map(Object value, Issue issue, StorageEngine storage) {
     String acceptanceCriteria = (String) value;
     if (acceptanceCriteria != null) {
+      // anchors
+      acceptanceCriteria = DescriptionMapping.replaceHtmlAnchors(acceptanceCriteria, false);
       // html tags (open-close)
       acceptanceCriteria = acceptanceCriteria.replaceAll("(?i)<td[^>]*>", " ").replaceAll("\\s+", " ").trim();
       // line breaks
       acceptanceCriteria = acceptanceCriteria.replaceAll("<br/>", "\r\n");
       // entities
       acceptanceCriteria = StringEscapeUtils.unescapeHtml4(acceptanceCriteria);
+
       issue.getFields().setAcceptanceCriteria(acceptanceCriteria);
     }
   }

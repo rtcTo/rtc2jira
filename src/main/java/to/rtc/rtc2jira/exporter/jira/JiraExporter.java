@@ -63,9 +63,15 @@ public class JiraExporter implements Exporter {
   private WorkItemTypeMapping workItemTypeMapping;
   private Set<Integer> updatedItems = new HashSet<Integer>();
 
+  static private Set<Integer> _tempMovedItems = new HashSet<Integer>();
+
   static {
     INSTANCE = new JiraExporter();
     LOGGER.addHandler(ExportManager.DEFAULT_LOG_HANDLER);
+
+    _tempMovedItems.add(Integer.valueOf(35392));
+    _tempMovedItems.add(Integer.valueOf(36385));
+    _tempMovedItems.add(Integer.valueOf(36068));
   }
 
   private JiraExporter() {};
@@ -103,7 +109,8 @@ public class JiraExporter implements Exporter {
     Date modified = StorageQuery.getField(item, FieldNames.MODIFIED, Date.from(Instant.now()));
     Date lastExport = StorageQuery.getField(item, FieldNames.JIRA_EXPORT_TIMESTAMP, new Date(0));
     if (Settings.getInstance().isForceUpdate() || modified.compareTo(lastExport) > 0) {
-      if (!"SRVS Management".equals(item.field(FieldNames.PROJECT_AREA))) {
+      if (!"SRVS Management".equals(item.field(FieldNames.PROJECT_AREA))
+          && !_tempMovedItems.contains(Integer.valueOf(workItemId))) {
         updateItem(item);
         updatedItems.add(Integer.valueOf(workItemId));
       }

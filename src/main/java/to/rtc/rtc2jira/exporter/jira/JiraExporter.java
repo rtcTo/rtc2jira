@@ -68,10 +68,45 @@ public class JiraExporter implements Exporter {
   static {
     INSTANCE = new JiraExporter();
     LOGGER.addHandler(ExportManager.DEFAULT_LOG_HANDLER);
-
+    // florian
     _tempMovedItems.add(Integer.valueOf(35392));
     _tempMovedItems.add(Integer.valueOf(36385));
     _tempMovedItems.add(Integer.valueOf(36068));
+    // franz
+    _tempMovedItems.add(Integer.valueOf(30379));
+    _tempMovedItems.add(Integer.valueOf(31428));
+    _tempMovedItems.add(Integer.valueOf(31858));
+    _tempMovedItems.add(Integer.valueOf(34034));
+    _tempMovedItems.add(Integer.valueOf(34035));
+    _tempMovedItems.add(Integer.valueOf(34477));
+    _tempMovedItems.add(Integer.valueOf(34549));
+    _tempMovedItems.add(Integer.valueOf(34663));
+    _tempMovedItems.add(Integer.valueOf(34887));
+    _tempMovedItems.add(Integer.valueOf(34888));
+    _tempMovedItems.add(Integer.valueOf(34889));
+    _tempMovedItems.add(Integer.valueOf(34890));
+    _tempMovedItems.add(Integer.valueOf(34892));
+    _tempMovedItems.add(Integer.valueOf(34893));
+    _tempMovedItems.add(Integer.valueOf(34895));
+    _tempMovedItems.add(Integer.valueOf(32606));
+    _tempMovedItems.add(Integer.valueOf(35964));
+    _tempMovedItems.add(Integer.valueOf(36132));
+    _tempMovedItems.add(Integer.valueOf(36133));
+    _tempMovedItems.add(Integer.valueOf(36134));
+    _tempMovedItems.add(Integer.valueOf(36135));
+    _tempMovedItems.add(Integer.valueOf(36189));
+    _tempMovedItems.add(Integer.valueOf(36192));
+    _tempMovedItems.add(Integer.valueOf(36193));
+    _tempMovedItems.add(Integer.valueOf(36194));
+    _tempMovedItems.add(Integer.valueOf(36241));
+    _tempMovedItems.add(Integer.valueOf(36242));
+    _tempMovedItems.add(Integer.valueOf(36284));
+    _tempMovedItems.add(Integer.valueOf(36480));
+    _tempMovedItems.add(Integer.valueOf(36544));
+    _tempMovedItems.add(Integer.valueOf(36696));
+    _tempMovedItems.add(Integer.valueOf(36761));
+    _tempMovedItems.add(Integer.valueOf(36774));
+    _tempMovedItems.add(Integer.valueOf(36793));
   }
 
   private JiraExporter() {};

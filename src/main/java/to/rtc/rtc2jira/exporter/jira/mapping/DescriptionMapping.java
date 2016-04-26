@@ -35,9 +35,12 @@ public class DescriptionMapping implements Mapping {
   }
 
   public static String convertHtmlToJiraMarkup(String text) {
+    String rnProxy = "caburacelhota";
+    String rn = "\r\n";
+
     if (text != null) {
       // line breaks
-      text = text.replaceAll("<br/>", "\r\n");
+      text = text.replaceAll("<br/>", rnProxy);
       // bold
       text = text.replaceAll("<b>", "*");
       text = text.replaceAll("</b>", "*");
@@ -59,15 +62,17 @@ public class DescriptionMapping implements Mapping {
       // subscript
       text = text.replaceAll("<sub>", "~");
       text = text.replaceAll("</sub>", "~");
+
+      text = replaceHtmlAnchors(text, true);
+
+      // delete remaining html tags (open-close)
+      text = text.replaceAll("\\<.*?>", " ").replaceAll("\\s+", " ").trim();
+
+      // entities
+      text = StringEscapeUtils.unescapeHtml4(text);
+
+      text = text.replaceAll(rnProxy, rn);
     }
-
-    text = replaceHtmlAnchors(text, true);
-
-    // delete remaining html tags (open-close)
-    text = text.replaceAll("\\<.*?>", " ").replaceAll("\\s+", " ").trim();
-
-    // entities
-    text = StringEscapeUtils.unescapeHtml4(text);
 
     return text;
   }

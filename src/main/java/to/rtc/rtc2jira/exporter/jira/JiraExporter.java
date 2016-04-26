@@ -5,6 +5,7 @@ import static to.rtc.rtc2jira.storage.Field.of;
 import java.io.File;
 import java.io.IOException;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -46,7 +47,6 @@ import to.rtc.rtc2jira.storage.StorageQuery;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.multipart.FormDataMultiPart;
 import com.sun.jersey.multipart.file.FileDataBodyPart;
 
@@ -107,6 +107,15 @@ public class JiraExporter implements Exporter {
     _tempMovedItems.add(Integer.valueOf(36761));
     _tempMovedItems.add(Integer.valueOf(36774));
     _tempMovedItems.add(Integer.valueOf(36793));
+
+    // unknown
+    _tempMovedItems.add(Integer.valueOf(33815));
+    _tempMovedItems.add(Integer.valueOf(36800));
+    _tempMovedItems.add(Integer.valueOf(36801));
+    // 19042016
+    _tempMovedItems.add(Integer.valueOf(36751));
+    _tempMovedItems.add(Integer.valueOf(36811));
+
   }
 
   private JiraExporter() {};
@@ -340,7 +349,7 @@ public class JiraExporter implements Exporter {
     String id = item.field(FieldNames.ID);
     List<Attachment> attachments = storage.readAttachments(Long.parseLong(id));
     if (attachments.size() > 0) {
-      List<String> alreadyExportedAttachments = item.field(Attachment.EXPORTED_ATTACHMENTS_PROPERTY);
+      List<String> alreadyExportedAttachments = getAlreadyExportedAttachments(issue);
       final FormDataMultiPart multiPart = new FormDataMultiPart();
       int newlyAdded = 0;
       for (Attachment attachment : attachments) {
@@ -354,25 +363,26 @@ public class JiraExporter implements Exporter {
         }
       }
       if (newlyAdded > 0) {
-        ClientResponse clientResponse = null;
         try {
-          clientResponse = getRestAccess().postMultiPart(issue.getSelfPath() + "/attachments", multiPart);
+          getRestAccess().postMultiPart(issue.getSelfPath() + "/attachments", multiPart);
         } catch (Exception e) {
           LOGGER.severe("Could not upload attachments");
-        }
-        if (clientResponse != null && isResponseOk(clientResponse)) {
-          // refresh list of already exported attachments
-          List<IssueAttachment> responseAttachments =
-              clientResponse.getEntity(new GenericType<List<IssueAttachment>>() {});
-          for (IssueAttachment issueAttachment : responseAttachments) {
-            alreadyExportedAttachments.add(issueAttachment.getFilename());
-          }
-          store.setFields(item, //
-              of(Attachment.EXPORTED_ATTACHMENTS_PROPERTY, alreadyExportedAttachments));
         }
       }
     }
   }
+
+  List<String> getAlreadyExportedAttachments(Issue issue) {
+    List<String> result = new ArrayList<String>();
+    List<IssueAttachment> attachment = issue.getFields().getAttachment();
+    if (attachment != null) {
+      for (IssueAttachment issueAttachment : attachment) {
+        result.add(issueAttachment.getFilename());
+      }
+    }
+    return result;
+  }
+
 
   private void persistNewComments(ODocument item, Issue issue) {
     List<IssueComment> issueComments = issue.getFields().getComment().getComments();
@@ -517,14 +527,21 @@ public class JiraExporter implements Exporter {
     if (cr.getStatus() == 200) {
       issue = cr.getEntity(Issue.class);
       IssueFields issueFields = issue.getFields();
-      issueFields.setProject(project);
-      store.setFields(workItem, of(FieldNames.JIRA_LAST_EXPORTED_STATUS, issueFields.getStatus().getId()));
-      mappingRegistry.map(workItem, issue, store);
-      // set resolution to appropriate default, otherwise it will be set to "fixed" whenever status
-      // is "done", even if issue is not a defect
-      if (issueFields.getStatus().getStatusEnum(issue.getFields().getIssuetype()).isFinished()
-          && issueFields.getResolution() == null) {
-        issueFields.setResolution(new IssueResolution(ResolutionEnum.done));
+      String retrievedIssueKey = issue.getKey();
+      if (!retrievedIssueKey.startsWith("RTC")) {
+        LOGGER.log(Level.WARNING, "The issue " + key + " has been moved to another project: " + retrievedIssueKey);
+        issue = null;
+      } else {
+        issueFields.setProject(project);
+        store.setFields(workItem, of(FieldNames.JIRA_LAST_EXPORTED_STATUS, issueFields.getStatus().getId()));
+        mappingRegistry.map(workItem, issue, store);
+        // set resolution to appropriate default, otherwise it will be set to "fixed" whenever
+        // status
+        // is "done", even if issue is not a defect
+        if (issueFields.getStatus().getStatusEnum(issue.getFields().getIssuetype()).isFinished()
+            && issueFields.getResolution() == null) {
+          issueFields.setResolution(new IssueResolution(ResolutionEnum.done));
+        }
       }
     } else {
       String issueKey = issue.getKey();
